@@ -1,0 +1,149 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 1500px;
+  margin: 2em auto;
+}
+
+.aside-container {
+  width: 25%;
+  max-width: 450px;
+  border: 1px solid #ccc;
+  padding: 2em;
+  visibility: hidden;
+}
+
+#add-emp-form {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-element .err {
+  color: red;
+  padding-left: 0.4em;
+  font-size: 15px;
+  display: none;
+}
+
+.form-element input {
+  margin: 1em 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 1em;
+  outline: none;
+  font-size: 15px;
+}
+
+.main-container {
+  width: 50%;
+  border: 1px solid #ccc;
+  margin: 0 1em;
+  padding: 2em;
+}
+
+.main-container .header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+
+.main-container #employees {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 350px;
+  margin-top: 1em;
+  display: inline-block;
+  width: 100%;
+}
+
+#employees .employee {
+  border: 1px solid rgb(162, 205, 240);
+  width: 100%;
+  padding: 1em;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0;
+  cursor: pointer;
+}
+
+#employees .employee:hover {
+  transform: translateY(-5px);
+  box-shadow: 1px 2px 3px #ccc;
+}
+
+.employee .left-side {
+  display: flex;
+  align-items: center;
+}
+
+.employee .left-side .profile-img {
+  width: 70px;
+  height: 70px;
+  border: 1px solid rgb(162, 205, 240);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1em;
+  font-size: 25px;
+}
+
+.emp-info p {
+  margin-bottom: 0.4em;
+  font-size: 18px;
+}
+
+.emp-info p:first-child {
+  font-weight: bold;
+}
+
+.btn {
+  padding: 0.7em;
+  border: none;
+  font-size: 17px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.new-emp-btn {
+  padding: 0.375em;
+  margin-left: 0.5em;
+  background-color: #c9fdff;
+}
+
+.submit-btn {
+  padding: 0.7em 2em;
+  float: right;
+  width: 100%;
+  margin-top: 1em;
+  background-color: #bbef8c;
+}
+
+#edit-btn {
+  background-color: #ffd400;
+  color: #3a3838;
+}
+
+#delete-btn {
+  background-color: #fb5353;
+  color: #3a3838;
+}

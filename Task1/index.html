@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Employee Management</title>
+</head>
+
+<body>
+
+    <div class="aside-container">
+        <h1>Add Employee</h1>
+        <form id="add-emp-form">
+            <div class="form-element">
+                <input type="text" name="name" placeholder="Enter your name" required>
+                <p class="err" id="err-name"></p>
+            </div>
+
+            <div class="form-element">
+                <input type="text" name="surname" placeholder="Enter your surname" required>
+                <p class="err" id="err-surname"></p>
+            </div>
+
+            <div class="form-element">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <p class="err" id="err-email"></p>
+            </div>
+
+            <div class="form-element">
+                <input type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}" name="phone" placeholder="0778964512"
+                    required>
+                <p class="err" id="err-phone"></p>
+            </div>
+
+            <button class="btn submit-btn" type="submit" data-submit-btn>Save</button>
+        </form>
+    </div>
+
+    <main class="main-container">
+        <div class="header">
+            <button class="btn new-emp-btn">New Employee</button>
+        </div>
+
+        <div id="employees"></div>
+        <template data-emp-template>
+            <div class="employee">
+                <div class="left-side">
+                    <div class="profile-img">
+                        <p class="profile-txt" data-profile></p>
+                    </div>
+                    <div class="emp-info">
+                        <p id="fullname" data-fullname></p>
+                        <p id="email" data-email></p>
+                        <p id="phone" data-phone></p>
+                    </div>
+                </div>
+
+                <div class="right-side">
+                    <div class="emp-actions">
+                        <button class="btn" id="edit-btn">Edit</button>
+                        <button class="btn" id="delete-btn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </main>
+
+    <div class="aside-container">
+        <h1>Edit Employee</h1>
+        <form id="edit-emp-form">
+            <input type="hidden" name="id" data-view-id>
+            <div class="form-element">
+                <input type="text" name="name" placeholder="Enter your name" required data-view-name>
+                <p class="err" id="err-name"></p>
+            </div>
+
+            <div class="form-element">
+                <input type="text" name="surname" placeholder="Enter your surname" required data-view-surname>
+                <p class="err" id="err-surname"></p>
+            </div>
+
+            <div class="form-element">
+                <input type="email" name="email" placeholder="Enter your email" required data-view-email>
+                <p class="err" id="err-email"></p>
+            </div>
+
+            <div class="form-element">
+                <input type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}" name="phone" placeholder="0778964512"
+                    required data-view-phone>
+                <p class="err" id="err-phone"></p>
+            </div>
+
+            <button class="btn submit-btn" type="submit" data-submit-btn>Save</button>
+        </form>
+    </div>
+
+
+    <script src="./app.mjs" type="module"></script>
+    <script src="./modules/employee.mjs" type="module"></script>
+    <script src="./modules/employeeList.mjs" type="module"></script>
+    <script src="./modules/empValidator.mjs" type="module"></script>
+</body>
+
+</html>

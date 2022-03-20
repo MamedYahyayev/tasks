@@ -1,0 +1,17 @@
+{
+  "name": "employee-management",
+  "version": "1.0.0",
+  "description": "Manage Employees",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "npx json-server --watch data/db.json",
+    "server": "npx http-server -c-1 -p 8085"
+  },
+  "author": "MamedYahyayev",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.0",
+    "json-server": "^0.17.0"
+  }
+}
