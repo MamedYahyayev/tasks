@@ -24,7 +24,6 @@ namespace Calculator
             {
                 computing.Number2 = Convert.ToDouble(inputArea.Text);
 
-
                 switch (computing.ActiveOperation)
                 {
                     case Computing.Operation.ADD:
@@ -87,7 +86,6 @@ namespace Calculator
         {
             revertOperationBtnColor();
             activeCircularBtn = multiplyBtn;
-
             changeOperationBtnColor(multiplyBtn);
 
             assignNumAndOperation(Computing.Operation.MULTIPLY);
