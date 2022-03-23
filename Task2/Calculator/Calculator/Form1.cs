@@ -4,31 +4,34 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        private CircularButton[] circularButtons = new CircularButton[5];
+        /*private CircularButton[] circularButtons = new CircularButton[5];*/
+        private CircularButton activeCircularBtn;
         private Computing computing;
         public Form1()
         {
             InitializeComponent();
-            circularButtons[0] = equalBtn;
+            /*circularButtons[0] = equalBtn;
             circularButtons[1] = minusBtn;
             circularButtons[2] = plusBtn;
             circularButtons[3] = multiplyBtn;
-            circularButtons[4] = divideBtn;
+            circularButtons[4] = divideBtn;*/
 
             computing = new Computing();
+            activeCircularBtn = new CircularButton();
 
         }
 
         private void equalBtn_Click(object sender, EventArgs e)
         {
             revertOperationBtnColor();
+            activeCircularBtn = equalBtn;
             changeOperationBtnColor(equalBtn);
 
             if (inputArea.Text != null && computing.ActiveOperation != null)
             {
                 computing.Number2 = Convert.ToDouble(inputArea.Text);
-                
-                
+
+
                 switch (computing.ActiveOperation)
                 {
                     case Computing.Operation.ADD:
@@ -68,6 +71,7 @@ namespace Calculator
         private void plusBtn_Click(object sender, EventArgs e)
         {
             revertOperationBtnColor();
+            activeCircularBtn = plusBtn;
             changeOperationBtnColor(plusBtn);
 
             assignNumAndOperation(Computing.Operation.ADD);
@@ -78,6 +82,7 @@ namespace Calculator
         private void minusBtn_Click(object sender, EventArgs e)
         {
             revertOperationBtnColor();
+            activeCircularBtn = minusBtn;
             changeOperationBtnColor(minusBtn);
 
             assignNumAndOperation(Computing.Operation.SUBTRACT);
@@ -88,6 +93,8 @@ namespace Calculator
         private void multiplyBtn_Click(object sender, EventArgs e)
         {
             revertOperationBtnColor();
+            activeCircularBtn = multiplyBtn;
+
             changeOperationBtnColor(multiplyBtn);
 
             assignNumAndOperation(Computing.Operation.MULTIPLY);
@@ -97,6 +104,7 @@ namespace Calculator
         private void divideBtn_Click(object sender, EventArgs e)
         {
             revertOperationBtnColor();
+            activeCircularBtn = divideBtn;
             changeOperationBtnColor(divideBtn);
 
             assignNumAndOperation(Computing.Operation.DIVIDE);
@@ -116,11 +124,14 @@ namespace Calculator
 
         private void revertOperationBtnColor()
         {
-            foreach (var circularBtn in circularButtons)
+            /*foreach (var circularBtn in circularButtons)
             {
-                circularBtn.BackColor = Color.FromArgb(254, 149, 4);
+                circularBtn.BackColor = Color.FromArgb();
                 circularBtn.ForeColor = Color.White;
             }
+*/
+            activeCircularBtn.BackColor = Color.FromArgb(254, 149, 4);
+            activeCircularBtn.ForeColor = Color.White;
         }
 
         private void number7Btn_Click(object sender, EventArgs e)
