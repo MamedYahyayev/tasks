@@ -198,10 +198,13 @@ namespace Calculator
 
         private void plusMinusBtn_Click(object sender, EventArgs e)
         {
-            string num = inputArea.Text;
-            int hasMinus = num.IndexOf("-");
-            if (hasMinus == -1) inputArea.Text = "-" + inputArea.Text;
-            else inputArea.Text = num.Replace("-", "");
+            if (inputArea.Text != "" && inputArea.Text != null)
+            {
+                string num = inputArea.Text;
+                int hasMinus = num.IndexOf("-");
+                if (hasMinus == -1) inputArea.Text = "-" + inputArea.Text;
+                else inputArea.Text = num.Replace("-", "");
+            }
         }
 
         private bool isExceedCharCount()
@@ -219,7 +222,7 @@ namespace Calculator
 
         private void assignNumAndOperation(string operation)
         {
-            if (inputArea.Text != null)
+            if (inputArea.Text != null && inputArea.Text != "")
             {
                 computing.Number1 = Convert.ToDouble(inputArea.Text);
                 computing.ActiveOperation = operation;
