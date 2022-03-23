@@ -4,18 +4,11 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        /*private CircularButton[] circularButtons = new CircularButton[5];*/
         private CircularButton activeCircularBtn;
         private Computing computing;
         public Form1()
         {
             InitializeComponent();
-            /*circularButtons[0] = equalBtn;
-            circularButtons[1] = minusBtn;
-            circularButtons[2] = plusBtn;
-            circularButtons[3] = multiplyBtn;
-            circularButtons[4] = divideBtn;*/
-
             computing = new Computing();
             activeCircularBtn = new CircularButton();
 
@@ -124,12 +117,6 @@ namespace Calculator
 
         private void revertOperationBtnColor()
         {
-            /*foreach (var circularBtn in circularButtons)
-            {
-                circularBtn.BackColor = Color.FromArgb();
-                circularBtn.ForeColor = Color.White;
-            }
-*/
             activeCircularBtn.BackColor = Color.FromArgb(254, 149, 4);
             activeCircularBtn.ForeColor = Color.White;
         }
