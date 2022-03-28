@@ -10,15 +10,10 @@ namespace Calculator
     {
         private double number1;
         private double number2;
-        private string activeOperation;
-
-        public static class Operation
+        
+        public enum Operation
         {
-            public const string ADD = "ADD";
-            public const string SUBTRACT = "SUBTRACT";
-            public const string MULTIPLY = "MULTIPLY";
-            public const string DIVIDE = "DIVIDE";
-            public const string PERCENTAGE = "PERCENTAGE";
+            ADD, SUBTRACT, MULTIPLY, DIVIDE, PERCENTAGE, UNKNOWN
         }
 
         public double add(double number1, double number2)
@@ -61,12 +56,6 @@ namespace Calculator
         {
             get { return number2; }
             set { number2 = value; }
-        }
-
-        public string ActiveOperation
-        {
-            get { return activeOperation; }
-            set { activeOperation = value; }
         }
 
 

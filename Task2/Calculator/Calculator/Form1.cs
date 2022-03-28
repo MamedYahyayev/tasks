@@ -6,12 +6,13 @@ namespace Calculator
     {
         private CircularButton activeCircularBtn;
         private Computing computing;
+        private Computing.Operation activeOperation;
         public Form1()
         {
             InitializeComponent();
             computing = new Computing();
             activeCircularBtn = new CircularButton();
-
+            activeOperation = Computing.Operation.UNKNOWN;
         }
 
         private void equalBtn_Click(object sender, EventArgs e)
@@ -20,11 +21,11 @@ namespace Calculator
             activeCircularBtn = equalBtn;
             changeOperationBtnColor(equalBtn);
 
-            if (inputArea.Text != null && computing.ActiveOperation != null)
+            if (inputArea.Text != null)
             {
                 computing.Number2 = Convert.ToDouble(inputArea.Text);
 
-                switch (computing.ActiveOperation)
+                switch (activeOperation)
                 {
                     case Computing.Operation.ADD:
                         inputArea.Text = computing.add(computing.Number1, computing.Number2).ToString();
@@ -49,13 +50,17 @@ namespace Calculator
                     case Computing.Operation.PERCENTAGE:
                         inputArea.Text = computing.percentage(computing.Number1, computing.Number2).ToString();
                         break;
+                    case Computing.Operation.UNKNOWN:
+                        MessageBox.Show("Choose one of the operations", "Operation",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     default:
                         Console.WriteLine("Operation doesn't exist");
                         break;
                 }
 
                 revertOperationBtnColor();
-                computing.ActiveOperation = "";
+                activeOperation = Computing.Operation.UNKNOWN;
             }
 
         }
@@ -205,12 +210,12 @@ namespace Calculator
             return false;
         }
 
-        private void assignNumAndOperation(string operation)
+        private void assignNumAndOperation(Computing.Operation operation)
         {
             if (inputArea.Text != null && inputArea.Text != "")
             {
                 computing.Number1 = Convert.ToDouble(inputArea.Text);
-                computing.ActiveOperation = operation;
+                activeOperation = operation;
                 inputArea.Text = "";
             }
         }
