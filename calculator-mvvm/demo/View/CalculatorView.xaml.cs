@@ -15,17 +15,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace demo
+namespace demo.View
 {
-    public partial class MainWindow : Window
+    public partial class CalculatorView : Window
     {
         private readonly CalculatorViewModel calculatorViewModel;
-        public MainWindow()
+
+        public CalculatorView()
         {
             InitializeComponent();
             calculatorViewModel = new CalculatorViewModel(new DialogService());
             DataContext = calculatorViewModel;
         }
+
     }
 }
 

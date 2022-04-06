@@ -1,14 +1,135 @@
-﻿<Window x:Class="demo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="demo.View.CalculatorView"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:demo.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewModel="clr-namespace:demo.ViewModel" 
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:CalculatorViewModel, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="525" Width="350">
-    <Grid Margin="10">
 
+    <i:Interaction.Triggers>
+        <i:KeyTrigger Key="NumPad0">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="0"/>
+        </i:KeyTrigger>
+        <i:KeyTrigger Key="NumPad1">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="1"/>
+        </i:KeyTrigger>
+        <i:KeyTrigger Key="NumPad2">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="2"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="NumPad3">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="3"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="NumPad4">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="4"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="NumPad5">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="5"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="NumPad6">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="6"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="NumPad7">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="7"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="NumPad8">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="8"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="NumPad9">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="9"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D0">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="0"/>
+        </i:KeyTrigger>
+        <i:KeyTrigger Key="D1">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="1"/>
+        </i:KeyTrigger>
+        <i:KeyTrigger Key="D2">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="2"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D3">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="3"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D4">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="4"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D5">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="5"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D6">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="6"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D7">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="7"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D8">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="8"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="D9">
+            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="9"/>
+        </i:KeyTrigger>
+
+
+        <i:KeyTrigger Key="Decimal">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="."/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="Add">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="+"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="Minus">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="-"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="Multiply">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="*"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="Divide">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="/"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="Backspace">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="AC"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="Enter">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="="/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="OemQuestion">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="/"/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="OemComma">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="."/>
+        </i:KeyTrigger>
+
+        <i:KeyTrigger Key="OemPlus">
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="+"/>
+        </i:KeyTrigger>
+
+    </i:Interaction.Triggers>
+
+    <Grid Margin="10">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -32,6 +153,9 @@
                 Grid.ColumnSpan="4"       
                 FontSize="50"
                      />
+
+
+
 
         <Button Content="AC"
                 Grid.Row="1"

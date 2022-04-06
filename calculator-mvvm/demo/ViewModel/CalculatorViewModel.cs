@@ -225,8 +225,11 @@ namespace demo.ViewModel
                     break;
                 case "AC": Clear(); break;
                 case ".":
-                    _isDotUsed = true;
-                    Display = Number + ".";
+                    if (!_isDotUsed)
+                    {
+                        Display = Number + ".";
+                        _isDotUsed = true;
+                    }
                     break;
                 case "+/-":
                     Number *= -1;
