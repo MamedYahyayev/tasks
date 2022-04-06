@@ -7,19 +7,22 @@
         <SolidColorBrush x:Key="numbersBgColor" Color="#444444" />
         <SolidColorBrush x:Key="operatorsBgColor" Color="Orange" />
         <SolidColorBrush x:Key="operatorsForeColor" Color="White" />
+        <SolidColorBrush x:Key="pressedOperatorsBgColor" Color="White" />
+        <SolidColorBrush x:Key="pressedOperatorsForeColor" Color="Orange" />
         <SolidColorBrush x:Key="numbersForeColor" Color="White" />
+        <SolidColorBrush x:Key="percentagePressedBgColor" Color="Gray" />
         <sys:Double x:Key="buttonFontSize">30</sys:Double>
 
 
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontSize" Value="{StaticResource buttonFontSize}" />
         </Style>
 
         <Style TargetType="Button" x:Key="numberButtonStyle">
             <Setter Property="Background" Value="{StaticResource numbersBgColor}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Foreground" Value="{StaticResource numbersForeColor}"/>
+            <Setter Property="FontSize" Value="{StaticResource buttonFontSize}" />
             <Setter Property="Margin" Value="5" />
         </Style>
 
@@ -35,11 +38,11 @@
         <Style TargetType="Button" x:Key="divideBtnStyle" BasedOn="{StaticResource operationButtonStyle}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsDividePressed}" Value="True">
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="Foreground" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource pressedOperatorsBgColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource pressedOperatorsForeColor}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsDividePressed}" Value="False">
-                    <Setter Property="Background" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource operatorsBgColor}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -47,11 +50,11 @@
         <Style TargetType="Button" x:Key="subtractBtnStyle" BasedOn="{StaticResource operationButtonStyle}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsSubtractPressed}" Value="True">
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="Foreground" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource pressedOperatorsBgColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource pressedOperatorsForeColor}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsSubtractPressed}" Value="False">
-                    <Setter Property="Background" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource operatorsBgColor}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -59,11 +62,11 @@
         <Style TargetType="Button" x:Key="multiplyBtnStyle" BasedOn="{StaticResource operationButtonStyle}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsMultiplyPressed}" Value="True">
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="Foreground" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource pressedOperatorsBgColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource pressedOperatorsForeColor}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsMultiplyPressed}" Value="False">
-                    <Setter Property="Background" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource operatorsBgColor}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -71,11 +74,11 @@
         <Style TargetType="Button" x:Key="addBtnStyle" BasedOn="{StaticResource operationButtonStyle}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsAddPressed}" Value="True">
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="Foreground" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource pressedOperatorsBgColor}" />
+                    <Setter Property="Foreground" Value="{StaticResource pressedOperatorsForeColor}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsAddPressed}" Value="False">
-                    <Setter Property="Background" Value="Orange" />
+                    <Setter Property="Background" Value="{StaticResource operatorsBgColor}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -84,14 +87,14 @@
         <Style TargetType="Button" x:Key="percentageBtnStyle" BasedOn="{StaticResource additionalButtonStyle}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsPercentagePressed}" Value="True">
-                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Background" Value="{StaticResource percentagePressedBgColor}" />
                     <Setter Property="BorderBrush" Value="#cccccc" />
                     <Setter Property="BorderThickness" Value="2" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
-        
+
 
     </Application.Resources>
 </Application>

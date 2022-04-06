@@ -12,20 +12,13 @@ namespace demo.Model
         public double Number { get; set; }
         public CalcOperation Operation { get; set; } = CalcOperation.UNSET;
 
-        private double Add(double n1, double n2)
-        {
-            return n1 + n2;
-        }
+        private double Add(double n1, double n2) => n1 + n2;
 
-        private double Subtract(double n1, double n2)
-        {
-            return n1 - n2;
-        }
+        private double Subtract(double n1, double n2) => n1 - n2;
 
-        private double Multiply(double n1, double n2)
-        {
-            return n1 * n2;
-        }
+        private double Multiply(double n1, double n2) => n1 * n2;
+
+        private double Percentage(double n1, double n2) => (n1 / 100) * n2;
 
         private double Divide(double n1, double n2)
         {
@@ -34,10 +27,6 @@ namespace demo.Model
             return n1 / n2;
         }
 
-        private double Percentage(double n1, double n2)
-        {
-            return n1 / 100 * n2;
-        }
 
         public double CalculateResult(double n1, double n2, CalcOperation operation)
         {

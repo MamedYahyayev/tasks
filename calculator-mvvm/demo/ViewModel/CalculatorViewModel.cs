@@ -51,7 +51,6 @@ namespace demo.ViewModel
                 {
                     _display = value;
                     OnPropertyChange(nameof(Display));
-                    Console.WriteLine("I am changed in display setter: " + Display);
                 }
 
             }
@@ -185,18 +184,17 @@ namespace demo.ViewModel
             }
             else
                 Display = Number.ToString();
-
-            
         }
 
         private void OperationBtnPress(string operationType)
         {
-            if (_calculator.Operation == CalcOperation.UNSET && Number != 0)
-                _firstOperand = double.Parse(Display);
-            else
-                if (!_isResultCalculated && Number != 0)
-                _secondOperand = double.Parse(Display);
-
+            if (Number != 0)
+            {
+                if (IsOperationUnset())
+                    _firstOperand = double.Parse(Display);
+                else
+                    _secondOperand = double.Parse(Display);
+            }
 
             if (operationType != "+/-" && operationType != "=" && !_isResultCalculated && operationType != ".")
                 Calculate();
@@ -236,7 +234,7 @@ namespace demo.ViewModel
                     break;
                 case "=":
                     UnPressed();
-                    if (_lastOperation != CalcOperation.UNSET && _calculator.Operation == CalcOperation.UNSET)
+                    if (_lastOperation != CalcOperation.UNSET && IsOperationUnset())
                     {
                         Number = _calculator.CalculateResult(_firstOperand, _secondOperand, _lastOperation);
                         Display = Number.ToString();
@@ -252,6 +250,8 @@ namespace demo.ViewModel
         }
         #endregion
 
+
+        private bool IsOperationUnset() => _calculator.Operation == CalcOperation.UNSET;
 
         private void AssignNumber(int parsedNum)
         {
@@ -278,7 +278,7 @@ namespace demo.ViewModel
             _secondOperand = 0;
             Number = 0;
             _calculator.Operation = CalcOperation.UNSET;
-            _lastOperation = 0;
+            _lastOperation = CalcOperation.UNSET;
             _isResultCalculated = false;
             Display = Number.ToString();
         }
@@ -288,7 +288,7 @@ namespace demo.ViewModel
             try
             {
                 Number = 0;
-                if (_calculator.Operation != CalcOperation.UNSET)
+                if (!IsOperationUnset())
                 {
                     Number = _calculator.CalculateResult(_firstOperand, _secondOperand, _calculator.Operation);
                     Display = Number.ToString();
@@ -300,7 +300,7 @@ namespace demo.ViewModel
             }
             catch (DivideByZeroException e)
             {
-                _dialogService.ShowMessageBox(e.Message);
+                _dialogService.ShowErrorMessageBox(e.Message, "Divide By Zero");
             }
         }
     }

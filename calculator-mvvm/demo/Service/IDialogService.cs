@@ -9,5 +9,7 @@ namespace demo.Service
     public interface IDialogService
     {
         void ShowMessageBox(string message);
+
+        void ShowErrorMessageBox(string message, string caption);
     }
 }

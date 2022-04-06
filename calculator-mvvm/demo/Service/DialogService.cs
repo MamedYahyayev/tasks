@@ -9,9 +9,9 @@ namespace demo.Service
 {
     public class DialogService : IDialogService
     {
-        public void ShowMessageBox(string message)
-        {
-            MessageBox.Show(message);
-        }
+        public void ShowErrorMessageBox(string message, string caption) 
+            => MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
+
+        public void ShowMessageBox(string message) => MessageBox.Show(message);
     }
 }
