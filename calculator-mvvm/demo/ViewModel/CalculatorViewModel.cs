@@ -177,11 +177,8 @@ namespace demo.ViewModel
             int parsedNum = int.Parse(numberStr);
             AssignNumber(parsedNum);
 
-            if (Display.Contains(".") && _isDotUsed)
-            {
-                var divider = Math.Pow(10, Display.Length - 1); ;
-                Display = (Number / divider).ToString();
-            }
+            if (_isDotUsed)
+                Display += numberStr;
             else
                 Display = Number.ToString();
         }
@@ -200,7 +197,10 @@ namespace demo.ViewModel
                 Calculate();
 
             UnPressed();
-            _isDotUsed = false;
+
+            if (operationType != ".")
+                _isDotUsed = false;
+
             switch (operationType)
             {
                 case "*":
