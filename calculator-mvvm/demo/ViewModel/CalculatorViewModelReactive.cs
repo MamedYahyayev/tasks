@@ -1,12 +1,16 @@
 ﻿using demo.Command;
 using demo.Model;
 using demo.Service;
+using ReactiveUI;
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace demo.ViewModel
 {
-    public partial class CalculatorViewModel : INotifyPropertyChanged
+    public class CalculatorViewModelReactive : ReactiveObject
     {
         private BaseUpdaterCommand? _numCommand;
         private BaseUpdaterCommand? _operationCommand;
@@ -18,13 +22,13 @@ namespace demo.ViewModel
         private CalcOperation _lastOperation = CalcOperation.UNSET;
         private bool _isResultCalculated = false;
 
-        public CalculatorViewModel(IDialogService dialogService)
+        public CalculatorViewModelReactive(IDialogService dialogService)
         {
             _dialogService = dialogService;
         }
 
         public double Number
-        {   
+        {
             get { return _calculator.Number; }
             set
             {
@@ -44,16 +48,8 @@ namespace demo.ViewModel
 
         public string Display
         {
-            get { return _display; }
-            set
-            {
-                if (_display != value)
-                {
-                    _display = value;
-                    OnPropertyChange(nameof(Display));
-                }
-
-            }
+            get => _display;
+            set => this.RaiseAndSetIfChanged(ref _display, value);
         }
 
         #region Private Properties for Operation Press Style
@@ -67,77 +63,35 @@ namespace demo.ViewModel
         #region Public Properties for Operation Press Style
         public bool IsAddPressed
         {
-            get { return _isAddPressed; }
-            set
-            {
-                if (_isAddPressed != value)
-                {
-                    _isAddPressed = value;
-                    OnPropertyChange(nameof(IsAddPressed));
-                }
-            }
+            get => this._isAddPressed;
+            set => this.RaiseAndSetIfChanged(ref _isAddPressed, value); 
         }
 
         public bool IsSubtractPressed
         {
-            get { return _isSubtractPressed; }
-            set
-            {
-                if (_isSubtractPressed != value)
-                {
-                    _isSubtractPressed = value;
-                    OnPropertyChange(nameof(IsSubtractPressed));
-                }
-            }
+            get => _isSubtractPressed;
+            set => this.RaiseAndSetIfChanged(ref _isSubtractPressed, value);
         }
 
         public bool IsMultiplyPressed
         {
-            get { return _isMultiplyPressed; }
-            set
-            {
-                if (_isMultiplyPressed != value)
-                {
-                    _isMultiplyPressed = value;
-                    OnPropertyChange(nameof(IsMultiplyPressed));
-                }
-            }
+            get => _isMultiplyPressed;
+            set => this.RaiseAndSetIfChanged(ref _isMultiplyPressed, value);
         }
 
         public bool IsDividePressed
         {
-            get { return _isDividePressed; }
-            set
-            {
-                if (_isDividePressed != value)
-                {
-                    _isDividePressed = value;
-                    OnPropertyChange(nameof(IsDividePressed));
-                }
-            }
+            get => _isDividePressed;
+            set => this.RaiseAndSetIfChanged(ref _isDividePressed, value);
         }
 
         public bool IsPercentagePressed
         {
-            get { return _isPercentagePressed; }
-            set
-            {
-                if (_isPercentagePressed != value)
-                {
-                    _isPercentagePressed = value;
-                    OnPropertyChange(nameof(IsPercentagePressed));
-                }
-            }
+            get => _isPercentagePressed;
+            set => this.RaiseAndSetIfChanged(ref _isPercentagePressed, value);
         }
         #endregion
 
-        #region Property Change Event Handler
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChange(string properyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(properyName));
-        }
-        #endregion
 
         #region Button Commands
         public BaseUpdaterCommand NumButtonPressCommand
@@ -193,7 +147,7 @@ namespace demo.ViewModel
                     _secondOperand = double.Parse(Display);
             }
 
-            if (operationType != "+/-" && operationType != "=" && !_isResultCalculated && operationType != "." 
+            if (operationType != "+/-" && operationType != "=" && !_isResultCalculated && operationType != "."
                     && operationType != "AC")
                 Calculate();
 
@@ -255,6 +209,7 @@ namespace demo.ViewModel
         #endregion
 
 
+        #region Additional Helper Methods
         private bool IsOperationUnset() => _calculator.Operation == CalcOperation.UNSET;
 
         private void AssignNumber(int parsedNum)
@@ -307,7 +262,6 @@ namespace demo.ViewModel
                 _dialogService.ShowErrorMessageBox(e.Message, "Divide By Zero");
             }
         }
+        #endregion
     }
-
-
 }

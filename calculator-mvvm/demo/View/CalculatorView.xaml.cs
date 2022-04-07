@@ -19,13 +19,14 @@ namespace demo.View
 {
     public partial class CalculatorView : Window
     {
-        private readonly CalculatorViewModel calculatorViewModel;
+        /*private readonly CalculatorViewModel calculatorViewModel;*/
+        private readonly CalculatorViewModelReactive _calculatorViewModelReactive;
 
         public CalculatorView()
         {
             InitializeComponent();
-            calculatorViewModel = new CalculatorViewModel(new DialogService());
-            DataContext = calculatorViewModel;
+            _calculatorViewModelReactive = new CalculatorViewModelReactive(new DialogService());
+            DataContext = _calculatorViewModelReactive;
         }
 
     }
