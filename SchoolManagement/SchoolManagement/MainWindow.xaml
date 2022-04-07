@@ -5,8 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolManagement"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="600" Width="1000"
+        Background="Transparent"
+        >
 
-    </Grid>
+    <Border Background="#272537">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+
+            <TextBlock 
+                Text="School"
+                FontSize="30"
+                Margin="10"
+                Foreground="White"
+                />
+
+            <StackPanel Grid.Row="1">
+                <RadioButton 
+                    Content="Students" 
+                    Foreground="White" 
+                    Height="50"
+                    FontSize="20"
+                    Style="{StaticResource MenuButtonTheme}"
+                    />
+                <RadioButton 
+                    Content="Teachers"  
+                    Foreground="White" 
+                    Height="50"
+                    FontSize="20"
+                    Style="{StaticResource MenuButtonTheme}"
+                    />
+                <RadioButton 
+                    Content="Subjects"  
+                    Foreground="White" 
+                    Height="50"
+                    FontSize="20"
+                    Style="{StaticResource MenuButtonTheme}"
+                    />
+
+            </StackPanel>
+
+            <TextBox 
+                Grid.Column="1"
+                Width="400"
+                Height="50"
+                HorizontalAlignment="Left"
+                Margin="5"
+                Style="{StaticResource TextBoxTheme}"
+                />
+
+
+            <ContentControl 
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="10"
+                />
+
+        </Grid>
+
+    </Border>
+
+
 </Window>
