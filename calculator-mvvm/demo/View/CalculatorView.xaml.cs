@@ -20,12 +20,12 @@ namespace demo.View
     public partial class CalculatorView : Window
     {
         /*private readonly CalculatorViewModel calculatorViewModel;*/
-        private readonly CalculatorViewModelReactive _calculatorViewModelReactive;
+        private readonly CalculatorViewModel _calculatorViewModelReactive;
 
         public CalculatorView()
         {
             InitializeComponent();
-            _calculatorViewModelReactive = new CalculatorViewModelReactive(new DialogService());
+            _calculatorViewModelReactive = new CalculatorViewModel(new DialogService());
             DataContext = _calculatorViewModelReactive;
         }
 
