@@ -3,18 +3,13 @@ using demo.Model;
 using demo.Service;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reactive;
 
 namespace demo.ViewModel
 {
     public class CalculatorViewModelReactive : ReactiveObject
     {
-        private BaseUpdaterCommand? _numCommand;
-        private BaseUpdaterCommand? _operationCommand;
-        private Calculator _calculator = new Calculator();
+        private readonly Calculator _calculator = new Calculator();
         private readonly IDialogService _dialogService;
 
         private double _firstOperand;
@@ -33,24 +28,27 @@ namespace demo.ViewModel
             set
             {
                 if (_calculator.Number != value)
-                {
                     _calculator.Number = value;
-                }
             }
         }
 
-        #region Properties For Decimal Number Calculation
+        #region Property For Decimal Number Calculation
 
         private bool _isDotUsed = false;
-        private string _display = string.Empty;
 
         #endregion
+
+        #region Public and Private Properties for Display
+
+        private string _display = string.Empty;
 
         public string Display
         {
             get => _display;
             set => this.RaiseAndSetIfChanged(ref _display, value);
         }
+
+        #endregion
 
         #region Private Properties for Operation Press Style
         private bool _isAddPressed = false;
@@ -64,7 +62,7 @@ namespace demo.ViewModel
         public bool IsAddPressed
         {
             get => this._isAddPressed;
-            set => this.RaiseAndSetIfChanged(ref _isAddPressed, value); 
+            set => this.RaiseAndSetIfChanged(ref _isAddPressed, value);
         }
 
         public bool IsSubtractPressed
@@ -92,35 +90,9 @@ namespace demo.ViewModel
         }
         #endregion
 
-
-        #region Button Commands
-        public BaseUpdaterCommand NumButtonPressCommand
-        {
-            get
-            {
-                if (_numCommand == null)
-                    _numCommand = new NumUpdater(NumButtonPress, true);
-                return _numCommand;
-            }
-            set { _numCommand = value; }
-        }
-
-        public BaseUpdaterCommand OperationBtnPressCommand
-        {
-            get
-            {
-                if (_operationCommand == null)
-                    _operationCommand = new OperationUpdater(OperationBtnPress, true);
-                return _operationCommand;
-            }
-            set { _operationCommand = value; }
-        }
-        #endregion
-
         #region Command Execute Methods
         private void NumButtonPress(string numberStr)
         {
-
             if (_isResultCalculated)
             {
                 Number = 0;
@@ -208,6 +180,15 @@ namespace demo.ViewModel
         }
         #endregion
 
+        #region Reactive Commands
+        private VoidReactiveCommand<string> _numCommand;
+        public VoidReactiveCommand<string> NumButtonPressCommand =>
+            _numCommand ?? VoidReactiveCommand<string>.Create(NumButtonPress);
+
+        private VoidReactiveCommand<string> _operationCommand;
+        public VoidReactiveCommand<string> OperationBtnPressCommand =>
+            _operationCommand ?? VoidReactiveCommand<string>.Create(OperationBtnPress);
+        #endregion
 
         #region Additional Helper Methods
         private bool IsOperationUnset() => _calculator.Operation == CalcOperation.UNSET;

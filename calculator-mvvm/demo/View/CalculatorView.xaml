@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewModel="clr-namespace:demo.ViewModel" 
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModel:CalculatorViewModel, IsDesignTimeCreatable=False}"
+        d:DataContext="{d:DesignInstance viewModel:CalculatorViewModelReactive, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="525" Width="350"
         Focusable="False"
       >

@@ -50,6 +50,7 @@ namespace demo.ViewModel
                 if (_display != value)
                 {
                     _display = value;
+                    Console.WriteLine("I am here");
                     OnPropertyChange(nameof(Display));
                 }
 
