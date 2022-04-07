@@ -17,6 +17,7 @@
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="{StaticResource buttonFontSize}" />
+            <Setter Property="KeyboardNavigation.AcceptsReturn" Value="False" />
         </Style>
 
         <Style TargetType="Button" x:Key="numberButtonStyle">
@@ -93,8 +94,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
-
 
     </Application.Resources>
 </Application>

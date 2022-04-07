@@ -193,7 +193,8 @@ namespace demo.ViewModel
                     _secondOperand = double.Parse(Display);
             }
 
-            if (operationType != "+/-" && operationType != "=" && !_isResultCalculated && operationType != ".")
+            if (operationType != "+/-" && operationType != "=" && !_isResultCalculated && operationType != "." 
+                    && operationType != "AC")
                 Calculate();
 
             UnPressed();

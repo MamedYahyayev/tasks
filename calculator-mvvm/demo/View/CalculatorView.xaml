@@ -7,15 +7,19 @@
         xmlns:viewModel="clr-namespace:demo.ViewModel" 
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:CalculatorViewModel, IsDesignTimeCreatable=False}"
-        Title="MainWindow" Height="525" Width="350">
+        Title="MainWindow" Height="525" Width="350"
+        Focusable="False"
+      >
 
     <i:Interaction.Triggers>
         <i:KeyTrigger Key="NumPad0">
             <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="0"/>
         </i:KeyTrigger>
+
         <i:KeyTrigger Key="NumPad1">
             <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="1"/>
         </i:KeyTrigger>
+
         <i:KeyTrigger Key="NumPad2">
             <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="2"/>
         </i:KeyTrigger>
@@ -48,45 +52,6 @@
             <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="9"/>
         </i:KeyTrigger>
 
-        <i:KeyTrigger Key="D0">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="0"/>
-        </i:KeyTrigger>
-        <i:KeyTrigger Key="D1">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="1"/>
-        </i:KeyTrigger>
-        <i:KeyTrigger Key="D2">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="2"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="D3">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="3"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="D4">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="4"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="D5">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="5"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="D6">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="6"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="D7">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="7"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="D8">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="8"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="D9">
-            <i:InvokeCommandAction Command="{Binding NumButtonPressCommand}" CommandParameter="9"/>
-        </i:KeyTrigger>
-
-
         <i:KeyTrigger Key="Decimal">
             <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="."/>
         </i:KeyTrigger>
@@ -103,6 +68,7 @@
             <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="*"/>
         </i:KeyTrigger>
 
+
         <i:KeyTrigger Key="Divide">
             <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="/"/>
         </i:KeyTrigger>
@@ -112,25 +78,12 @@
         </i:KeyTrigger>
 
         <i:KeyTrigger Key="Enter">
-            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="="/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="OemQuestion">
-            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="/"/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="OemComma">
-            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="."/>
-        </i:KeyTrigger>
-
-        <i:KeyTrigger Key="OemPlus">
-            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="+"/>
+            <i:InvokeCommandAction Command="{Binding OperationBtnPressCommand}" CommandParameter="=" />
         </i:KeyTrigger>
 
     </i:Interaction.Triggers>
 
     <Grid Margin="10">
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -154,14 +107,12 @@
                 FontSize="50"
                      />
 
-
-
-
         <Button Content="AC"
                 Grid.Row="1"
                 Style="{StaticResource additionalButtonStyle}"
-                Command="{Binding Path=OperationBtnPressCommand}"
+                Command="{Binding OperationBtnPressCommand}"
                 CommandParameter="AC"
+                KeyboardNavigation.AcceptsReturn="False"
                 />
 
         <Button Content="+/-"
@@ -169,7 +120,8 @@
                 Grid.Column="1"
                 Style="{StaticResource additionalButtonStyle}"
                 Command="{Binding Path=OperationBtnPressCommand}"
-                CommandParameter="+/-"                
+                CommandParameter="+/-"            
+                KeyboardNavigation.AcceptsReturn="False"
                  />
 
         <Button Content="%"
@@ -178,6 +130,7 @@
                 Grid.Column="2"
                 Command="{Binding Path=OperationBtnPressCommand}"
                 CommandParameter="%"
+                KeyboardNavigation.AcceptsReturn="False"
                 />
 
         <Button 
@@ -187,6 +140,7 @@
                 Style="{StaticResource divideBtnStyle}"
                 Command="{Binding Path=OperationBtnPressCommand}"
                 CommandParameter="/"
+                KeyboardNavigation.AcceptsReturn="False"
                                 />
 
         <Button Content="7"
@@ -194,6 +148,7 @@
                 Style="{StaticResource numberButtonStyle}"
                 Command="{Binding Path=NumButtonPressCommand}"
                 CommandParameter="7"
+                KeyboardNavigation.AcceptsReturn="False"
                  />
 
         <Button Content="8"
@@ -202,6 +157,7 @@
                 Style="{StaticResource numberButtonStyle}"
                 Command="{Binding Path=NumButtonPressCommand}"
                 CommandParameter="8"
+                KeyboardNavigation.AcceptsReturn="False"
                  />
 
 
@@ -211,6 +167,7 @@
                 Grid.Column="2"
                 Command="{Binding Path=NumButtonPressCommand}"
                 CommandParameter="9"
+                KeyboardNavigation.AcceptsReturn="False"
                  />
 
         <Button Content="*"
@@ -218,6 +175,7 @@
                 Style="{StaticResource multiplyBtnStyle}"
                 Grid.Column="3"
                 Command="{Binding Path=OperationBtnPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="*"
                  />
 
@@ -226,6 +184,7 @@
                 Grid.Row="3"
                 Style="{StaticResource numberButtonStyle}"
                 Command="{Binding Path=NumButtonPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="4"
                  />
 
@@ -234,6 +193,7 @@
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Column="1"
                 Command="{Binding Path=NumButtonPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="5"
                  />
 
@@ -243,6 +203,7 @@
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Column="2"
                 Command="{Binding Path=NumButtonPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="6"
                  />
 
@@ -251,6 +212,7 @@
                 Style="{StaticResource subtractBtnStyle}"
                 Grid.Column="3"
                 Command="{Binding Path=OperationBtnPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="-"
                  />
 
@@ -259,6 +221,7 @@
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="4"
                 Command="{Binding Path=NumButtonPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="1"
                  />
 
@@ -267,6 +230,7 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 Command="{Binding Path=NumButtonPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="2"
                  />
 
@@ -276,6 +240,7 @@
                 Grid.Row="4"
                 Grid.Column="2"
                 Command="{Binding Path=NumButtonPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="3"
                  />
 
@@ -285,6 +250,7 @@
                 Style="{StaticResource addBtnStyle}"
                 Grid.Column="3"
                 Command="{Binding Path=OperationBtnPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="+"
                  />
 
@@ -293,6 +259,7 @@
                 Style="{StaticResource numberButtonStyle}"
                 Grid.ColumnSpan="2"
                 Command="{Binding Path=NumButtonPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
                 CommandParameter="0"
                 />
 
@@ -301,6 +268,8 @@
                 Grid.Column="2"
                 Style="{StaticResource numberButtonStyle}"
                 Command="{Binding Path=OperationBtnPressCommand}"
+                KeyboardNavigation.AcceptsReturn="False"
+                KeyboardNavigation.IsTabStop="False"
                 CommandParameter="."
                 />
 
