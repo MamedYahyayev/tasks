@@ -173,12 +173,14 @@ namespace demo.ViewModel
         #region Reactive Commands
 
         private VoidReactiveCommand<string> _numCommand;
+
         public VoidReactiveCommand<string> NumButtonPressCommand =>
-            _numCommand ?? VoidReactiveCommand<string>.Create(NumButtonPress);
+            _numCommand ??= VoidReactiveCommand<string>.Create(NumButtonPress);
 
         private VoidReactiveCommand<string> _operationCommand;
+        
         public VoidReactiveCommand<string> OperationBtnPressCommand =>
-            _operationCommand ?? VoidReactiveCommand<string>.Create(OperationBtnPress);
+            _operationCommand ??= VoidReactiveCommand<string>.Create(OperationBtnPress);
         
         #endregion
 
