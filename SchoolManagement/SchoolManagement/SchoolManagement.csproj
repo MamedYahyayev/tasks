@@ -12,10 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Resources\Images\" />
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
+	  <Folder Include="Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\school.png" />
   </ItemGroup>
 
 </Project>
