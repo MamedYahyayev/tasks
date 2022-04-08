@@ -470,3 +470,9 @@ Temporary Items
 InteropTests/NativeTests/out
 /src/System.Windows.Forms/src/comctl32.dll
 *.received.*
+
+
+
+
+# Sql Server Constants
+./SchoolManagement/SchoolManagement/Constant/SqlServerDbConfig.cs
