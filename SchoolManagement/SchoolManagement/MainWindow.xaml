@@ -9,8 +9,7 @@
         Title="MainWindow" Height="600" Width="1000"
         Background="Transparent"
         >
-
-
+    
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -40,24 +39,21 @@
             <StackPanel Grid.Row="1" Margin="0, 20">
                 <RadioButton 
                     Content="Students" 
-                    Foreground="White" 
-                    Height="50"
-                    FontSize="20"
                     Style="{StaticResource MenuButtonTheme}"
+                    Command="{Binding CurrentViewChangeCommand}"
+                    CommandParameter="STUDENT"
                     />
                 <RadioButton 
                     Content="Teachers"  
-                    Foreground="White" 
-                    Height="50"
-                    FontSize="20"
                     Style="{StaticResource MenuButtonTheme}"
+                    Command="{Binding CurrentViewChangeCommand}"
+                    CommandParameter="TEACHER"
                     />
                 <RadioButton 
                     Content="Subjects"  
-                    Foreground="White" 
-                    Height="50"
-                    FontSize="20"
                     Style="{StaticResource MenuButtonTheme}"
+                    Command="{Binding CurrentViewChangeCommand}"
+                    CommandParameter="SUBJECT"
                     />
 
             </StackPanel>

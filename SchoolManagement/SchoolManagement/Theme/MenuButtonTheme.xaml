@@ -6,6 +6,9 @@
            x:Key="MenuButtonTheme"
            >
         <Style.Setters>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Foreground" Value="White" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
