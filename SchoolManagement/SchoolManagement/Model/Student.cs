@@ -8,6 +8,6 @@ namespace SchoolManagement.Model
 {
     public class Student : Person
     {
-        public DateTime RegisterDate { get; set; }
+        public DateTime RegisterDate { get; set; }  
     }
 }
