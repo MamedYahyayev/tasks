@@ -53,7 +53,8 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    const string sql = "SELECT s.Id, s.Name, s.Surname, s.BirthDate, s.RegisterDate, t.Name, t.Surname " +
+                    const string sql = "SELECT s.Id studentId, s.Name studentName, s.Surname studentSurname," +
+                        " s.BirthDate studentBirthDate, s.RegisterDate studentRegisterDate, t.Name teacherName, t.Surname teacherSurname " +
                         "FROM Student s left join Teacher t on t.Id = s.TeacherId";
                     _command = new SqlCommand(sql, _connection);
                     _reader = _command.ExecuteReader();
@@ -61,15 +62,15 @@ namespace SchoolManagement.Service
                     while (_reader.Read())
                     {
                         var student = new Student();
-                        student.Id = _reader.GetInt32("s.Id");
-                        student.Name = _reader.GetString("s.Name");
-                        student.Surname = _reader.GetString("s.Surname");
-                        student.BirthDate = _reader.GetDateTime("s.BirthDate");
-                        student.RegisterDate = _reader.GetDateTime("s.RegisterDate");
+                        student.Id = _reader.GetInt32("studentId");
+                        student.Name = _reader.GetStringValueOrDefault("studentName");
+                        student.Surname = _reader.GetStringValueOrDefault("studentSurname");
+                        student.BirthDate = _reader.GetDateTime("studentBirthDate");
+                        student.RegisterDate = _reader.GetDateTime("studentRegisterDate");
 
                         var teacher = new Teacher();
-                        teacher.Name = _reader.GetString("t.Name");
-                        teacher.Surname = _reader.GetString("t.Surname");
+                        teacher.Name = _reader.GetStringValueOrDefault("teacherName");
+                        teacher.Surname = _reader.GetStringValueOrDefault("teacherSurname");
 
                         student.Teacher = teacher;
 
@@ -81,9 +82,9 @@ namespace SchoolManagement.Service
 
                 throw new Exception("Sorry, we couldn't connect the database");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {
@@ -98,7 +99,7 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    const string sql = "SELECT s.Id, s.Name, s.Surname, s.BirthDate, s.RegisterDate, t.Name, t.Surname" +
+                    const string sql = "SELECT s.Id studentId, s.Name studentName, s.Surname, s.BirthDate, s.RegisterDate, t.Name, t.Surname" +
                         " FROM Student s left join Teacher t on t.id = s.TeacherId Where s.Id=@Id";
                     _command = new SqlCommand(sql, _connection);
                     _command.Parameters.AddWithValue("Id", id);
