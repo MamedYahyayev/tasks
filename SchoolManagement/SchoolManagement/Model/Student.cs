@@ -9,5 +9,6 @@ namespace SchoolManagement.Model
     public class Student : Person
     {
         public DateTime RegisterDate { get; set; }  
+        public Teacher Teacher { get; set; }
     }
 }
