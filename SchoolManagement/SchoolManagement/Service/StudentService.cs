@@ -49,7 +49,7 @@ namespace SchoolManagement.Service
         {
             try
             {
-                IList<Student> students = new List<Student>();
+                var students = new List<Student>();
                 if (_connection != null)
                 {
                     _connection.Open();
@@ -211,7 +211,7 @@ namespace SchoolManagement.Service
         {
             try
             {
-                IList<Student> students = new List<Student>();
+                var students = new List<Student>();
                 if (_connection != null)
                 {
                     _connection.Open();
