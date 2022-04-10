@@ -49,31 +49,19 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
             <Button Content="Save" 
-                    FontSize="20"
                     Background="#FF004880"
-                    Foreground="#FFF9F4F4"
-                    Padding="10"
-                    Margin="10"
-                    Width="100"
+                    Style="{StaticResource formButtonStyle}"
                     />
 
             <Button Content="Cancel" 
-                    FontSize="20"
                     Background="Gray"
-                    Foreground="#FFF9F4F4"
-                    Padding="10"
-                    Margin="10"
-                    Width="100"
+                    Style="{StaticResource formButtonStyle}"
                     Command="{Binding ClearFormCommand}"
                     />
 
             <Button Content="Delete" 
-                    FontSize="20"
                     Background="Red"
-                    Foreground="#FFF9F4F4"
-                    Padding="10"
-                    Margin="10"
-                    Width="100"
+                    Style="{StaticResource formButtonStyle}"
                     />
         </StackPanel>
 

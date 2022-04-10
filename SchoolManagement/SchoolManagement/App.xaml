@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="/Theme/TextBoxTheme.xaml" />
                 <ResourceDictionary Source="/Theme/OperationButtonTheme.xaml" />
+                <ResourceDictionary Source="/Theme/FormTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:TeacherViewModel }">
