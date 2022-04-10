@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="SchoolManagement.View.SubView.StudentFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolManagement.View.SubView"
+             xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance viewModel:StudentViewModel, IsDesignTimeCreatable=False}" 
+             d:DesignHeight="250" d:DesignWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10">
+            <TextBlock Text="Name" FontSize="18" Foreground="White"/>
+            <TextBox Text="{Binding CurrentStudent.Name}" Style="{StaticResource formTextBoxTheme}" />
+
+            <TextBlock Text="Surname" FontSize="18" Foreground="White" />
+            <TextBox Text="{Binding CurrentStudent.Surname}" Style="{StaticResource formTextBoxTheme}" />
+        </StackPanel>
+
+        <StackPanel Margin="10" Grid.Column="1">
+            <TextBlock Text="Birth date" FontSize="18" Foreground="White"/>
+            <DatePicker 
+                Height="35" 
+                VerticalContentAlignment="Center"
+                FontSize="18"
+                Margin="0, 5, 0, 10"
+                SelectedDate="{Binding CurrentStudent.BirthDate}"
+                />
+
+            <TextBlock Text="Register date" FontSize="18" Foreground="White"/>
+            <DatePicker 
+                Height="35" 
+                VerticalContentAlignment="Center"
+                FontSize="18" 
+                Margin="0, 5, 0, 10"
+                SelectedDate="{Binding CurrentStudent.RegisterDate}"
+                />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
+            <Button Content="Save" 
+                    FontSize="20"
+                    Background="#FF004880"
+                    Foreground="#FFF9F4F4"
+                    Padding="10"
+                    Margin="10"
+                    Width="100"
+                    />
+
+            <Button Content="Cancel" 
+                    FontSize="20"
+                    Background="Gray"
+                    Foreground="#FFF9F4F4"
+                    Padding="10"
+                    Margin="10"
+                    Width="100"
+                    Command="{Binding ClearFormCommand}"
+                    />
+
+            <Button Content="Delete" 
+                    FontSize="20"
+                    Background="Red"
+                    Foreground="#FFF9F4F4"
+                    Padding="10"
+                    Margin="10"
+                    Width="100"
+                    />
+        </StackPanel>
+
+    </Grid>
+</UserControl>
