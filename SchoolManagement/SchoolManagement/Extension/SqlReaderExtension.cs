@@ -12,10 +12,23 @@ namespace System.Data.SqlClient
     {
         public static string GetStringValueOrDefault(this SqlDataReader reader, string columnName)
         {
-            var isNull = reader.IsDBNull(reader.GetOrdinal(columnName));
+            var isNull = IsNull(reader, columnName);
             if (isNull) return String.Empty;
 
             return reader.GetString(columnName);
+        }
+
+        public static object GetIntValueOrDefault(this SqlDataReader reader, string columnName)
+        {
+            var isNull = IsNull(reader, columnName);
+            if (isNull) return null;
+
+            return reader.GetInt32(columnName);
+        }
+
+        private static bool IsNull(SqlDataReader reader, string columnName)
+        {
+            return reader.IsDBNull(reader.GetOrdinal(columnName)); ;
         }
     }
 }
