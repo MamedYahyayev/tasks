@@ -8,6 +8,10 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModel:StudentOperationViewModel, IsDesignTimeCreatable=False}" 
              d:DesignHeight="250" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -25,10 +29,24 @@
             <TextBlock Text="Name" FontSize="18" Foreground="White"/>
             <TextBox Text="{Binding Student.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      Style="{StaticResource formTextBoxTheme}" />
+            <TextBlock Foreground="Red" Text="{Binding Errors[Name].ErrorMessage,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}" 
+                       Visibility="{Binding Errors[Name].HasError, 
+                        Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0, 2, 0, 10"
+                       />
 
             <TextBlock Text="Surname" FontSize="18" Foreground="White" />
             <TextBox Text="{Binding Student.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      Style="{StaticResource formTextBoxTheme}" />
+            <TextBlock Foreground="Red" Text="{Binding Errors[Surname].ErrorMessage, 
+                        Mode=TwoWay,
+                        UpdateSourceTrigger=PropertyChanged}" 
+                        Visibility="{Binding Errors[Surname].HasError, 
+                        Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0, 5, 0, 5"
+                       />
         </StackPanel>
 
         <StackPanel Margin="10" Grid.Column="1">
@@ -100,7 +118,7 @@
             <Button Content="Cancel" 
                     Background="Gray"
                     Style="{StaticResource formButtonStyle}"
-                    Command="{Binding ClearStudentCommand}"
+                    Command="{Binding CancelOperationCommand}"
                     />
         </StackPanel>
     </Grid>

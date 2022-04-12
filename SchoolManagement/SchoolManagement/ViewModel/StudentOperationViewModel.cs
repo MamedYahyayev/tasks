@@ -4,7 +4,9 @@ using SchoolManagement.Enum;
 using SchoolManagement.Model;
 using SchoolManagement.Service;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,27 @@ namespace SchoolManagement.ViewModel
 {
     public class StudentOperationViewModel : ReactiveObject
     {
-        #region Properties
+        #region Private Properties
+
+        private readonly StudentService _studentService = new StudentService();
+
+        private Action<ViewType> _callback;
+
+        private TeacherService _teacherService;
+
+        #endregion
+
+        public StudentOperationViewModel(int? id, Action<ViewType> callback)
+        {
+            _callback = callback;
+            Errors = new Dictionary<string, ErrorModel>();
+
+            LoadAllTeachers();
+            if (id != null) LoadStudent(id);
+            else Student = new Student();
+        }
+
+        #region Public Properties
 
         private Student _student;
         public Student Student
@@ -44,22 +66,15 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _studentViewModel, value);
         }
 
-        private readonly StudentService _studentService = new StudentService();
-
-        private Action<ViewType> _callback;
-
-        private TeacherService _teacherService;
+        private Dictionary<string, ErrorModel> _errors;
+        public Dictionary<string, ErrorModel> Errors
+        {
+            get => _errors;
+            set => this.RaiseAndSetIfChanged(ref _errors, value);
+        }
 
         #endregion
 
-
-        public StudentOperationViewModel(int? id, Action<ViewType> callback)
-        {
-            _callback = callback;
-            LoadAllTeachers();
-            if (id != null) LoadStudent(id);
-            else Student = new Student();
-        }
 
         #region Functions
 
@@ -106,6 +121,33 @@ namespace SchoolManagement.ViewModel
 
         private bool IsDataValid()
         {
+            // create method that deletes error message for specific key if it has error
+
+            if (string.IsNullOrEmpty(Student.Name))
+            {
+                var errorModel = new ErrorModel()
+                {
+                    HasError = true,
+                    ErrorMessage = "Name cannot be empty"
+                };
+
+                //Errors.Add(nameof(Student.Name), errorModel);
+
+            }
+
+            if (string.IsNullOrEmpty(Student.Surname))
+            {
+                var errorModel = new ErrorModel()
+                {
+                    HasError = true,
+                    ErrorMessage = "Surname cannot be empty"
+                };
+
+                //Errors.Add(nameof(Student.Surname), errorModel);
+            }
+
+            
+
             return Student != null && !string.IsNullOrEmpty(Student.Name) && !string.IsNullOrEmpty(Student.Surname);
         }
 
@@ -116,9 +158,13 @@ namespace SchoolManagement.ViewModel
 
         private void CancelOperation() => _callback?.Invoke(ViewType.STUDENT);
 
+
+
         #endregion
 
+
         #region Commands
+
         private VoidReactiveCommand<int?> _saveCommand;
         public VoidReactiveCommand<int?> SaveCommand =>
             _saveCommand ??= VoidReactiveCommand<int?>.Create(Save);
@@ -128,6 +174,8 @@ namespace SchoolManagement.ViewModel
             _cancelOperationCommand ??= VoidReactiveCommand.Create(CancelOperation);
 
         private VoidReactiveCommand _unselectCommand;
+
+
         public VoidReactiveCommand UnselectCommand =>
             _unselectCommand ??= VoidReactiveCommand.Create(UnselectTeacher);
 
