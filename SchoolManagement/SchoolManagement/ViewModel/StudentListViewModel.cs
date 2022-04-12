@@ -12,49 +12,58 @@ namespace SchoolManagement.ViewModel
 {
     public class StudentListViewModel : ReactiveObject
     {
+        #region Private Properties
+
         private readonly StudentService _studentService = new StudentService();
 
-        private IList<Student> _students;
-        private Student _currentStudent = new Student();
-
-        private TeacherListViewModel _teacherViewModel = new TeacherListViewModel();
-
+        #endregion
 
         public StudentListViewModel()
         {
-            Students = _studentService.GetAll();
+            _teacherListViewModel = new TeacherListViewModel();
+            CurrentStudent = new Student();
+            Students = _studentService.GetAll().ToArray();
         }
 
-        public IList<Student> Students
+        #region Public Properties
+
+        private Student[] _students;
+        public Student[] Students
         {
             get => _students;
             set => this.RaiseAndSetIfChanged(ref _students, value);
         }
 
+        private Student _currentStudent;
         public Student CurrentStudent
         {
             get => _currentStudent;
             set => this.RaiseAndSetIfChanged(ref _currentStudent, value);
         }
 
+        private TeacherListViewModel _teacherListViewModel;
         public TeacherListViewModel TeacherListViewModel
         {
-            get => _teacherViewModel;
-            set => this.RaiseAndSetIfChanged(ref _teacherViewModel, value);
+            get => _teacherListViewModel;
+            set => this.RaiseAndSetIfChanged(ref _teacherListViewModel, value);
         }
+
+        #endregion
+
+        #region Functions
 
         public void DeleteStudent(int id)
         {
             _studentService.Delete(id);
-            Students = _studentService.GetAll();
+            Students = _studentService.GetAll().ToArray();
         }
 
         public void SearchStudent(string keyword)
         {
-            Students = _studentService.Search(keyword);
+            Students = _studentService.Search(keyword).ToArray();
         }
 
-
+        #endregion
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using SchoolManagement.Command;
+using SchoolManagement.Enum;
 using SchoolManagement.Model;
 using SchoolManagement.Service;
 using System;
@@ -45,14 +46,14 @@ namespace SchoolManagement.ViewModel
 
         private readonly StudentService _studentService = new StudentService();
 
-        private Action<string> _callback;
+        private Action<ViewType> _callback;
 
         private TeacherService _teacherService;
 
         #endregion
 
 
-        public StudentOperationViewModel(int? id, Action<string> callback)
+        public StudentOperationViewModel(int? id, Action<ViewType> callback)
         {
             _callback = callback;
             LoadAllTeachers();
@@ -113,7 +114,7 @@ namespace SchoolManagement.ViewModel
             SelectedTeacher = null;
         }
 
-        private void CancelOperation() => _callback?.Invoke("STUDENT");
+        private void CancelOperation() => _callback?.Invoke(ViewType.STUDENT);
 
         #endregion
 

@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using SchoolManagement.Command;
 using SchoolManagement.Config;
+using SchoolManagement.Enum;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,45 +13,49 @@ namespace SchoolManagement.ViewModel
 {
     public class MainViewModel : ReactiveObject
     {
-        private object _currentView;
-        private string _searchInput;
 
         public MainViewModel()
         {
-            StudentViewModel = new StudentListViewModel();
-            TeacherViewModel = new TeacherListViewModel();
+            StudentListViewModel = new StudentListViewModel();
+            TeacherListViewModel = new TeacherListViewModel();
 
-            CurrentView = StudentViewModel;
+            CurrentView = StudentListViewModel;
         }
 
+        #region Public Properties
 
-        public StudentListViewModel StudentViewModel { get; set; }
-        public TeacherListViewModel TeacherViewModel { get; set; }
+        public StudentListViewModel StudentListViewModel { get; set; }
+        public TeacherListViewModel TeacherListViewModel { get; set; }
 
-
+        private object _currentView;
         public Object CurrentView
         {
             get => _currentView;
             set => this.RaiseAndSetIfChanged(ref _currentView, value);
         }
 
+        private string _searchInput;
         public string SearchInput
         {
             get => _searchInput;
             set => this.RaiseAndSetIfChanged(ref _searchInput, value);
         }
 
-        private void CurrentViewChange(string viewName)
+        #endregion
+
+        #region Functions
+
+        private void CurrentViewChange(ViewType viewType)
         {
-            switch (viewName)
+            switch (viewType)
             {
-                case "STUDENT":
-                    StudentViewModel = new StudentListViewModel();
-                    CurrentView = StudentViewModel;
+                case ViewType.STUDENT:
+                    StudentListViewModel = new StudentListViewModel();
+                    CurrentView = StudentListViewModel;
                     break;
-                case "TEACHER":
-                    TeacherViewModel = new TeacherListViewModel();
-                    CurrentView = TeacherViewModel;
+                case ViewType.TEACHER:
+                    TeacherListViewModel = new TeacherListViewModel();
+                    CurrentView = TeacherListViewModel;
                     break;
             }
         }
@@ -59,33 +64,37 @@ namespace SchoolManagement.ViewModel
         {
             if (CurrentView is StudentListViewModel)
                 CurrentView = new StudentOperationViewModel(null, CurrentViewChange);
-            else
+            else if(CurrentView is TeacherListViewModel)
                 CurrentView = new TeacherOperationViewModel("INSERT", CurrentViewChange);
         }
 
         private void UpdatePerson()
         {
-            if (CurrentView is StudentListViewModel && StudentViewModel.CurrentStudent.Id != null)
-                CurrentView = new StudentOperationViewModel(StudentViewModel.CurrentStudent.Id, CurrentViewChange);
+            if (CurrentView is StudentListViewModel && StudentListViewModel.CurrentStudent.Id != null)
+                CurrentView = new StudentOperationViewModel(StudentListViewModel.CurrentStudent.Id, CurrentViewChange);
         }
 
         private void DeletePerson()
         {
-            if (CurrentView is StudentListViewModel && StudentViewModel.CurrentStudent.Id != null)
-                StudentViewModel.DeleteStudent((int)StudentViewModel.CurrentStudent.Id);
+            if (CurrentView is StudentListViewModel && StudentListViewModel.CurrentStudent.Id != null)
+                StudentListViewModel.DeleteStudent((int)StudentListViewModel.CurrentStudent.Id);
         }
 
         private void SearchPerson()
         {
             if (CurrentView is StudentListViewModel)
             {
-                StudentViewModel.SearchStudent(SearchInput);
+                StudentListViewModel.SearchStudent(SearchInput);
             }
         }
 
-        private VoidReactiveCommand<string> _currentViewChangeCommand;
-        public VoidReactiveCommand<string> CurrentViewChangeCommand =>
-            _currentViewChangeCommand ??= VoidReactiveCommand<string>.Create(CurrentViewChange);
+        #endregion
+
+        #region Commands
+
+        private VoidReactiveCommand<ViewType> _currentViewChangeCommand;
+        public VoidReactiveCommand<ViewType> CurrentViewChangeCommand =>
+            _currentViewChangeCommand ??= VoidReactiveCommand<ViewType>.Create(CurrentViewChange);
 
         private VoidReactiveCommand _insertPersonCommand;
         public VoidReactiveCommand InsertPersonCommand =>
@@ -105,6 +114,8 @@ namespace SchoolManagement.ViewModel
         private VoidReactiveCommand _searchCommand;
         public VoidReactiveCommand SearchCommand =>
             _searchCommand ??= VoidReactiveCommand.Create(SearchPerson);
+
+        #endregion
 
     }
 }

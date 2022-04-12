@@ -11,27 +11,37 @@ namespace SchoolManagement.ViewModel
 {
     public class TeacherListViewModel : ReactiveObject
     {
+        #region Private Properties
+
         private readonly TeacherService _teacherService;
-        private IList<Teacher> _teachers;
-        private Teacher _currentTeacher;
+
+        #endregion
 
         public TeacherListViewModel()
         {
             _teacherService = new TeacherService();
-            Teachers = _teacherService.GetAll();
+            Teachers = _teacherService.GetAll().ToArray();
             CurrentTeacher = new Teacher();
         }
 
-        public IList<Teacher> Teachers
+
+        #region Public Properties
+
+        private Teacher[] _teachers;
+        public Teacher[] Teachers
         {
             get => _teachers;
             set => this.RaiseAndSetIfChanged(ref _teachers, value);
         }
 
+        private Teacher _currentTeacher;
         public Teacher CurrentTeacher
         {
             get => _currentTeacher;
             set => this.RaiseAndSetIfChanged(ref _currentTeacher, value);
         }
+        
+        #endregion
+
     }
 }

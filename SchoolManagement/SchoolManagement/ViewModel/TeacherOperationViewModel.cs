@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using SchoolManagement.Command;
+using SchoolManagement.Enum;
 using SchoolManagement.Model;
 using SchoolManagement.Service;
 using System;
@@ -16,11 +17,11 @@ namespace SchoolManagement.ViewModel
 
         private TeacherListViewModel _teacherViewModel = new TeacherListViewModel();
         private Teacher _teacher = new Teacher();
-        private Action<string> _callback;
+        private Action<ViewType> _callback;
         private string _operationType;
 
 
-        public TeacherOperationViewModel(string operationType, Action<string> callback, int? id = null)
+        public TeacherOperationViewModel(string operationType, Action<ViewType> callback, int? id = null)
         {
             _operationType = operationType;
             _callback = callback;
@@ -46,7 +47,7 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _teacherViewModel, value);
         }
 
-        private void CancelOperation() => _callback?.Invoke("TEACHER");
+        private void CancelOperation() => _callback?.Invoke(ViewType.TEACHER);
 
         private void ProcessOperation()
         {
@@ -55,7 +56,6 @@ namespace SchoolManagement.ViewModel
             else
                 UpdateTeacher();
 
-            _callback?.Invoke("STUDENT");
         }
 
         private void InsertTeacher()

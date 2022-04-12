@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:SchoolManagement.View"
         xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel"
         xmlns:view="clr-namespace:SchoolManagement.View"
+        xmlns:enum="clr-namespace:SchoolManagement.Enum;assembly=SchoolManagement"  
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-
+        Title="MainWindow" Height="450" Width="800"
+        >
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
 
     <Grid>
         <Border Background="#272537">
-
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -30,16 +30,16 @@
 
                 <StackPanel Grid.Row="1" Margin="0, 20">
                     <RadioButton 
-                    Content="Students" 
-                    Style="{StaticResource MenuButtonTheme}"
-                    Command="{Binding CurrentViewChangeCommand}"
-                    CommandParameter="STUDENT"
+                        Content="Students" 
+                        Style="{StaticResource MenuButtonTheme}"
+                        Command="{Binding CurrentViewChangeCommand}"
+                        CommandParameter="{x:Static enum:ViewType.STUDENT}"
                     />
                     <RadioButton 
-                    Content="Teachers"  
-                    Style="{StaticResource MenuButtonTheme}"
-                    Command="{Binding CurrentViewChangeCommand}"
-                    CommandParameter="TEACHER"
+                        Content="Teachers"  
+                        Style="{StaticResource MenuButtonTheme}"
+                        Command="{Binding CurrentViewChangeCommand}"
+                        CommandParameter="{x:Static enum:ViewType.TEACHER}"
                     />
                 </StackPanel>
 
