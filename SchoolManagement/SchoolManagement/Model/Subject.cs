@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Model
 {
-    public class Subject
+    public enum Subject
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        MATH = 1,
+        PHYSICS = 2,
+        BIOLOGY = 3,
+        HISTORY = 4,
     }
 }

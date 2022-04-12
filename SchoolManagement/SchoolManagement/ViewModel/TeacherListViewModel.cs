@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.ViewModel
 {
-    public class TeacherViewModel : ReactiveObject
+    public class TeacherListViewModel : ReactiveObject
     {
         private readonly TeacherService _teacherService;
         private IList<Teacher> _teachers;
         private Teacher _currentTeacher;
 
-        public TeacherViewModel()
+        public TeacherListViewModel()
         {
             _teacherService = new TeacherService();
             Teachers = _teacherService.GetAll();
@@ -33,6 +33,5 @@ namespace SchoolManagement.ViewModel
             get => _currentTeacher;
             set => this.RaiseAndSetIfChanged(ref _currentTeacher, value);
         }
-
     }
 }

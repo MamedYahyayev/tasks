@@ -9,5 +9,7 @@ namespace SchoolManagement.Model
     public class Teacher : Person
     {
         public string License { get; set; }
+        public Subject Subject { get; set; }
+        public string SubjectName { get; set; }
     }
 }
