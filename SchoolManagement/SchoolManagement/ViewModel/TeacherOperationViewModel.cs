@@ -3,6 +3,7 @@ using SchoolManagement.Command;
 using SchoolManagement.Enum;
 using SchoolManagement.Model;
 using SchoolManagement.Service;
+using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +27,12 @@ namespace SchoolManagement.ViewModel
         {
             _callback = callback;
 
-            // load subject enums 
-
             if (id != null) LoadTeacher(id);
             else Teacher = new Teacher();
 
         }
+        
+        #region Public Properties
 
         public Subject[] AllSubjects => System.Enum.GetValues(typeof(Subject)).Cast<Subject>().ToArray();
 
@@ -46,8 +47,6 @@ namespace SchoolManagement.ViewModel
         }
 
 
-        #region Public Properties
-
         private Teacher _teacher;
         public Teacher Teacher
         {
@@ -55,26 +54,15 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _teacher, value);
         }
 
-        #endregion
-
-
-        #region Commands
-
-
-        private VoidReactiveCommand<int?> _saveCommand;
-        public VoidReactiveCommand<int?> SaveCommand =>
-            _saveCommand ??= VoidReactiveCommand<int?>.Create(Save);
-
-
-        private VoidReactiveCommand _cancelCommand;
-        public VoidReactiveCommand CancelCommand =>
-            _cancelCommand ??= VoidReactiveCommand.Create(CancelOperation);
-
-        private VoidReactiveCommand _unselectCommand;
-        public VoidReactiveCommand UnselectCommand =>
-            _unselectCommand ??= VoidReactiveCommand.Create(UnselectSubject);
+        private Dictionary<string, ErrorModel> _errors;
+        public Dictionary<string, ErrorModel> Errors
+        {
+            get => _errors;
+            set => this.RaiseAndSetIfChanged(ref _errors, value);
+        }
 
         #endregion
+
 
         #region Functions
 
@@ -116,44 +104,50 @@ namespace SchoolManagement.ViewModel
 
         private bool IsDataValid()
         {
-            // create method that deletes error message for specific key if it has error
+            Errors.Clear();
 
-            if (string.IsNullOrEmpty(Teacher.Name))
-            {
-                var errorModel = new ErrorModel()
-                {
-                    HasError = true,
-                    ErrorMessage = "Name cannot be empty"
-                };
+            this.RaisePropertyChanged(nameof(Errors));
 
-                //Errors.Add(nameof(Student.Name), errorModel);
+            var errorModel = PersonValidator.CheckEmpty(nameof(Teacher.Name), Teacher.Name);
+            if (errorModel != null) Errors.Add(nameof(Teacher.Name), errorModel);
 
-            }
+            errorModel = PersonValidator.CheckEmpty(nameof(Teacher.Surname), Teacher.Surname);
+            if (errorModel != null) Errors.Add(nameof(Teacher.Surname), errorModel);
 
-            if (string.IsNullOrEmpty(Teacher.Surname))
-            {
-                var errorModel = new ErrorModel()
-                {
-                    HasError = true,
-                    ErrorMessage = "Surname cannot be empty"
-                };
+            errorModel = PersonValidator.CheckSmallerThanNow(Teacher.BirthDate);
+            if (errorModel != null) Errors.Add(nameof(Teacher.BirthDate), errorModel);
 
-                //Errors.Add(nameof(Student.Surname), errorModel);
-            }
+            this.RaisePropertyChanged(nameof(Errors));
 
-
-
-            return Teacher != null && !string.IsNullOrEmpty(Teacher.Name) && !string.IsNullOrEmpty(Teacher.Surname);
+            return Teacher != null && Errors.Count == 0;
         }
 
-        private void UnselectSubject()
-        {
-            Subject = null;
-        }
+
+        private void UnselectSubject() => Subject = null;
 
         private void CancelOperation() => _callback?.Invoke(ViewType.TEACHER);
 
         #endregion
+
+
+        #region Commands
+
+
+        private VoidReactiveCommand<int?> _saveCommand;
+        public VoidReactiveCommand<int?> SaveCommand =>
+            _saveCommand ??= VoidReactiveCommand<int?>.Create(Save);
+
+
+        private VoidReactiveCommand _cancelCommand;
+        public VoidReactiveCommand CancelCommand =>
+            _cancelCommand ??= VoidReactiveCommand.Create(CancelOperation);
+
+        private VoidReactiveCommand _unselectCommand;
+        public VoidReactiveCommand UnselectCommand =>
+            _unselectCommand ??= VoidReactiveCommand.Create(UnselectSubject);
+
+        #endregion
+
 
     }
 }

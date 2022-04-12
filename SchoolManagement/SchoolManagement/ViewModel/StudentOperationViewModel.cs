@@ -3,6 +3,7 @@ using SchoolManagement.Command;
 using SchoolManagement.Enum;
 using SchoolManagement.Model;
 using SchoolManagement.Service;
+using SchoolManagement.Utility;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -57,13 +58,6 @@ namespace SchoolManagement.ViewModel
         {
             get => _selectedTeacher;
             set => this.RaiseAndSetIfChanged(ref _selectedTeacher, value);
-        }
-
-        private StudentListViewModel _studentViewModel;
-        public StudentListViewModel StudentViewModel
-        {
-            get => _studentViewModel;
-            set => this.RaiseAndSetIfChanged(ref _studentViewModel, value);
         }
 
         private Dictionary<string, ErrorModel> _errors;
@@ -121,40 +115,26 @@ namespace SchoolManagement.ViewModel
 
         private bool IsDataValid()
         {
-            // create method that deletes error message for specific key if it has error
+            Errors.Clear();
 
-            if (string.IsNullOrEmpty(Student.Name))
-            {
-                var errorModel = new ErrorModel()
-                {
-                    HasError = true,
-                    ErrorMessage = "Name cannot be empty"
-                };
+            this.RaisePropertyChanged(nameof(Errors));
 
-                //Errors.Add(nameof(Student.Name), errorModel);
+            var errorModel = PersonValidator.CheckEmpty(nameof(Student.Name), Student.Name);
+            if (errorModel != null) Errors.Add(nameof(Student.Name), errorModel);
 
-            }
+            errorModel = PersonValidator.CheckEmpty(nameof(Student.Surname), Student.Surname);
+            if (errorModel != null) Errors.Add(nameof(Student.Surname), errorModel);
 
-            if (string.IsNullOrEmpty(Student.Surname))
-            {
-                var errorModel = new ErrorModel()
-                {
-                    HasError = true,
-                    ErrorMessage = "Surname cannot be empty"
-                };
+            errorModel = PersonValidator.CheckSmallerThanNow(Student.BirthDate);
+            if (errorModel != null) Errors.Add(nameof(Student.BirthDate), errorModel);
 
-                //Errors.Add(nameof(Student.Surname), errorModel);
-            }
+            this.RaisePropertyChanged(nameof(Errors));
 
-            
-
-            return Student != null && !string.IsNullOrEmpty(Student.Name) && !string.IsNullOrEmpty(Student.Surname);
+            return Student != null && Errors.Count == 0;
         }
 
-        private void UnselectTeacher()
-        {
-            SelectedTeacher = null;
-        }
+
+        private void UnselectTeacher() => SelectedTeacher = null;
 
         private void CancelOperation() => _callback?.Invoke(ViewType.STUDENT);
 
