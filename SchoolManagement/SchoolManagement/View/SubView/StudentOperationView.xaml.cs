@@ -18,9 +18,9 @@ namespace SchoolManagement.View.SubView
     /// <summary>
     /// Interaction logic for NewStudentView.xaml
     /// </summary>
-    public partial class StudentFormView : UserControl
+    public partial class StudentOperationView : UserControl
     {
-        public StudentFormView()
+        public StudentOperationView()
         {
             InitializeComponent();
         }

@@ -14,14 +14,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SchoolManagement.View
+namespace SchoolManagement.View.SubView
 {
     /// <summary>
     /// Interaction logic for HomeView.xaml
     /// </summary>
-    public partial class StudentView : UserControl
+    public partial class StudentListView : UserControl
     {
-        public StudentView()
+        public StudentListView()
         {
             InitializeComponent();
         }
