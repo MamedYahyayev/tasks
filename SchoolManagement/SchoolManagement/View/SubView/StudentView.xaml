@@ -24,8 +24,8 @@
                        />
 
             <ListView Margin="10" Name="studentsList" 
-                      ItemsSource="{Binding Students}"
-                      SelectedItem="{Binding CurrentStudent}"
+                      ItemsSource="{Binding Students, Mode=OneWay}"
+                      SelectedItem="{Binding CurrentStudent, Mode=TwoWay}"
                       >
                 <ListView.View>
                     <GridView>

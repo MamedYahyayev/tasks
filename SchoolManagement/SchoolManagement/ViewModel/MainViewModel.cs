@@ -54,12 +54,8 @@ namespace SchoolManagement.ViewModel
             }
         }
 
-
-
-
         private VoidReactiveCommand<string> _currentViewChangeCommand;
         public VoidReactiveCommand<string> CurrentViewChangeCommand =>
             _currentViewChangeCommand ??= VoidReactiveCommand<string>.Create(CurrentViewChange);
-
     }
 }

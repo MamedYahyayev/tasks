@@ -7,7 +7,7 @@
         xmlns:view="clr-namespace:SchoolManagement.View"
         xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000"
+        Title="MainWindow" Height="700" Width="1000"
         xmlns:control="clr-namespace:SchoolManagement;assembly=SchoolManagement"
         Background="Transparent"
         >
@@ -69,22 +69,6 @@
                     Margin="5"
                     Style="{StaticResource TextBoxTheme}"
                 />
-
-                <Button Content="Add"
-                        Style="{StaticResource OperationButtonTheme}"
-                        Foreground="Black"
-                        />
-
-                <Button Content="Update"
-                        Style="{StaticResource OperationButtonTheme}"
-                        Foreground="Black"
-                        />
-
-                <Button Content="Delete"
-                        Style="{StaticResource OperationButtonTheme}"
-                        Foreground="Black"
-                        />
-
             </StackPanel>
 
 
@@ -96,7 +80,6 @@
                 />
 
         </Grid>
-
     </Border>
 
 

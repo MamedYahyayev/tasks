@@ -151,7 +151,7 @@ namespace SchoolManagement.Service
                     _command.Parameters.AddWithValue("@Surname", student.Surname);
                     _command.Parameters.AddWithValue("@BirthDate", student.BirthDate);
                     _command.Parameters.AddWithValue("@RegisterDate", student.RegisterDate);
-                    _command.Parameters.AddWithValue("@TeacherId", student.Teacher.Id);
+                    _command.Parameters.AddWithValue("@TeacherId", student.Teacher == null ? DBNull.Value : student.Teacher.Id);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;

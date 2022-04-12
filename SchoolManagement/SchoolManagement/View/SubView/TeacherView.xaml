@@ -17,15 +17,25 @@
                    />
 
         <ListView Margin="10" Name="teachersList" 
-                  d:ItemsSource="{d:SampleData ItemCount=5}">
+                  ItemsSource="{Binding Teachers}"
+                  SelectedItem="{Binding CurrentTeacher}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="#" Width="30"  />
-                    <GridViewColumn Header="Name" Width="100" />
-                    <GridViewColumn Header="Surname" Width="100" />
-                    <GridViewColumn Header="Birthdate" Width="120" />
-                    <GridViewColumn Header="Subject" Width="80" />
-                    <GridViewColumn Header="Lisence" Width="150" />
+                    <GridViewColumn Header="#" 
+                                    Width="30" 
+                                    DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" 
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Surname" 
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding Surname}"/>
+                    <GridViewColumn Header="Birthdate" 
+                                    Width="120"
+                                    DisplayMemberBinding="{Binding BirthDate}"/>
+                    <GridViewColumn Header="Lisence" 
+                                    Width="150"
+                                    DisplayMemberBinding="{Binding License}"/>
                 </GridView>
             </ListView.View>
         </ListView>
