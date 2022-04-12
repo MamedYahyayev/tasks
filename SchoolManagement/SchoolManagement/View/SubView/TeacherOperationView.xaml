@@ -61,10 +61,24 @@
                 Margin="0, 5, 0, 10"
                 SelectedDate="{Binding Teacher.BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 />
+            <TextBlock Foreground="Red" Text="{Binding Errors[BirthDate].ErrorMessage, 
+                        Mode=TwoWay,
+                        UpdateSourceTrigger=PropertyChanged}" 
+                        Visibility="{Binding Errors[BirthDate].HasError, 
+                        Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0, 5, 0, 5"
+                       />
 
             <TextBlock Text="License" FontSize="18" Foreground="White"/>
             <TextBox Text="{Binding Teacher.License, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      Style="{StaticResource formTextBoxTheme}"  />
+            <TextBlock Foreground="Red" Text="{Binding Errors[License].ErrorMessage, 
+                        Mode=TwoWay,
+                        UpdateSourceTrigger=PropertyChanged}" 
+                        Visibility="{Binding Errors[License].HasError, 
+                        Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Margin="0, 5, 0, 5"
+                       />
 
 
         </StackPanel>
@@ -80,7 +94,7 @@
             </StackPanel>
 
             <ListView  ItemsSource="{Binding AllSubjects, UpdateSourceTrigger=PropertyChanged}"
-                       SelectedItem="{Binding Subject}"
+                       SelectedItem="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                        Height="100"
                        Background="Green"
                        Foreground="White"

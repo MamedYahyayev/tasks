@@ -119,14 +119,7 @@ namespace SchoolManagement.ViewModel
 
             this.RaisePropertyChanged(nameof(Errors));
 
-            var errorModel = PersonValidator.CheckEmpty(nameof(Student.Name), Student.Name);
-            if (errorModel != null) Errors.Add(nameof(Student.Name), errorModel);
-
-            errorModel = PersonValidator.CheckEmpty(nameof(Student.Surname), Student.Surname);
-            if (errorModel != null) Errors.Add(nameof(Student.Surname), errorModel);
-
-            errorModel = PersonValidator.CheckSmallerThanNow(Student.BirthDate);
-            if (errorModel != null) Errors.Add(nameof(Student.BirthDate), errorModel);
+            Errors = PersonValidator.ValidatePerson(Student, Errors);
 
             this.RaisePropertyChanged(nameof(Errors));
 

@@ -26,6 +26,7 @@ namespace SchoolManagement.ViewModel
         public TeacherOperationViewModel(int? id, Action<ViewType> callback)
         {
             _callback = callback;
+            _errors = new Dictionary<string, ErrorModel>();
 
             if (id != null) LoadTeacher(id);
             else Teacher = new Teacher();
@@ -108,14 +109,10 @@ namespace SchoolManagement.ViewModel
 
             this.RaisePropertyChanged(nameof(Errors));
 
-            var errorModel = PersonValidator.CheckEmpty(nameof(Teacher.Name), Teacher.Name);
-            if (errorModel != null) Errors.Add(nameof(Teacher.Name), errorModel);
+            Errors = PersonValidator.ValidatePerson(Teacher, Errors);
 
-            errorModel = PersonValidator.CheckEmpty(nameof(Teacher.Surname), Teacher.Surname);
-            if (errorModel != null) Errors.Add(nameof(Teacher.Surname), errorModel);
-
-            errorModel = PersonValidator.CheckSmallerThanNow(Teacher.BirthDate);
-            if (errorModel != null) Errors.Add(nameof(Teacher.BirthDate), errorModel);
+            var errorModel = PersonValidator.CheckEmpty(nameof(Teacher.License), Teacher.License);
+            if (errorModel != null) Errors.Add(nameof(Teacher.License), errorModel);
 
             this.RaisePropertyChanged(nameof(Errors));
 

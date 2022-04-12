@@ -190,7 +190,7 @@ namespace SchoolManagement.Service
                     _command.Parameters.AddWithValue("@SURNAME", teacher.Surname);
                     _command.Parameters.AddWithValue("@BIRTH_DATE", teacher.BirthDate);
                     _command.Parameters.AddWithValue("@LICENSE", teacher.License);
-                    _command.Parameters.AddWithValue("@SUBJECT_CODE", teacher.Subject);
+                    _command.Parameters.AddWithValue("@SUBJECT_CODE", teacher.Subject == null ? DBNull.Value : teacher.Subject);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;
