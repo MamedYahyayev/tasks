@@ -54,18 +54,24 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    const string sql = "SELECT Id, Name, Surname, BirthDate, License FROM Teacher";
+                    const string sql = "select t.Id teacherId, t.Name teacherName, t.Surname teacherSurname, t.BirthDate teacherBirthDate, " +
+                        " t.License license, s.Code subjectCode, s.Name subjectName " +
+                        " from Teacher t left join Subject s on s.Id = t.SubjectId";
                     _command = new SqlCommand(sql, _connection);
                     _reader = _command.ExecuteReader();
 
                     while (_reader.Read())
                     {
                         var teacher = new Teacher();
-                        teacher.Id = _reader.GetInt32("id");
-                        teacher.Name = _reader.GetString("Name");
-                        teacher.Surname = _reader.GetString("Surname");
-                        teacher.BirthDate = _reader.GetDateTime("BirthDate");
+                        teacher.Id = _reader.GetInt32("teacherId");
+                        teacher.Name = _reader.GetString("teacherName");
+                        teacher.Surname = _reader.GetString("teacherSurname");
+                        teacher.BirthDate = _reader.GetDateTime("teacherBirthDate");
                         teacher.License = _reader.GetString("License");
+
+                        Subject subject = (Subject)_reader.GetInt32("subjectCode");
+                        teacher.SubjectName = subject.ToString();
+
                         teachers.Add(teacher);
                     }
 
@@ -229,7 +235,6 @@ namespace SchoolManagement.Service
             }
 
         }
-
 
     }
 }

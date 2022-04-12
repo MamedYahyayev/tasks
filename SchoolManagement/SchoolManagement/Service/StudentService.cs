@@ -13,6 +13,7 @@ namespace SchoolManagement.Service
 {
     public class StudentService : ICrudOperation<Student>
     {
+
         private readonly SqlConnection _connection = DbConfig.Connect();
         private SqlCommand _command;
         private SqlDataReader _reader;
@@ -54,7 +55,7 @@ namespace SchoolManagement.Service
                 {
                     _connection.Open();
                     const string sql = "SELECT s.Id studentId, s.Name studentName, s.Surname studentSurname," +
-                        " s.BirthDate studentBirthDate, s.RegisterDate studentRegisterDate, t.Name teacherName, t.Surname teacherSurname " +
+                        " s.BirthDate studentBirthDate, s.RegisterDate studentRegisterDate, t.Id teacherId, t.Name teacherName, t.Surname teacherSurname " +
                         "FROM Student s left join Teacher t on t.Id = s.TeacherId";
                     _command = new SqlCommand(sql, _connection);
                     _reader = _command.ExecuteReader();
@@ -69,6 +70,7 @@ namespace SchoolManagement.Service
                         student.RegisterDate = _reader.GetDateTime("studentRegisterDate");
 
                         var teacher = new Teacher();
+                        teacher.Id = (int?)_reader.GetIntValueOrDefault("teacherId");
                         teacher.Name = _reader.GetStringValueOrDefault("teacherName");
                         teacher.Surname = _reader.GetStringValueOrDefault("teacherSurname");
 
@@ -99,7 +101,8 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    const string sql = "SELECT s.Id studentId, s.Name studentName, s.Surname, s.BirthDate, s.RegisterDate, t.Name, t.Surname" +
+                    const string sql = "SELECT s.Id studentId, s.Name studentName, s.Surname studentSurname, s.BirthDate studentBirthDate, " +
+                        "s.RegisterDate studentRegisterDate, t.Id teacherId, t.Name teacherName, t.Surname teacherSurname " +
                         " FROM Student s left join Teacher t on t.id = s.TeacherId Where s.Id=@Id";
                     _command = new SqlCommand(sql, _connection);
                     _command.Parameters.AddWithValue("Id", id);
@@ -107,15 +110,16 @@ namespace SchoolManagement.Service
                     if (_reader.Read())
                     {
                         var student = new Student();
-                        student.Id = _reader.GetInt32("s.id");
-                        student.Name = _reader.GetString("s.Name");
-                        student.Surname = _reader.GetString("s.Surname");
-                        student.BirthDate = _reader.GetDateTime("s.BirthDate");
-                        student.RegisterDate = _reader.GetDateTime("s.RegisterDate");
+                        student.Id = _reader.GetInt32("studentId");
+                        student.Name = _reader.GetString("studentName");
+                        student.Surname = _reader.GetString("studentSurname");
+                        student.BirthDate = _reader.GetDateTime("studentBirthDate");
+                        student.RegisterDate = _reader.GetDateTime("studentRegisterDate");
 
                         var teacher = new Teacher();
-                        teacher.Name = _reader.GetString("t.Name");
-                        teacher.Surname = _reader.GetString("t.Surname");
+                        teacher.Id = (int?)_reader.GetIntValueOrDefault("teacherId");
+                        teacher.Name = _reader.GetStringValueOrDefault("teacherName");
+                        teacher.Surname = _reader.GetStringValueOrDefault("teacherSurname");
 
                         student.Teacher = teacher;
 
@@ -151,7 +155,7 @@ namespace SchoolManagement.Service
                     _command.Parameters.AddWithValue("@Surname", student.Surname);
                     _command.Parameters.AddWithValue("@BirthDate", student.BirthDate);
                     _command.Parameters.AddWithValue("@RegisterDate", student.RegisterDate);
-                    _command.Parameters.AddWithValue("@TeacherId", student.Teacher == null ? DBNull.Value : student.Teacher.Id);
+                    _command.Parameters.AddWithValue("@TeacherId", student.Teacher?.Id == null ? DBNull.Value : student.Teacher.Id);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;
@@ -180,14 +184,14 @@ namespace SchoolManagement.Service
                 {
                     _connection.Open();
                     string sql = "UPDATE Student SET Name = @Name, Surname = @Surname, " +
-                        "BirthDate = @BirthDate, RegisterDate=@RegisterDate, TeacherId=@TeacherId WHERE Id = @Id ";
+                        "BirthDate = @BirthDate, RegisterDate=@RegisterDate, TeacherId=@TeacherId WHERE Id = @Id";
                     _command = new SqlCommand(sql, _connection);
                     _command.Parameters.AddWithValue("@Id", student.Id);
                     _command.Parameters.AddWithValue("@Name", student.Name);
                     _command.Parameters.AddWithValue("@Surname", student.Surname);
                     _command.Parameters.AddWithValue("@BirthDate", student.BirthDate);
                     _command.Parameters.AddWithValue("@RegisterDate", student.RegisterDate);
-                    _command.Parameters.AddWithValue("@TeacherId", student.Teacher.Id);
+                    _command.Parameters.AddWithValue("@TeacherId", student.Teacher?.Id == null ? DBNull.Value : student.Teacher.Id);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;
@@ -215,25 +219,27 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "SELECT s.Id, s.Name, s.Surname, s.BirthDate, s.RegisterDate, t.Name, t.Surname " +
+                    string sql = "SELECT s.Id studentId, s.Name studentName, s.Surname studentSurname, s.BirthDate studentBirthDate," +
+                        "s.RegisterDate studentRegisterDate, t.Id teacherId, t.Name teacherName, t.Surname teacherSurname  " +
                         "FROM Student s left join Teacher t on t.Id = s.TeacherId " +
-                        "where LOWER(s.Name) like LOWER('%@Keyword%') OR LOWER(s.Surname) like LOWER('%@Keyword%')";
+                        "where LOWER(s.Name) like LOWER(@Keyword) OR LOWER(s.Surname) like LOWER(@Keyword)";
                     _command = new SqlCommand(sql, _connection);
-                    _command.Parameters.AddWithValue("@Keyword", keyword);
+                    _command.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
                     _reader = _command.ExecuteReader();
 
                     while (_reader.Read())
                     {
                         var student = new Student();
-                        student.Id = _reader.GetInt32("s.Id");
-                        student.Name = _reader.GetString("s.Name");
-                        student.Surname = _reader.GetString("s.Surname");
-                        student.BirthDate = _reader.GetDateTime("s.BirthDate");
-                        student.RegisterDate = _reader.GetDateTime("s.RegisterDate");
+                        student.Id = _reader.GetInt32("studentId");
+                        student.Name = _reader.GetStringValueOrDefault("studentName");
+                        student.Surname = _reader.GetStringValueOrDefault("studentSurname");
+                        student.BirthDate = _reader.GetDateTime("studentBirthDate");
+                        student.RegisterDate = _reader.GetDateTime("studentRegisterDate");
 
                         var teacher = new Teacher();
-                        teacher.Name = _reader.GetString("t.Name");
-                        teacher.Surname = _reader.GetString("t.Surname");
+                        teacher.Id = (int?)_reader.GetIntValueOrDefault("teacherId");
+                        teacher.Name = _reader.GetStringValueOrDefault("teacherName");
+                        teacher.Surname = _reader.GetStringValueOrDefault("teacherSurname");
 
                         student.Teacher = teacher;
 
@@ -255,10 +261,6 @@ namespace SchoolManagement.Service
             }
 
         }
-
-
-
-
 
     }
 }
