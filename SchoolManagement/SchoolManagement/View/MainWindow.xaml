@@ -8,8 +8,9 @@
         xmlns:view="clr-namespace:SchoolManagement.View"
         xmlns:enum="clr-namespace:SchoolManagement.Enum;assembly=SchoolManagement"  
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="900"
         >
+    
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -85,7 +86,7 @@
                             Foreground="White"
                             Background="Red"
                             BorderThickness="2"
-                            Command="{Binding DeletePersonCommand}"
+                            Command="{Binding OpenPopupCommand}"
                             />
 
                 </StackPanel>
@@ -100,6 +101,39 @@
 
             </Grid>
         </Border>
+
+        <Popup Placement="Center"  IsOpen="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+               Width="300"
+               AllowsTransparency="True"
+               Margin="10"
+               >
+            <Border Background="White" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    BorderThickness="2"
+                    BorderBrush="Black">
+                <StackPanel Margin="15">
+                    <TextBlock Text="Are you sure to delete?" FontSize="20" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
+                        <Button Content="Delete"
+                                Padding="10"    
+                                Background="Red" 
+                                Foreground="White"
+                                Margin="0, 0 , 10, 0"
+                                Command="{Binding DeletePersonCommand}"
+                         />
+
+                        <Button Content="Cancel" 
+                                Padding="10"
+                                Background="Gray" 
+                                Foreground="White"
+                                Command="{Binding ClosePopupCommand}"
+                        />
+
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
 
     </Grid>
 </Window>
