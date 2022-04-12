@@ -37,7 +37,7 @@
                                     Width="200"
                                     DisplayMemberBinding="{Binding License}"/>
                     <GridViewColumn Header="Subject" 
-                                    Width="50"
+                                    Width="100"
                                     DisplayMemberBinding="{Binding SubjectName}"/>
                 </GridView>
             </ListView.View>

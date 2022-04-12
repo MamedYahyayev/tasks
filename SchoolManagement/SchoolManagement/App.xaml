@@ -27,9 +27,9 @@
                 <subview:StudentOperationView />
             </DataTemplate>
 
-            <!--<DataTemplate DataType="{x:Type viewModel:TeacherOperationViewModel}">
-                <view:NewTeacherView />
-            </DataTemplate>-->
+            <DataTemplate DataType="{x:Type viewModel:TeacherOperationViewModel}">
+                <subview:TeacherOperationView />
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

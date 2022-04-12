@@ -40,8 +40,23 @@ namespace SchoolManagement.ViewModel
             get => _currentTeacher;
             set => this.RaiseAndSetIfChanged(ref _currentTeacher, value);
         }
-        
+
         #endregion
 
+
+        #region Functions
+
+        public void DeleteTeacher(int id)
+        {
+            _teacherService.Delete(id);
+            Teachers = _teacherService.GetAll().ToArray();
+        }
+
+        public void SearchTeacher(string keyword)
+        {
+            Teachers = _teacherService.Search(keyword).ToArray();
+        }
+
+        #endregion
     }
 }

@@ -69,8 +69,12 @@ namespace SchoolManagement.Service
                         teacher.BirthDate = _reader.GetDateTime("teacherBirthDate");
                         teacher.License = _reader.GetString("License");
 
-                        Subject subject = (Subject)_reader.GetInt32("subjectCode");
-                        teacher.SubjectName = subject.ToString();
+                        var subjectCode = _reader.GetIntValueOrDefault("subjectCode");
+                        if (subjectCode != null)
+                        {
+                            teacher.Subject = (Subject)_reader.GetInt32("subjectCode");
+                            teacher.SubjectName = teacher.Subject.ToString();
+                        }
 
                         teachers.Add(teacher);
                     }
@@ -97,18 +101,27 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "Select Id, Name, Surname, BirthDate, License Where Id=@Id";
+                    string sql = "Select t.Id, t.Name, t.Surname, t.BirthDate, t.License, s.Code subjectCode, s.Name subjectName, s.Id subjectId from Teacher t " +
+                        " left join Subject s on s.Id = t.SubjectId Where t.Id=@Id";
                     _command = new SqlCommand(sql, _connection);
                     _command.Parameters.AddWithValue("Id", id);
                     _reader = _command.ExecuteReader();
                     if (_reader.Read())
                     {
                         var teacher = new Teacher();
-                        teacher.Id = _reader.GetInt32("id");
+                        teacher.Id = _reader.GetInt32("Id");
                         teacher.Name = _reader.GetString("Name");
                         teacher.Surname = _reader.GetString("Surname");
                         teacher.BirthDate = _reader.GetDateTime("BirthDate");
                         teacher.License = _reader.GetString("License");
+
+                        var subjectCode = _reader.GetIntValueOrDefault("subjectCode");
+                        if (subjectCode != null)
+                        {
+                            teacher.Subject = (Subject)_reader.GetInt32("subjectCode");
+                            teacher.SubjectName = teacher.Subject.ToString();
+                        }
+
                         return teacher;
                     }
 
@@ -134,13 +147,14 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "INSERT INTO Teacher(Name,Surname,BirthDate,License) " +
-                        " VALUES(@Name, @Surname, @BirthDate, @License)";
+                    string sql = "INSERT_TEACHER";
                     _command = new SqlCommand(sql, _connection);
-                    _command.Parameters.AddWithValue("@Name", teacher.Name);
-                    _command.Parameters.AddWithValue("@Surname", teacher.Surname);
-                    _command.Parameters.AddWithValue("@BirthDate", teacher.BirthDate);
-                    _command.Parameters.AddWithValue("@License", teacher.License);
+                    _command.CommandType = CommandType.StoredProcedure;
+                    _command.Parameters.AddWithValue("@NAME", teacher.Name);
+                    _command.Parameters.AddWithValue("@SURNAME", teacher.Surname);
+                    _command.Parameters.AddWithValue("@BIRTH_DATE", teacher.BirthDate);
+                    _command.Parameters.AddWithValue("@LICENSE", teacher.License);
+                    _command.Parameters.AddWithValue("@SUBJECT_CODE", teacher.Subject == null ? DBNull.Value : teacher.Subject);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;
@@ -168,14 +182,15 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "UPDATE Teacher SET Name = @Name, Surname = @Surname, " +
-                        "BirthDate = @BirthDate, License=@License WHERE Id = @Id ";
+                    string sql = "UPDATE_TEACHER";
                     _command = new SqlCommand(sql, _connection);
-                    _command.Parameters.AddWithValue("@Id", teacher.Id);
-                    _command.Parameters.AddWithValue("@Name", teacher.Name);
-                    _command.Parameters.AddWithValue("@Surname", teacher.Surname);
-                    _command.Parameters.AddWithValue("@BirthDate", teacher.BirthDate);
-                    _command.Parameters.AddWithValue("@License", teacher.License);
+                    _command.CommandType = CommandType.StoredProcedure;
+                    _command.Parameters.AddWithValue("@ID", teacher.Id);
+                    _command.Parameters.AddWithValue("@NAME", teacher.Name);
+                    _command.Parameters.AddWithValue("@SURNAME", teacher.Surname);
+                    _command.Parameters.AddWithValue("@BIRTH_DATE", teacher.BirthDate);
+                    _command.Parameters.AddWithValue("@LICENSE", teacher.License);
+                    _command.Parameters.AddWithValue("@SUBJECT_CODE", teacher.Subject);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;
@@ -204,9 +219,9 @@ namespace SchoolManagement.Service
                 {
                     _connection.Open();
                     string sql = "select Id, Name, Surname, BirthDate, License from Teacher " +
-                    "where LOWER(Name) like LOWER('%@Keyword%') OR LOWER(Surname) like LOWER('%@Keyword%')";
+                    " where LOWER(Name) like LOWER(@Keyword) OR LOWER(Surname) like LOWER(@Keyword)";
                     _command = new SqlCommand(sql, _connection);
-                    _command.Parameters.AddWithValue("@Keyword", keyword);
+                    _command.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
                     _reader = _command.ExecuteReader();
 
                     while (_reader.Read())
