@@ -12,7 +12,7 @@ namespace SchoolManagement.Utility
     {
         public static ErrorModel? CheckEmpty(string propertyName, string property)
         {
-            if(string.IsNullOrEmpty(property))
+            if(string.IsNullOrEmpty(property) || string.IsNullOrWhiteSpace(property))
             {
                 return new ErrorModel()
                 {
