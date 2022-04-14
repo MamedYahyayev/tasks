@@ -19,9 +19,9 @@ namespace SchoolManagement.View.SubView
     /// <summary>
     /// Interaction logic for HomeView.xaml
     /// </summary>
-    public partial class StudentListView : UserControl
+    public partial class StudentView : UserControl
     {
-        public StudentListView()
+        public StudentView()
         {
             InitializeComponent();
         }

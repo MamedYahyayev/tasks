@@ -16,19 +16,19 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:TeacherListViewModel}">
-                <subview:TeacherListView />
+                <subview:TeacherView />
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewModel:StudentListViewModel }">
-                <subview:StudentListView />
+                <subview:StudentView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:StudentOperationViewModel}">
-                <subview:StudentOperationView />
+                <subview:StudentEditorView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:TeacherOperationViewModel}">
-                <subview:TeacherOperationView />
+                <subview:TeacherEditorView />
             </DataTemplate>
 
         </ResourceDictionary>

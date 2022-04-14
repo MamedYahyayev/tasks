@@ -18,9 +18,9 @@ namespace SchoolManagement.View.SubView
     /// <summary>
     /// Interaction logic for TeacherOperationView.xaml
     /// </summary>
-    public partial class TeacherOperationView : UserControl
+    public partial class TeacherEditorView : UserControl
     {
-        public TeacherOperationView()
+        public TeacherEditorView()
         {
             InitializeComponent();
         }
