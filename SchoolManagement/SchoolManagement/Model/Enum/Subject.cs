@@ -8,9 +8,10 @@ namespace SchoolManagement.Model
 {
     public enum Subject
     {
-        MATH = 1,
-        PHYSICS = 2,
-        BIOLOGY = 3,
-        HISTORY = 4,
+        MATH,
+        PHYSICS,
+        BIOLOGY,
+        HISTORY,
+        INFORMATION_TECHNOLOGY
     }
 }
