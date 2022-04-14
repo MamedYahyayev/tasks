@@ -55,8 +55,8 @@ namespace SchoolManagement.Service
                 {
                     _connection.Open();
                     const string sql = "select t.Id teacherId, t.Name teacherName, t.Surname teacherSurname, t.BirthDate teacherBirthDate, " +
-                        " t.License license, s.Code subjectCode, s.Name subjectName " +
-                        " from Teacher t left join Subject s on s.Id = t.SubjectId";
+                        " t.License license, t.SubjectCode subjectCode" +
+                        " from Teacher t";
                     _command = new SqlCommand(sql, _connection);
                     _reader = _command.ExecuteReader();
 
@@ -101,8 +101,7 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "Select t.Id, t.Name, t.Surname, t.BirthDate, t.License, s.Code subjectCode, s.Name subjectName, s.Id subjectId from Teacher t " +
-                        " left join Subject s on s.Id = t.SubjectId Where t.Id=@Id";
+                    string sql = "Select Id, Name, Surname, BirthDate, License, SubjectCode from Teacher Where Id=@Id";
                     _command = new SqlCommand(sql, _connection);
                     _command.Parameters.AddWithValue("Id", id);
                     _reader = _command.ExecuteReader();
@@ -115,10 +114,10 @@ namespace SchoolManagement.Service
                         teacher.BirthDate = _reader.GetDateTime("BirthDate");
                         teacher.License = _reader.GetString("License");
 
-                        var subjectCode = _reader.GetIntValueOrDefault("subjectCode");
+                        var subjectCode = _reader.GetIntValueOrDefault("SubjectCode");
                         if (subjectCode != null)
                         {
-                            teacher.Subject = (Subject)_reader.GetInt32("subjectCode");
+                            teacher.Subject = (Subject)_reader.GetInt32("SubjectCode");
                             teacher.SubjectName = teacher.Subject.ToString();
                         }
 
@@ -147,14 +146,14 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "INSERT_TEACHER";
+                    string sql = "INSERT INTO Teacher(Name, Surname, BirthDate, License, SubjectCode) " +
+                        " VALUES(@Name, @Surname, @BirthDate, @License, @SubjectCode) ";
                     _command = new SqlCommand(sql, _connection);
-                    _command.CommandType = CommandType.StoredProcedure;
-                    _command.Parameters.AddWithValue("@NAME", teacher.Name);
-                    _command.Parameters.AddWithValue("@SURNAME", teacher.Surname);
-                    _command.Parameters.AddWithValue("@BIRTH_DATE", teacher.BirthDate);
-                    _command.Parameters.AddWithValue("@LICENSE", teacher.License);
-                    _command.Parameters.AddWithValue("@SUBJECT_CODE", teacher.Subject == null ? DBNull.Value : teacher.Subject);
+                    _command.Parameters.AddWithValue("@Name", teacher.Name);
+                    _command.Parameters.AddWithValue("@Surname", teacher.Surname);
+                    _command.Parameters.AddWithValue("@BirthDate", teacher.BirthDate);
+                    _command.Parameters.AddWithValue("@License", teacher.License);
+                    _command.Parameters.AddWithValue("@SubjectCode", teacher.Subject == null ? DBNull.Value : teacher.Subject);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;
@@ -182,15 +181,15 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "UPDATE_TEACHER";
+                    string sql = "UPDATE Teacher SET Name = @Name, Surname = @Surname, BirthDate = @BirthDate, " +
+                        " License = @License, SubjectCode = @SubjectCode WHERE Id = @Id";
                     _command = new SqlCommand(sql, _connection);
-                    _command.CommandType = CommandType.StoredProcedure;
-                    _command.Parameters.AddWithValue("@ID", teacher.Id);
-                    _command.Parameters.AddWithValue("@NAME", teacher.Name);
-                    _command.Parameters.AddWithValue("@SURNAME", teacher.Surname);
-                    _command.Parameters.AddWithValue("@BIRTH_DATE", teacher.BirthDate);
-                    _command.Parameters.AddWithValue("@LICENSE", teacher.License);
-                    _command.Parameters.AddWithValue("@SUBJECT_CODE", teacher.Subject == null ? DBNull.Value : teacher.Subject);
+                    _command.Parameters.AddWithValue("@Id", teacher.Id);
+                    _command.Parameters.AddWithValue("@Name", teacher.Name);
+                    _command.Parameters.AddWithValue("@Surname", teacher.Surname);
+                    _command.Parameters.AddWithValue("@BirthDate", teacher.BirthDate);
+                    _command.Parameters.AddWithValue("@License", teacher.License);
+                    _command.Parameters.AddWithValue("@SubjectCode", teacher.Subject == null ? DBNull.Value : teacher.Subject);
 
                     var isAdded = _command.ExecuteNonQuery();
                     if (isAdded == 1) return true;
@@ -218,7 +217,7 @@ namespace SchoolManagement.Service
                 if (_connection != null)
                 {
                     _connection.Open();
-                    string sql = "select Id, Name, Surname, BirthDate, License from Teacher " +
+                    string sql = "select Id, Name, Surname, BirthDate, License, SubjectCode from Teacher " +
                     " where LOWER(Name) like LOWER(@Keyword) OR LOWER(Surname) like LOWER(@Keyword)";
                     _command = new SqlCommand(sql, _connection);
                     _command.Parameters.AddWithValue("@Keyword", "%" + keyword + "%");
@@ -232,6 +231,14 @@ namespace SchoolManagement.Service
                         teacher.Surname = _reader.GetString("Surname");
                         teacher.BirthDate = _reader.GetDateTime("BirthDate");
                         teacher.License = _reader.GetString("License");
+
+                        var subjectCode = _reader.GetIntValueOrDefault("SubjectCode");
+                        if (subjectCode != null)
+                        {
+                            teacher.Subject = (Subject)_reader.GetInt32("SubjectCode");
+                            teacher.SubjectName = teacher.Subject.ToString();
+                        }
+
                         teachers.Add(teacher);
                     }
 
