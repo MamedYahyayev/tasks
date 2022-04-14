@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="900"
         >
-    
+
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -61,31 +61,20 @@
                     </TextBox>
 
                     <Button Content="New" 
-                            Width="100" Height="40" 
-                            Margin="20, 0, 0, 0"
-                            FontSize="18"
-                            BorderBrush="Black"
-                            BorderThickness="2"
+                            Style="{StaticResource OperationButtonTheme}"
+                            Foreground="Black"
                             Command="{Binding InsertPersonCommand}"
                             />
 
-                    <Button Content="Update" 
-                            Width="100" Height="40" 
-                            Margin="20, 0, 0, 0"
-                            FontSize="18"
-                            BorderBrush="Black"
-                            BorderThickness="2"
+                    <Button Content="Edit" 
+                            Style="{StaticResource OperationButtonTheme}"
+                            Foreground="Black"
                             Command="{Binding UpdatePersonCommand}"
                             />
 
                     <Button Content="Delete" 
-                            Width="100" Height="40" 
-                            Margin="20, 0, 0, 0"
-                            FontSize="18"
-                            BorderBrush="Black"
-                            Foreground="White"
+                            Style="{StaticResource OperationButtonTheme}"
                             Background="Red"
-                            BorderThickness="2"
                             Command="{Binding OpenPopupCommand}"
                             />
 
