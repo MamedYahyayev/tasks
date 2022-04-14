@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SchoolManagement"
              xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel"
+             xmlns:subViewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
              xmlns:subview="clr-namespace:SchoolManagement.View.SubView"
              xmlns:view="clr-namespace:SchoolManagement.View"
+             xmlns:converter="clr-namespace:SchoolManagement.Converter"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -15,21 +17,23 @@
                 <ResourceDictionary Source="/Theme/FormTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:TeacherListViewModel}">
+            <DataTemplate DataType="{x:Type subViewModel:TeacherViewModel}">
                 <subview:TeacherView />
             </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type viewModel:StudentListViewModel }">
+
+            <DataTemplate DataType="{x:Type subViewModel:StudentViewModel }">
                 <subview:StudentView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:StudentOperationViewModel}">
+            <DataTemplate DataType="{x:Type subViewModel:StudentEditorViewModel}">
                 <subview:StudentEditorView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:TeacherOperationViewModel}">
+            <DataTemplate DataType="{x:Type subViewModel:TeacherEditorViewModel}">
                 <subview:TeacherEditorView />
             </DataTemplate>
+
+            <converter:SubjectToStringConverter x:Key="SubjectToStringConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

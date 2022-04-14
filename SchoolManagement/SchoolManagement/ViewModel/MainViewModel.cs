@@ -2,6 +2,8 @@
 using SchoolManagement.Command;
 using SchoolManagement.Config;
 using SchoolManagement.Enum;
+using SchoolManagement.Model;
+using SchoolManagement.Model.Enum;
 using SchoolManagement.Service;
 using SchoolManagement.ViewModel.SubViewModel;
 using System;

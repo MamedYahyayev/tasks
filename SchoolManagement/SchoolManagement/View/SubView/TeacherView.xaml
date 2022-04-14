@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolManagement"
-             xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel"
+             xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance viewModel:TeacherListViewModel, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance viewModel:TeacherViewModel, IsDesignTimeCreatable=False}"
              >
     <StackPanel>
         <TextBlock Text="Teachers" 
@@ -37,8 +37,8 @@
                                     Width="200"
                                     DisplayMemberBinding="{Binding License}"/>
                     <GridViewColumn Header="Subject" 
-                                    Width="100"
-                                    DisplayMemberBinding="{Binding SubjectName}"/>
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding Subject, Converter={StaticResource SubjectToStringConverter}}"/>
                 </GridView>
             </ListView.View>
         </ListView>
