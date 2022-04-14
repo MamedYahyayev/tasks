@@ -8,9 +8,9 @@ using SchoolManagement.Command;
 using SchoolManagement.Model;
 using SchoolManagement.Service;
 
-namespace SchoolManagement.ViewModel
+namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class StudentListViewModel : ReactiveObject
+    public class StudentViewModel : ReactiveObject
     {
         #region Private Properties
 
@@ -18,9 +18,9 @@ namespace SchoolManagement.ViewModel
 
         #endregion
 
-        public StudentListViewModel()
+        public StudentViewModel()
         {
-            _teacherListViewModel = new TeacherListViewModel();
+            _teacherViewModel = new TeacherViewModel();
             CurrentStudent = new Student();
             Students = _studentService.GetAll().ToArray();
         }
@@ -41,11 +41,11 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _currentStudent, value);
         }
 
-        private TeacherListViewModel _teacherListViewModel;
-        public TeacherListViewModel TeacherListViewModel
+        private TeacherViewModel _teacherViewModel;
+        public TeacherViewModel TeacherViewModel
         {
-            get => _teacherListViewModel;
-            set => this.RaiseAndSetIfChanged(ref _teacherListViewModel, value);
+            get => _teacherViewModel;
+            set => this.RaiseAndSetIfChanged(ref _teacherViewModel, value);
         }
 
         #endregion

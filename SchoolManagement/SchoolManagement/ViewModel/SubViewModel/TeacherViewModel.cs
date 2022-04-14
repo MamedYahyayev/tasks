@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolManagement.ViewModel
+namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class TeacherListViewModel : ReactiveObject
+    public class TeacherViewModel : ReactiveObject
     {
         #region Private Properties
 
@@ -17,7 +17,7 @@ namespace SchoolManagement.ViewModel
 
         #endregion
 
-        public TeacherListViewModel()
+        public TeacherViewModel()
         {
             _teacherService = new TeacherService();
             Teachers = _teacherService.GetAll().ToArray();

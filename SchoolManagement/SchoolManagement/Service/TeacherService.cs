@@ -258,5 +258,33 @@ namespace SchoolManagement.Service
 
         }
 
+        public int FindStudentCount(int teacherId)
+        {
+            try
+            {
+                if (_connection != null)
+                {
+                    _connection.Open();
+                    const string sql = "select Count(*) studentCount from Student where TeacherId = @TeacherId";
+                    _command = new SqlCommand(sql, _connection);
+                    _command.Parameters.AddWithValue("@TeacherId", teacherId);
+                    _reader = _command.ExecuteReader();
+                    
+                    if (_reader.Read())
+                        return _reader.GetInt32("studentCount");
+                }
+                throw new Exception("Sorry, we couldn't connect the database");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+        }
+
     }
 }

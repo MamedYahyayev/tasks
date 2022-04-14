@@ -2,6 +2,8 @@
 using SchoolManagement.Command;
 using SchoolManagement.Config;
 using SchoolManagement.Enum;
+using SchoolManagement.Service;
+using SchoolManagement.ViewModel.SubViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -13,18 +15,23 @@ namespace SchoolManagement.ViewModel
 {
     public class MainViewModel : ReactiveObject
     {
+        #region Private Properties
+        private readonly TeacherService _teacherService = new TeacherService();
+
+        #endregion
+
 
         public MainViewModel()
         {
-            StudentListViewModel = new StudentListViewModel();
+            StudentViewModel = new StudentViewModel();
 
-            CurrentView = StudentListViewModel;
+            CurrentView = StudentViewModel;
         }
 
         #region Public Properties
 
-        public StudentListViewModel StudentListViewModel { get; set; }
-        public TeacherListViewModel TeacherListViewModel { get; set; }
+        public StudentViewModel StudentViewModel { get; set; }
+        public TeacherViewModel TeacherViewModel { get; set; }
 
         private object _currentView;
         public Object CurrentView
@@ -47,6 +54,13 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _isPopupOpen, value);
         }
 
+        private string _popupMessage;
+        public string PopupMessage
+        {
+            get => _popupMessage;
+            set => this.RaiseAndSetIfChanged(ref _popupMessage, value);
+        }
+
         #endregion
 
         #region Functions
@@ -56,12 +70,12 @@ namespace SchoolManagement.ViewModel
             switch (viewType)
             {
                 case ViewType.STUDENT:
-                    StudentListViewModel = new StudentListViewModel();
-                    CurrentView = StudentListViewModel;
+                    StudentViewModel = new StudentViewModel();
+                    CurrentView = StudentViewModel;
                     break;
                 case ViewType.TEACHER:
-                    TeacherListViewModel = new TeacherListViewModel();
-                    CurrentView = TeacherListViewModel;
+                    TeacherViewModel = new TeacherViewModel();
+                    CurrentView = TeacherViewModel;
                     break;
             }
         }
@@ -69,27 +83,27 @@ namespace SchoolManagement.ViewModel
         private void InsertPerson()
         {
             if (IsCurrentViewStudent())
-                CurrentView = new StudentOperationViewModel(null, CurrentViewChange);
+                CurrentView = new StudentEditorViewModel(null, CurrentViewChange);
             else if (IsCurrentViewTeacher())
-                CurrentView = new TeacherOperationViewModel(null, CurrentViewChange);
+                CurrentView = new TeacherEditorViewModel(null, CurrentViewChange);
         }
 
         private void UpdatePerson()
         {
             if (IsCurrentViewStudent() && IsStudentSelected())
-                CurrentView = new StudentOperationViewModel(StudentListViewModel.CurrentStudent.Id, CurrentViewChange);
+                CurrentView = new StudentEditorViewModel(StudentViewModel.CurrentStudent.Id, CurrentViewChange);
             else if (IsCurrentViewTeacher() && IsTeacherSelected())
-                CurrentView = new TeacherOperationViewModel(TeacherListViewModel.CurrentTeacher.Id, CurrentViewChange);
+                CurrentView = new TeacherEditorViewModel(TeacherViewModel.CurrentTeacher.Id, CurrentViewChange);
 
         }
 
         private void DeletePerson()
         {
             if (IsCurrentViewStudent() && IsStudentSelected())
-                StudentListViewModel.DeleteStudent((int)StudentListViewModel.CurrentStudent.Id);
+                StudentViewModel.DeleteStudent((int)StudentViewModel.CurrentStudent.Id);
 
             else if (IsCurrentViewTeacher() && IsTeacherSelected())
-                TeacherListViewModel.DeleteTeacher((int)TeacherListViewModel.CurrentTeacher.Id);
+                TeacherViewModel.DeleteTeacher((int)TeacherViewModel.CurrentTeacher.Id);
 
             IsPopupOpen = false;
 
@@ -98,21 +112,33 @@ namespace SchoolManagement.ViewModel
         private void SearchPerson()
         {
             if (IsCurrentViewStudent())
-                StudentListViewModel.SearchStudent(SearchInput);
+                StudentViewModel.SearchStudent(SearchInput);
             else if (IsCurrentViewTeacher())
-                TeacherListViewModel.SearchTeacher(SearchInput);
+                TeacherViewModel.SearchTeacher(SearchInput);
         }
 
 
         private void OpenPopup()
         {
-            if (IsStudentSelected() || IsTeacherSelected()) IsPopupOpen = true;
+            PopupMessage = "Are you sure to delete?";
+            IsPopupOpen = true;
+
+            if (IsTeacherSelected())
+            {
+                var studentCount = _teacherService.FindStudentCount((int)TeacherViewModel.CurrentTeacher?.Id);
+                if(studentCount > 0)
+                {
+                    var teacher = TeacherViewModel.CurrentTeacher;
+                    PopupMessage = teacher.Name + " " + teacher.Surname + " has " + studentCount + " students. " +
+                        " If you want to delete teacher all of his students will be deleted. Do you want to continue?";
+                }
+            }
         }
 
-        private bool IsCurrentViewStudent() => CurrentView is StudentListViewModel;
-        private bool IsCurrentViewTeacher() => CurrentView is TeacherListViewModel;
-        private bool IsStudentSelected() => StudentListViewModel?.CurrentStudent?.Id != null;
-        private bool IsTeacherSelected() => TeacherListViewModel?.CurrentTeacher?.Id != null;
+        private bool IsCurrentViewStudent() => CurrentView is StudentViewModel;
+        private bool IsCurrentViewTeacher() => CurrentView is TeacherViewModel;
+        private bool IsStudentSelected() => StudentViewModel?.CurrentStudent?.Id != null;
+        private bool IsTeacherSelected() => TeacherViewModel?.CurrentTeacher?.Id != null;
 
 
         #endregion
@@ -144,7 +170,7 @@ namespace SchoolManagement.ViewModel
 
         private VoidReactiveCommand _openPopupCommand;
         public VoidReactiveCommand OpenPopupCommand =>
-            _openPopupCommand  ??= VoidReactiveCommand.Create(OpenPopup);
+            _openPopupCommand ??= VoidReactiveCommand.Create(OpenPopup);
 
         private VoidReactiveCommand _closePopupCommand;
         public VoidReactiveCommand ClosePopupCommand =>

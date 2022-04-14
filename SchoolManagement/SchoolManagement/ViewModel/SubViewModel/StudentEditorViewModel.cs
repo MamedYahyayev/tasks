@@ -12,9 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolManagement.ViewModel
+namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class StudentOperationViewModel : ReactiveObject
+    public class StudentEditorViewModel : ReactiveObject
     {
         #region Private Properties
 
@@ -26,7 +26,7 @@ namespace SchoolManagement.ViewModel
 
         #endregion
 
-        public StudentOperationViewModel(int? id, Action<ViewType> callback)
+        public StudentEditorViewModel(int? id, Action<ViewType> callback)
         {
             _callback = callback;
             Errors = new Dictionary<string, ErrorModel>();
