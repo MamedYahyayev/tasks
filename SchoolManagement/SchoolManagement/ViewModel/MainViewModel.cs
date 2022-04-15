@@ -28,6 +28,7 @@ namespace SchoolManagement.ViewModel
             StudentViewModel = new StudentViewModel();
 
             CurrentView = StudentViewModel;
+            IsOperationVisible = true;
         }
 
         #region Public Properties
@@ -63,12 +64,20 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _popupMessage, value);
         }
 
+        private bool _isOperationVisible;
+        public bool IsOperationVisible
+        {
+            get => _isOperationVisible;
+            set => this.RaiseAndSetIfChanged(ref _isOperationVisible, value);
+        }
+
         #endregion
 
         #region Functions
 
         private void CurrentViewChange(ViewType viewType)
         {
+            IsOperationVisible = true;
             switch (viewType)
             {
                 case ViewType.STUDENT:
@@ -84,6 +93,7 @@ namespace SchoolManagement.ViewModel
 
         private void InsertPerson()
         {
+            IsOperationVisible = false;
             if (IsCurrentViewStudent())
                 CurrentView = new StudentEditorViewModel(null, CurrentViewChange);
             else if (IsCurrentViewTeacher())
@@ -92,6 +102,7 @@ namespace SchoolManagement.ViewModel
 
         private void UpdatePerson()
         {
+            IsOperationVisible = false;
             if (IsCurrentViewStudent() && IsStudentSelected())
                 CurrentView = new StudentEditorViewModel(StudentViewModel.CurrentStudent.Id, CurrentViewChange);
             else if (IsCurrentViewTeacher() && IsTeacherSelected())
@@ -101,6 +112,7 @@ namespace SchoolManagement.ViewModel
 
         private void DeletePerson()
         {
+            IsOperationVisible = false;
             if (IsCurrentViewStudent() && IsStudentSelected())
                 StudentViewModel.DeleteStudent((int)StudentViewModel.CurrentStudent.Id);
 
@@ -122,13 +134,14 @@ namespace SchoolManagement.ViewModel
 
         private void OpenPopup()
         {
-            PopupMessage = "Are you sure to delete?";
+            IsOperationVisible = false;
             IsPopupOpen = true;
+            PopupMessage = "Are you sure to delete?";
 
             if (IsTeacherSelected())
             {
                 var studentCount = _teacherService.FindStudentCount((int)TeacherViewModel.CurrentTeacher?.Id);
-                if(studentCount > 0)
+                if (studentCount > 0)
                 {
                     var teacher = TeacherViewModel.CurrentTeacher;
                     PopupMessage = teacher.Name + " " + teacher.Surname + " has " + studentCount + " students. " +

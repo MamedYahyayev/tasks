@@ -15,7 +15,7 @@ namespace SchoolManagement.Model.Enum
         {
             var subjectName = subject.ToString();
 
-            if(subjectName.Contains("_"))
+            if (subjectName.Contains("_"))
             {
                 var subjectSplit = subjectName.Split('_');
                 subjectName = "";

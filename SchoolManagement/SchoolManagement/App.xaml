@@ -34,6 +34,7 @@
             </DataTemplate>
 
             <converter:SubjectToStringConverter x:Key="SubjectToStringConverter" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>
