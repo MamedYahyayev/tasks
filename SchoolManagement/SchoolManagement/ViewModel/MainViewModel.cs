@@ -28,7 +28,6 @@ namespace SchoolManagement.ViewModel
             StudentViewModel = new StudentViewModel();
 
             CurrentView = StudentViewModel;
-            IsOperationVisible = true;
         }
 
         #region Public Properties
@@ -64,20 +63,12 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _popupMessage, value);
         }
 
-        private bool _isOperationVisible;
-        public bool IsOperationVisible
-        {
-            get => _isOperationVisible;
-            set => this.RaiseAndSetIfChanged(ref _isOperationVisible, value);
-        }
-
         #endregion
 
         #region Functions
 
         private void CurrentViewChange(ViewType viewType)
         {
-            IsOperationVisible = true;
             switch (viewType)
             {
                 case ViewType.STUDENT:
@@ -93,7 +84,6 @@ namespace SchoolManagement.ViewModel
 
         private void InsertPerson()
         {
-            IsOperationVisible = false;
             if (IsCurrentViewStudent())
                 CurrentView = new StudentEditorViewModel(null, CurrentViewChange);
             else if (IsCurrentViewTeacher())
@@ -102,7 +92,6 @@ namespace SchoolManagement.ViewModel
 
         private void UpdatePerson()
         {
-            IsOperationVisible = false;
             if (IsCurrentViewStudent() && IsStudentSelected())
                 CurrentView = new StudentEditorViewModel(StudentViewModel.CurrentStudent.Id, CurrentViewChange);
             else if (IsCurrentViewTeacher() && IsTeacherSelected())
@@ -110,31 +99,29 @@ namespace SchoolManagement.ViewModel
 
         }
 
-        private void DeletePerson()
+        private void DeletePerson(ITableOperation operation)
         {
-            IsOperationVisible = false;
-            if (IsCurrentViewStudent() && IsStudentSelected())
-                StudentViewModel.DeleteStudent((int)StudentViewModel.CurrentStudent.Id);
 
-            else if (IsCurrentViewTeacher() && IsTeacherSelected())
-                TeacherViewModel.DeleteTeacher((int)TeacherViewModel.CurrentTeacher.Id);
+            operation = (ITableOperation)CurrentView;
+
+            if (IsStudentSelected())
+                operation.Delete((int)StudentViewModel.CurrentStudent.Id);
+
+            else if (IsTeacherSelected())
+                operation.Delete((int)TeacherViewModel.CurrentTeacher.Id);
 
             IsPopupOpen = false;
-
         }
 
-        private void SearchPerson()
+        private void SearchPerson(ITableOperation operation)
         {
-            if (IsCurrentViewStudent())
-                StudentViewModel.SearchStudent(SearchInput);
-            else if (IsCurrentViewTeacher())
-                TeacherViewModel.SearchTeacher(SearchInput);
+            operation = (ITableOperation)CurrentView;
+            operation.Search(SearchInput);
         }
 
 
         private void OpenPopup()
         {
-            IsOperationVisible = false;
             IsPopupOpen = true;
             PopupMessage = "Are you sure to delete?";
 
@@ -147,7 +134,15 @@ namespace SchoolManagement.ViewModel
                     PopupMessage = teacher.Name + " " + teacher.Surname + " has " + studentCount + " students. " +
                         " If you want to delete teacher all of his students will be deleted. Do you want to continue?";
                 }
+            } else
+            {
+                PopupMessage = "Are you sure to delete?";
             }
+        }
+
+        private void CancelPopup()
+        {
+            IsPopupOpen = false;
         }
 
         private bool IsCurrentViewStudent() => CurrentView is StudentViewModel;
@@ -174,14 +169,14 @@ namespace SchoolManagement.ViewModel
             _updatePersonCommand ??= VoidReactiveCommand.Create(UpdatePerson);
 
 
-        private VoidReactiveCommand _deletePersonCommand;
-        public VoidReactiveCommand DeletePersonCommand =>
-            _deletePersonCommand ??= VoidReactiveCommand.Create(DeletePerson);
+        private VoidReactiveCommand<ITableOperation> _deletePersonCommand;
+        public VoidReactiveCommand<ITableOperation> DeletePersonCommand =>
+            _deletePersonCommand ??= VoidReactiveCommand<ITableOperation>.Create(DeletePerson);
 
 
-        private VoidReactiveCommand _searchCommand;
-        public VoidReactiveCommand SearchCommand =>
-            _searchCommand ??= VoidReactiveCommand.Create(SearchPerson);
+        private VoidReactiveCommand<ITableOperation> _searchCommand;
+        public VoidReactiveCommand<ITableOperation> SearchCommand =>
+            _searchCommand ??= VoidReactiveCommand<ITableOperation>.Create(SearchPerson);
 
         private VoidReactiveCommand _openPopupCommand;
         public VoidReactiveCommand OpenPopupCommand =>
@@ -189,7 +184,7 @@ namespace SchoolManagement.ViewModel
 
         private VoidReactiveCommand _closePopupCommand;
         public VoidReactiveCommand ClosePopupCommand =>
-            _closePopupCommand ??= VoidReactiveCommand.Create(() => IsPopupOpen = false);
+            _closePopupCommand ??= VoidReactiveCommand.Create(CancelPopup);
 
         #endregion
 

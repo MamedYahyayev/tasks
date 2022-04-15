@@ -8,6 +8,8 @@ namespace SchoolManagement.Service
 {
     public interface ITableOperation
     {
+        void Delete(int id);
 
+        void Search(string keyword);
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class TeacherViewModel : ReactiveObject
+    public class TeacherViewModel : ReactiveObject, ITableOperation
     {
         #region Private Properties
 
@@ -46,13 +46,13 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         #region Functions
 
-        public void DeleteTeacher(int id)
+        public void Delete(int id)
         {
             _teacherService.Delete(id);
             Teachers = _teacherService.GetAll().ToArray();
         }
 
-        public void SearchTeacher(string keyword)
+        public void Search(string keyword)
         {
             Teachers = _teacherService.Search(keyword).ToArray();
         }

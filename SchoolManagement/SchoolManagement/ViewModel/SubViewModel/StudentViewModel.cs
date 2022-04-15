@@ -10,7 +10,7 @@ using SchoolManagement.Service;
 
 namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class StudentViewModel : ReactiveObject
+    public class StudentViewModel : ReactiveObject, ITableOperation
     {
         #region Private Properties
 
@@ -52,13 +52,13 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         #region Functions
 
-        public void DeleteStudent(int id)
+        public void Delete(int id)
         {
             _studentService.Delete(id);
             Students = _studentService.GetAll().ToArray();
         }
 
-        public void SearchStudent(string keyword)
+        public void Search(string keyword)
         {
             Students = _studentService.Search(keyword).ToArray();
         }
