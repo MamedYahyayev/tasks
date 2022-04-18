@@ -10,6 +10,6 @@ namespace SchoolManagement.Model
     {
         public string License { get; set; }
         public Subject? Subject { get; set; }
-        public string SubjectName { get; set; }
+        public ICollection<Student> Students { get; set; } = new List<Student>();
     }
 }
