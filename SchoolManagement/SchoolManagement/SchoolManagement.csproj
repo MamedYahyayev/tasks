@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Model\Enum\" />
-    <Folder Include="Model\Entity\" />
   </ItemGroup>
 
 </Project>

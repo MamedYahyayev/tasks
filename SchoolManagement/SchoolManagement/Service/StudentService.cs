@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Config;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Config;
 using SchoolManagement.Exceptions;
 using SchoolManagement.Model;
 using System;
@@ -36,6 +37,15 @@ namespace SchoolManagement.Service
 
         public void Insert(Student student)
         {
+            var teachers = new List<Teacher>();
+            foreach (var teacher in student.Teachers)
+            {
+                var findedTeacher = _context.Teachers.Find(teacher.Id);
+                teachers.Add(findedTeacher);
+            }
+
+            student.Teachers = teachers;
+            
             _context.Students.Add(student);
             _context.SaveChanges();
         }
@@ -50,8 +60,8 @@ namespace SchoolManagement.Service
         public IList<Student> Search(string keyword)
         {
             var query = from s in _context.Students
-                         where s.Name.ToLower().Contains(keyword.ToLower()) ||
-                                s.Surname.ToLower().Contains(keyword.ToLower())
+                        where s.Name.ToLower().Contains(keyword.ToLower()) ||
+                               s.Surname.ToLower().Contains(keyword.ToLower())
                         select s;
             return query.ToList();
         }
@@ -59,7 +69,7 @@ namespace SchoolManagement.Service
 
         private Student FindStudentById(int studentId)
         {
-            var student = _context.Students.Find(studentId);
+            var student = _context.Students.Include(s => s.Teachers).Single(s => s.Id == studentId);
             if (student == null) throw new ItemNotFoundException("Student with " + studentId + " not found!");
             return student;
         }

@@ -24,6 +24,8 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         private TeacherService _teacherService;
 
+        private List<Teacher> _selectedTeacherList = new List<Teacher>();
+
         #endregion
 
         public StudentEditorViewModel(int? id, Action<ViewType> callback)
@@ -57,8 +59,17 @@ namespace SchoolManagement.ViewModel.SubViewModel
         public Teacher SelectedTeacher
         {
             get => _selectedTeacher;
-            set => this.RaiseAndSetIfChanged(ref _selectedTeacher, value);
+            set =>
+                this.RaiseAndSetIfChanged(ref _selectedTeacher, value);
         }
+
+        private Teacher[] _selectedTeachers;
+        public Teacher[] SelectedTeachers
+        {
+            get => _selectedTeachers;
+            set => this.RaiseAndSetIfChanged(ref _selectedTeachers, value);
+        }
+
 
         private Dictionary<string, ErrorModel> _errors;
         public Dictionary<string, ErrorModel> Errors
@@ -83,7 +94,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             var student = _studentService.GetById((int)id);
             Student = student;
-            //SelectedTeacher = AllTeachers?.FirstOrDefault(t => t.Id == student.Teacher.Id);
+            SelectedTeachers = student.Teachers.ToArray();
         }
 
         private void Save(int? id)
@@ -97,8 +108,6 @@ namespace SchoolManagement.ViewModel.SubViewModel
         private void UpdateStudent(Student student)
         {
             if (!IsDataValid()) return;
-
-            //Student.Teacher = SelectedTeacher;
             _studentService.Update(student);
             CancelOperation();
         }
@@ -107,8 +116,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             if (!IsDataValid()) return;
 
-            //Student.Teacher = SelectedTeacher;
-
+            Student.Teachers = _selectedTeachers;
             _studentService.Insert(Student);
             CancelOperation();
         }
@@ -132,6 +140,17 @@ namespace SchoolManagement.ViewModel.SubViewModel
         private void CancelOperation() => _callback?.Invoke(ViewType.STUDENT);
 
 
+        private void AddTeacher()
+        {
+            // check selectedTeacher is not null
+            var isExist = _selectedTeacherList.Any(t => t.Id == SelectedTeacher.Id);
+            if (!isExist)
+            {
+                _selectedTeacherList.Add(SelectedTeacher);
+                SelectedTeachers = _selectedTeacherList.ToArray();
+            }
+        }
+
 
         #endregion
 
@@ -147,10 +166,12 @@ namespace SchoolManagement.ViewModel.SubViewModel
             _cancelOperationCommand ??= VoidReactiveCommand.Create(CancelOperation);
 
         private VoidReactiveCommand _unselectCommand;
-
-
         public VoidReactiveCommand UnselectCommand =>
             _unselectCommand ??= VoidReactiveCommand.Create(UnselectTeacher);
+
+        private VoidReactiveCommand _addTeacherCommand;
+        public VoidReactiveCommand AddTeacherCommand =>
+            _addTeacherCommand ??= VoidReactiveCommand.Create(AddTeacher);
 
         #endregion
 

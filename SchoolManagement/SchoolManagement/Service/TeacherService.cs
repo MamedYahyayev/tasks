@@ -59,8 +59,8 @@ namespace SchoolManagement.Service
         public int FindStudentCount(int id)
         {
             var teacher = FindTeacherById(id);
-            Console.WriteLine(teacher.Students.Count);
-            return teacher.Students.Count;
+            //Console.WriteLine(teacher.Students.Count);
+            return 0 /*teacher.Students.Count*/;
         }
 
 
