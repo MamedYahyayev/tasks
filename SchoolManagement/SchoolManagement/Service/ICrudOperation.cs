@@ -12,9 +12,9 @@ namespace SchoolManagement.Service
 
         T GetById(int id);
 
-        bool Insert(T entity);
+        void Insert(T entity);
 
-        bool Update(T entity);
+        void Update(T entity);
 
         bool Delete(int id);
 
