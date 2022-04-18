@@ -9,6 +9,6 @@ namespace SchoolManagement.Model
     public class Student : Person
     {
         public DateTime? RegisterDate { get; set; }  = DateTime.Now;
-        public ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
+        public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
     }
 }

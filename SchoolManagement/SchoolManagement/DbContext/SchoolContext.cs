@@ -13,6 +13,10 @@ namespace SchoolManagement.Model
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 
+        public SchoolContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=localhost; Database=SchoolManagement; User Id=sa; Password=mamed2001");
@@ -73,6 +77,19 @@ namespace SchoolManagement.Model
 
 
             #region Relationships
+
+            //modelBuilder.Entity<StudentTeacher>()
+            //    .HasKey(st => new { st.StudentId, st.TeacherId });
+
+            //modelBuilder.Entity<StudentTeacher>()
+            //    .HasOne(s => s.Teacher)
+            //    .WithMany(t => t.StudentTeachers)
+            //    .HasForeignKey(s => s.TeacherId);
+
+            //modelBuilder.Entity<StudentTeacher>()
+            //    .HasOne(t => t.Teacher)
+            //    .WithMany(t => t.StudentTeachers)
+            //    .HasForeignKey(t => t.TeacherId);
 
             modelBuilder.Entity<Student>()
                 .HasMany(s => s.Teachers)

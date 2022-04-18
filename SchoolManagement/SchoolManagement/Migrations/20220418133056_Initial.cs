@@ -13,10 +13,10 @@ namespace SchoolManagement.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 4, 18, 11, 44, 58, 245, DateTimeKind.Local).AddTicks(4008)),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 4, 18, 17, 30, 55, 804, DateTimeKind.Local).AddTicks(3536)),
                     Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 4, 18, 11, 44, 58, 241, DateTimeKind.Local).AddTicks(7631))
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 4, 18, 17, 30, 55, 802, DateTimeKind.Local).AddTicks(592))
                 },
                 constraints: table =>
                 {
@@ -33,7 +33,7 @@ namespace SchoolManagement.Migrations
                     Subject = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 4, 18, 11, 44, 58, 245, DateTimeKind.Local).AddTicks(5387))
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2022, 4, 18, 17, 30, 55, 804, DateTimeKind.Local).AddTicks(4727))
                 },
                 constraints: table =>
                 {

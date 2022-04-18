@@ -10,7 +10,7 @@ using SchoolManagement.Model;
 namespace SchoolManagement.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20220418074458_Initial")]
+    [Migration("20220418133056_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace SchoolManagement.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 4, 18, 11, 44, 58, 241, DateTimeKind.Local).AddTicks(7631));
+                        .HasDefaultValue(new DateTime(2022, 4, 18, 17, 30, 55, 802, DateTimeKind.Local).AddTicks(592));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -41,7 +41,7 @@ namespace SchoolManagement.Migrations
                     b.Property<DateTime?>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 4, 18, 11, 44, 58, 245, DateTimeKind.Local).AddTicks(4008));
+                        .HasDefaultValue(new DateTime(2022, 4, 18, 17, 30, 55, 804, DateTimeKind.Local).AddTicks(3536));
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -63,7 +63,7 @@ namespace SchoolManagement.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 4, 18, 11, 44, 58, 245, DateTimeKind.Local).AddTicks(5387));
+                        .HasDefaultValue(new DateTime(2022, 4, 18, 17, 30, 55, 804, DateTimeKind.Local).AddTicks(4727));
 
                     b.Property<string>("License")
                         .IsRequired()
