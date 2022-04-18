@@ -37,19 +37,23 @@ namespace SchoolManagement.Service
         public void Insert(Student student)
         {
             _context.Students.Add(student);
+            _context.SaveChanges();
         }
 
 
         public void Update(Student student)
         {
             _context.Students.Update(student);
+            _context.SaveChanges();
         }
 
         public IList<Student> Search(string keyword)
         {
-            return _context.Students
-                .Where(s => s.Name.EqualsIgnoreCase(keyword) &&
-                            s.Surname.EqualsIgnoreCase(keyword)).ToList();
+            var query = from s in _context.Students
+                         where s.Name.ToLower().Contains(keyword.ToLower()) ||
+                                s.Surname.ToLower().Contains(keyword.ToLower())
+                        select s;
+            return query.ToList();
         }
 
 

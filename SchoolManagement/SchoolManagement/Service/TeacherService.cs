@@ -49,9 +49,11 @@ namespace SchoolManagement.Service
 
         public IList<Teacher> Search(string keyword)
         {
-            return _context.Teachers
-                .Where(s => s.Name.EqualsIgnoreCase(keyword) &&
-                            s.Surname.EqualsIgnoreCase(keyword)).ToList();
+            var query = from s in _context.Teachers
+                        where s.Name.ToLower().Contains(keyword.ToLower()) ||
+                               s.Surname.ToLower().Contains(keyword.ToLower())
+                        select s;
+            return query.ToList();
         }
 
         public int FindStudentCount(int id)
