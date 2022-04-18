@@ -48,7 +48,7 @@ namespace SchoolManagement.Utility
             error = CheckEmpty(nameof(person.Surname), person.Surname);
             if (error != null) errors.Add(nameof(person.Surname), error);
 
-            error = CheckSmallerThanNow(person.BirthDate);
+            error = CheckSmallerThanNow((DateTime)person.BirthDate);
             if (error != null) errors.Add(nameof(person.BirthDate), error);
 
             return errors;
