@@ -32,7 +32,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
             else Teacher = new Teacher();
 
         }
-        
+
         #region Public Properties
 
         public Subject[] AllSubjects => System.Enum.GetValues(typeof(Subject)).Cast<Subject>().ToArray();
@@ -87,8 +87,8 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
             if (Subject != null) Teacher.Subject = Subject;
 
-            var isUpdated = _teacherService.Update(Teacher);
-            if (isUpdated) CancelOperation();
+            _teacherService.Update(Teacher);
+            CancelOperation();
 
         }
 
@@ -99,8 +99,8 @@ namespace SchoolManagement.ViewModel.SubViewModel
             if (Subject != null)
                 Teacher.Subject = Subject;
 
-            var isAdded = _teacherService.Insert(Teacher);
-            if (isAdded) CancelOperation();
+            _teacherService.Insert(Teacher);
+            CancelOperation();
         }
 
         private bool IsDataValid()

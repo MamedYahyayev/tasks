@@ -49,24 +49,6 @@
                             Header="Register Date" Width="150" 
                             DisplayMemberBinding="{Binding RegisterDate}"
                                         />
-
-                        <GridViewColumn 
-                                        Header="Teacher" Width="150"
-                                        >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
-                                        <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                <Binding Path="Teacher.Name" />
-                                                <Binding Path="Teacher.Surname" />
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
                     </GridView>
                 </ListView.View>
             </ListView>

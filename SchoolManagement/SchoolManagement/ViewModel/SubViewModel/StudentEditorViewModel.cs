@@ -83,7 +83,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             var student = _studentService.GetById((int)id);
             Student = student;
-            SelectedTeacher = AllTeachers?.FirstOrDefault(t => t.Id == student.Teacher.Id);
+            //SelectedTeacher = AllTeachers?.FirstOrDefault(t => t.Id == student.Teacher.Id);
         }
 
         private void Save(int? id)
@@ -98,19 +98,19 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             if (!IsDataValid()) return;
 
-            Student.Teacher = SelectedTeacher;
-            var isUpdated = _studentService.Update(student);
-            if (isUpdated) CancelOperation();
+            //Student.Teacher = SelectedTeacher;
+            _studentService.Update(student);
+            CancelOperation();
         }
 
         private void InsertStudent()
         {
             if (!IsDataValid()) return;
 
-            Student.Teacher = SelectedTeacher;
+            //Student.Teacher = SelectedTeacher;
 
-            var isAdded = _studentService.Insert(Student);
-            if (isAdded) CancelOperation();
+            _studentService.Insert(Student);
+            CancelOperation();
         }
 
         private bool IsDataValid()
