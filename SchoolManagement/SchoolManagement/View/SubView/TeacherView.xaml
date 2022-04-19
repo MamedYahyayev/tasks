@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolManagement"
              xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
+             xmlns:view="clr-namespace:SchoolManagement.View.SubView"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModel:TeacherViewModel, IsDesignTimeCreatable=False}"
@@ -106,42 +107,9 @@
               Visibility="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
                     Converter={StaticResource BooleanToVisibilityConverter}}"
               >
-            <Popup Placement="Center"  IsOpen="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   Width="300"
-                   AllowsTransparency="True"
-                   Margin="10"
-                   >
-                <Border Background="White" 
-                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                        BorderThickness="2"
-                        BorderBrush="Black">
-                    <StackPanel Margin="15">
-                        <TextBlock Text="{Binding PopupMessage}" FontSize="20" TextWrapping="Wrap"/>
-
-                        <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
-                            <Button Content="Delete"
-                                    Padding="10"    
-                                    Background="Red" 
-                                    Foreground="White"
-                                    Margin="0, 0 , 10, 0"
-                                    Command="{Binding DeleteTeacherCommand}"
-                             />
-
-                            <Button Content="Cancel" 
-                                    Padding="10"
-                                    Background="Gray" 
-                                    Foreground="White"
-                                    Command="{Binding ClosePopupCommand}"
-                            />
-
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-            </Popup>
+            <view:OperationPopup 
+                DataContext="{Binding}" />
         </Grid>
-
     </Grid>
-
     
-
 </UserControl>

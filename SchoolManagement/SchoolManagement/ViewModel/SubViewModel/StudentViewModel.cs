@@ -105,7 +105,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
             if (CurrentStudent.Id == null) return;
 
             IsPopupOpen = true;
-            PopupMessage = "Are you sure to delete?";
+            PopupMessage = "Are you sure to delete this student?";
         }
 
         private void ClosePopup() => IsPopupOpen = false;
@@ -125,9 +125,9 @@ namespace SchoolManagement.ViewModel.SubViewModel
             _updateStudentCommand ??= VoidReactiveCommand.Create(Update);
 
 
-        private VoidReactiveCommand _deleteStudentCommand;
-        public VoidReactiveCommand DeleteStudentCommand =>
-            _deleteStudentCommand ??= VoidReactiveCommand.Create(Delete);
+        private VoidReactiveCommand _deleteCommand;
+        public VoidReactiveCommand DeleteCommand =>
+            _deleteCommand ??= VoidReactiveCommand.Create(Delete);
 
 
         private VoidReactiveCommand _searchCommand;
@@ -138,9 +138,9 @@ namespace SchoolManagement.ViewModel.SubViewModel
         public VoidReactiveCommand OpenPopupCommand =>
             _openPopupCommand ??= VoidReactiveCommand.Create(OpenPopup);
 
-        private VoidReactiveCommand _closePopupCommand;
-        public VoidReactiveCommand ClosePopupCommand =>
-            _closePopupCommand ??= VoidReactiveCommand.Create(ClosePopup);
+        private VoidReactiveCommand _cancelCommand;
+        public VoidReactiveCommand CancelCommand =>
+            _cancelCommand ??= VoidReactiveCommand.Create(ClosePopup);
 
         #endregion
 
