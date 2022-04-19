@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace SchoolManagement.Model
 {
@@ -15,7 +16,9 @@ namespace SchoolManagement.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["SchoolManagement"].ConnectionString);
+            //var connectionString = ConfigurationManager.ConnectionStrings["SchoolManagement"].ConnectionString;
+            //optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer("Server=localhost; Database=SchoolManagement; User Id=sa; Password=mamed2001");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
