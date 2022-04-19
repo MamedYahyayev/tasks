@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using SchoolManagement.Command;
 using SchoolManagement.Model;
 using SchoolManagement.Service;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class TeacherViewModel : ReactiveObject, ITableOperation
+    public class TeacherViewModel : BaseViewModel
     {
         #region Private Properties
 
@@ -41,21 +42,99 @@ namespace SchoolManagement.ViewModel.SubViewModel
             set => this.RaiseAndSetIfChanged(ref _currentTeacher, value);
         }
 
+        private string _searchInput;
+        public string SearchInput
+        {
+            get => _searchInput;
+            set => this.RaiseAndSetIfChanged(ref _searchInput, value);
+        }
+
+        private bool _isPopupOpen;
+        public bool IsPopupOpen
+        {
+            get => _isPopupOpen;
+            set => this.RaiseAndSetIfChanged(ref _isPopupOpen, value);
+        }
+
+        private string _popupMessage;
+        public string PopupMessage
+        {
+            get => _popupMessage;
+            set => this.RaiseAndSetIfChanged(ref _popupMessage, value);
+        }
+
         #endregion
 
 
         #region Functions
 
-        public void Delete(int id)
+        public void Delete()
         {
-            _teacherService.Delete(id);
-            Teachers = _teacherService.GetAll().ToArray();
+            if (CurrentTeacher.Id != null)
+            {
+                _teacherService.Delete((int)CurrentTeacher.Id);
+                Teachers = _teacherService.GetAll().ToArray();
+                ClosePopup();
+            }
         }
 
-        public void Search(string keyword)
+        public void Search()
         {
-            Teachers = _teacherService.Search(keyword).ToArray();
+            Teachers = _teacherService.Search(SearchInput).ToArray();
         }
+
+        public void Insert()
+        {
+            MainViewModel.Instance.SetCurrentViewModel(new TeacherEditorViewModel(null));
+        }
+
+        public void Update()
+        {
+            if (CurrentTeacher.Id != null)
+                MainViewModel.Instance.SetCurrentViewModel(new TeacherEditorViewModel(CurrentTeacher.Id));
+        }
+
+
+        private void OpenPopup()
+        {
+            if (CurrentTeacher.Id == null) return;
+
+            IsPopupOpen = true;
+            PopupMessage = "Are you sure to delete?";
+        }
+
+        private void ClosePopup() => IsPopupOpen = false;
+
+        #endregion
+
+        #region Commands
+
+        private VoidReactiveCommand _insertTeacherCommand;
+        public VoidReactiveCommand InsertTeacherCommand =>
+            _insertTeacherCommand ??= VoidReactiveCommand.Create(Insert);
+
+
+        private VoidReactiveCommand _updateTeacherCommand;
+        public VoidReactiveCommand UpdateTeacherCommand =>
+            _updateTeacherCommand ??= VoidReactiveCommand.Create(Update);
+
+
+        private VoidReactiveCommand _deleteTeacherCommand;
+        public VoidReactiveCommand DeleteTeacherCommand =>
+            _deleteTeacherCommand ??= VoidReactiveCommand.Create(Delete);
+
+
+        private VoidReactiveCommand _searchCommand;
+        public VoidReactiveCommand SearchCommand =>
+            _searchCommand ??= VoidReactiveCommand.Create(Search);
+
+        private VoidReactiveCommand _openPopupCommand;
+        public VoidReactiveCommand OpenPopupCommand =>
+            _openPopupCommand ??= VoidReactiveCommand.Create(OpenPopup);
+
+        private VoidReactiveCommand _closePopupCommand;
+        public VoidReactiveCommand ClosePopupCommand =>
+            _closePopupCommand ??= VoidReactiveCommand.Create(ClosePopup);
 
         #endregion
     }

@@ -5,27 +5,70 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:SchoolManagement.View.SubView"
              xmlns:local="clr-namespace:SchoolManagement.View.SubView"
-             xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
+             xmlns:subViewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
+             xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance viewModel:StudentViewModel, IsDesignTimeCreatable=False}"    
+             d:DataContext="{d:DesignInstance subViewModel:StudentViewModel, IsDesignTimeCreatable=False}"    
              x:Name="studentUserControl"
              >
     <Grid>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel>
+
+
+        <StackPanel Margin="0, 20, 0, 20">
+            <StackPanel Grid.Column="1" 
+                            Orientation="Horizontal"
+                            >
+                <TextBox 
+                        Width="200"
+                        Height="40"
+                        HorizontalAlignment="Left"
+                        Margin="5"
+                        Style="{StaticResource TextBoxTheme}"
+                        Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        
+                    >
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding SearchCommand}" Key="Return"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <Button Content="New" 
+                            Style="{StaticResource OperationButtonTheme}"
+                            Foreground="Black"
+                            Command="{Binding InsertStudentCommand}"
+                            />
+
+                <Button Content="Edit" 
+                            Style="{StaticResource OperationButtonTheme}"
+                            Foreground="Black"
+                            Command="{Binding UpdateStudentCommand}"
+                            />
+
+                <Button Content="Delete" 
+                            Style="{StaticResource OperationButtonTheme}"
+                            Background="Red"
+                            Command="{Binding OpenPopupCommand}"
+                            />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
             <TextBlock Text="Students" 
                        Foreground="White" 
                        FontSize="25"
                        Margin="10"
                        />
 
-            <ListView Margin="10" Name="studentsList" 
+            <ListView Margin="10" Name="studentsList" SelectionMode="Single"
                       ItemsSource="{Binding Students, Mode=TwoWay}"
-                      SelectedItem="{Binding CurrentStudent, Mode=TwoWay}"
+                      SelectedItem="{Binding CurrentStudent,
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       >
                 <ListView.View>
                     <GridView>
@@ -53,5 +96,45 @@
                 </ListView.View>
             </ListView>
         </StackPanel>
+
+        <Grid Background="#FF4E4B4B" Opacity="0.7" 
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="2"
+              Visibility="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                    Converter={StaticResource BooleanToVisibilityConverter}}"
+              >
+            <Popup Placement="Center"  IsOpen="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   Width="300"
+                   AllowsTransparency="True"
+                   Margin="10"
+                   >
+                <Border Background="White" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        BorderThickness="2"
+                        BorderBrush="Black">
+                    <StackPanel Margin="15">
+                        <TextBlock Text="{Binding PopupMessage}" FontSize="20" TextWrapping="Wrap"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
+                            <Button Content="Delete"
+                                    Padding="10"    
+                                    Background="Red" 
+                                    Foreground="White"
+                                    Margin="0, 0 , 10, 0"
+                                    Command="{Binding DeleteStudentCommand}"
+                             />
+
+                            <Button Content="Cancel" 
+                                    Padding="10"
+                                    Background="Gray" 
+                                    Foreground="White"
+                                    Command="{Binding ClosePopupCommand}"
+                            />
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
     </Grid>
 </UserControl>

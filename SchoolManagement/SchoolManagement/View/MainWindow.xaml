@@ -24,7 +24,6 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
@@ -50,92 +49,17 @@
                     />
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" 
-                            Orientation="Horizontal"
-                            Visibility="{Binding IsOperationVisible, 
-                            Converter={StaticResource BooleanToVisibilityConverter}}"
-                            >
-                    <TextBox 
-                        Width="200"
-                        Height="40"
-                        HorizontalAlignment="Left"
-                        Margin="5"
-                        Style="{StaticResource TextBoxTheme}"
-                        Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        
-                    >
-                        <TextBox.InputBindings>
-                            <KeyBinding Command="{Binding SearchCommand}" Key="Return"/>
-                        </TextBox.InputBindings>
-                    </TextBox>
-
-                    <Button Content="New" 
-                            Style="{StaticResource OperationButtonTheme}"
-                            Foreground="Black"
-                            Command="{Binding InsertPersonCommand}"
-                            />
-
-                    <Button Content="Edit" 
-                            Style="{StaticResource OperationButtonTheme}"
-                            Foreground="Black"
-                            Command="{Binding UpdatePersonCommand}"
-                            />
-
-                    <Button Content="Delete" 
-                            Style="{StaticResource OperationButtonTheme}"
-                            Background="Red"
-                            Command="{Binding OpenPopupCommand}"
-                            />
-                </StackPanel>
-
-
                 <ContentControl 
                     Grid.Column="1"
-                    Grid.Row="1"
+                    Grid.Row="0"
                     Margin="10"
-                    Content="{Binding CurrentView}"
+                    Content="{Binding CurrentViewModel}"
                 />
 
             </Grid>
         </Border>
 
-        <Grid Background="#FF4E4B4B" Opacity="0.7" 
-              Visibility="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
-                    Converter={StaticResource BooleanToVisibilityConverter}}"
-              >
-            <Popup Placement="Center"  IsOpen="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   Width="300"
-                   AllowsTransparency="True"
-                   Margin="10"
-                   >
-                <Border Background="White" 
-                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                        BorderThickness="2"
-                        BorderBrush="Black">
-                    <StackPanel Margin="15">
-                        <TextBlock Text="{Binding PopupMessage}" FontSize="20" TextWrapping="Wrap"/>
-
-                        <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
-                            <Button Content="Delete"
-                                    Padding="10"    
-                                    Background="Red" 
-                                    Foreground="White"
-                                    Margin="0, 0 , 10, 0"
-                                    Command="{Binding DeletePersonCommand}"
-                             />
-
-                            <Button Content="Cancel" 
-                                    Padding="10"
-                                    Background="Gray" 
-                                    Foreground="White"
-                                    Command="{Binding ClosePopupCommand}"
-                            />
-
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-            </Popup>
-        </Grid>
+        
 
     </Grid>
 </Window>

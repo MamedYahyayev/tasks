@@ -12,20 +12,17 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class TeacherEditorViewModel : ReactiveObject
+    public class TeacherEditorViewModel : BaseViewModel
     {
 
         #region Private Properties
 
         private readonly TeacherService _teacherService = new TeacherService();
 
-        private Action<ViewType> _callback;
-
         #endregion
 
-        public TeacherEditorViewModel(int? id, Action<ViewType> callback)
+        public TeacherEditorViewModel(int? id)
         {
-            _callback = callback;
             _errors = new Dictionary<string, ErrorModel>();
 
             if (id != null) LoadTeacher(id);
@@ -122,7 +119,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         private void UnselectSubject() => Subject = null;
 
-        private void CancelOperation() => _callback?.Invoke(ViewType.TEACHER);
+        private void CancelOperation() => MainViewModel.Instance.SetCurrentViewModel(new TeacherViewModel());
 
         #endregion
 

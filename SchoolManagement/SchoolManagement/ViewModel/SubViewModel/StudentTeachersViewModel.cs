@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.ViewModel.SubViewModel
 {
-    public class StudentTeachersViewModel : ReactiveObject  
+    public class StudentTeachersViewModel : BaseViewModel  
     {
         #region Private Properties
 
