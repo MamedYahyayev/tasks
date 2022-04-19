@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Config
-{
+{   
+    [Obsolete]
     public class DbConfig
     {
         public static SqlConnection Connect() => new SqlConnection(SqlServerConnection());
