@@ -11,13 +11,15 @@ namespace SchoolManagement.Model.Enum
 {
     public static class SubjectExtension
     {
+        private const string UNDERSCORE_SIGN = "_";
+
         public static string GetName(this Subject subject)
         {
             var subjectName = subject.ToString();
 
-            if (subjectName.Contains("_"))
+            if (subjectName.Contains(UNDERSCORE_SIGN))
             {
-                var subjectSplit = subjectName.Split('_');
+                var subjectSplit = subjectName.Split(UNDERSCORE_SIGN);
                 subjectName = "";
                 foreach (var part  in subjectSplit)
                    subjectName += part[..1] + part[1..].ToLower() + " ";

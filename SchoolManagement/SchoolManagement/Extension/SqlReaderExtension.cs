@@ -13,7 +13,7 @@ namespace System.Data.SqlClient
         public static string GetStringValueOrDefault(this SqlDataReader reader, string columnName)
         {
             var isNull = IsNull(reader, columnName);
-            if (isNull) return String.Empty;
+            if (isNull) return string.Empty;
 
             return reader.GetString(columnName);
         }

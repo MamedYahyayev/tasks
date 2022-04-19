@@ -20,21 +20,6 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
         }
 
-        //public bool HasError {get; set;}
-        //public string ErrorMessage {get; set;}
-
         #endregion
-
-
-        #region Functions
-
-        public void ClearError()
-        {
-            ErrorMessage = string.Empty;
-            HasError = false;
-        }
-
-        #endregion
-
     }
 }
