@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Constant
 {
+    [Obsolete]
     public class SqlServerDbConfig
     {
         public const string DATA_SOURCE = "localhost";

@@ -13,13 +13,9 @@ namespace SchoolManagement.Model
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 
-        public SchoolContext()
-        {
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost; Database=SchoolManagement; User Id=sa; Password=mamed2001");
+            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["SchoolManagement"].ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
