@@ -9,6 +9,7 @@ namespace SchoolManagement.Enum
     public enum ViewType
     {
         STUDENT,
-        TEACHER
+        TEACHER,
+        STUDENT_TEACHERS
     }
 }

@@ -33,6 +33,10 @@
                 <subview:TeacherEditorView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type subViewModel:StudentTeachersViewModel}">
+                <subview:StudentTeachersView />
+            </DataTemplate>
+
             <converter:SubjectToStringConverter x:Key="SubjectToStringConverter" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 

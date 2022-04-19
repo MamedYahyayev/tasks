@@ -138,8 +138,6 @@ namespace SchoolManagement.ViewModel.SubViewModel
         }
 
 
-        private void UnselectTeacher() => SelectedTeacher = null;
-
         private void CancelOperation() => _callback?.Invoke(ViewType.STUDENT);
 
 
@@ -179,10 +177,6 @@ namespace SchoolManagement.ViewModel.SubViewModel
         private VoidReactiveCommand _cancelOperationCommand;
         public VoidReactiveCommand CancelOperationCommand =>
             _cancelOperationCommand ??= VoidReactiveCommand.Create(CancelOperation);
-
-        private VoidReactiveCommand _unselectCommand;
-        public VoidReactiveCommand UnselectCommand =>
-            _unselectCommand ??= VoidReactiveCommand.Create(UnselectTeacher);
 
         private VoidReactiveCommand _addTeacherCommand;
         public VoidReactiveCommand AddTeacherCommand =>

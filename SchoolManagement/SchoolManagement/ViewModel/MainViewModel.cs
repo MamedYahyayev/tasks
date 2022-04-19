@@ -1,17 +1,9 @@
 ﻿using ReactiveUI;
 using SchoolManagement.Command;
-using SchoolManagement.Config;
 using SchoolManagement.Enum;
-using SchoolManagement.Model;
-using SchoolManagement.Model.Enum;
 using SchoolManagement.Service;
 using SchoolManagement.ViewModel.SubViewModel;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.ViewModel
 {
@@ -26,6 +18,7 @@ namespace SchoolManagement.ViewModel
         public MainViewModel()
         {
             StudentViewModel = new StudentViewModel();
+            IsOperationVisible = true;
 
             CurrentView = StudentViewModel;
         }
@@ -34,6 +27,7 @@ namespace SchoolManagement.ViewModel
 
         public StudentViewModel StudentViewModel { get; set; }
         public TeacherViewModel TeacherViewModel { get; set; }
+        public StudentTeachersViewModel StudentTeachersViewModel { get; set; }
 
         private object _currentView;
         public Object CurrentView
@@ -63,12 +57,21 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _popupMessage, value);
         }
 
+        private bool _isOperationVisible;
+        public bool IsOperationVisible
+        {
+            get => _isOperationVisible;
+            set => this.RaiseAndSetIfChanged(ref _isOperationVisible, value);
+        }
+
         #endregion
 
         #region Functions
 
         private void CurrentViewChange(ViewType viewType)
         {
+            IsOperationVisible = true;
+
             switch (viewType)
             {
                 case ViewType.STUDENT:
@@ -79,11 +82,18 @@ namespace SchoolManagement.ViewModel
                     TeacherViewModel = new TeacherViewModel();
                     CurrentView = TeacherViewModel;
                     break;
+                case ViewType.STUDENT_TEACHERS:
+                    StudentTeachersViewModel = new StudentTeachersViewModel();
+                    CurrentView = StudentTeachersViewModel;
+                    IsOperationVisible = false;
+                    break;
             }
         }
 
         private void InsertPerson()
         {
+            IsOperationVisible = false;
+
             if (IsCurrentViewStudent())
                 CurrentView = new StudentEditorViewModel(null, CurrentViewChange);
             else if (IsCurrentViewTeacher())
@@ -92,6 +102,9 @@ namespace SchoolManagement.ViewModel
 
         private void UpdatePerson()
         {
+            if(IsStudentSelected() || IsTeacherSelected()) 
+                IsOperationVisible = false;
+
             if (IsCurrentViewStudent() && IsStudentSelected())
                 CurrentView = new StudentEditorViewModel(StudentViewModel.CurrentStudent.Id, CurrentViewChange);
             else if (IsCurrentViewTeacher() && IsTeacherSelected())
@@ -101,7 +114,6 @@ namespace SchoolManagement.ViewModel
 
         private void DeletePerson(ITableOperation operation)
         {
-
             operation = (ITableOperation)CurrentView;
 
             if (IsStudentSelected())
@@ -122,28 +134,13 @@ namespace SchoolManagement.ViewModel
 
         private void OpenPopup()
         {
-            IsPopupOpen = true;
+            if(IsTeacherSelected() || IsStudentSelected())
+                IsPopupOpen = true;
+            
             PopupMessage = "Are you sure to delete?";
-
-            if (IsTeacherSelected())
-            {
-                var studentCount = _teacherService.FindStudentCount((int)TeacherViewModel.CurrentTeacher?.Id);
-                if (studentCount > 0)
-                {
-                    var teacher = TeacherViewModel.CurrentTeacher;
-                    PopupMessage = teacher.Name + " " + teacher.Surname + " has " + studentCount + " students. " +
-                        " If you want to delete teacher all of his students will be deleted. Do you want to continue?";
-                }
-            } else
-            {
-                PopupMessage = "Are you sure to delete?";
-            }
         }
 
-        private void CancelPopup()
-        {
-            IsPopupOpen = false;
-        }
+        private void CancelPopup() => IsPopupOpen = false;
 
         private bool IsCurrentViewStudent() => CurrentView is StudentViewModel;
         private bool IsCurrentViewTeacher() => CurrentView is TeacherViewModel;

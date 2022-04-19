@@ -78,19 +78,6 @@ namespace SchoolManagement.Model
 
             #region Relationships
 
-            //modelBuilder.Entity<StudentTeacher>()
-            //    .HasKey(st => new { st.StudentId, st.TeacherId });
-
-            //modelBuilder.Entity<StudentTeacher>()
-            //    .HasOne(s => s.Teacher)
-            //    .WithMany(t => t.StudentTeachers)
-            //    .HasForeignKey(s => s.TeacherId);
-
-            //modelBuilder.Entity<StudentTeacher>()
-            //    .HasOne(t => t.Teacher)
-            //    .WithMany(t => t.StudentTeachers)
-            //    .HasForeignKey(t => t.TeacherId);
-
             modelBuilder.Entity<Student>()
                 .HasMany(s => s.Teachers)
                 .WithMany(t => t.Students)

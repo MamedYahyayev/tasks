@@ -42,6 +42,12 @@
                         Command="{Binding CurrentViewChangeCommand}"
                         CommandParameter="{x:Static enum:ViewType.TEACHER}"
                     />
+                    <RadioButton 
+                        Content="Student Teachers"  
+                        Style="{StaticResource MenuButtonTheme}"
+                        Command="{Binding CurrentViewChangeCommand}"
+                        CommandParameter="{x:Static enum:ViewType.STUDENT_TEACHERS}"
+                    />
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" 
@@ -80,7 +86,6 @@
                             Background="Red"
                             Command="{Binding OpenPopupCommand}"
                             />
-
                 </StackPanel>
 
 

@@ -81,12 +81,6 @@
                     Margin="10" Orientation="Horizontal"
                     Grid.ColumnSpan="3">
             <StackPanel Orientation="Vertical">
-                <Button 
-                        Content="Unselect" 
-                        Margin="10, 0, 0, 0"
-                        Command="{Binding UnselectCommand}"
-                    />
-
                 <ListBox SelectionMode="Single"
                      Width="180"
                      ItemsSource="{Binding AllTeachers, UpdateSourceTrigger=PropertyChanged}"

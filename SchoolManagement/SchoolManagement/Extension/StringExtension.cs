@@ -10,7 +10,7 @@ namespace System
     {
         public static bool EqualsIgnoreCase(this string first, string second)
         {
-            return first.ToLower() == second.ToLower();
+            return first.ToLower().Contains(second.ToLower());
         }
     }
 }
