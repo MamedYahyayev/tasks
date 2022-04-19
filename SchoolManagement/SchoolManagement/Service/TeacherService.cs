@@ -49,25 +49,17 @@ namespace SchoolManagement.Service
 
         public IList<Teacher> Search(string keyword)
         {
-            var query = from s in _context.Teachers
-                        where s.Name.ToLower().Contains(keyword.ToLower()) ||
-                               s.Surname.ToLower().Contains(keyword.ToLower())
-                        select s;
-            return query.ToList();
+            var teachers = _context.Teachers.AsEnumerable()
+                                            .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
+                                                        s.Surname.EqualsIgnoreCase(keyword))
+                                            .ToList();
+            return teachers;
         }
-
-        public int FindStudentCount(int id)
-        {
-            var teacher = FindTeacherById(id);
-            //Console.WriteLine(teacher.Students.Count);
-            return 0 /*teacher.Students.Count*/;
-        }
-
 
         private Teacher FindTeacherById(int teacherId)
         {
             var teacher = _context.Teachers.Find(teacherId);
-            if (teacher == null) throw new ItemNotFoundException("Teacher with " + teacherId + " not found!");
+            if (teacher == null) throw new ItemNotFoundException("Teacher with id " + teacherId + " not found!");
             return teacher;
         }
 

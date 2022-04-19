@@ -54,12 +54,12 @@ namespace SchoolManagement.Service
 
         public IList<Student> Search(string keyword)
         {
-            var query = from s in _context.Students
-                        where s.Name.ToLower().Contains(keyword.ToLower()) ||
-                               s.Surname.ToLower().Contains(keyword.ToLower())
-                        select s;
+            var students = _context.Students.AsEnumerable()
+                                            .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
+                                                        s.Surname.EqualsIgnoreCase(keyword))
+                                            .ToList();
+            return students;
 
-            return query.ToList();
         }
 
         #region Helper Functions
@@ -67,7 +67,7 @@ namespace SchoolManagement.Service
         private Student FindStudentById(int studentId)
         {
             var student = _context.Students.Include(s => s.Teachers).Single(s => s.Id == studentId);
-            if (student == null) throw new ItemNotFoundException("Student with " + studentId + " not found!");
+            if (student == null) throw new ItemNotFoundException("Student with id " + studentId + " not found!");
             return student;
         }
 
