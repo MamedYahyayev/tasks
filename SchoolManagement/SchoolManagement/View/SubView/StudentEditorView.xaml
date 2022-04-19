@@ -110,7 +110,7 @@
                     Height="40" 
                     Command="{Binding AddTeacherCommand}"/>
 
-                <Button Content="-==" 
+                <Button Content="X" 
                     FontSize="16" 
                     Margin="10" 
                     Height="40" 
@@ -121,6 +121,7 @@
                     Width="180"
                     Height="100"
                     ItemsSource="{Binding SelectedTeachers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedTeacher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  >
                 <ListBox.ItemTemplate>
                     <DataTemplate>

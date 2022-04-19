@@ -37,15 +37,8 @@ namespace SchoolManagement.Service
 
         public void Insert(Student student)
         {
-            var teachers = new List<Teacher>();
-            foreach (var teacher in student.Teachers)
-            {
-                var findedTeacher = _context.Teachers.Find(teacher.Id);
-                teachers.Add(findedTeacher);
-            }
+            AssignTeachersToStudent(student);
 
-            student.Teachers = teachers;
-            
             _context.Students.Add(student);
             _context.SaveChanges();
         }
@@ -53,6 +46,8 @@ namespace SchoolManagement.Service
 
         public void Update(Student student)
         {
+            AssignTeachersToStudent(student);
+
             _context.Students.Update(student);
             _context.SaveChanges();
         }
@@ -63,9 +58,11 @@ namespace SchoolManagement.Service
                         where s.Name.ToLower().Contains(keyword.ToLower()) ||
                                s.Surname.ToLower().Contains(keyword.ToLower())
                         select s;
+
             return query.ToList();
         }
 
+        #region Helper Functions
 
         private Student FindStudentById(int studentId)
         {
@@ -73,5 +70,20 @@ namespace SchoolManagement.Service
             if (student == null) throw new ItemNotFoundException("Student with " + studentId + " not found!");
             return student;
         }
+
+        private void AssignTeachersToStudent(Student student)
+        {
+            var teachers = new List<Teacher>();
+            foreach (var teacher in student.Teachers)
+            {
+                var findedTeacher = _context.Teachers.Find(teacher.Id);
+                teachers.Add(findedTeacher);
+            }
+
+            student.Teachers = teachers;
+        }
+
+        #endregion
+
     }
 }

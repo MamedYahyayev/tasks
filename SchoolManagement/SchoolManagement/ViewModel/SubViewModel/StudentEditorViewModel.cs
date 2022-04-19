@@ -95,6 +95,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
             var student = _studentService.GetById((int)id);
             Student = student;
             SelectedTeachers = student.Teachers.ToArray();
+            _selectedTeacherList = student.Teachers.ToList();
         }
 
         private void Save(int? id)
@@ -108,6 +109,8 @@ namespace SchoolManagement.ViewModel.SubViewModel
         private void UpdateStudent(Student student)
         {
             if (!IsDataValid()) return;
+
+            Student.Teachers = _selectedTeachers;
             _studentService.Update(student);
             CancelOperation();
         }
@@ -140,9 +143,10 @@ namespace SchoolManagement.ViewModel.SubViewModel
         private void CancelOperation() => _callback?.Invoke(ViewType.STUDENT);
 
 
-        private void AddTeacher()
+        private void AssignTeacher()
         {
-            // check selectedTeacher is not null
+            if (SelectedTeacher == null) return;
+
             var isExist = _selectedTeacherList.Any(t => t.Id == SelectedTeacher.Id);
             if (!isExist)
             {
@@ -151,6 +155,17 @@ namespace SchoolManagement.ViewModel.SubViewModel
             }
         }
 
+        private void UnassignTeacher()
+        {
+            if (SelectedTeacher == null) return;
+
+            var isExist = _selectedTeacherList.Any(t => t.Id == SelectedTeacher.Id);
+            if (isExist)
+            {
+                _selectedTeacherList = _selectedTeacherList.Where(t => t.Id != SelectedTeacher.Id).ToList();
+                SelectedTeachers = _selectedTeacherList.ToArray();
+            }
+        }
 
         #endregion
 
@@ -171,7 +186,11 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         private VoidReactiveCommand _addTeacherCommand;
         public VoidReactiveCommand AddTeacherCommand =>
-            _addTeacherCommand ??= VoidReactiveCommand.Create(AddTeacher);
+            _addTeacherCommand ??= VoidReactiveCommand.Create(AssignTeacher);
+
+        private VoidReactiveCommand _removeTeacherCommand;
+        public VoidReactiveCommand RemoveTeacherCommand =>
+            _removeTeacherCommand ??= VoidReactiveCommand.Create(UnassignTeacher);
 
         #endregion
 
