@@ -18,7 +18,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private readonly StudentService _studentService = new StudentService();
+        private readonly StudentService _studentService = new StudentService(new JsonFileService());
 
         private TeacherService _teacherService;
 
@@ -91,8 +91,9 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             var student = _studentService.GetById((int)id);
             Student = student;
-            SelectedTeachers = student.Teachers.ToArray();
-            _selectedTeacherList = student.Teachers.ToList();
+            // TODO:  check student teachers is null or not
+            //SelectedTeachers = student.Teachers.ToArray();
+            //_selectedTeacherList = student.Teachers.ToList();
         }
 
         private void Save(int? id)

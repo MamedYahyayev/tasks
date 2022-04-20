@@ -14,7 +14,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private readonly StudentService _studentService = new StudentService();
+        private readonly StudentService _studentService = new StudentService(new JsonFileService());
 
         #endregion
 
