@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Model\Enum\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
   <ItemGroup>
