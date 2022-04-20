@@ -105,8 +105,6 @@
               >
             <view:DeleteOperationPopup DataContext="{Binding}" />
         </Grid>
-
-
-
+        
     </Grid>
 </UserControl>

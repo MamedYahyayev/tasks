@@ -16,9 +16,8 @@ namespace SchoolManagement.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //var connectionString = ConfigurationManager.ConnectionStrings["SchoolManagement"].ConnectionString;
-            //optionsBuilder.UseSqlServer(connectionString);
-            optionsBuilder.UseSqlServer("Server=localhost; Database=SchoolManagement; User Id=sa; Password=mamed2001");
+            var connectionString = ConfigurationManager.ConnectionStrings["SchoolManagement"].ConnectionString;
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

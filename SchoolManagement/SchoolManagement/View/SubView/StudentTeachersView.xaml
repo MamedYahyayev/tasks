@@ -50,24 +50,3 @@
         </ListView>
     </StackPanel>
 </UserControl>
-
-
-<!--<ListView.ItemTemplate>
-    <DataTemplate>
-        <StackPanel>
-            <TextBlock Text="{Binding Name}"/>
-            <TextBlock Text="{Binding Surname}"/>
-        </StackPanel>
-    </DataTemplate>
-</ListView.ItemTemplate>-->
-
-
-
-<!--<ListView.ItemTemplate>
-    <DataTemplate>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Name}"/>
-            <TextBlock Text="{Binding Surname}"/>
-        </StackPanel>
-    </DataTemplate>
-</ListView.ItemTemplate>-->

@@ -76,6 +76,13 @@ namespace SchoolManagement.Utility
                     HasError = true,
                     ErrorMessage = propertyName + " cannot contains letters or symbols!"
                 };
+            }else if(double.Parse(property) <= 0)
+            {
+                return new ErrorModel()
+                {
+                    HasError = true,
+                    ErrorMessage = propertyName + " cannot be 0 or less than 0!"
+                };
             }
 
             return null;
