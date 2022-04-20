@@ -18,7 +18,7 @@ namespace SchoolManagement.Service
 
         }
 
-        public IList<Teacher> GetAll()
+        public List<Teacher> GetAll()
         {
             return new List<Teacher>();
         }

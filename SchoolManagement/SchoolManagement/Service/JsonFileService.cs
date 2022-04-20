@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SchoolManagement.Enum;
 using SchoolManagement.Model;
 using SchoolManagement.Utility;
@@ -11,40 +12,22 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
-    public class JsonFileService : IFileService
+    public class JsonFileService<T> : IFileService<T>
     {
-        public void AppendData(EntityType entity, string json)
+        public void AppendData(Type entity, List<T> data)
         {
-            var filePath = FileValidator.GetOrCreateFile(entity, FileType.JSON);
-            File.WriteAllTextAsync(filePath, json);
+            object serializedData = JsonConvert.SerializeObject(data);
+
+            var filePath = FileValidator.GetOrCreateFile(EntityType.STUDENT, FileType.JSON);
+            File.WriteAllTextAsync(filePath, serializedData.ToString());
+
         }
 
-        public void DeleteData()
+        public List<T> GetData(Type entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public string GetData(EntityType entity)
-        {
-            var filePath = FileValidator.GetOrCreateFile(entity, FileType.JSON);
-            string json = "";
-
-            using (StreamReader r = new StreamReader(filePath))
-            {
-                json = r.ReadToEnd();
-            }
-
-            return json;
-        }
-
-        public void SearchData()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateData()
-        {
-            throw new NotImplementedException();
+            var filePath = FileValidator.GetOrCreateFile(EntityType.STUDENT, FileType.JSON);
+            string readAllText = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<List<T>>(readAllText);
         }
     }
 }

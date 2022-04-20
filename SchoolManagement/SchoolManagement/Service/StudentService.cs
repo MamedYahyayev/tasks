@@ -16,9 +16,9 @@ namespace SchoolManagement.Service
 {
     public class StudentService : ICrudOperation<Student>
     {
-        private readonly IFileService _fileService;
+        private readonly IFileService<Student> _fileService;
 
-        public StudentService(IFileService fileService)
+        public StudentService(IFileService<Student> fileService)
         {
             _fileService = fileService;
         }
@@ -29,18 +29,13 @@ namespace SchoolManagement.Service
 
             var newStudents = students.Where(student => student.Id != id).ToList();
 
-            string json = JsonConvert.SerializeObject(newStudents);
-
-            _fileService.AppendData(EntityType.STUDENT, json);
+            _fileService.AppendData(typeof(Student), newStudents);
         }
 
-        public IList<Student> GetAll()
+        public List<Student> GetAll()
         {
-            var json = _fileService.GetData(EntityType.STUDENT);
-
-            var students = JsonConvert.DeserializeObject<List<Student>>(json);
-
-            return students ?? new List<Student>();
+            var students =  _fileService.GetData(typeof(Student));
+            return students;
         }
 
         public Student GetById(int id)
@@ -55,26 +50,22 @@ namespace SchoolManagement.Service
 
         public void Insert(Student student)
         {
-            var existingJsonData = _fileService.GetData(EntityType.STUDENT);
+            var students = _fileService.GetData(typeof(Student));
 
-            var students = JsonConvert.DeserializeObject<List<Student>>(existingJsonData);
             if (students == null) students = new List<Student>();
 
             student.Id = GenerateRandomId();
             students.Add(student);
-            string json = JsonConvert.SerializeObject(students);
 
-            _fileService.AppendData(EntityType.STUDENT, json);
+            _fileService.AppendData(typeof(Student), students);
         }
 
 
         public void Update(Student student)
         {
-            var existingJsonData = _fileService.GetData(EntityType.STUDENT);
+            var students = _fileService.GetData(typeof(List<Student>));
 
-            var students = JsonConvert.DeserializeObject<List<Student>>(existingJsonData);
             if (students == null) students = new List<Student>();
-
 
             var existingStudent = students.FirstOrDefault(s => s.Id == student.Id);
             if (existingStudent != null)
@@ -86,9 +77,8 @@ namespace SchoolManagement.Service
                 existingStudent.Teachers = student.Teachers;
 
             }
-            string json = JsonConvert.SerializeObject(students);
 
-            _fileService.AppendData(EntityType.STUDENT, json);
+            _fileService.AppendData(typeof(Student), students);
         }
 
         public IList<Student> Search(string keyword)

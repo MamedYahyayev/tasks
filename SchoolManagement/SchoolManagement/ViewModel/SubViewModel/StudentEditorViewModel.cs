@@ -18,7 +18,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private readonly StudentService _studentService = new StudentService(new JsonFileService());
+        private readonly StudentService _studentService = new StudentService(new XmlFileService<Student>());
 
         private TeacherService _teacherService;
 
@@ -108,7 +108,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             if (!IsDataValid()) return;
 
-            Student.Teachers = _selectedTeachers;
+            //Student.Teachers = _selectedTeachers;
             _studentService.Update(student);
             CancelOperation();
         }
@@ -117,7 +117,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             if (!IsDataValid()) return;
 
-            Student.Teachers = _selectedTeachers;
+            //Student.Teachers = _selectedTeachers;
             _studentService.Insert(Student);
             CancelOperation();
         }

@@ -8,7 +8,7 @@ namespace SchoolManagement.Service
 {
     public interface ICrudOperation<T>
     {
-        IList<T> GetAll();
+        List<T> GetAll();
 
         T GetById(int id);
 

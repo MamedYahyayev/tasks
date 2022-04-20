@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace SchoolManagement.Service
 {
     // TODO: Replace EntityType parameters with base Parameter
-    public interface IFileService
+    public interface IFileService<T>
     {
-        string GetData(EntityType entity);
+        List<T> GetData(Type entity);
 
-        void AppendData(EntityType entity, string data);
+        void AppendData(Type entity, List<T> data);
 
     }
 }

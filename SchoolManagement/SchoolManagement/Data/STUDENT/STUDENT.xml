@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student>
+    <Id>77037782</Id>
+    <Name>xxxxxx</Name>
+    <Surname>xxxxxxxxxxxxxxxxxxxxa</Surname>
+    <BirthDate>2022-04-03T00:00:00</BirthDate>
+    <RegisterDate>2022-03-28T00:00:00</RegisterDate>
+    <Teachers />
+  </Student>
+  <Student>
+    <Id>74489923</Id>
+    <Name>dsadasdasd</Name>
+    <Surname>asdasdasda</Surname>
+    <BirthDate>2022-03-30T00:00:00</BirthDate>
+    <RegisterDate>2022-04-03T00:00:00</RegisterDate>
+    <Teachers />
+  </Student>
+</ArrayOfStudent>
