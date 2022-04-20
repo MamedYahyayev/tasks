@@ -56,6 +56,13 @@ namespace SchoolManagement.ViewModel.SubViewModel
             set => this.RaiseAndSetIfChanged(ref _isPopupOpen, value);
         }
 
+        private bool _isInfoPopupOpen;
+        public bool IsInfoPopupOpen
+        {
+            get => _isInfoPopupOpen;
+            set => this.RaiseAndSetIfChanged(ref _isInfoPopupOpen, value);
+        }
+
         private string _popupMessage;
         public string PopupMessage
         {
@@ -94,6 +101,14 @@ namespace SchoolManagement.ViewModel.SubViewModel
                 MainViewModel.Instance.SetCurrentViewModel(new TeacherEditorViewModel(CurrentTeacher.Id));
         }
 
+        private void CalculateSalary()
+        {
+            var salary = Teachers.ToList().Sum(t => t.Salary);
+
+            IsInfoPopupOpen = true;
+            PopupMessage = "Total Salary is: " + salary;
+        }
+
 
         private void OpenPopup()
         {
@@ -104,6 +119,8 @@ namespace SchoolManagement.ViewModel.SubViewModel
         }
 
         private void ClosePopup() => IsPopupOpen = false;
+        private void CloseInfoPopup() => IsInfoPopupOpen = false;
+
 
         #endregion
 
@@ -123,10 +140,18 @@ namespace SchoolManagement.ViewModel.SubViewModel
         public VoidReactiveCommand DeleteCommand =>
             _deleteCommand ??= VoidReactiveCommand.Create(Delete);
 
+        private VoidReactiveCommand _okCommand;
+        public VoidReactiveCommand OkCommand =>
+            _okCommand  ??= VoidReactiveCommand.Create(CloseInfoPopup);
+
 
         private VoidReactiveCommand _searchCommand;
         public VoidReactiveCommand SearchCommand =>
             _searchCommand ??= VoidReactiveCommand.Create(Search);
+
+        private VoidReactiveCommand _calculateSalaryCommand;
+        public VoidReactiveCommand CalculateSalaryCommand =>
+            _calculateSalaryCommand  ??= VoidReactiveCommand.Create(CalculateSalary);
 
         private VoidReactiveCommand _openPopupCommand;
         public VoidReactiveCommand OpenPopupCommand =>

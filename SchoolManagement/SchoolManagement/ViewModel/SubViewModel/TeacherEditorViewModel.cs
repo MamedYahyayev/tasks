@@ -59,6 +59,13 @@ namespace SchoolManagement.ViewModel.SubViewModel
             set => this.RaiseAndSetIfChanged(ref _errors, value);
         }
 
+        private string _salary;
+        public string Salary
+        {
+            get => _salary;
+            set => this.RaiseAndSetIfChanged(ref _salary, value);
+        }
+
         #endregion
 
 
@@ -67,6 +74,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         private void LoadTeacher(int? id)
         {
             Teacher = _teacherService.GetById((int)id);
+            Salary = Teacher.Salary.ToString();
         }
 
 
@@ -110,6 +118,10 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
             var errorModel = PersonValidator.CheckEmpty(nameof(Teacher.License), Teacher.License);
             if (errorModel != null) Errors.Add(nameof(Teacher.License), errorModel);
+
+            errorModel = PersonValidator.IsNumberAndPositive(nameof(Teacher.Salary), Salary);
+            if (errorModel != null) Errors.Add(nameof(Teacher.Salary), errorModel);
+            else Teacher.Salary = double.Parse(Salary);
 
             this.RaisePropertyChanged(nameof(Errors));
 

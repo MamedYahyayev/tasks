@@ -103,8 +103,7 @@
               Visibility="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
                     Converter={StaticResource BooleanToVisibilityConverter}}"
               >
-            <view:OperationPopup 
-                DataContext="{Binding}" />
+            <view:DeleteOperationPopup DataContext="{Binding}" />
         </Grid>
 
 

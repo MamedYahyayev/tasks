@@ -57,7 +57,7 @@
                 <Button Content="Calculate Salary" 
                             Style="{StaticResource OperationButtonTheme}"
                             Foreground="Black"
-                            Command="{Binding OpenPopupCommand}"
+                            Command="{Binding CalculateSalaryCommand}"
                             Width="150"
                             />
             </StackPanel>
@@ -107,8 +107,16 @@
               Visibility="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
                     Converter={StaticResource BooleanToVisibilityConverter}}"
               >
-            <view:OperationPopup 
-                DataContext="{Binding}" />
+            <view:DeleteOperationPopup DataContext="{Binding}" />
+        </Grid>
+
+        <Grid Background="#FF4E4B4B" Opacity="0.7" 
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="2"
+              Visibility="{Binding IsInfoPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                    Converter={StaticResource BooleanToVisibilityConverter}}"
+              >
+            <view:InfoOperationPopup DataContext="{Binding}" />
         </Grid>
     </Grid>
     
