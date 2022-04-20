@@ -1,0 +1,34 @@
+﻿<Popup
+    x:Class="SchoolManagement.View.SubView.InfoOperationPopup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SchoolManagement.View.SubView"
+    mc:Ignorable="d"
+    Width="300"
+    AllowsTransparency="True"
+    Margin="10"
+    Placement="Center"
+    IsOpen="{Binding IsInfoPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+    >
+
+    <Border Background="White" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        BorderThickness="2"
+                        BorderBrush="Black">
+        <StackPanel Margin="15">
+            <TextBlock Text="{Binding PopupMessage}" FontSize="20" TextWrapping="Wrap"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
+                <Button Content="Ok"
+                                    Padding="10"    
+                                    Background="LightBlue" 
+                                    Foreground="White"
+                                    Margin="0, 0 , 10, 0"
+                                    Command="{Binding OkCommand}"
+                             />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Popup>
