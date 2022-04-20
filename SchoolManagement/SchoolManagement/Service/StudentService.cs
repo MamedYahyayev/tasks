@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SchoolManagement.Config;
+using SchoolManagement.Enum;
 using SchoolManagement.Exceptions;
 using SchoolManagement.Model;
 using System;
@@ -14,74 +16,93 @@ namespace SchoolManagement.Service
 {
     public class StudentService : ICrudOperation<Student>
     {
-        private readonly SchoolContext _context = new SchoolContext();
+        private readonly IFileService _fileService;
 
-        public bool Delete(int id)
+        public StudentService(IFileService fileService)
         {
-            var student = FindStudentById(id);
+            _fileService = fileService;
+        }
 
-            _context.Students.Remove(student);
-            _context.SaveChanges();
-            return true;
+        public void Delete(int id)
+        {
+            var students = GetAll();
+
+            var newStudents = students.Where(student => student.Id != id).ToList();
+
+            string json = JsonConvert.SerializeObject(newStudents);
+
+            _fileService.AppendData(EntityType.STUDENT, json);
         }
 
         public IList<Student> GetAll()
         {
-            return _context.Students.Include(s => s.Teachers).ToList();
+            var json = _fileService.GetData(EntityType.STUDENT);
+
+            var students = JsonConvert.DeserializeObject<List<Student>>(json);
+
+            return students ?? new List<Student>();
         }
 
         public Student GetById(int id)
         {
-            return FindStudentById(id);
+            var students = GetAll();
+            var student = students.FirstOrDefault(student => student.Id == id);
+
+            if (student == null) throw new ItemNotFoundException("Student with id " + id + " not found!");
+
+            return student;
         }
 
         public void Insert(Student student)
         {
-            AssignTeachersToStudent(student);
+            var existingJsonData = _fileService.GetData(EntityType.STUDENT);
 
-            _context.Students.Add(student);
-            _context.SaveChanges();
+            var students = JsonConvert.DeserializeObject<List<Student>>(existingJsonData);
+            if (students == null) students = new List<Student>();
+
+            student.Id = GenerateRandomId();
+            students.Add(student);
+            string json = JsonConvert.SerializeObject(students);
+
+            _fileService.AppendData(EntityType.STUDENT, json);
         }
 
 
         public void Update(Student student)
         {
-            AssignTeachersToStudent(student);
+            var existingJsonData = _fileService.GetData(EntityType.STUDENT);
 
-            _context.Students.Update(student);
-            _context.SaveChanges();
+            var students = JsonConvert.DeserializeObject<List<Student>>(existingJsonData);
+            if (students == null) students = new List<Student>();
+
+
+            var existingStudent = students.FirstOrDefault(s => s.Id == student.Id);
+            if (existingStudent != null)
+            {
+                existingStudent.Name = student.Name;
+                existingStudent.Surname = student.Surname;
+                existingStudent.BirthDate = student.BirthDate;
+                existingStudent.RegisterDate = student.RegisterDate;
+                existingStudent.Teachers = student.Teachers;
+
+            }
+            string json = JsonConvert.SerializeObject(students);
+
+            _fileService.AppendData(EntityType.STUDENT, json);
         }
 
         public IList<Student> Search(string keyword)
         {
-            var students = _context.Students.AsEnumerable()
-                                            .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
-                                                        s.Surname.EqualsIgnoreCase(keyword))
-                                            .ToList();
+            var students = GetAll().AsEnumerable()
+                                              .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
+                                                          s.Surname.EqualsIgnoreCase(keyword))
+                                              .ToList();
             return students;
-
         }
 
         #region Helper Functions
 
-        private Student FindStudentById(int studentId)
-        {
-            var student = _context.Students.Include(s => s.Teachers).Single(s => s.Id == studentId);
-            if (student == null) throw new ItemNotFoundException("Student with id " + studentId + " not found!");
-            return student;
-        }
-
-        private void AssignTeachersToStudent(Student student)
-        {
-            var teachers = new List<Teacher>();
-            foreach (var teacher in student.Teachers)
-            {
-                var findedTeacher = _context.Teachers.Find(teacher.Id);
-                teachers.Add(findedTeacher);
-            }
-
-            student.Teachers = teachers;
-        }
+        private int GenerateRandomId() => new Random().Next(1, 100_000_000);
 
         #endregion
 

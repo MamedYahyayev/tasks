@@ -16,7 +16,7 @@ namespace SchoolManagement.Service
 
         void Update(T entity);
 
-        bool Delete(int id);
+        void Delete(int id);
 
         IList<T> Search(string keyword);
     }

@@ -13,54 +13,36 @@ namespace SchoolManagement.Service
 {
     public class TeacherService : ICrudOperation<Teacher>
     {
-        private readonly SchoolContext _context = new SchoolContext();
-
-        public bool Delete(int id)
+        public void Delete(int id)
         {
-            var teacher = FindTeacherById(id);
 
-            _context.Teachers.Remove(teacher);
-            _context.SaveChanges();
-            return true;
         }
 
         public IList<Teacher> GetAll()
         {
-            return _context.Teachers.ToList();
+            return new List<Teacher>();
         }
 
         public Teacher GetById(int id)
         {
-            return FindTeacherById(id);
+            return null;
         }
 
         public void Insert(Teacher teacher)
         {
-            _context.Teachers.Add(teacher);
-            _context.SaveChanges();
+           
         }
 
 
         public void Update(Teacher teacher)
         {
-            _context.Teachers.Update(teacher);
-            _context.SaveChanges();
+            
         }
 
         public IList<Teacher> Search(string keyword)
         {
-            var teachers = _context.Teachers.AsEnumerable()
-                                            .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
-                                                        s.Surname.EqualsIgnoreCase(keyword))
-                                            .ToList();
-            return teachers;
-        }
-
-        private Teacher FindTeacherById(int teacherId)
-        {
-            var teacher = _context.Teachers.Find(teacherId);
-            if (teacher == null) throw new ItemNotFoundException("Teacher with id " + teacherId + " not found!");
-            return teacher;
+            
+            return null;
         }
 
     }
