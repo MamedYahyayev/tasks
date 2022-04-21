@@ -29,6 +29,7 @@ namespace SchoolManagement.Service
             _fileService = fileService;
 
             _storage = _fileService.Load();
+            if(_storage == null) _storage = new Storage();
             Storage = GetStorageClone();
 
             StartPersistence();
@@ -87,7 +88,8 @@ namespace SchoolManagement.Service
                     Surname = t.Surname,
                     Name = t.Name,
                     BirthDate = t.BirthDate,
-                    RegisterDate = t.RegisterDate
+                    RegisterDate = t.RegisterDate,
+                    TeacherIds = t.TeacherIds,
                 }).ToArray(),
                 Teachers = storage.Teachers.Select(t => new Teacher
                 {

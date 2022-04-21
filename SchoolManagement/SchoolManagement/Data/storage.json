@@ -1,50 +1,53 @@
 {
   "Students": [
     {
-      "RegisterDate": "2022-04-21T17:24:11.0470566+04:00",
+      "RegisterDate": "2022-04-21T17:58:09.2678274+04:00",
       "TeacherIds": [
+        18271578,
+        4935966,
+        99883369
       ],
       "Teachers": [
       ],
-      "Id": 98836753,
-      "Name": "dsad",
-      "Surname": "adasdas",
-      "BirthDate": "2022-04-21T17:24:11.0470604+04:00"
-    },
-    {
-      "RegisterDate": "2022-04-21T17:24:14.2154385+04:00",
-      "TeacherIds": [
-      ],
-      "Teachers": [
-      ],
-      "Id": 45759371,
-      "Name": "dsadasd",
-      "Surname": "sadsadas",
-      "BirthDate": "2022-04-21T17:24:14.2154411+04:00"
-    },
-    {
-      "RegisterDate": "2022-04-21T17:24:17.105225+04:00",
-      "TeacherIds": [
-      ],
-      "Teachers": [
-      ],
-      "Id": 27144051,
-      "Name": "dsadsadsa",
-      "Surname": "dsadasdasda",
-      "BirthDate": "2022-04-21T17:24:17.1052267+04:00"
+      "Id": 55338521,
+      "Name": "AnaBaci",
+      "Surname": "Anabaci",
+      "BirthDate": "2022-04-21T17:58:09.2678321+04:00"
     }
   ],
   "Teachers": [
     {
-      "License": "adsdad",
+      "License": "sasasasas",
       "Subject": 3,
-      "Salary": 222.0,
+      "Salary": 2222.0,
       "Students": [
       ],
-      "Id": 17890722,
-      "Name": "dasdas",
-      "Surname": "ddadas",
-      "BirthDate": "2022-04-21T17:24:21.9454661+04:00"
+      "Id": 18271578,
+      "Name": "Malis",
+      "Surname": "Malisov",
+      "BirthDate": "2022-04-21T17:48:55.2738343+04:00"
+    },
+    {
+      "License": "DASADSADSSAD",
+      "Subject": 4,
+      "Salary": 333.0,
+      "Students": [
+      ],
+      "Id": 4935966,
+      "Name": "Qanmaz",
+      "Surname": "Qanmazov",
+      "BirthDate": "2022-04-21T17:49:33.1505543+04:00"
+    },
+    {
+      "License": "dsasadads",
+      "Subject": 2,
+      "Salary": 4444.0,
+      "Students": [
+      ],
+      "Id": 99883369,
+      "Name": "xuy",
+      "Surname": "xuyev",
+      "BirthDate": "2022-04-21T17:49:53.7522154+04:00"
     }
   ]
 }

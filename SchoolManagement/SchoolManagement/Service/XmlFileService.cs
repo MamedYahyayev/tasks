@@ -17,8 +17,9 @@ namespace SchoolManagement.Service
     {
         public Storage Load()
         {
-            var filePath = FileHelper.GetStoragePath(FileType.JSON);
+            var filePath = FileHelper.GetStoragePath(FileType.XML);
             Storage storage;
+            object data = null;
 
             if (!File.Exists(filePath))
             {
@@ -27,17 +28,20 @@ namespace SchoolManagement.Service
             }
             else
             {
-                var text = File.ReadAllText(filePath) ?? "";
-                storage = JsonConvert.DeserializeObject<Storage>(text);
+                
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Storage));
 
-                if (storage == null)
+                if (new FileInfo(filePath).Length != 0)
                 {
-                    storage = new Storage();
-                    Save(storage);
+                    using (var reader = new StreamReader(filePath, Encoding.UTF8))
+                    {
+
+                        data = xmlSerializer.Deserialize(reader);
+                    }
                 }
             }
 
-            return storage;
+            return (Storage) data;
         }
 
         public void Save(Storage storage)
@@ -45,9 +49,13 @@ namespace SchoolManagement.Service
             if (storage == null)
                 return;
 
-            var filePath = FileHelper.GetStoragePath(FileType.JSON);
-            var text = JsonConvert.SerializeObject(storage);
-            File.WriteAllText(text, filePath);
+            var filePath = FileHelper.GetStoragePath(FileType.XML);
+            XmlSerializer serializer = new XmlSerializer(typeof(Storage));
+
+            using (var writer = new StreamWriter(filePath))
+            {
+                serializer.Serialize(writer, storage);
+            }
         }
 
         //public void AppendData(Type entity, List<T> data)

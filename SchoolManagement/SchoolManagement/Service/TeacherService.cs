@@ -14,11 +14,15 @@ namespace SchoolManagement.Service
 {
     public class TeacherService : ICrudOperation<Teacher>
     {
+        private readonly StudentService _studentService = new StudentService();
+
         public void Delete(int id)
         {
             var teachers = GetAll();
             var removedTeacher = GetById(id);
             teachers.Remove(removedTeacher);
+
+            _studentService.DeleteTeacherFromStudent(id);
 
             DataService.Instance.Storage.Teachers = teachers.ToArray();
 
