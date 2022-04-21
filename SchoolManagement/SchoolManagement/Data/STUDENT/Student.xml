@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student>
+    <Id>85996927</Id>
+    <Name>Kemale</Name>
+    <Surname>Heyderova</Surname>
+    <BirthDate>2022-04-21T11:59:04.0618501+04:00</BirthDate>
+    <RegisterDate>2022-04-21T11:59:04.0618492+04:00</RegisterDate>
+    <Teachers />
+  </Student>
+  <Student>
+    <Id>98081197</Id>
+    <Name>Zabit</Name>
+    <Surname>Zabitov</Surname>
+    <BirthDate>2022-04-21T11:59:15.6447514+04:00</BirthDate>
+    <RegisterDate>2022-04-21T11:59:15.644751+04:00</RegisterDate>
+    <Teachers />
+  </Student>
+</ArrayOfStudent>

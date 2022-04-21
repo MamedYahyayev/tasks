@@ -19,7 +19,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         public StudentTeachersViewModel()
         {
-            _studentService = new StudentService(new JsonFileService<Student>());
+            _studentService = new StudentService(new GeneralFileService().GetFileService<Student>(App.FILE_SERVICE));
             Students = _studentService.GetAll().Where(s => s.Teachers.Count != 0).ToArray();
         }
 

@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Exceptions;
+﻿using SchoolManagement.Enum;
+using SchoolManagement.Exceptions;
 using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace SchoolManagement
     public partial class App : Application
     {
 
+        public static FileType FILE_SERVICE;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             var fileType = ConfigurationManager.AppSettings.Get("fileType");
@@ -23,6 +26,8 @@ namespace SchoolManagement
 
             var isValid = FileValidator.IsValidFileType(fileType);
             if (!isValid) throw new UnsupportedFileTypeException("Invalid File Type, please use json or xml file type");
+
+            FILE_SERVICE = FileHelper.GetDefaultFileType(fileType);
 
             base.OnStartup(e);
         }

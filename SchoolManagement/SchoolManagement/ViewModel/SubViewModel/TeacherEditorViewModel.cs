@@ -17,7 +17,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         #region Private Properties
 
-        private readonly TeacherService _teacherService = new TeacherService(new JsonFileService<Teacher>());
+        private readonly TeacherService _teacherService = new TeacherService(new GeneralFileService().GetFileService<Teacher>(App.FILE_SERVICE));
 
         #endregion
 
