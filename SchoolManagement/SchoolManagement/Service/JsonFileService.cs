@@ -18,16 +18,21 @@ namespace SchoolManagement.Service
         {
             object serializedData = JsonConvert.SerializeObject(data);
 
-            var filePath = FileValidator.GetOrCreateFile(EntityType.STUDENT, FileType.JSON);
+            var filePath = FileValidator.GetOrCreateFile(entity, FileType.JSON);
             File.WriteAllTextAsync(filePath, serializedData.ToString());
 
         }
 
         public List<T> GetData(Type entity)
         {
-            var filePath = FileValidator.GetOrCreateFile(EntityType.STUDENT, FileType.JSON);
-            string readAllText = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<List<T>>(readAllText);
+            var filePath = FileValidator.GetOrCreateFile(entity, FileType.JSON);
+            string text = "";
+            if (new FileInfo(filePath).Length != 0)
+            {
+                text = File.ReadAllText(filePath);
+            }
+
+            return JsonConvert.DeserializeObject<List<T>>(text);
         }
     }
 }

@@ -28,12 +28,12 @@ namespace SchoolManagement.Utility
             return false;
         }
 
-        public static string GetOrCreateFile(EntityType entityType, FileType fileType)
+        public static string GetOrCreateFile(Type entity, FileType fileType)
         {
-            CheckFileExist(entityType, fileType);
-            var fileName = entityType.ToString() + "." + fileType.ToString().ToLower();
+            CheckFileExist(entity.Name, fileType);
+            var fileName = CreateFileName(entity.Name, fileType.ToString());
 
-            return Path.Combine(DATA_FOLDER_PATH, entityType.ToString(), fileName);
+            return Path.Combine(DATA_FOLDER_PATH, entity.Name, fileName);
         }
 
         private static bool HasBaseDataFolder()
@@ -46,24 +46,29 @@ namespace SchoolManagement.Utility
             Directory.CreateDirectory(path);
         }
 
-        private static void CreateFile(string path, string filename)
+        private static void CreateFile(string path)
         {
-            File.Create(Path.Combine(path, filename));
+            File.Create(path);
         }
 
-        private static void CheckFileExist(EntityType entity, FileType fileType)
+        private static void CheckFileExist(string entityName, FileType fileType)
         {
             var hasDataFolder = HasBaseDataFolder();
             if (!hasDataFolder) CreateFolder(DATA_FOLDER_PATH);
 
-            var entityFolderName = entity.ToString();
-            var entityFolderPath = Path.Combine(DATA_FOLDER_PATH, entityFolderName);
+            var folderPath = Path.Combine(DATA_FOLDER_PATH, entityName);
+            var filePath = Path.Combine(folderPath, CreateFileName(entityName, fileType.ToString()));
 
-            if (!Directory.Exists(entityFolderPath))
-            {
-                CreateFolder(entityFolderPath);
-                CreateFile(entityFolderPath, entity.ToString() + "." + fileType.ToString().ToLower());
-            }
+            if (!Directory.Exists(folderPath))
+                CreateFolder(folderPath);
+
+            if(!File.Exists(filePath))
+                CreateFile(filePath);
+        }
+
+        private static string CreateFileName(string fileName, string fileExtension)
+        {
+            return fileName + "." + fileExtension.ToLower();
         }
 
 

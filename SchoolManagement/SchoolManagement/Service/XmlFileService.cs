@@ -14,9 +14,9 @@ namespace SchoolManagement.Service
     public class XmlFileService<T> : IFileService<T>
     {
 
-        public void AppendData(Type dataType, List<T> data)
+        public void AppendData(Type entity, List<T> data)
         {
-            var filePath = FileValidator.GetOrCreateFile(EntityType.STUDENT, FileType.XML);
+            var filePath = FileValidator.GetOrCreateFile(entity, FileType.XML);
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
 
@@ -29,13 +29,16 @@ namespace SchoolManagement.Service
 
         public List<T> GetData(Type entity)
         {
-            var filePath = FileValidator.GetOrCreateFile(EntityType.STUDENT, FileType.XML);
+            var filePath = FileValidator.GetOrCreateFile(entity, FileType.XML);
             object data = null;
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));
-            using (var reader = new StreamReader(filePath))
+            using (var reader = new StreamReader(filePath, Encoding.UTF8))
             {
-                data = xmlSerializer.Deserialize(reader);
+                if(new FileInfo(filePath).Length != 0)
+                {
+                    data = xmlSerializer.Deserialize(reader);
+                }
             }
 
             return (List<T>)data;
