@@ -33,10 +33,12 @@ namespace SchoolManagement.Service
             object data = null;
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));
-            using (var reader = new StreamReader(filePath, Encoding.UTF8))
+            
+            if (new FileInfo(filePath).Length != 0)
             {
-                if(new FileInfo(filePath).Length != 0)
+                using (var reader = new StreamReader(filePath, Encoding.UTF8))
                 {
+
                     data = xmlSerializer.Deserialize(reader);
                 }
             }

@@ -22,14 +22,13 @@ namespace SchoolManagement.Service
             _studentService = new StudentService(new GeneralFileService().GetFileService<Student>(App.FILE_SERVICE));
             _fileService = fileService;
         }
-        // TODO: Change finded to new List in Delete method inside student Service
+
         public void Delete(int id)
         {
             var teachers = GetAll();
 
             var newTeachers = teachers.Where(teacher => teacher.Id != id).ToList();
 
-            // delete teacher from students file
             _studentService.DeleteTeacherFromStudent(id);
 
             _fileService.AppendData(typeof(Teacher), newTeachers);
