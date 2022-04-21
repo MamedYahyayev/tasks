@@ -20,7 +20,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         public TeacherViewModel()
         {
-            _teacherService = new TeacherService();
+            _teacherService = new TeacherService(new JsonFileService<Teacher>());
             Teachers = _teacherService.GetAll().ToArray();
             CurrentTeacher = new Teacher();
         }

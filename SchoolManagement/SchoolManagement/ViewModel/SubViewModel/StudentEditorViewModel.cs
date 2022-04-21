@@ -18,7 +18,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private readonly StudentService _studentService = new StudentService(new XmlFileService<Student>());
+        private readonly StudentService _studentService = new StudentService(new JsonFileService<Student>());
 
         private TeacherService _teacherService;
 
@@ -82,7 +82,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         private void LoadAllTeachers()
         {
-            _teacherService = new TeacherService();
+            _teacherService = new TeacherService(new JsonFileService<Teacher>());
             var teachers = _teacherService.GetAll();
             AllTeachers = teachers.ToArray();
         }

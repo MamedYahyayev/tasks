@@ -73,7 +73,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn 
-                            Header="#" Width="30"
+                            Header="#" Width="70"
                             DisplayMemberBinding="{Binding Id}"
                                         />
                         <GridViewColumn 

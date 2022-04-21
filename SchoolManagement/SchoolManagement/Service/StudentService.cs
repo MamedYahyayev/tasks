@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
+    // TODO: Call GetById() method inside of delete method( same as TeacherService)
     public class StudentService : ICrudOperation<Student>
     {
         private readonly IFileService<Student> _fileService;
@@ -27,15 +28,15 @@ namespace SchoolManagement.Service
         {
             var students = GetAll();
 
-            var newStudents = students.Where(student => student.Id != id).ToList();
+            var findedStudent = students.Where(student => student.Id != id).ToList();
 
-            _fileService.AppendData(typeof(Student), newStudents);
+            _fileService.AppendData(typeof(Student), findedStudent);
         }
 
         public List<Student> GetAll()
         {
             var students =  _fileService.GetData(typeof(Student));
-            return students;
+            return students ?? new List<Student>();
         }
 
         public Student GetById(int id)
@@ -63,7 +64,7 @@ namespace SchoolManagement.Service
 
         public void Update(Student student)
         {
-            var students = _fileService.GetData(typeof(List<Student>));
+            var students = _fileService.GetData(typeof(Student));
 
             if (students == null) students = new List<Student>();
 

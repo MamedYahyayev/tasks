@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Model
 {
+    [Serializable]
     public class Teacher : Person
     {
         public string License { get; set; }
