@@ -1,4 +1,6 @@
-﻿using SchoolManagement.Enum;
+﻿using Newtonsoft.Json;
+using SchoolManagement.Enum;
+using SchoolManagement.Model.Entity;
 using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
@@ -11,39 +13,73 @@ using System.Xml.Serialization;
 
 namespace SchoolManagement.Service
 {
-    public class XmlFileService<T> : IFileService<T>
+    public class XmlFileService : IFileService
     {
-
-        public void AppendData(Type entity, List<T> data)
+        public Storage Load()
         {
-            var filePath = FileHelper.GetOrCreateFile(entity, FileType.XML);
+            var filePath = FileHelper.GetStoragePath(FileType.JSON);
+            Storage storage;
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
-
-            using (var writer = new StreamWriter(filePath))
+            if (!File.Exists(filePath))
             {
-                serializer.Serialize(writer, data);
+                storage = new Storage();
+                Save(storage);
             }
-
-        }
-
-        public List<T> GetData(Type entity)
-        {
-            var filePath = FileHelper.GetOrCreateFile(entity, FileType.XML);
-            object data = null;
-
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));
-            
-            if (new FileInfo(filePath).Length != 0)
+            else
             {
-                using (var reader = new StreamReader(filePath, Encoding.UTF8))
-                {
+                var text = File.ReadAllText(filePath) ?? "";
+                storage = JsonConvert.DeserializeObject<Storage>(text);
 
-                    data = xmlSerializer.Deserialize(reader);
+                if (storage == null)
+                {
+                    storage = new Storage();
+                    Save(storage);
                 }
             }
 
-            return (List<T>)data;
+            return storage;
         }
+
+        public void Save(Storage storage)
+        {
+            if (storage == null)
+                return;
+
+            var filePath = FileHelper.GetStoragePath(FileType.JSON);
+            var text = JsonConvert.SerializeObject(storage);
+            File.WriteAllText(text, filePath);
+        }
+
+        //public void AppendData(Type entity, List<T> data)
+        //{
+        //    var filePath = FileHelper.GetOrCreateFile(entity, FileType.XML);
+
+        //    XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
+
+        //    using (var writer = new StreamWriter(filePath))
+        //    {
+        //        serializer.Serialize(writer, data);
+        //    }
+
+        //}
+
+        //public List<T> GetData(Type entity)
+        //{
+        //    var filePath = FileHelper.GetOrCreateFile(entity, FileType.XML);
+        //    object data = null;
+
+        //    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));
+            
+        //    if (new FileInfo(filePath).Length != 0)
+        //    {
+        //        using (var reader = new StreamReader(filePath, Encoding.UTF8))
+        //        {
+
+        //            data = xmlSerializer.Deserialize(reader);
+        //        }
+        //    }
+
+        //    return (List<T>)data;
+        //}
     }
 }

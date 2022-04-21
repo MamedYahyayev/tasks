@@ -14,84 +14,71 @@ namespace SchoolManagement.Service
 {
     public class TeacherService : ICrudOperation<Teacher>
     {
-        private readonly IFileService<Teacher> _fileService;
-        private readonly StudentService _studentService;
-
-        public TeacherService(IFileService<Teacher> fileService)
-        {
-            _studentService = new StudentService(new GeneralFileService().GetFileService<Student>(App.FILE_SERVICE));
-            _fileService = fileService;
-        }
-
         public void Delete(int id)
         {
             var teachers = GetAll();
+            var removedTeacher = GetById(id);
+            teachers.Remove(removedTeacher);
 
-            var newTeachers = teachers.Where(teacher => teacher.Id != id).ToList();
+            DataService.Instance.Storage.Teachers = teachers.ToArray();
 
-            _studentService.DeleteTeacherFromStudent(id);
-
-            _fileService.AppendData(typeof(Teacher), newTeachers);
+            DataService.Instance.SetModified();
         }
 
         public List<Teacher> GetAll()
         {
-            var teachers = _fileService.GetData(typeof(Teacher));
+            var teachers = DataService.Instance.Storage.Teachers.ToList();
             return teachers ?? new List<Teacher>();
         }
 
         public Teacher GetById(int id)
         {
-            var teachers = GetAll();
-            var teacher = teachers.FirstOrDefault(teacher => teacher.Id == id);
 
-            if (teacher == null) throw new ItemNotFoundException("Teacher with id " + id + " not found!");
+            var teacher = DataService.Instance.Storage.Teachers.FirstOrDefault(x => x.Id == id);
+            if (teacher == null) throw new ItemNotFoundException("Teacher with id: " + id + " not found!");
 
             return teacher;
         }
 
         public void Insert(Teacher teacher)
         {
-            var teachers = _fileService.GetData(typeof(Teacher));
-
-            if (teachers == null) teachers = new List<Teacher>();
-
             teacher.Id = Generator.GenerateId();
-            teachers.Add(teacher);
 
-            _fileService.AppendData(typeof(Teacher), teachers);
+            var teachers = DataService.Instance.Storage.Teachers;
+
+            var teacherList = teachers.ToList();
+
+            teacherList.Add(teacher);
+
+            DataService.Instance.Storage.Teachers = teacherList.ToArray();
+
+            DataService.Instance.SetModified();
         }
 
 
         public void Update(Teacher teacher)
         {
-            var teachers = _fileService.GetData(typeof(Teacher));
+            var existingTeacher = GetById((int)teacher.Id);
 
-            if (teachers == null) teachers = new List<Teacher>();
+            existingTeacher.Name = teacher.Name;
+            existingTeacher.Surname = teacher.Surname;
+            existingTeacher.BirthDate = teacher.BirthDate;
+            existingTeacher.License = teacher.License;
+            existingTeacher.Subject = teacher.Subject;
+            existingTeacher.Salary = teacher.Salary;
 
-            var existingTeacher = teachers.FirstOrDefault(t => t.Id == teacher.Id);
-            if (existingTeacher != null)
-            {
-                existingTeacher.Name = teacher.Name;
-                existingTeacher.Surname = teacher.Surname;
-                existingTeacher.BirthDate = teacher.BirthDate;
-                existingTeacher.License = teacher.License;
-                existingTeacher.Students = teacher.Students;
-                existingTeacher.Salary = teacher.Salary;
-                existingTeacher.Subject = teacher.Subject;
-
-            }
-
-            _fileService.AppendData(typeof(Teacher), teachers);
+            DataService.Instance.SetModified();
         }
 
         public IList<Teacher> Search(string keyword)
         {
-
             var teachers = GetAll().AsEnumerable()
-                                               .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
-                                                           s.Surname.EqualsIgnoreCase(keyword))
-                                               .ToList();
+                                              .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
+                                                          s.Surname.EqualsIgnoreCase(keyword))
+                                              .ToList(); ;
+
+
+
             return teachers;
         }
     }

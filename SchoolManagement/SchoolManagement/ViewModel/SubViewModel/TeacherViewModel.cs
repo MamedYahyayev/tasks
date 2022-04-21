@@ -20,7 +20,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         public TeacherViewModel()
         {
-            _teacherService = new TeacherService(new GeneralFileService().GetFileService<Teacher>(App.FILE_SERVICE));
+            _teacherService = new TeacherService();
             Teachers = _teacherService.GetAll().ToArray();
             CurrentTeacher = new Teacher();
         }

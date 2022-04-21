@@ -1,0 +1,50 @@
+{
+  "Students": [
+    {
+      "RegisterDate": "2022-04-21T17:24:11.0470566+04:00",
+      "TeacherIds": [
+      ],
+      "Teachers": [
+      ],
+      "Id": 98836753,
+      "Name": "dsad",
+      "Surname": "adasdas",
+      "BirthDate": "2022-04-21T17:24:11.0470604+04:00"
+    },
+    {
+      "RegisterDate": "2022-04-21T17:24:14.2154385+04:00",
+      "TeacherIds": [
+      ],
+      "Teachers": [
+      ],
+      "Id": 45759371,
+      "Name": "dsadasd",
+      "Surname": "sadsadas",
+      "BirthDate": "2022-04-21T17:24:14.2154411+04:00"
+    },
+    {
+      "RegisterDate": "2022-04-21T17:24:17.105225+04:00",
+      "TeacherIds": [
+      ],
+      "Teachers": [
+      ],
+      "Id": 27144051,
+      "Name": "dsadsadsa",
+      "Surname": "dsadasdasda",
+      "BirthDate": "2022-04-21T17:24:17.1052267+04:00"
+    }
+  ],
+  "Teachers": [
+    {
+      "License": "adsdad",
+      "Subject": 3,
+      "Salary": 222.0,
+      "Students": [
+      ],
+      "Id": 17890722,
+      "Name": "dasdas",
+      "Surname": "ddadas",
+      "BirthDate": "2022-04-21T17:24:21.9454661+04:00"
+    }
+  ]
+}

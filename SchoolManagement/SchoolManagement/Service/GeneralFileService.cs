@@ -9,14 +9,14 @@ namespace SchoolManagement.Service
 {
     public class GeneralFileService
     {
-        public IFileService<T> GetFileService<T>(FileType fileServiceType)
+        public IFileService GetFileService(FileType fileServiceType)
         {
-            switch(fileServiceType)
+            switch (fileServiceType)
             {
                 case FileType.JSON:
-                    return new JsonFileService<T>();
+                    return new JsonFileService();
                 case FileType.XML:
-                    return new XmlFileService<T>();
+                    return new XmlFileService();
             }
 
             return null;

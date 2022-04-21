@@ -11,6 +11,7 @@ namespace SchoolManagement.Model
     public class Student : Person
     {
         public DateTime? RegisterDate { get; set; }  = DateTime.Now;
+        public int[] TeacherIds { get; set; } = new int[0];  
         public virtual List<Teacher> Teachers { get; set; } = new List<Teacher>();
     }
 }

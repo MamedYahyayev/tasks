@@ -1,38 +1,48 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SchoolManagement.Enum;
-using SchoolManagement.Model;
+using SchoolManagement.Model.Entity;
 using SchoolManagement.Utility;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
-    public class JsonFileService<T> : IFileService<T>
+    public class JsonFileService : IFileService
     {
-        public void AppendData(Type entity, List<T> data)
+        public Storage Load()
         {
-            object serializedData = JsonConvert.SerializeObject(data);
+            var filePath = FileHelper.GetStoragePath(FileType.JSON);
+            Storage storage;
 
-            var filePath = FileHelper.GetOrCreateFile(entity, FileType.JSON);
-            File.WriteAllTextAsync(filePath, serializedData.ToString());
-
-        }
-
-        public List<T> GetData(Type entity)
-        {
-            var filePath = FileHelper.GetOrCreateFile(entity, FileType.JSON);
-            string text = "";
-            if (new FileInfo(filePath).Length != 0)
+            if (!File.Exists(filePath))
             {
-                text = File.ReadAllText(filePath);
+                storage = new Storage();
+                Save(storage);
+            }
+            else
+            {
+                if (new FileInfo(filePath).Length == 0) return new Storage();
+
+                var text = File.ReadAllText(filePath) ?? "";
+                storage = JsonConvert.DeserializeObject<Storage>(text);
+
+                if (storage == null)
+                {
+                    storage = new Storage();
+                    Save(storage);
+                }
             }
 
-            return JsonConvert.DeserializeObject<List<T>>(text);
+            return storage;
+        }
+
+        public void Save(Storage storage)
+        {
+            if (storage == null)
+                return;
+
+            var filePath = FileHelper.GetStoragePath(FileType.JSON);
+            var text = JsonConvert.SerializeObject(storage);
+            File.WriteAllText(filePath, text);
         }
     }
 }

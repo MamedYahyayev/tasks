@@ -13,6 +13,13 @@ namespace SchoolManagement.Utility
     {
         private static string DATA_FOLDER_PATH = ConfigurationManager.AppSettings.Get("dataPath");
 
+        public static string GetStoragePath(FileType fileType)
+        {
+            var path = Path.Combine(DATA_FOLDER_PATH, "storage." + fileType.ToString().ToLowerInvariant());
+            CreateFile(path);
+            return path;
+        }
+
         public static FileType GetDefaultFileType(string fileType)
         {
             if (fileType.ToLower() == "xml") return FileType.XML;
