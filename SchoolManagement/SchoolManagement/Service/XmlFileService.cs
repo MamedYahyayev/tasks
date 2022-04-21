@@ -16,7 +16,7 @@ namespace SchoolManagement.Service
 
         public void AppendData(Type entity, List<T> data)
         {
-            var filePath = FileValidator.GetOrCreateFile(entity, FileType.XML);
+            var filePath = FileHelper.GetOrCreateFile(entity, FileType.XML);
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
 
@@ -29,7 +29,7 @@ namespace SchoolManagement.Service
 
         public List<T> GetData(Type entity)
         {
-            var filePath = FileValidator.GetOrCreateFile(entity, FileType.XML);
+            var filePath = FileHelper.GetOrCreateFile(entity, FileType.XML);
             object data = null;
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<T>));

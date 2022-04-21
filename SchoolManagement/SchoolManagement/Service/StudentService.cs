@@ -4,6 +4,7 @@ using SchoolManagement.Config;
 using SchoolManagement.Enum;
 using SchoolManagement.Exceptions;
 using SchoolManagement.Model;
+using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
-    // TODO: Call GetById() method inside of delete method( same as TeacherService)
     public class StudentService : ICrudOperation<Student>
     {
         private readonly IFileService<Student> _fileService;
@@ -55,7 +55,7 @@ namespace SchoolManagement.Service
 
             if (students == null) students = new List<Student>();
 
-            student.Id = GenerateRandomId();
+            student.Id = Generator.GenerateId();
             students.Add(student);
 
             _fileService.AppendData(typeof(Student), students);
@@ -76,7 +76,6 @@ namespace SchoolManagement.Service
                 existingStudent.BirthDate = student.BirthDate;
                 existingStudent.RegisterDate = student.RegisterDate;
                 existingStudent.Teachers = student.Teachers;
-
             }
 
             _fileService.AppendData(typeof(Student), students);
@@ -91,11 +90,20 @@ namespace SchoolManagement.Service
             return students;
         }
 
-        #region Helper Functions
+        public void DeleteTeacherFromStudent(int teacherId)
+        {
+            var students = GetAll();
 
-        private int GenerateRandomId() => new Random().Next(1, 100_000_000);
+            foreach (var student in students)
+            {
+                for (var i = 0; i < student.Teachers.Count; i++)
+                {
+                    if(student.Teachers[i].Id == teacherId)
+                        student.Teachers.RemoveAt(i);
+                }
+            }
 
-        #endregion
-
+            _fileService.AppendData(typeof(Student), students);
+        }
     }
 }

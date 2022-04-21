@@ -1,6 +1,7 @@
 ﻿using SchoolManagement.Config;
 using SchoolManagement.Exceptions;
 using SchoolManagement.Model;
+using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,23 +12,27 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
-    // TODO: Create a new helper method for generating id move GenerateRandomId to a static method and call it meaningfully
     public class TeacherService : ICrudOperation<Teacher>
     {
         private readonly IFileService<Teacher> _fileService;
+        private readonly StudentService _studentService;
 
         public TeacherService(IFileService<Teacher> fileService)
         {
+            _studentService = new StudentService(new GeneralFileService().GetFileService<Student>(App.FILE_SERVICE));
             _fileService = fileService;
         }
-
+        // TODO: Change finded to new List in Delete method inside student Service
         public void Delete(int id)
         {
             var teachers = GetAll();
 
-            var findedTeacher = teachers.Where(teacher => teacher.Id != id).ToList();
+            var newTeachers = teachers.Where(teacher => teacher.Id != id).ToList();
 
-            _fileService.AppendData(typeof(Teacher), findedTeacher);
+            // delete teacher from students file
+            _studentService.DeleteTeacherFromStudent(id);
+
+            _fileService.AppendData(typeof(Teacher), newTeachers);
         }
 
         public List<Teacher> GetAll()
@@ -52,7 +57,7 @@ namespace SchoolManagement.Service
 
             if (teachers == null) teachers = new List<Teacher>();
 
-            teacher.Id = GenerateRandomId();
+            teacher.Id = Generator.GenerateId();
             teachers.Add(teacher);
 
             _fileService.AppendData(typeof(Teacher), teachers);
@@ -90,14 +95,5 @@ namespace SchoolManagement.Service
                                                .ToList();
             return teachers;
         }
-
-
-        #region Helper Functions
-
-        private int GenerateRandomId() => new Random().Next(1, 100_000_000);
-
-        #endregion
-
-
     }
 }

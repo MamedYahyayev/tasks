@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
-    // TODO: Replace EntityType parameters with base Parameter
     public interface IFileService<T>
     {
         List<T> GetData(Type entity);
