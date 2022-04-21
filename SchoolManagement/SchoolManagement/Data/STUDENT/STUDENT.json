@@ -1,1 +1,22 @@
-[{"RegisterDate":"2022-04-21T12:00:30.4044054+04:00","Teachers":[],"Id":65820860,"Name":"json","Surname":"JSON","BirthDate":"2022-04-21T12:00:30.4044064+04:00"}]
+[
+  {
+    "RegisterDate": "2022-04-21T12:40:14.7148187+04:00",
+    "Teachers": [
+      {
+        "License": "a",
+        "Subject": 0,
+        "Salary": 2.0,
+        "Students": [
+        ],
+        "Id": 47861037,
+        "Name": "a",
+        "Surname": "a",
+        "BirthDate": "2022-04-21T12:48:58.7221639+04:00"
+      }
+    ],
+    "Id": 9731014,
+    "Name": "Kamal",
+    "Surname": "Qasimov",
+    "BirthDate": "2022-04-21T12:40:14.7148197+04:00"
+  }
+]

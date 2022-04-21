@@ -12,10 +12,5 @@ namespace SchoolManagement.Model
     {
         public DateTime? RegisterDate { get; set; }  = DateTime.Now;
         public virtual List<Teacher> Teachers { get; set; } = new List<Teacher>();
-
-        public Student()
-        {
-
-        }
     }
 }

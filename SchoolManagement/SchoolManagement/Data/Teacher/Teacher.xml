@@ -20,14 +20,4 @@
     <Salary>450</Salary>
     <Students />
   </Teacher>
-  <Teacher>
-    <Id>41322692</Id>
-    <Name>xml</Name>
-    <Surname>dsada</Surname>
-    <BirthDate>2022-04-21T12:01:39.1808641+04:00</BirthDate>
-    <License>dasdsad</License>
-    <Subject>PHYSICS</Subject>
-    <Salary>2424</Salary>
-    <Students />
-  </Teacher>
 </ArrayOfTeacher>

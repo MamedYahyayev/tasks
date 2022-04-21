@@ -91,9 +91,11 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             var student = _studentService.GetById((int)id);
             Student = student;
-            // TODO:  check student teachers is null or not
-            //SelectedTeachers = student.Teachers.ToArray();
-            //_selectedTeacherList = student.Teachers.ToList();
+            if(student.Teachers != null)
+            {
+                SelectedTeachers = student.Teachers.ToArray();
+                _selectedTeacherList = student.Teachers.ToList();
+            }
         }
 
         private void Save(int? id)
@@ -108,7 +110,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             if (!IsDataValid()) return;
 
-            //Student.Teachers = _selectedTeachers;
+            Student.Teachers = _selectedTeachers.ToList();
             _studentService.Update(student);
             CancelOperation();
         }
@@ -117,7 +119,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             if (!IsDataValid()) return;
 
-            //Student.Teachers = _selectedTeachers;
+            Student.Teachers = _selectedTeachers.ToList();
             _studentService.Insert(Student);
             CancelOperation();
         }
