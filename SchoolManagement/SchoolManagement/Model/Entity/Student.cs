@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,10 @@ namespace SchoolManagement.Model
     public class Student : Person
     {
         public DateTime? RegisterDate { get; set; }  = DateTime.Now;
-        public int[] TeacherIds { get; set; } = new int[0];  
+        public int[] TeacherIds { get; set; } = new int[0];
+
+        [XmlIgnore]
+        [JsonIgnore]
         public virtual List<Teacher> Teachers { get; set; } = new List<Teacher>();
     }
 }

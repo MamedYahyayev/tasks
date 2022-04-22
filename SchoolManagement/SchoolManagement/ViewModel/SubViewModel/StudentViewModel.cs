@@ -22,7 +22,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             _teacherViewModel = new TeacherViewModel();
             CurrentStudent = new Student();
-            Students = _studentService.GetAll().ToArray();
+            Students = _studentService.GetAll(false).ToArray();
         }
 
         #region Public Properties
@@ -75,34 +75,34 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         public void Delete()
         {
-            if (CurrentStudent.Id != null)
+            if (CurrentStudent.Id != 0)
             {
                 _studentService.Delete((int)CurrentStudent.Id);
-                Students = _studentService.GetAll().ToArray();
+                Students = _studentService.GetAll(false).ToArray();
                 ClosePopup();
             }
         }
 
         public void Search()
         {
-            Students = _studentService.Search(SearchInput).ToArray();
+            Students = _studentService.Search(SearchInput, false).ToArray();
         }
 
         public void Insert()
         {
-            MainViewModel.Instance.SetCurrentViewModel(new StudentEditorViewModel(null));
+            MainViewModel.Instance.SetCurrentViewModel(new StudentEditorViewModel(0));
         }
 
         public void Update()
         {
-            if (CurrentStudent.Id != null)
+            if (CurrentStudent.Id != 0)
                 MainViewModel.Instance.SetCurrentViewModel(new StudentEditorViewModel(CurrentStudent.Id));
         }
 
 
         private void OpenPopup()
         {
-            if (CurrentStudent.Id == null) return;
+            if (CurrentStudent.Id == 0) return;
 
             IsPopupOpen = true;
             PopupMessage = "Are you sure to delete this student?";

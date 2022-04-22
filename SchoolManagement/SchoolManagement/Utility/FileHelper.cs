@@ -1,4 +1,5 @@
 ﻿using SchoolManagement.Enum;
+using System;
 using System.Configuration;
 using System.IO;
 
@@ -6,7 +7,7 @@ namespace SchoolManagement.Utility
 {
     public class FileHelper
     {
-        private static string DATA_FOLDER_PATH = ConfigurationManager.AppSettings.Get("dataPath");
+        private static string DATA_FOLDER_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Data";
 
         public static string GetOrCreateFile(FileType fileType)
         {
@@ -28,8 +29,16 @@ namespace SchoolManagement.Utility
 
         private static void CreateFile(string path)
         {
+            CreateFolder(DATA_FOLDER_PATH);
+
             if (!File.Exists(path))
                 File.Create(path);
+        }
+
+        private static void CreateFolder(string folderPath)
+        {
+            if(!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
         }
 
         private static string CreateFileName(string fileName, string fileExtension)

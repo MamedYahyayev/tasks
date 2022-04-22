@@ -14,8 +14,8 @@ namespace SchoolManagement.Service
 
         public void Delete(int id)
         {
-            var teachers = GetAll();
-            var removedTeacher = GetById(id);
+            var teachers = GetAll(false);
+            var removedTeacher = GetById(id, false);
             teachers.Remove(removedTeacher);
 
             _studentService.DeleteTeacherFromStudent(id);
@@ -25,40 +25,39 @@ namespace SchoolManagement.Service
             DataService.Instance.SetModified();
         }
 
-        public List<Teacher> GetAll()
+        public List<Teacher> GetAll(bool includeAllFields)
         {
             var teachers = DataService.Instance.Storage.Teachers.ToList();
+            
+            if (includeAllFields)
+                teachers.ForEach(teacher => LoadAllFields(teacher));
+
             return teachers ?? new List<Teacher>();
         }
 
-        public Teacher GetById(int id)
+        public Teacher GetById(int id, bool includeAllFields)
         {
 
             var teacher = DataService.Instance.Storage.Teachers.FirstOrDefault(x => x.Id == id);
             if (teacher == null) throw new ItemNotFoundException("Teacher with id: " + id + " not found!");
+
+            if (includeAllFields)
+                LoadAllFields(teacher);
 
             return teacher;
         }
 
         public void Insert(Teacher teacher)
         {
-            teacher.Id = Generator.GenerateId();
-
-            var teachers = DataService.Instance.Storage.Teachers;
-
-            var teacherList = teachers.ToList();
-
-            teacherList.Add(teacher);
-
-            DataService.Instance.Storage.Teachers = teacherList.ToArray();
-
+            teacher.Id = GetNextId();
+            DataService.Instance.Storage.Teachers.Concat(new[] { teacher }).ToArray();
             DataService.Instance.SetModified();
         }
 
 
         public void Update(Teacher teacher)
         {
-            var existingTeacher = GetById((int)teacher.Id);
+            var existingTeacher = GetById((int)teacher.Id, false);
 
             existingTeacher.Name = teacher.Name;
             existingTeacher.Surname = teacher.Surname;
@@ -70,16 +69,47 @@ namespace SchoolManagement.Service
             DataService.Instance.SetModified();
         }
 
-        public IList<Teacher> Search(string keyword)
+        public IList<Teacher> Search(string keyword, bool includeAllFields)
         {
-            var teachers = GetAll().AsEnumerable()
+            var teachers = GetAll(includeAllFields).AsEnumerable()
                                               .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
                                                           s.Surname.EqualsIgnoreCase(keyword))
                                               .ToList(); ;
 
-
-
             return teachers;
         }
+
+        private int GetNextId()
+        {
+            return DataService.Instance.Storage.Teachers.Count() + 1;
+        }
+
+        #region Helper Functions
+
+        private void LoadAllFields(Teacher teacher)
+        {
+            if (teacher == null)
+                return;
+
+            var teachersStudents = new List<Student>();
+            
+            var students = _studentService.GetAll(false);
+
+            foreach(var student in students)
+            {
+                foreach (var teacherId in student.TeacherIds)
+                {
+                    if(teacher.Id == teacherId)
+                        teachersStudents.Add(student);
+                }
+            }
+
+            teacher.Students = teachersStudents;
+        }
+
+        #endregion
+
+
+        
     }
 }

@@ -8,7 +8,7 @@
         xmlns:view="clr-namespace:SchoolManagement.View"
         xmlns:enum="clr-namespace:SchoolManagement.Enum;assembly=SchoolManagement"  
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="900"
+        Title="MainWindow" Height="650" Width="1100"
         >
 
     <Window.DataContext>

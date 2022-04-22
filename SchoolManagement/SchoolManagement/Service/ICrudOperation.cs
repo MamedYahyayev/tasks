@@ -8,9 +8,9 @@ namespace SchoolManagement.Service
 {
     public interface ICrudOperation<T>
     {
-        List<T> GetAll();
+        List<T> GetAll(bool includeAllFields);
 
-        T GetById(int id);
+        T GetById(int id, bool includeAllFields);
 
         void Insert(T entity);
 
@@ -18,6 +18,6 @@ namespace SchoolManagement.Service
 
         void Delete(int id);
 
-        IList<T> Search(string keyword);
+        IList<T> Search(string keyword, bool includeAllFields);
     }
 }

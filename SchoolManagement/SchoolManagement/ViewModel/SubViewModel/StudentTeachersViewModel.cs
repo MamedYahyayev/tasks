@@ -20,7 +20,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         public StudentTeachersViewModel()
         {
             _studentService = new StudentService();
-            Students = _studentService.GetAll().Where(s => s.Teachers.Count != 0).ToArray();
+            Students = _studentService.GetAll(true).Where(s => s.Teachers.Count != 0).ToArray();
         }
 
 
