@@ -1,21 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using SchoolManagement.Config;
-using SchoolManagement.Enum;
-using SchoolManagement.Exceptions;
+﻿using SchoolManagement.Exceptions;
 using SchoolManagement.Model;
 using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
-    // TODO: create new method for duplicate codes
     public class StudentService : ICrudOperation<Student>
     {
         public void Delete(int id)
@@ -25,7 +17,6 @@ namespace SchoolManagement.Service
             students.Remove(removedStudent);
 
             DataService.Instance.Storage.Students = students.ToArray();
-
             DataService.Instance.SetModified();
         }
 
@@ -63,17 +54,10 @@ namespace SchoolManagement.Service
 
             studentList.Add(student);
 
-            var teacherIdList = new List<int>();
-            foreach (var teacher in student.Teachers)
-            {
-                teacherIdList.Add((int)teacher.Id);
-            }
-
-            student.TeacherIds = teacherIdList.ToArray();
+            student.TeacherIds = AddTeacherIdsToStudent(student);
             student.Teachers = new List<Teacher>();
 
             DataService.Instance.Storage.Students = studentList.ToArray();
-
             DataService.Instance.SetModified();
         }
 
@@ -88,19 +72,10 @@ namespace SchoolManagement.Service
             existingStudent.Surname = student.Surname;
             existingStudent.BirthDate = student.BirthDate;
             existingStudent.RegisterDate = student.RegisterDate;
-            existingStudent.Teachers = student.Teachers;
-
-            var teacherIdList = new List<int>();
-            foreach (var teacher in student.Teachers)
-            {
-                teacherIdList.Add((int)teacher.Id);
-            }
-
-            existingStudent.TeacherIds = teacherIdList.ToArray();
+            existingStudent.TeacherIds = AddTeacherIdsToStudent(student);
             existingStudent.Teachers = new List<Teacher>();
 
             DataService.Instance.Storage.Students = students.ToArray();
-
             DataService.Instance.SetModified();
         }
 
@@ -121,15 +96,28 @@ namespace SchoolManagement.Service
             foreach (var student in students)
             {
                 var teacherIds = student.TeacherIds;
-
                 teacherIds = teacherIds.Where(x => x != teacherId).ToArray();
-
                 student.TeacherIds = teacherIds;
             }
 
             DataService.Instance.Storage.Students = students.ToArray();
-
             DataService.Instance.SetModified();
         }
+
+        #region Helper Functions
+
+        private int[] AddTeacherIdsToStudent(Student student)
+        {
+            var teacherIdList = new List<int>();
+            foreach (var teacher in student.Teachers)
+            {
+                teacherIdList.Add((int)teacher.Id);
+            }
+
+            return teacherIdList.ToArray();
+        }
+
+        #endregion
+
     }
 }

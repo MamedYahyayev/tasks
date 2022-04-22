@@ -10,7 +10,7 @@ namespace SchoolManagement.Service
     {
         public Storage Load()
         {
-            var filePath = FileHelper.GetStoragePath(FileType.JSON);
+            var filePath = FileHelper.GetOrCreateFile(FileType.JSON);
             Storage storage;
 
             if (!File.Exists(filePath))
@@ -40,7 +40,7 @@ namespace SchoolManagement.Service
             if (storage == null)
                 return;
 
-            var filePath = FileHelper.GetStoragePath(FileType.JSON);
+            var filePath = FileHelper.GetOrCreateFile(FileType.JSON);
             var text = JsonConvert.SerializeObject(storage);
             File.WriteAllText(filePath, text);
         }

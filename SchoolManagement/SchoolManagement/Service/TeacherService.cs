@@ -1,14 +1,10 @@
-﻿using SchoolManagement.Config;
-using SchoolManagement.Exceptions;
+﻿using SchoolManagement.Exceptions;
 using SchoolManagement.Model;
 using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
