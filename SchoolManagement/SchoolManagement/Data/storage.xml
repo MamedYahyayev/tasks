@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Storage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Students>
+    <Student>
+      <Id>1</Id>
+      <Name>Malik</Name>
+      <Surname>Qasimov</Surname>
+      <BirthDate>1989-09-01T00:00:00</BirthDate>
+      <RegisterDate>2021-11-15T00:00:00</RegisterDate>
+      <TeacherIds>
+        <int>1</int>
+      </TeacherIds>
+    </Student>
+    <Student>
+      <Id>2</Id>
+      <Name>a</Name>
+      <Surname>a</Surname>
+      <BirthDate>2022-04-22T12:22:10.2151765+04:00</BirthDate>
+      <RegisterDate>2022-04-22T12:22:10.2151736+04:00</RegisterDate>
+      <TeacherIds>
+        <int>1</int>
+      </TeacherIds>
+    </Student>
+  </Students>
+  <Teachers>
+    <Teacher>
+      <Id>1</Id>
+      <Name>Camal</Name>
+      <Surname>Heyderli</Surname>
+      <BirthDate>2022-04-22T12:19:11.2236303+04:00</BirthDate>
+      <License>DSADSADASDA</License>
+      <Subject>INFORMATION_TECHNOLOGY</Subject>
+      <Salary>450</Salary>
+    </Teacher>
+  </Teachers>
+</Storage>

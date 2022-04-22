@@ -21,7 +21,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         public TeacherViewModel()
         {
             _teacherService = new TeacherService();
-            Teachers = _teacherService.GetAll().ToArray();
+            Teachers = _teacherService.GetAll(false).ToArray();
             CurrentTeacher = new Teacher();
         }
 
@@ -77,27 +77,27 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         public void Delete()
         {
-            if (CurrentTeacher.Id != null)
+            if (CurrentTeacher.Id != 0)
             {
                 _teacherService.Delete((int)CurrentTeacher.Id);
-                Teachers = _teacherService.GetAll().ToArray();
+                Teachers = _teacherService.GetAll(false).ToArray();
                 ClosePopup();
             }
         }
 
         public void Search()
         {
-            Teachers = _teacherService.Search(SearchInput).ToArray();
+            Teachers = _teacherService.Search(SearchInput, false).ToArray();
         }
 
         public void Insert()
         {
-            MainViewModel.Instance.SetCurrentViewModel(new TeacherEditorViewModel(null));
+            MainViewModel.Instance.SetCurrentViewModel(new TeacherEditorViewModel(0));
         }
 
         public void Update()
         {
-            if (CurrentTeacher.Id != null)
+            if (CurrentTeacher.Id != 0)
                 MainViewModel.Instance.SetCurrentViewModel(new TeacherEditorViewModel(CurrentTeacher.Id));
         }
 
@@ -112,7 +112,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         private void OpenPopup()
         {
-            if (CurrentTeacher.Id == null) return;
+            if (CurrentTeacher.Id == 0) return;
 
             IsPopupOpen = true;
             PopupMessage = "Are you sure to delete?";

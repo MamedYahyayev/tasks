@@ -26,12 +26,12 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         #endregion
 
-        public StudentEditorViewModel(int? id)
+        public StudentEditorViewModel(int id)
         {
             Errors = new Dictionary<string, ErrorModel>();
 
             LoadAllTeachers();
-            if (id != null) LoadStudent(id);
+            if (id != 0) LoadStudent(id);
             else Student = new Student();
         }
 
@@ -83,13 +83,13 @@ namespace SchoolManagement.ViewModel.SubViewModel
         private void LoadAllTeachers()
         {
             _teacherService = new TeacherService();
-            var teachers = _teacherService.GetAll();
+            var teachers = _teacherService.GetAll(false);
             AllTeachers = teachers.ToArray();
         }
 
-        private void LoadStudent(int? id)
+        private void LoadStudent(int id)
         {
-            var student = _studentService.GetById((int)id);
+            var student = _studentService.GetById((int)id, false);
             Student = student;
             if (student.Teachers != null)
             {
@@ -98,9 +98,9 @@ namespace SchoolManagement.ViewModel.SubViewModel
             }
         }
 
-        private void Save(int? id)
+        private void Save(int id)
         {
-            if (id == null)
+            if (id == 0)
                 InsertStudent();
             else
                 UpdateStudent(Student);
@@ -174,9 +174,9 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         #region Commands
 
-        private VoidReactiveCommand<int?> _saveCommand;
-        public VoidReactiveCommand<int?> SaveCommand =>
-            _saveCommand ??= VoidReactiveCommand<int?>.Create(Save);
+        private VoidReactiveCommand<int> _saveCommand;
+        public VoidReactiveCommand<int> SaveCommand =>
+            _saveCommand ??= VoidReactiveCommand<int>.Create(Save);
 
         private VoidReactiveCommand _cancelOperationCommand;
         public VoidReactiveCommand CancelOperationCommand =>

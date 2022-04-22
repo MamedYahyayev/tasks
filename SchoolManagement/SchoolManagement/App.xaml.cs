@@ -27,8 +27,7 @@ namespace SchoolManagement
 
             FileType fileService = FileHelper.GetDefaultFileType(fileType);
 
-            var dataService = new DataService(new GeneralFileService().GetFileService(fileService));
-            dataService.StartPersistence();
+            DataService.InitInstance(GeneralFileService.GetFileService(fileService));
 
             base.OnStartup(e);
         }

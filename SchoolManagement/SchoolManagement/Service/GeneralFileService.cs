@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
-    public class GeneralFileService
+    public static class GeneralFileService
     {
-        public IFileService GetFileService(FileType fileServiceType)
+        public static IFileService GetFileService(FileType fileServiceType)
         {
             switch (fileServiceType)
             {

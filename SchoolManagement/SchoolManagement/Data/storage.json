@@ -1,29 +1,25 @@
 {
   "Students": [
     {
-      "RegisterDate": "2022-04-22T11:12:15.2322216+04:00",
+      "RegisterDate": "2022-04-22T12:13:28.8267998+04:00",
       "TeacherIds": [
-        36488156
+        1
       ],
-      "Teachers": [
-      ],
-      "Id": 10271555,
-      "Name": "dasasd",
-      "Surname": "dadasads",
-      "BirthDate": "2022-04-22T11:12:15.2322247+04:00"
+      "Id": 1,
+      "Name": "Cabbar",
+      "Surname": "Eliyev",
+      "BirthDate": "2022-04-22T12:13:28.8268037+04:00"
     }
   ],
   "Teachers": [
     {
-      "License": "dsadasads",
-      "Subject": 3,
-      "Salary": 333.0,
-      "Students": [
-      ],
-      "Id": 36488156,
-      "Name": "dasdas",
-      "Surname": "dasadsads3",
-      "BirthDate": "2022-04-22T11:12:18.1574182+04:00"
+      "License": "ASDDASADSDAS",
+      "Subject": 4,
+      "Salary": 1200.0,
+      "Id": 1,
+      "Name": "Zakir",
+      "Surname": "Hesenov",
+      "BirthDate": "2022-04-22T12:13:35.3423428+04:00"
     }
   ]
 }

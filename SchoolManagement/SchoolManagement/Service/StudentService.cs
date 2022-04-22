@@ -12,55 +12,61 @@ namespace SchoolManagement.Service
     {
         public void Delete(int id)
         {
-            var students = GetAll();
-            var removedStudent = GetById(id);
+            var students = GetAll(false);
+            var removedStudent = GetById(id, false);
             students.Remove(removedStudent);
 
             DataService.Instance.Storage.Students = students.ToArray();
             DataService.Instance.SetModified();
         }
 
-        public List<Student> GetAll()
+        public List<Student> GetAll(bool includeAllFields)
         {
             var students = DataService.Instance.Storage.Students.ToList();
+            if (includeAllFields)
+            {
+                students.ForEach(student => LoadAllFields(student));
+            }
             return students ?? new List<Student>();
         }
 
-        public Student GetById(int id)
+        public Student GetById(int id, bool includeAllFields)
         {
             var student = DataService.Instance.Storage.Students.FirstOrDefault(x => x.Id == id);
             if (student == null) throw new ItemNotFoundException("Student with id: " + id + " not found!");
 
             var teacherService = new TeacherService();
 
-            var teachers = new List<Teacher>();
-            foreach (var teacherId in student.TeacherIds)
+            if (includeAllFields)
             {
-                var teacher = teacherService.GetById(teacherId);
-                teachers.Add(teacher);
+                LoadAllFields(student);
             }
-            student.Teachers = teachers;
 
             return student;
         }
 
-        public void Insert(Student student)
+        private void LoadAllFields(Student student)
         {
-            student.Id = Generator.GenerateId();
+            if (student == null)
+                return;
 
-            var students = DataService.Instance.Storage.Students;
-
-            var studentList = students.ToList();
-
-            studentList.Add(student);
-
-            student.TeacherIds = AddTeacherIdsToStudent(student);
-            student.Teachers = new List<Teacher>();
-
-            DataService.Instance.Storage.Students = studentList.ToArray();
-            DataService.Instance.SetModified();
+            var teacherService = new TeacherService();
+            var teachers = new List<Teacher>();
+            foreach (var teacherId in student.TeacherIds)
+            {
+                var teacher = teacherService.GetById(teacherId, true);
+                teachers.Add(teacher);
+            }
+            student.Teachers = teachers;
         }
 
+        public void Insert(Student student)
+        {
+            student.Id = GetNextId();
+            student.TeacherIds = AddTeacherIdsToStudent(student);
+            DataService.Instance.Storage.Students.Concat(new[] { student }).ToArray();
+            DataService.Instance.SetModified();
+        }
 
         public void Update(Student student)
         {
@@ -73,15 +79,14 @@ namespace SchoolManagement.Service
             existingStudent.BirthDate = student.BirthDate;
             existingStudent.RegisterDate = student.RegisterDate;
             existingStudent.TeacherIds = AddTeacherIdsToStudent(student);
-            existingStudent.Teachers = new List<Teacher>();
 
             DataService.Instance.Storage.Students = students.ToArray();
             DataService.Instance.SetModified();
         }
 
-        public IList<Student> Search(string keyword)
+        public IList<Student> Search(string keyword, bool includeAllFields)
         {
-            var students = GetAll().AsEnumerable()
+            var students = GetAll(includeAllFields).AsEnumerable()
                                 .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
                                             s.Surname.EqualsIgnoreCase(keyword))
                                 .ToList(); ;
@@ -102,6 +107,11 @@ namespace SchoolManagement.Service
 
             DataService.Instance.Storage.Students = students.ToArray();
             DataService.Instance.SetModified();
+        }
+
+        public int GetNextId()
+        {
+            return DataService.Instance.Storage.Students.Count() + 1;
         }
 
         #region Helper Functions

@@ -8,7 +8,8 @@ namespace SchoolManagement.Service
 {
     public class DataService
     {
-        public static DataService Instance { get; private set; }
+        private static DataService _instance;
+        public static DataService Instance => _instance;
 
         private IFileService _fileService;
         private Storage _storage;
@@ -17,7 +18,7 @@ namespace SchoolManagement.Service
 
         public Storage Storage = new Storage();
 
-        public DataService(IFileService fileService)
+        private DataService(IFileService fileService)
         {
             if (Instance != null)
             {
@@ -32,7 +33,7 @@ namespace SchoolManagement.Service
 
             StartPersistence();
 
-            Instance = this;
+            _instance = this;
         }
 
         ~DataService()
@@ -102,6 +103,11 @@ namespace SchoolManagement.Service
             };
 
             return clone;
+        }
+
+        public static void InitInstance(IFileService fileService)
+        {
+            _ = new DataService(fileService);
         }
 
     }
