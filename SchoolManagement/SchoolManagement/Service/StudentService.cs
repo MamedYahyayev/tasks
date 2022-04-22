@@ -1,86 +1,120 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SchoolManagement.Config;
-using SchoolManagement.Exceptions;
+﻿using SchoolManagement.Exceptions;
 using SchoolManagement.Model;
+using SchoolManagement.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Service
 {
     public class StudentService : ICrudOperation<Student>
     {
-        private readonly SchoolContext _context = new SchoolContext();
-
-        public bool Delete(int id)
+        public void Delete(int id)
         {
-            var student = FindStudentById(id);
+            var students = GetAll();
+            var removedStudent = GetById(id);
+            students.Remove(removedStudent);
 
-            _context.Students.Remove(student);
-            _context.SaveChanges();
-            return true;
+            DataService.Instance.Storage.Students = students.ToArray();
+            DataService.Instance.SetModified();
         }
 
-        public IList<Student> GetAll()
+        public List<Student> GetAll()
         {
-            return _context.Students.Include(s => s.Teachers).ToList();
+            var students = DataService.Instance.Storage.Students.ToList();
+            return students ?? new List<Student>();
         }
 
         public Student GetById(int id)
         {
-            return FindStudentById(id);
+            var student = DataService.Instance.Storage.Students.FirstOrDefault(x => x.Id == id);
+            if (student == null) throw new ItemNotFoundException("Student with id: " + id + " not found!");
+
+            var teacherService = new TeacherService();
+
+            var teachers = new List<Teacher>();
+            foreach (var teacherId in student.TeacherIds)
+            {
+                var teacher = teacherService.GetById(teacherId);
+                teachers.Add(teacher);
+            }
+            student.Teachers = teachers;
+
+            return student;
         }
 
         public void Insert(Student student)
         {
-            AssignTeachersToStudent(student);
+            student.Id = Generator.GenerateId();
 
-            _context.Students.Add(student);
-            _context.SaveChanges();
+            var students = DataService.Instance.Storage.Students;
+
+            var studentList = students.ToList();
+
+            studentList.Add(student);
+
+            student.TeacherIds = AddTeacherIdsToStudent(student);
+            student.Teachers = new List<Teacher>();
+
+            DataService.Instance.Storage.Students = studentList.ToArray();
+            DataService.Instance.SetModified();
         }
 
 
         public void Update(Student student)
         {
-            AssignTeachersToStudent(student);
+            var students = DataService.Instance.Storage.Students;
+            var existingStudent = students.FirstOrDefault(x => x.Id == student.Id);
+            if (student == null) throw new ItemNotFoundException("Student with id: " + student.Id + " not found!");
 
-            _context.Students.Update(student);
-            _context.SaveChanges();
+            existingStudent.Name = student.Name;
+            existingStudent.Surname = student.Surname;
+            existingStudent.BirthDate = student.BirthDate;
+            existingStudent.RegisterDate = student.RegisterDate;
+            existingStudent.TeacherIds = AddTeacherIdsToStudent(student);
+            existingStudent.Teachers = new List<Teacher>();
+
+            DataService.Instance.Storage.Students = students.ToArray();
+            DataService.Instance.SetModified();
         }
 
         public IList<Student> Search(string keyword)
         {
-            var students = _context.Students.AsEnumerable()
-                                            .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
-                                                        s.Surname.EqualsIgnoreCase(keyword))
-                                            .ToList();
-            return students;
+            var students = GetAll().AsEnumerable()
+                                .Where(s => s.Name.EqualsIgnoreCase(keyword) ||
+                                            s.Surname.EqualsIgnoreCase(keyword))
+                                .ToList(); ;
 
+            return students;
+        }
+
+        public void DeleteTeacherFromStudent(int teacherId)
+        {
+            var students = DataService.Instance.Storage.Students;
+
+            foreach (var student in students)
+            {
+                var teacherIds = student.TeacherIds;
+                teacherIds = teacherIds.Where(x => x != teacherId).ToArray();
+                student.TeacherIds = teacherIds;
+            }
+
+            DataService.Instance.Storage.Students = students.ToArray();
+            DataService.Instance.SetModified();
         }
 
         #region Helper Functions
 
-        private Student FindStudentById(int studentId)
+        private int[] AddTeacherIdsToStudent(Student student)
         {
-            var student = _context.Students.Include(s => s.Teachers).Single(s => s.Id == studentId);
-            if (student == null) throw new ItemNotFoundException("Student with id " + studentId + " not found!");
-            return student;
-        }
-
-        private void AssignTeachersToStudent(Student student)
-        {
-            var teachers = new List<Teacher>();
+            var teacherIdList = new List<int>();
             foreach (var teacher in student.Teachers)
             {
-                var findedTeacher = _context.Teachers.Find(teacher.Id);
-                teachers.Add(findedTeacher);
+                teacherIdList.Add((int)teacher.Id);
             }
 
-            student.Teachers = teachers;
+            return teacherIdList.ToArray();
         }
 
         #endregion

@@ -475,4 +475,7 @@ InteropTests/NativeTests/out
 
 
 # Sql Server Constants
-./SchoolManagement/SchoolManagement/Constant/SqlServerDbConfig.cs
+SchoolManagement/SchoolManagement/Constant/SqlServerDbConfig.cs
+
+# Visual Studio config file
+SchoolManagement/.editorconfig

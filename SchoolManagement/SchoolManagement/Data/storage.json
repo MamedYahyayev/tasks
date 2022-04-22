@@ -1,0 +1,29 @@
+{
+  "Students": [
+    {
+      "RegisterDate": "2022-04-22T11:12:15.2322216+04:00",
+      "TeacherIds": [
+        36488156
+      ],
+      "Teachers": [
+      ],
+      "Id": 10271555,
+      "Name": "dasasd",
+      "Surname": "dadasads",
+      "BirthDate": "2022-04-22T11:12:15.2322247+04:00"
+    }
+  ],
+  "Teachers": [
+    {
+      "License": "dsadasads",
+      "Subject": 3,
+      "Salary": 333.0,
+      "Students": [
+      ],
+      "Id": 36488156,
+      "Name": "dasdas",
+      "Surname": "dasadsads3",
+      "BirthDate": "2022-04-22T11:12:18.1574182+04:00"
+    }
+  ]
+}
