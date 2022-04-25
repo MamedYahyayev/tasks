@@ -69,8 +69,12 @@
                 <Setter Property="Foreground" Value="Black"  />
                 <Setter Property="BorderThickness" Value="0" />
             </Trigger>
+
+            <Trigger Property="IsSelected" Value="true" >
+                <Setter Property="Background" Value="#6297f0" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
         </Style.Triggers>
-        
-        
+
     </Style>
 </ResourceDictionary>
