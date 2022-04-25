@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SchoolManagement.View.SubView"
              xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
              mc:Ignorable="d" 
+             xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
              d:DataContext="{d:DesignInstance viewModel:StudentEditorViewModel, IsDesignTimeCreatable=False}" 
              d:DesignHeight="250" d:DesignWidth="800">
 
@@ -80,12 +81,14 @@
         <StackPanel Grid.Column="0" Grid.Row="1" 
                     Margin="10" Orientation="Horizontal"
                     Grid.ColumnSpan="3">
+
             <StackPanel Orientation="Vertical">
                 <ListBox SelectionMode="Single"
                      Width="180"
                      ItemsSource="{Binding AllTeachers, UpdateSourceTrigger=PropertyChanged}"
                      SelectedItem="{Binding SelectedTeacher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     >
+                    Style="{StaticResource ListBoxTheme}"  
+                   >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
@@ -98,28 +101,43 @@
             </StackPanel>
 
             <StackPanel Orientation="Vertical">
-                <Button Content="==>" 
-                    FontSize="16" 
-                    Margin="10" 
-                    Height="40" 
-                    Command="{Binding AddTeacherCommand}"/>
+                <TextBlock VerticalAlignment="Center" Margin="40, 30, 20, 0">
+                    <Hyperlink TextDecorations="{x:Null}" 
+                                Command="{Binding AddTeacherCommand}"
+                                >
+                        <fa:ImageAwesome Icon="ArrowCircleRight" 
+                                Margin="0,0,20,0"
+                                Width="30"
+                                Height="30"
+                                Foreground="White"
+                            />
+                    </Hyperlink>
+                </TextBlock>
 
-                <Button Content="X" 
-                    FontSize="16" 
-                    Margin="10" 
-                    Height="40" 
-                    Command="{Binding RemoveTeacherCommand}"/>
+                <TextBlock VerticalAlignment="Center" Margin="40, 30, 20, 0">
+                    <Hyperlink TextDecorations="{x:Null}" 
+                                Command="{Binding RemoveTeacherCommand}"
+                                >
+                        <fa:ImageAwesome Icon="Times" 
+                                Margin="0,0,20,0"
+                                Width="30"
+                                Height="30"
+                                Foreground="Red"
+                            />
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
 
             <ListBox
                     Width="180"
-                    Height="100"
                     ItemsSource="{Binding SelectedTeachers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedItem="{Binding SelectedTeacher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource ListBoxTheme}"
+                   
                  >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock Text="{Binding Name}" Margin="2" />
                             <TextBlock Text="{Binding Surname}" Margin="2"/>
                         </StackPanel>
@@ -133,18 +151,35 @@
         <StackPanel Orientation="Horizontal" 
                     Grid.Column="2" Grid.Row="0" 
                     Height="70" VerticalAlignment="Top">
-            <Button Content="Save" 
-                    Background="#FF004880"
-                    Style="{StaticResource formButtonStyle}"
+
+            <Button Style="{StaticResource SaveBtnTheme}"
                     Command="{Binding SaveCommand}"
                     CommandParameter="{Binding Student.Id}"
-                    />
+                    Foreground="#404240"
+                            >
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="FloppyOutline" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                    <Label Content="Save" VerticalAlignment="Center" 
+                               Foreground="#404240"/>
+                </StackPanel>
+            </Button>
 
-            <Button Content="Cancel" 
-                    Background="Gray"
-                    Style="{StaticResource formButtonStyle}"
+
+            <Button Style="{StaticResource CancelBtnTheme}"
                     Command="{Binding CancelOperationCommand}"
-                    />
+                    Foreground="#404240"
+                            >
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Times" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                    <Label Content="Cancel" VerticalAlignment="Center" 
+                               Foreground="#404240"/>
+                </StackPanel>
+            </Button>
+
         </StackPanel>
     </Grid>
 </UserControl>

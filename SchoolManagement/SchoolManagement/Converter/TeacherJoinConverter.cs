@@ -27,9 +27,5 @@ namespace SchoolManagement.Converter
             return null;
         }
 
-        private void Concat()
-        {
-
-        }
     }
 }

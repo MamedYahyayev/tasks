@@ -122,7 +122,8 @@
                                     DisplayMemberBinding="{Binding Salary}"/>
 
                         <GridViewColumn Header="Subject" Width="200"
-                                    DisplayMemberBinding="{Binding Subject, Converter={StaticResource SubjectToStringConverter}}"/>
+                                    DisplayMemberBinding="{Binding Subject, 
+                            Converter={StaticResource SubjectToStringConverter}}"/>
 
                     </GridView>
                 </ListView.View>
