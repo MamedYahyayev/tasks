@@ -32,31 +32,32 @@
                          Height="40" />
 
                 <Button Style="{StaticResource OperationButtonTheme}"
-                            Foreground="Black"
                             Command="{Binding InsertTeacherCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Plus" 
                                         VerticalAlignment="Center"
                                         Margin="0,0,5,0"/>
-                        <Label Content="New" VerticalAlignment="Center"/>
+                        <Label Content="New" 
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource OperationButtonTheme}"
-                            Foreground="Black"
                             Command="{Binding UpdateTeacherCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Pencil" 
                                         VerticalAlignment="Center"
                                         Margin="0,0,5,0"/>
-                        <Label Content="Edit" VerticalAlignment="Center"/>
+                        <Label Content="Edit" 
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
                     </StackPanel>
                 </Button>
 
-                <Button Style="{StaticResource OperationButtonTheme}"
-                            Background="Red"
+                <Button Style="{StaticResource DeleteBtnTheme}"
                             Command="{Binding OpenPopupCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
@@ -71,7 +72,6 @@
 
 
                 <Button Style="{StaticResource OperationButtonTheme}"
-                            Foreground="Black"
                             Command="{Binding CalculateSalaryCommand}"
                             Width="200"
                             >
@@ -80,7 +80,8 @@
                                         VerticalAlignment="Center"
                                         Margin="0,0,5,0"/>
                         <Label Content="Calculate Salary" 
-                               VerticalAlignment="Center" />
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

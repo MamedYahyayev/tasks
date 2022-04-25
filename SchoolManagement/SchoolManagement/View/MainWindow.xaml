@@ -23,7 +23,7 @@
     </Window.DataContext>
 
     <Grid>
-        <Border Background="#272537">
+        <Border Background="#FF3A3562">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200" />
@@ -102,12 +102,6 @@
                         Style="{StaticResource MenuButtonTheme}"
                         Command="{Binding CurrentViewChangeCommand}"
                         CommandParameter="{x:Static enum:ViewType.TEACHER}"
-                    />
-                    <RadioButton 
-                        Content="Student Teachers"  
-                        Style="{StaticResource MenuButtonTheme}"
-                        Command="{Binding CurrentViewChangeCommand}"
-                        CommandParameter="{x:Static enum:ViewType.STUDENT_TEACHERS}"
                     />
                 </StackPanel>
 
