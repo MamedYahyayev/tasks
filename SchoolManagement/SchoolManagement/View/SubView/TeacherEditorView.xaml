@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SchoolManagement.View.SubView"
+             xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
              xmlns:enum="clr-namespace:SchoolManagement.Model"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
@@ -104,9 +105,8 @@
 
             <ListView  ItemsSource="{Binding AllSubjects, UpdateSourceTrigger=PropertyChanged}"
                        SelectedItem="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                       Height="100"
-                       Background="Green"
-                       Foreground="White"
+                       Style="{StaticResource SubjectListTheme}"
+                       ItemContainerStyle="{StaticResource SubjectListItemTheme}"
                        Margin="0, 10, 0, 0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -117,18 +117,33 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
-            <Button Content="Save" 
-                    Background="#FF004880"
-                    Style="{StaticResource formButtonStyle}"
+            <Button Style="{StaticResource SaveBtnTheme}"
                     Command="{Binding SaveCommand}"
                     CommandParameter="{Binding Teacher.Id}"
-                    />
+                    Foreground="#404240"
+                            >
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="FloppyOutline" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                    <Label Content="Save" VerticalAlignment="Center" 
+                               Foreground="#404240"/>
+                </StackPanel>
+            </Button>
 
-            <Button Content="Cancel" 
-                    Background="Gray"
-                    Style="{StaticResource formButtonStyle}"
+
+            <Button Style="{StaticResource CancelBtnTheme}"
                     Command="{Binding CancelCommand}"
-                    />
+                    Foreground="#404240"
+                            >
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Times" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                    <Label Content="Cancel" VerticalAlignment="Center" 
+                               Foreground="#404240"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>
