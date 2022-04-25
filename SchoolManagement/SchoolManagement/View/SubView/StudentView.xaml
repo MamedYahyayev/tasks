@@ -25,35 +25,34 @@
             <StackPanel Grid.Column="1" 
                             Orientation="Horizontal"
                             >
-                
+
                 <TextBox Style="{StaticResource TextBoxTheme}" />
 
                 <Button Style="{StaticResource OperationButtonTheme}"
-                            Foreground="Black"
                             Command="{Binding InsertStudentCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Plus" 
                                         VerticalAlignment="Center"
                                         Margin="0,0,5,0"/>
-                        <Label Content="New" VerticalAlignment="Center"/>
+                        <Label Content="New" VerticalAlignment="Center" 
+                               Foreground="White"/>
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource OperationButtonTheme}"
-                            Foreground="Black"
                             Command="{Binding UpdateStudentCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Pencil" 
                                         VerticalAlignment="Center"
                                         Margin="0,0,5,0"/>
-                        <Label Content="Edit" VerticalAlignment="Center"/>
+                        <Label Content="Edit" VerticalAlignment="Center"
+                               Foreground="White"/>
                     </StackPanel>
                 </Button>
 
-                <Button Style="{StaticResource OperationButtonTheme}"
-                            Background="Red"
+                <Button Style="{StaticResource DeleteBtnTheme}"
                             Command="{Binding OpenPopupCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
@@ -80,6 +79,7 @@
                       ItemsSource="{Binding Students, Mode=TwoWay}"
                       SelectedItem="{Binding CurrentStudent,
                         Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Style="{StaticResource TableTheme}"
                       >
                 <ListView.View>
                     <GridView>
@@ -88,21 +88,26 @@
                             DisplayMemberBinding="{Binding Id}"
                                         />
                         <GridViewColumn 
-                            Header="Name" Width="100" 
+                            Header="Name" Width="120" 
                             DisplayMemberBinding="{Binding Name}"
                                         />
                         <GridViewColumn 
-                            Header="Surname" Width="100" 
+                            Header="Surname" Width="120" 
                             DisplayMemberBinding="{Binding Surname}"
                                         />
                         <GridViewColumn 
-                            Header="Birthdate" Width="150" 
+                            Header="Birthdate" Width="200" 
                             DisplayMemberBinding="{Binding BirthDate}"
                                         />
                         <GridViewColumn 
-                            Header="Register Date" Width="150" 
+                            Header="Register Date" Width="200" 
                             DisplayMemberBinding="{Binding RegisterDate}"
                                         />
+                        <GridViewColumn 
+                            Header="Teachers" Width="200" 
+                            DisplayMemberBinding="{Binding Teachers, 
+                            Converter={StaticResource TeacherJoinConverter}}"
+                         />
                     </GridView>
                 </ListView.View>
             </ListView>

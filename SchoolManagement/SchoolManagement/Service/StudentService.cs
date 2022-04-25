@@ -64,7 +64,7 @@ namespace SchoolManagement.Service
         {
             student.Id = GetNextId();
             student.TeacherIds = AddTeacherIdsToStudent(student);
-            DataService.Instance.Storage.Students.Concat(new[] { student }).ToArray();
+            DataService.Instance.Storage.Students = DataService.Instance.Storage.Students.Concat(new[] { student }).ToArray();
             DataService.Instance.SetModified();
         }
 

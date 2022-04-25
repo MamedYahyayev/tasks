@@ -50,7 +50,7 @@ namespace SchoolManagement.Service
         public void Insert(Teacher teacher)
         {
             teacher.Id = GetNextId();
-            DataService.Instance.Storage.Teachers.Concat(new[] { teacher }).ToArray();
+            DataService.Instance.Storage.Teachers = DataService.Instance.Storage.Teachers.Concat(new[] { teacher }).ToArray();
             DataService.Instance.SetModified();
         }
 
