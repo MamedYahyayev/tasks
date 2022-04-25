@@ -1,10 +1,9 @@
 ﻿using ReactiveUI;
 using SchoolManagement.Command;
 using SchoolManagement.Enum;
-using SchoolManagement.Service;
 using SchoolManagement.Utility;
 using SchoolManagement.ViewModel.SubViewModel;
-using System;
+using System.Windows;
 
 namespace SchoolManagement.ViewModel
 {
@@ -33,6 +32,13 @@ namespace SchoolManagement.ViewModel
             set => this.RaiseAndSetIfChanged(ref _currentViewModel, value);
         }
 
+        private WindowState _windowState;
+        public WindowState WindowState
+        {
+            get => _windowState;
+            set => this.RaiseAndSetIfChanged(ref _windowState, value);
+        }
+
         #endregion
 
 
@@ -59,6 +65,25 @@ namespace SchoolManagement.ViewModel
             CurrentViewModel = viewModel;
         }
 
+        private void MinimizeWindow()
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeWindow()
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        private void CloseWindow(IClosable window)
+        {
+            if (window != null)
+            {
+                window.Close();
+            }
+        }
+
+
         #endregion
 
         #region Commands
@@ -66,6 +91,18 @@ namespace SchoolManagement.ViewModel
         private VoidReactiveCommand<ViewType> _currentViewChangeCommand;
         public VoidReactiveCommand<ViewType> CurrentViewChangeCommand =>
             _currentViewChangeCommand ??= VoidReactiveCommand<ViewType>.Create(CurrentViewChange);
+
+        private VoidReactiveCommand _minimizeWindowCommand;
+        public VoidReactiveCommand MinimizeWindowCommand =>
+            _minimizeWindowCommand ??= VoidReactiveCommand.Create(MinimizeWindow);
+
+        private VoidReactiveCommand _maximizeWindowCommand;
+        public VoidReactiveCommand MaximizeWindowCommand =>
+            _maximizeWindowCommand ??= VoidReactiveCommand.Create(MaximizeWindow);
+
+        private VoidReactiveCommand<IClosable> _closeWindowCommand;
+        public VoidReactiveCommand<IClosable> CloseWindowCommand =>
+            _closeWindowCommand ??= VoidReactiveCommand<IClosable>.Create(CloseWindow);
 
         #endregion
 
