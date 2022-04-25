@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:view="clr-namespace:SchoolManagement.View.SubView"
+             xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
              xmlns:local="clr-namespace:SchoolManagement.View.SubView"
              xmlns:subViewModel="clr-namespace:SchoolManagement.ViewModel.SubViewModel"
              xmlns:viewModel="clr-namespace:SchoolManagement.ViewModel"
@@ -38,23 +39,45 @@
                     </TextBox.InputBindings>
                 </TextBox>
 
-                <Button Content="New" 
-                            Style="{StaticResource OperationButtonTheme}"
+
+                <Button Style="{StaticResource OperationButtonTheme}"
                             Foreground="Black"
                             Command="{Binding InsertStudentCommand}"
-                            />
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Plus" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                        <Label Content="New" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
 
-                <Button Content="Edit" 
-                            Style="{StaticResource OperationButtonTheme}"
+                <Button Style="{StaticResource OperationButtonTheme}"
                             Foreground="Black"
                             Command="{Binding UpdateStudentCommand}"
-                            />
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Pencil" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                        <Label Content="Edit" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
 
-                <Button Content="Delete" 
-                            Style="{StaticResource OperationButtonTheme}"
+                <Button Style="{StaticResource OperationButtonTheme}"
                             Background="Red"
                             Command="{Binding OpenPopupCommand}"
-                            />
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Trash" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                        <Label Content="Delete" 
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
             </StackPanel>
         </StackPanel>
 
@@ -97,6 +120,7 @@
             </ListView>
         </StackPanel>
 
+
         <Grid Background="#FF4E4B4B" Opacity="0.7" 
               Grid.RowSpan="2"
               Grid.ColumnSpan="2"
@@ -105,6 +129,6 @@
               >
             <view:DeleteOperationPopup DataContext="{Binding}" />
         </Grid>
-        
+
     </Grid>
 </UserControl>
