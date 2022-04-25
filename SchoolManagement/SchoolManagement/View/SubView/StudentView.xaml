@@ -25,20 +25,8 @@
             <StackPanel Grid.Column="1" 
                             Orientation="Horizontal"
                             >
-                <TextBox 
-                        Width="200"
-                        Height="40"
-                        HorizontalAlignment="Left"
-                        Margin="5"
-                        Style="{StaticResource TextBoxTheme}"
-                        Text="{Binding SearchInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        
-                    >
-                    <TextBox.InputBindings>
-                        <KeyBinding Command="{Binding SearchCommand}" Key="Return"/>
-                    </TextBox.InputBindings>
-                </TextBox>
-
+                
+                <TextBox Style="{StaticResource TextBoxTheme}" />
 
                 <Button Style="{StaticResource OperationButtonTheme}"
                             Foreground="Black"
