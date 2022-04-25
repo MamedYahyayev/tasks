@@ -103,11 +103,23 @@
                             Header="Register Date" Width="200" 
                             DisplayMemberBinding="{Binding RegisterDate}"
                                         />
+
                         <GridViewColumn 
-                            Header="Teachers" Width="200" 
-                            DisplayMemberBinding="{Binding Teachers, 
-                            Converter={StaticResource TeacherJoinConverter}}"
-                         />
+                            Header="Teachers" 
+                             Width="200"
+                         >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                        Text="{Binding Teachers, 
+                                          Converter={StaticResource TeacherJoinConverter}}"
+                                        ToolTip="{Binding Teachers, 
+                                          Converter={StaticResource TeacherJoinConverter}}"
+                                         TextTrimming="CharacterEllipsis"
+                                        />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
