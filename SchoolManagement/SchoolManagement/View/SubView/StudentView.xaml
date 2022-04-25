@@ -79,6 +79,7 @@
                       ItemsSource="{Binding Students, Mode=TwoWay}"
                       SelectedItem="{Binding CurrentStudent,
                         Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Style="{StaticResource TableTheme}"
                       >
                 <ListView.View>
                     <GridView>
@@ -87,21 +88,26 @@
                             DisplayMemberBinding="{Binding Id}"
                                         />
                         <GridViewColumn 
-                            Header="Name" Width="100" 
+                            Header="Name" Width="120" 
                             DisplayMemberBinding="{Binding Name}"
                                         />
                         <GridViewColumn 
-                            Header="Surname" Width="100" 
+                            Header="Surname" Width="120" 
                             DisplayMemberBinding="{Binding Surname}"
                                         />
                         <GridViewColumn 
-                            Header="Birthdate" Width="150" 
+                            Header="Birthdate" Width="200" 
                             DisplayMemberBinding="{Binding BirthDate}"
                                         />
                         <GridViewColumn 
-                            Header="Register Date" Width="150" 
+                            Header="Register Date" Width="200" 
                             DisplayMemberBinding="{Binding RegisterDate}"
                                         />
+                        <GridViewColumn 
+                            Header="Teachers" Width="200" 
+                            DisplayMemberBinding="{Binding Teachers, 
+                            Converter={StaticResource TeacherJoinConverter}}"
+                         />
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -95,30 +95,35 @@
                    FontSize="25"
                    Margin="10"
                    />
-
-            <ListView Margin="10" Name="teachersList" 
+            <ListView Name="teachersList" 
                   ItemsSource="{Binding Teachers}"
-                  SelectedItem="{Binding CurrentTeacher}">
+                  SelectedItem="{Binding CurrentTeacher}"
+                  Style="{StaticResource TableTheme}"
+                  >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="#" 
-                                    Width="70" 
-                                    DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn Header="Name" 
-                                    Width="100"
+                        <GridViewColumn Header="#"
+                                    Width="40" 
+                                    DisplayMemberBinding="{Binding Id}"
+                                        />
+                        <GridViewColumn Header="Name" Width="110"
                                     DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Surname" 
-                                    Width="100"
+
+                        <GridViewColumn Header="Surname" Width="110"
                                     DisplayMemberBinding="{Binding Surname}"/>
-                        <GridViewColumn Header="Birthdate" 
-                                    Width="150"
+
+                        <GridViewColumn Header="Birthdate" Width="200"
                                     DisplayMemberBinding="{Binding BirthDate}"/>
-                        <GridViewColumn Header="Lisence" 
-                                    Width="200"
+
+                        <GridViewColumn Header="License" Width="200"
                                     DisplayMemberBinding="{Binding License}"/>
-                        <GridViewColumn Header="Subject" 
-                                    Width="150"
+
+                        <GridViewColumn Header="Salary" Width="120"
+                                    DisplayMemberBinding="{Binding Salary}"/>
+
+                        <GridViewColumn Header="Subject" Width="200"
                                     DisplayMemberBinding="{Binding Subject, Converter={StaticResource SubjectToStringConverter}}"/>
+
                     </GridView>
                 </ListView.View>
             </ListView>

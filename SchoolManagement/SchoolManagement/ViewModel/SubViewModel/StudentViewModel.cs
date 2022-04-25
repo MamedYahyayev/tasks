@@ -22,7 +22,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
         {
             _teacherViewModel = new TeacherViewModel();
             CurrentStudent = new Student();
-            Students = _studentService.GetAll(false).ToArray();
+            Students = _studentService.GetAll(true).ToArray();
         }
 
         #region Public Properties
