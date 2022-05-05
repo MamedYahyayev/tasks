@@ -102,7 +102,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         private void OpenPopup()
         {
-            if (CurrentStudent.Id == 0) return;
+            if (CurrentStudent != null && CurrentStudent.Id == 0) return;
 
             IsPopupOpen = true;
             PopupMessage = "Are you sure to delete this student?";

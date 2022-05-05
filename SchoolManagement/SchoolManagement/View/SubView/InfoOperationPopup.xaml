@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
     xmlns:local="clr-namespace:SchoolManagement.View.SubView"
     mc:Ignorable="d"
     Width="300"
@@ -13,21 +14,31 @@
     IsOpen="{Binding IsInfoPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
     >
 
-    <Border Background="White" 
+    <Border Background="LightBlue" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                        BorderThickness="2"
-                        BorderBrush="Black">
+                        BorderThickness="1"
+                        BorderBrush="Gray"
+                        CornerRadius="5"
+                        Padding="5"
+            >
         <StackPanel Margin="15">
             <TextBlock Text="{Binding PopupMessage}" FontSize="20" TextWrapping="Wrap"/>
 
             <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
-                <Button Content="Ok"
-                                    Padding="10"    
-                                    Background="LightBlue" 
-                                    Foreground="White"
-                                    Margin="0, 0 , 10, 0"
-                                    Command="{Binding OkCommand}"
-                             />
+                <Button Style="{StaticResource CancelBtnTheme}"
+                            Command="{Binding OkCommand}"
+                            Foreground="White"
+                            Background="LightGreen"
+                        >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Check" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                        <Label Content="Ok" VerticalAlignment="Center" 
+                               Foreground="Black"/>
+                    </StackPanel>
+                </Button>
+
             </StackPanel>
         </StackPanel>
     </Border>

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
     xmlns:local="clr-namespace:SchoolManagement.View.SubView"
     mc:Ignorable="d"
     Width="300"
@@ -13,28 +14,46 @@
     IsOpen="{Binding IsPopupOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
     >
 
-    <Border Background="White" 
+    <Border Background="Wheat" 
                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                        BorderThickness="2"
-                        BorderBrush="Black">
-        <StackPanel Margin="15">
-            <TextBlock Text="{Binding PopupMessage}" FontSize="20" TextWrapping="Wrap"/>
+                        BorderThickness="1"
+                        BorderBrush="Gray"
+                        CornerRadius="5"
+                        Padding="5"
+            >
+        <StackPanel Margin="15" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding PopupMessage}" 
+                       FontSize="20" 
+                       TextWrapping="Wrap"
+               />
 
             <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
-                <Button Content="Delete"
-                                    Padding="10"    
-                                    Background="Red" 
-                                    Foreground="White"
-                                    Margin="0, 0 , 10, 0"
-                                    Command="{Binding DeleteCommand}"
-                             />
+                <Button Style="{StaticResource DeleteBtnTheme}"
+                            Command="{Binding DeleteCommand}"
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Trash" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                        <Label Content="Delete" 
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
+                    </StackPanel>
+                </Button>
 
-                <Button Content="Cancel" 
-                                    Padding="10"
-                                    Background="Gray" 
-                                    Foreground="White"
-                                    Command="{Binding CancelCommand}"
-                            />
+                <Button Style="{StaticResource CancelBtnTheme}"
+                    Command="{Binding CancelCommand}"
+                    Foreground="#404240"
+                            >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Times" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,5,0"/>
+                        <Label Content="Cancel" VerticalAlignment="Center" 
+                               Foreground="#404240"/>
+                    </StackPanel>
+                </Button>
+
             </StackPanel>
         </StackPanel>
     </Border>
