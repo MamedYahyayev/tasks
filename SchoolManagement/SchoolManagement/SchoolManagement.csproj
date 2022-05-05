@@ -5,11 +5,11 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>3069198-cap-education-hat-school_112714.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="3069198-cap-education-hat-school_112714.ico" />
+    <Content Include="Resources\favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
