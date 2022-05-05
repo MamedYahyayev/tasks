@@ -26,7 +26,7 @@
         <Border Background="#FF3A3562">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="300" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
@@ -35,17 +35,50 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Border Grid.ColumnSpan="2"
-                            Grid.Row="0"
-                            Grid.Column="0">
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True" Background="#FF211A58">
+                    <Button Style="{StaticResource OperationButtonTheme}"
+                            Width="130"
+                            Margin="10, 0, 0, 0"
+                            FontSize="14"
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="FilePdfOutline" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,0,0"/>
+                            <Label Content="Export Pdf" VerticalAlignment="Center"
+                               Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource OperationButtonTheme}"
+                            Width="130"
+                            Margin="10, 0, 0, 0"
+                            FontSize="14"
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="FileExcelOutline" 
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,0,0"/>
+                            <Label Content="Export Excel" VerticalAlignment="Center"
+                               Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <Border
+                        Grid.ColumnSpan="2"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Background="#FF211A58"
+                        >
 
                     <StackPanel 
                             Width="100"
-                            Height="30"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             WindowChrome.IsHitTestVisibleInChrome="True"
-                            Margin="20,15,20,0">
+                            Margin="20,0,20,0">
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock VerticalAlignment="Center">
@@ -88,6 +121,8 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
+
+
 
                 <StackPanel Grid.Row="1" Margin="0, 20">
                     <RadioButton 
