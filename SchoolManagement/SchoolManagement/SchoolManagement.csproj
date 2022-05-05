@@ -14,7 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
     <PackageReference Include="ReactiveUI.WPF" Version="16.3.10" />
   </ItemGroup>
 
