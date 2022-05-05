@@ -39,7 +39,7 @@
             <TextBlock Text="Surname" FontSize="18" Foreground="White" />
             <TextBox Text="{Binding Teacher.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      Style="{StaticResource formTextBoxTheme}" />
-            
+
             <TextBlock Foreground="Red" Text="{Binding Errors[Surname].ErrorMessage, 
                         Mode=TwoWay,
                         UpdateSourceTrigger=PropertyChanged}" 
@@ -52,7 +52,7 @@
             <TextBlock Text="Salary" FontSize="18" Foreground="White" />
             <TextBox Style="{StaticResource formTextBoxTheme}"
                      Text="{Binding Salary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            
+
             <TextBlock Foreground="Red" Text="{Binding Errors[Salary].ErrorMessage, 
                         Mode=TwoWay,
                         UpdateSourceTrigger=PropertyChanged}" 
@@ -100,6 +100,8 @@
                         Content="Unselect" 
                         Margin="10, 0, 0, 0"
                         Command="{Binding UnselectCommand}"
+                        Style="{StaticResource CancelBtnTheme}"
+                        Height="30"
                     />
             </StackPanel>
 
