@@ -51,7 +51,9 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource OperationButtonTheme}"
+                    <Button 
+                            Command="{Binding ExportExcelCommand}"        
+                            Style="{StaticResource OperationButtonTheme}"
                             Width="130"
                             Margin="10, 0, 0, 0"
                             FontSize="14"
