@@ -16,7 +16,7 @@ namespace SchoolManagement.Converter
         {
             if (value == null) return null;
 
-            Subject subject = (Subject) value;
+            Subject? subject = (Subject) value;
             return subject.GetName();
         }
 

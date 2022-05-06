@@ -13,8 +13,10 @@ namespace SchoolManagement.Model.Enum
     {
         private const string UNDERSCORE_SIGN = "_";
 
-        public static string GetName(this Subject subject)
+        public static string GetName(this Subject? subject)
         {
+            if (subject == null) return subject.ToString();
+            
             var subjectName = subject.ToString();
 
             if (subjectName.Contains(UNDERSCORE_SIGN))
