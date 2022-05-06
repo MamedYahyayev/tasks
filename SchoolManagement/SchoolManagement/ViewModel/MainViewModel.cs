@@ -1,8 +1,10 @@
 ﻿using ReactiveUI;
 using SchoolManagement.Command;
 using SchoolManagement.Enum;
+using SchoolManagement.Service;
 using SchoolManagement.Utility;
 using SchoolManagement.ViewModel.SubViewModel;
+using System.Data;
 using System.Windows;
 
 namespace SchoolManagement.ViewModel
@@ -84,6 +86,20 @@ namespace SchoolManagement.ViewModel
         }
 
 
+        private void ExportExcel()
+        {
+            var excel = new ExcelExporter();
+            DataSet dataSet = new DataSet();
+            dataSet.Tables.Add(new StudentViewModel().GenerateStudentDataTable());
+            dataSet.Tables.Add(new TeacherViewModel().GenerateTeacherDataTable());
+            excel.Export(dataSet);
+        }
+
+        private void ExportPdf()
+        {
+
+        }
+
         #endregion
 
         #region Commands
@@ -103,6 +119,15 @@ namespace SchoolManagement.ViewModel
         private VoidReactiveCommand<IClosable> _closeWindowCommand;
         public VoidReactiveCommand<IClosable> CloseWindowCommand =>
             _closeWindowCommand ??= VoidReactiveCommand<IClosable>.Create(CloseWindow);
+
+
+        private VoidReactiveCommand _exportExcelCommand;
+        public VoidReactiveCommand ExportExcelCommand =>
+            _exportExcelCommand ??= VoidReactiveCommand.Create(ExportExcel);
+
+        private VoidReactiveCommand _exportPdfCommand;
+        public VoidReactiveCommand ExportPdfCommand =>
+            _exportPdfCommand ??= VoidReactiveCommand.Create(ExportPdf);
 
         #endregion
 
