@@ -37,7 +37,8 @@
 
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True" Background="#FF211A58">
-                    <Button Style="{StaticResource OperationButtonTheme}"
+                    <Button Command="{Binding ExportPdfCommand}"
+                            Style="{StaticResource OperationButtonTheme}"
                             Width="130"
                             Margin="10, 0, 0, 0"
                             FontSize="14"

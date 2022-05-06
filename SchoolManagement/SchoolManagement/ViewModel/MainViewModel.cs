@@ -97,7 +97,17 @@ namespace SchoolManagement.ViewModel
 
         private void ExportPdf()
         {
+            var pdf = new PdfExporter();
+            DataSet dataSet = InsertDataTableIntoDateSet();
+            pdf.Export(dataSet);
+        }
 
+        private DataSet InsertDataTableIntoDateSet()
+        {
+            DataSet dataSet = new DataSet();
+            dataSet.Tables.Add(new StudentViewModel().GenerateStudentDataTable());
+            dataSet.Tables.Add(new TeacherViewModel().GenerateTeacherDataTable());
+            return dataSet;
         }
 
         #endregion
