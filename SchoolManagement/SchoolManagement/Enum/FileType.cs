@@ -9,6 +9,8 @@ namespace SchoolManagement.Enum
     public enum FileType
     {
         JSON,
-        XML
+        XML,
+        XLSX,
+        PDF
     }
 }

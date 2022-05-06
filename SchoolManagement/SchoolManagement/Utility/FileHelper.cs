@@ -37,7 +37,7 @@ namespace SchoolManagement.Utility
 
         private static void CreateFolder(string folderPath)
         {
-            if(!Directory.Exists(folderPath))
+            if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
         }
 
