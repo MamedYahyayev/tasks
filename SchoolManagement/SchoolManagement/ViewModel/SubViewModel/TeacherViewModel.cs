@@ -1,9 +1,11 @@
 ﻿using ReactiveUI;
 using SchoolManagement.Command;
 using SchoolManagement.Model;
+using SchoolManagement.Model.Enum;
 using SchoolManagement.Service;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,8 @@ namespace SchoolManagement.ViewModel.SubViewModel
             _teacherService = new TeacherService();
             Teachers = _teacherService.GetAll(false).ToArray();
             CurrentTeacher = new Teacher();
+
+            GenerateTeacherDataTable();
         }
 
 
@@ -120,6 +124,32 @@ namespace SchoolManagement.ViewModel.SubViewModel
 
         private void ClosePopup() => IsPopupOpen = false;
         private void CloseInfoPopup() => IsInfoPopupOpen = false;
+
+        public DataTable GenerateTeacherDataTable()
+        {
+            var table = new DataTable("Teachers");
+            table.Columns.Add("Id");
+            table.Columns.Add("Name");
+            table.Columns.Add("Surname");
+            table.Columns.Add("BirthDate");
+            table.Columns.Add("Salary");
+            table.Columns.Add("Subject");
+
+            foreach (var teacher in Teachers)
+            {
+                DataRow row = table.NewRow();
+                row["Id"] = teacher.Id;
+                row["Name"] = teacher.Name;
+                row["Surname"] = teacher.Surname;
+                row["BirthDate"] = teacher.BirthDate;
+                row["Salary"] = teacher.Salary;
+                row["Subject"] = teacher.Subject.GetName();
+
+                table.Rows.Add(row);
+            }
+
+            return table;
+        }
 
 
         #endregion

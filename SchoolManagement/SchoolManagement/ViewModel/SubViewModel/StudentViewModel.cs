@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace SchoolManagement.ViewModel.SubViewModel
             _teacherViewModel = new TeacherViewModel();
             CurrentStudent = new Student();
             Students = _studentService.GetAll(true).ToArray();
+            GenerateStudentDataTable();
         }
 
         #region Public Properties
@@ -109,6 +111,34 @@ namespace SchoolManagement.ViewModel.SubViewModel
         }
 
         private void ClosePopup() => IsPopupOpen = false;
+
+        public DataTable GenerateStudentDataTable()
+        {
+            var table = new DataTable("Students");
+            table.Columns.Add("Id");
+            table.Columns.Add("Name");
+            table.Columns.Add("Surname");
+            table.Columns.Add("BirthDate");
+            table.Columns.Add("RegisterDate");
+            table.Columns.Add("Teachers");
+
+            foreach (var student in Students)
+            {
+                DataRow row = table.NewRow();
+                row["Id"] = student.Id;
+                row["Name"] = student.Name;
+                row["Surname"] = student.Surname;
+                row["BirthDate"] = student.BirthDate;
+                row["RegisterDate"] = student.RegisterDate;
+
+                var teachers = student.Teachers.Select(t => t.Name + " " + t.Surname);
+                row["Teachers"] = string.Join(",", teachers.ToArray());
+
+                table.Rows.Add(row);
+            }
+
+            return table;
+        }
 
         #endregion
 
