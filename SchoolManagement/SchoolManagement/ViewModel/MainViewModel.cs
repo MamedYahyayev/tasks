@@ -5,6 +5,7 @@ using SchoolManagement.Service;
 using SchoolManagement.Utility;
 using SchoolManagement.ViewModel.SubViewModel;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SchoolManagement.ViewModel
@@ -86,20 +87,20 @@ namespace SchoolManagement.ViewModel
         }
 
 
-        private void ExportExcel()
+        private async void ExportExcel()
         {
             var excel = new ExcelExporter();
             DataSet dataSet = new DataSet();
             dataSet.Tables.Add(new StudentViewModel().GenerateStudentDataTable());
             dataSet.Tables.Add(new TeacherViewModel().GenerateTeacherDataTable());
-            excel.Export(dataSet);
+            await Task.Run(() => excel.Export(dataSet));
         }
 
-        private void ExportPdf()
+        private async void ExportPdf()
         {
             var pdf = new PdfExporter();
             DataSet dataSet = InsertDataTableIntoDateSet();
-            pdf.Export(dataSet);
+            await Task.Run(() => pdf.Export(dataSet));
         }
 
         private DataSet InsertDataTableIntoDateSet()
