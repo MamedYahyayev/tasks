@@ -39,6 +39,9 @@ namespace SchoolManagement.Service
         private Table CreateTable(DataTable dataTable)
         {
             var table = new Table(dataTable.Columns.Count);
+
+            #region Table Header
+
             for (int i = 0; i < dataTable.Columns.Count; i++)
             {
                 Cell headerCell = new Cell(1, 1)
@@ -50,6 +53,10 @@ namespace SchoolManagement.Service
 
                 table.AddCell(headerCell);
             }
+
+            #endregion
+
+            #region Table Rows
 
             for (int j = 1; j <= dataTable.Rows.Count; j++)
             {
@@ -64,6 +71,8 @@ namespace SchoolManagement.Service
                     table.AddCell(dataCell);
                 }
             }
+
+            #endregion
 
             return table;
         }
