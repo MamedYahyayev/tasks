@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:local="clr-namespace:LookScoreAdmin"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -20,9 +21,7 @@
                             >
 
                 <TextBox Style="{StaticResource TextBoxTheme}" />
-
                 <Button Style="{StaticResource OperationButtonTheme}"
-                            Command="{Binding InsertStudentCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Plus" 
@@ -34,7 +33,6 @@
                 </Button>
 
                 <Button Style="{StaticResource OperationButtonTheme}"
-                            Command="{Binding UpdateStudentCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Pencil" 
@@ -46,7 +44,6 @@
                 </Button>
 
                 <Button Style="{StaticResource DeleteBtnTheme}"
-                            Command="{Binding OpenPopupCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Trash" 
@@ -62,49 +59,23 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <TextBlock Text="Students" 
-                       Foreground="White" 
-                       FontSize="25"
-                       Margin="10"
-                       />
-
             <ListView Margin="10" Name="studentsList" SelectionMode="Single"
                       Style="{StaticResource TableTheme}"
                       >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn 
-                            Header="#" Width="70"
+                            Header="#" Width="40"
                                         />
                         <GridViewColumn 
-                            Header="Name" Width="120" 
+                            Header="Game" Width="250" 
                                         />
                         <GridViewColumn 
-                            Header="Surname" Width="120" 
+                            Header="Time" Width="200" 
                                         />
                         <GridViewColumn 
-                            Header="Birthdate" Width="200" 
+                            Header="Referees" Width="200" 
                                         />
-                        <GridViewColumn 
-                            Header="Register Date" Width="200" 
-                                        />
-
-                        <GridViewColumn 
-                            Header="Teachers" 
-                             Width="200"
-                         >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock 
-                                        Text="{Binding Teachers, 
-                                          Converter={StaticResource TeacherJoinConverter}}"
-                                        ToolTip="{Binding Teachers, 
-                                          Converter={StaticResource TeacherJoinConverter}}"
-                                         TextTrimming="CharacterEllipsis"
-                                        />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
