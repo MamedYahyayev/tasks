@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:LookScoreAdmin"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml" />
+                <ResourceDictionary Source="/Theme/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="/Theme/OperationButtonTheme.xaml" />
+                <ResourceDictionary Source="/Theme/FormTheme.xaml" />
+                <ResourceDictionary Source="/Theme/ListViewTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
