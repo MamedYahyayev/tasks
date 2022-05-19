@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreViewerClient", "Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreTimeJudgeClient", "LookScoreTimeJudgeClient\LookScoreTimeJudgeClient.csproj", "{33EB5A40-6C66-4195-BC09-BDFF008AC9DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreManageStatisticsClient", "LookScoreManageStatisticsClient\LookScoreManageStatisticsClient.csproj", "{937B221A-4858-4AB3-A4CA-C90DB3FBDD0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreAdmin", "LookScoreAdmin\LookScoreAdmin.csproj", "{3A75D0B1-69E8-47F0-945F-46F29379D5D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{33EB5A40-6C66-4195-BC09-BDFF008AC9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33EB5A40-6C66-4195-BC09-BDFF008AC9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33EB5A40-6C66-4195-BC09-BDFF008AC9DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937B221A-4858-4AB3-A4CA-C90DB3FBDD0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937B221A-4858-4AB3-A4CA-C90DB3FBDD0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937B221A-4858-4AB3-A4CA-C90DB3FBDD0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937B221A-4858-4AB3-A4CA-C90DB3FBDD0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
