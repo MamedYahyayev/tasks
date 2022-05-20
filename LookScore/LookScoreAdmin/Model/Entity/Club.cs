@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LookScoreAdmin.Model.Entity
 {
@@ -11,6 +7,7 @@ namespace LookScoreAdmin.Model.Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string ShortName { get; set; }
         public int PlayersCount { get; set; }
         public string LogoUrl { get; set; }
         public string Country { get; set; }
