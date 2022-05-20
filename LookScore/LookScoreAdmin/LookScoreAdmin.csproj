@@ -81,6 +81,9 @@
     <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
     <Compile Include="Service\FileServices\FileServiceFactory.cs" />
     <Compile Include="Util\FileValidator.cs" />
+    <Compile Include="View\SubView\ClubEditorView.xaml.cs">
+      <DependentUpon>ClubEditorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SubView\GameEditorView.xaml.cs">
       <DependentUpon>GameEditorView.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
     <Page Include="Theme\TextBoxTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SubView\ClubEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SubView\GameEditorView.xaml">
       <SubType>Designer</SubType>
