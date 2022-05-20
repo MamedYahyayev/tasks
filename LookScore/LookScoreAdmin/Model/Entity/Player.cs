@@ -3,6 +3,7 @@ using System;
 
 namespace LookScoreAdmin.Model.Entity
 {
+    [Serializable]
     public class Player
     {
         public int Id { get; set; }

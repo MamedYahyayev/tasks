@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LookScoreAdmin.Model.Entity
 {
+    [Serializable]
     public class Storage
     {
         public Club[] Clubs = new Club[0];
