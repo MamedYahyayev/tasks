@@ -5,90 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:subview="clr-namespace:LookScoreAdmin.View.SubView"
+        xmlns:enum="clr-namespace:LookScoreAdmin.Model.Enums;assembly=LookScoreAdmin"  
+        xmlns:viewModel="clr-namespace:LookScoreAdmin.ViewModel"
         xmlns:local="clr-namespace:LookScoreAdmin"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
+        <Border BorderThickness="0, 0, 2, 0" BorderBrush="Red">
+            <StackPanel Grid.RowSpan="2">
 
+                <Button Content="Games" 
+                    Margin="5, 5, 5, 10"
+                    Command="{Binding CurrentViewChangeCommand}"
+                    CommandParameter="{x:Static enum:ViewType.GAME }"
+                    />
 
-        <StackPanel Margin="0, 20, 0, 20">
-            <StackPanel Grid.Column="1" 
-                            Orientation="Horizontal"
-                            >
+                <Button Content="Referees" Margin="5, 5, 5, 10"
+                    Command="{Binding CurrentViewChangeCommand}"
+                    CommandParameter="{x:Static enum:ViewType.REFEREE }"
+                    />
 
-                <TextBox Style="{StaticResource TextBoxTheme}" />
-                <Button Style="{StaticResource OperationButtonTheme}"
-                            >
-                    <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Icon="Plus" 
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,5,0"/>
-                        <Label Content="New" VerticalAlignment="Center" 
-                               Foreground="White"/>
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{StaticResource OperationButtonTheme}"
-                            >
-                    <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Icon="Pencil" 
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,5,0"/>
-                        <Label Content="Edit" VerticalAlignment="Center"
-                               Foreground="White"/>
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{StaticResource DeleteBtnTheme}"
-                            >
-                    <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Icon="Trash" 
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,5,0"/>
-                        <Label Content="Delete" 
-                               VerticalAlignment="Center"
-                               Foreground="White"/>
-                    </StackPanel>
-                </Button>
+                <Button Content="Clubs" Margin="5, 5, 5, 10"
+                    Command="{Binding CurrentViewChangeCommand}"
+                    CommandParameter="{x:Static enum:ViewType.CLUB }"
+                    />
+                <Button Content="Players" Margin="5, 5, 5, 10"
+                    Command="{Binding CurrentViewChangeCommand}"
+                    CommandParameter="{x:Static enum:ViewType.PLAYER }"
+                    />
 
             </StackPanel>
-        </StackPanel>
+        </Border>
 
-        <StackPanel Grid.Row="1">
-            <ListView Margin="10" Name="studentsList" SelectionMode="Single"
-                      Style="{StaticResource TableTheme}"
-                      >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn 
-                            Header="#" Width="40"
-                                        />
-                        <GridViewColumn 
-                            Header="Game" Width="250" 
-                                        />
-                        <GridViewColumn 
-                            Header="Time" Width="200" 
-                                        />
-                        <GridViewColumn 
-                            Header="Referees" Width="200" 
-                                        />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
-
-
-
-        <Grid Grid.RowSpan="2"
-              Grid.ColumnSpan="2"
-              >
-            <subview:GameEditorView />
-        </Grid>
+        <ContentControl 
+                    Grid.Column="1"
+                    Content="{Binding CurrentView}"
+                />
 
     </Grid>
 </Window>
