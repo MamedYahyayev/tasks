@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LookScoreAdmin"
+             xmlns:subViewModel="clr-namespace:LookScoreAdmin.ViewModel.SubViewModel"
+             xmlns:subview="clr-namespace:LookScoreAdmin.View.SubView"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +14,23 @@
                 <ResourceDictionary Source="/Theme/FormTheme.xaml" />
                 <ResourceDictionary Source="/Theme/ListViewTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type subViewModel:GameViewModel}">
+                <subview:GameView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type subViewModel:RefereeViewModel}">
+                <subview:RefereeView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type subViewModel:PlayerViewModel}">
+                <subview:PlayerView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type subViewModel:ClubViewModel}">
+                <subview:ClubView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
