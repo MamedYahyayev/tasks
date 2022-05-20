@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LookScoreAdmin.Model.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace LookScoreAdmin.Model.Entity
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public Nationality Nationality { get; set; }
 
     }
 }
