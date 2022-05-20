@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LookScoreAdmin.Model.Entity
 {
+    [Serializable]
     public class Statistics
     {
         public int Goal { get; set; }
