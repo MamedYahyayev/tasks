@@ -121,6 +121,22 @@
             </ComboBox>
         </StackPanel>
 
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal" 
+                    Width="300"
+                    Height="30"
+                    Margin="10, 110, 0, 0">
+            <Label Content="Height" 
+                   Width="100"
+                   FontSize="15"/>
+            <TextBox Width="200"
+                     VerticalContentAlignment="Center"
+                     FontSize="17"/>
+        </StackPanel>
+
 
 
         <StackPanel Grid.Row="2"
