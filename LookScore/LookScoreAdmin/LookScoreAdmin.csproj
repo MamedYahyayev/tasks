@@ -66,6 +66,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Entity\Game.cs" />
+    <Compile Include="Model\Entity\GameStatistics.cs" />
+    <Compile Include="Model\Entity\Statistics.cs" />
+    <Compile Include="Model\Entity\Player.cs" />
+    <Compile Include="Model\Entity\Club.cs" />
+    <Compile Include="Model\Entity\Referee.cs" />
+    <Compile Include="Model\Enums\Position.cs" />
+    <Compile Include="Service\ClubService.cs" />
+    <Compile Include="Service\GameService.cs" />
+    <Compile Include="Service\ICrudOperation.cs" />
+    <Compile Include="Service\PlayerService.cs" />
+    <Compile Include="Service\RefereeService.cs" />
+    <Compile Include="Service\StatisticService.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -118,9 +132,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
