@@ -79,6 +79,7 @@
     </ApplicationDefinition>
     <Compile Include="Exceptions\FileTypeNotConfiguredException.cs" />
     <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
+    <Compile Include="Model\Enums\Nationality.cs" />
     <Compile Include="Service\FileServices\FileServiceFactory.cs" />
     <Compile Include="Util\FileValidator.cs" />
     <Compile Include="View\SubView\ClubEditorView.xaml.cs">
@@ -86,6 +87,9 @@
     </Compile>
     <Compile Include="View\SubView\GameEditorView.xaml.cs">
       <DependentUpon>GameEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubView\PlayerEditorView.xaml.cs">
+      <DependentUpon>PlayerEditorView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -145,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SubView\GameEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SubView\PlayerEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
