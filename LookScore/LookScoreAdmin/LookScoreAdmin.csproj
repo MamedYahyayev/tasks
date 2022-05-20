@@ -42,6 +42,7 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +77,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\FileTypeNotConfiguredException.cs" />
+    <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
+    <Compile Include="Service\FileServices\FileServiceFactory.cs" />
+    <Compile Include="Util\FileValidator.cs" />
     <Compile Include="View\SubView\GameEditorView.xaml.cs">
       <DependentUpon>GameEditorView.xaml</DependentUpon>
     </Compile>
