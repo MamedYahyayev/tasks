@@ -38,6 +38,9 @@
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -66,6 +69,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Entity\Game.cs" />
+    <Compile Include="Model\Entity\GameStatistics.cs" />
+    <Compile Include="Model\Entity\Statistics.cs" />
+    <Compile Include="Model\Entity\Player.cs" />
+    <Compile Include="Model\Entity\Club.cs" />
+    <Compile Include="Model\Entity\Referee.cs" />
+    <Compile Include="Model\Enums\FileType.cs" />
+    <Compile Include="Model\Enums\Position.cs" />
+    <Compile Include="Service\EntityServices\ClubService.cs" />
+    <Compile Include="Service\DataService.cs" />
+    <Compile Include="Service\EntityServices\GameService.cs" />
+    <Compile Include="Service\EntityServices\ICrudOperation.cs" />
+    <Compile Include="Service\FileServices\IFileService.cs" />
+    <Compile Include="Service\FileServices\JsonFileService.cs" />
+    <Compile Include="Service\EntityServices\PlayerService.cs" />
+    <Compile Include="Service\EntityServices\RefereeService.cs" />
+    <Compile Include="Service\EntityServices\StatisticService.cs" />
+    <Compile Include="Model\Entity\Storage.cs" />
+    <Compile Include="Service\FileServices\XmlFileService.cs" />
+    <Compile Include="Util\FileHelper.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -119,8 +143,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
+    <Folder Include="Service\ExportServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

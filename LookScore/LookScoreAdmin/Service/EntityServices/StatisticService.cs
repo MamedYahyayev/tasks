@@ -1,4 +1,4 @@
-﻿namespace LookScoreAdmin.Service
+﻿namespace LookScoreAdmin.Service.EntityServices
 {
     public class StatisticService
     {
@@ -46,12 +46,7 @@
 
         #region Pass Statistics
 
-        public int IncreasePass()
-        {
-            return 0;
-        }
-
-        public int DecreasePass()
+        public int UpdatePassStatistics(int amount)
         {
             return 0;
         }
@@ -60,12 +55,7 @@
 
         #region Ball Possession Statistics
 
-        public int IncreaseBallPossession()
-        {
-            return 0;
-        }
-
-        public int DecreaseBallPossession()
+        public int UpdateBallPossessionStatistics(int amount)
         {
             return 0;
         }

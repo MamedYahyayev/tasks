@@ -1,7 +1,7 @@
 ﻿using LookScoreAdmin.Model.Enums;
 using System;
 
-namespace LookScoreAdmin.Model
+namespace LookScoreAdmin.Model.Entity
 {
     public class Player
     {

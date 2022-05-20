@@ -1,31 +1,31 @@
-﻿using LookScoreAdmin.Model;
+﻿using LookScoreAdmin.Model.Entity;
 using System;
 
-namespace LookScoreAdmin.Service
+namespace LookScoreAdmin.Service.EntityServices
 {
-    public class PlayerService : ICrudOperation<Player>
+    public class GameService : ICrudOperation<Game>
     {
         public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Player[] FindAll()
+        public Game[] FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public Player FindOne()
+        public Game FindOne()
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(Player entity)
+        public void Insert(Game entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Player entity)
+        public void Update(Game entity)
         {
             throw new NotImplementedException();
         }
