@@ -75,18 +75,20 @@
     <Compile Include="Model\Entity\Player.cs" />
     <Compile Include="Model\Entity\Club.cs" />
     <Compile Include="Model\Entity\Referee.cs" />
+    <Compile Include="Model\Enums\FileType.cs" />
     <Compile Include="Model\Enums\Position.cs" />
-    <Compile Include="Service\ClubService.cs" />
+    <Compile Include="Service\EntityServices\ClubService.cs" />
     <Compile Include="Service\DataService.cs" />
-    <Compile Include="Service\GameService.cs" />
-    <Compile Include="Service\ICrudOperation.cs" />
-    <Compile Include="Service\IFileService.cs" />
-    <Compile Include="Service\JsonFileService.cs" />
-    <Compile Include="Service\PlayerService.cs" />
-    <Compile Include="Service\RefereeService.cs" />
-    <Compile Include="Service\StatisticService.cs" />
+    <Compile Include="Service\EntityServices\GameService.cs" />
+    <Compile Include="Service\EntityServices\ICrudOperation.cs" />
+    <Compile Include="Service\FileServices\IFileService.cs" />
+    <Compile Include="Service\FileServices\JsonFileService.cs" />
+    <Compile Include="Service\EntityServices\PlayerService.cs" />
+    <Compile Include="Service\EntityServices\RefereeService.cs" />
+    <Compile Include="Service\EntityServices\StatisticService.cs" />
     <Compile Include="Model\Entity\Storage.cs" />
-    <Compile Include="Service\XmlFileService.cs" />
+    <Compile Include="Service\FileServices\XmlFileService.cs" />
+    <Compile Include="Util\FileHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -140,6 +142,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Service\ExportServices\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
