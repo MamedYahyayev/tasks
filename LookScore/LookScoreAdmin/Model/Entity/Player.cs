@@ -4,13 +4,8 @@ using System;
 namespace LookScoreAdmin.Model.Entity
 {
     [Serializable]
-    public class Player
+    public class Player : Person
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public Nationality Nationality { get; set; }
-        public DateTime DateOfBirth { get; set; }
         public int Height { get; set; }
         public string ImageUrl { get; set; }
         public double PlayerValue { get; set; }
