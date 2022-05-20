@@ -67,7 +67,7 @@ namespace LookScoreAdmin.Service.FileServices
         }
 
 
-        public void InitInstance(IFileService fileService)
+        public static void InitInstance(IFileService fileService)
         {
             _ = new DataService(fileService);
         }

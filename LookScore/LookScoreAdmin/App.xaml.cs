@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LookScoreAdmin.Exceptions;
+using LookScoreAdmin.Model.Enums;
+using LookScoreAdmin.Service.FileServices;
+using LookScoreAdmin.Util;
 using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace LookScoreAdmin
@@ -13,5 +12,19 @@ namespace LookScoreAdmin
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var fileType = ConfigurationManager.AppSettings.Get("fileType");
+            if (string.IsNullOrEmpty(fileType)) throw new FileTypeNotConfiguredException("File Type doesn't exist in config file!");
+
+            var isValid = FileValidator.IsValidFileType(fileType);
+            if (!isValid) throw new UnsupportedFileTypeException("Invalid File Type, please use json or xml file type");
+
+            FileType fileService = FileHelper.GetFileType(fileType);
+
+            DataService.InitInstance(FileServiceFactory.CreateFileService(fileService));
+
+            base.OnStartup(e);
+        }
     }
 }

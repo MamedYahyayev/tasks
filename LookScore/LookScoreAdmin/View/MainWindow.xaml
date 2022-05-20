@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        xmlns:subview="clr-namespace:LookScoreAdmin.View.SubView"
         xmlns:local="clr-namespace:LookScoreAdmin"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -80,6 +81,14 @@
                 </ListView.View>
             </ListView>
         </StackPanel>
-        
+
+
+
+        <Grid Grid.RowSpan="2"
+              Grid.ColumnSpan="2"
+              >
+            <subview:GameEditorView />
+        </Grid>
+
     </Grid>
 </Window>
