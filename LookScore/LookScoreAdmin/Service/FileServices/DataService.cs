@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace LookScoreAdmin.Service
+namespace LookScoreAdmin.Service.FileServices
 {
     public class DataService
     {
@@ -27,7 +27,7 @@ namespace LookScoreAdmin.Service
 
             _storage = _fileService.Load();
             if (_storage == null) _storage = new Storage();
-            
+
             StartPersistence();
 
             _instance = this;
