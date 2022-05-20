@@ -38,6 +38,9 @@
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -74,11 +77,16 @@
     <Compile Include="Model\Entity\Referee.cs" />
     <Compile Include="Model\Enums\Position.cs" />
     <Compile Include="Service\ClubService.cs" />
+    <Compile Include="Service\DataService.cs" />
     <Compile Include="Service\GameService.cs" />
     <Compile Include="Service\ICrudOperation.cs" />
+    <Compile Include="Service\IFileService.cs" />
+    <Compile Include="Service\JsonFileService.cs" />
     <Compile Include="Service\PlayerService.cs" />
     <Compile Include="Service\RefereeService.cs" />
     <Compile Include="Service\StatisticService.cs" />
+    <Compile Include="Model\Entity\Storage.cs" />
+    <Compile Include="Service\XmlFileService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
