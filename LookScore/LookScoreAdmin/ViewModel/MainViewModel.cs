@@ -15,11 +15,14 @@ namespace LookScoreAdmin.ViewModel
         #region Private Properties
 
         private BaseViewModel _currentView;
+        public static MainViewModel Instance { get; private set; }
 
         #endregion
 
         public MainViewModel()
         {
+            Instance = this;
+
             CurrentView = new GameViewModel();
         }
 
@@ -56,12 +59,17 @@ namespace LookScoreAdmin.ViewModel
             }
         }
 
+        public void SetCurrentViewModel(BaseViewModel viewModel)
+        {
+            CurrentView = viewModel;
+        }
+
         #endregion
 
 
         #region Commands
 
-        private VoidReactiveCommand<ViewType> _currentViewChangeCommand;
+        private readonly VoidReactiveCommand<ViewType> _currentViewChangeCommand;
         public VoidReactiveCommand<ViewType> CurrentViewChangeCommand =>
             _currentViewChangeCommand ?? VoidReactiveCommand<ViewType>.Create(CurrentViewChange);
 
