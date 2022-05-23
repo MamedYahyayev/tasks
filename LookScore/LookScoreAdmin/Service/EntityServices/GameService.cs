@@ -15,7 +15,7 @@ namespace LookScoreAdmin.Service.EntityServices
             throw new NotImplementedException();
         }
 
-        public Game FindOne()
+        public Game FindOne(int id)
         {
             throw new NotImplementedException();
         }

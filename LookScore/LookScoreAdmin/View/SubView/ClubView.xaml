@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:LookScoreAdmin.View.SubView"
              xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
              xmlns:subview="clr-namespace:LookScoreAdmin.View.SubView"
-             mc:Ignorable="d" 
+             xmlns:subViewModel="clr-namespace:LookScoreAdmin.ViewModel.SubViewModel"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance subViewModel:ClubViewModel,
+                                                IsDesignTimeCreatable=False}"    
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,6 +24,7 @@
 
                 <TextBox Style="{StaticResource TextBoxTheme}" />
                 <Button Style="{StaticResource OperationButtonTheme}"
+                        Command="{Binding NewClubCommand}"
                             >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Plus" 
@@ -59,25 +63,38 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <ListView Margin="10" Name="studentsList" SelectionMode="Single"
+                      ItemsSource="{Binding Clubs}"
                       Style="{StaticResource TableTheme}"
                       >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn 
                             Header="#" Width="40"
+                            DisplayMemberBinding="{Binding Id}"
                                         />
                         <GridViewColumn 
-                            Header="Name" Width="100" 
+                            Header="Name" Width="100"
+                            DisplayMemberBinding="{Binding Name}"
                                         />
                         <GridViewColumn 
-                            Header="Surname" Width="100" 
+                            Header="Short Name" Width="100"
+                            DisplayMemberBinding="{Binding Name, 
+                            Converter={StaticResource LongNameToShortConverter}}"
                                         />
+                        
                         <GridViewColumn 
-                            Header="Formed Year" Width="200" 
+                            Header="Formed Year" Width="200"
+                            DisplayMemberBinding="{Binding FormedYear}"
                                         />
 
                         <GridViewColumn 
-                            Header="Country" Width="150" 
+                            Header="Country" Width="150"
+                            DisplayMemberBinding="{Binding Country}"
+                                        />
+
+                        <GridViewColumn 
+                            Header="Players Count" Width="30"
+                            DisplayMemberBinding="{Binding PlayersCount}"
                                         />
 
                     </GridView>

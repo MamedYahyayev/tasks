@@ -102,6 +102,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\VoidReactiveCommand.cs" />
+    <Compile Include="Converter\LongNameToShortConverter.cs" />
     <Compile Include="Exceptions\FileTypeNotConfiguredException.cs" />
     <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
     <Compile Include="Model\Entity\Person.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Service\FileServices\FileServiceFactory.cs" />
     <Compile Include="Util\FileValidator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\SubViewModel\ClubEditorViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\GameViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\PlayerViewModel.cs" />

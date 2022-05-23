@@ -4,9 +4,12 @@
              xmlns:local="clr-namespace:LookScoreAdmin"
              xmlns:subViewModel="clr-namespace:LookScoreAdmin.ViewModel.SubViewModel"
              xmlns:subview="clr-namespace:LookScoreAdmin.View.SubView"
+             xmlns:converter="clr-namespace:LookScoreAdmin.Converter"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            
+            <!--Themes-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="/Theme/TextBoxTheme.xaml" />
@@ -15,6 +18,7 @@
                 <ResourceDictionary Source="/Theme/ListViewTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <!--Views-->
             <DataTemplate DataType="{x:Type subViewModel:GameViewModel}">
                 <subview:GameView />
             </DataTemplate>
@@ -31,6 +35,14 @@
                 <subview:ClubView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type subViewModel:ClubEditorViewModel}">
+                <subview:ClubEditorView />
+            </DataTemplate>
+            
+
+            <!--Converters-->
+            <converter:LongNameToShortConverter x:Key="LongNameToShortConverter" />
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

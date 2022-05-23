@@ -4,7 +4,7 @@
     {
         T[] FindAll();
 
-        T FindOne();
+        T FindOne(int id);
 
         void Insert(T entity);
 

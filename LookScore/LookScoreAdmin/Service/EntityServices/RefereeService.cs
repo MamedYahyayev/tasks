@@ -15,7 +15,7 @@ namespace LookScoreAdmin.Service.EntityServices
             throw new NotImplementedException();
         }
 
-        public Referee FindOne()
+        public Referee FindOne(int id)
         {
             throw new NotImplementedException();
         }

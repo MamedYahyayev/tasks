@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LookScoreAdmin.View.SubView"
+             xmlns:subViewModel="clr-namespace:LookScoreAdmin.ViewModel.SubViewModel"
              mc:Ignorable="d" 
              xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             d:DataContext="{d:DesignInstance subViewModel:ClubEditorViewModel,
+                                                    IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
 
@@ -32,7 +35,8 @@
                    FontSize="15"/>
 
             <TextBox Width="200" FontSize="16" 
-                     VerticalContentAlignment="Center"/>
+                     VerticalContentAlignment="Center"
+                     Text="{Binding Club.Name, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1"
@@ -47,6 +51,8 @@
                    FontSize="15"/>
             <DatePicker Width="200"
                         FontSize="17"
+                        SelectedDate="{Binding Club.FormedYear, 
+                                UpdateSourceTrigger=PropertyChanged}"
                        />
         </StackPanel>
 
@@ -62,7 +68,10 @@
                    FontSize="15"/>
             <TextBox Width="200"
                      FontSize="17"
-                     VerticalContentAlignment="Center"/>
+                     VerticalContentAlignment="Center"
+                     Text="{Binding Club.PlayersCount,
+                        UpdateSourceTrigger=PropertyChanged}"
+                     />
         </StackPanel>
 
         <StackPanel Grid.Row="1"
@@ -75,12 +84,10 @@
             <Label Content="Country" 
                    Width="100"
                    FontSize="15"/>
-            <ComboBox Width="200" FontSize="17">
-                <ComboBoxItem Content="Select" IsSelected="True"/>
-                <ComboBoxItem Content="England" />
-                <ComboBoxItem Content="Spain" />
-                <ComboBoxItem Content="Germany" />
-            </ComboBox>
+            <ComboBox Width="200" FontSize="17"
+                      ItemsSource="{Binding Countries}"
+                      SelectedItem="{Binding Club.Country, 
+                                UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
 
@@ -88,9 +95,12 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Content="Save" Margin="5"
-                    Width="100"/>
+                    Width="100"
+                    Command="{Binding SaveClubCommand}"/>
+            
             <Button Content="Cancel" Margin="5"
-                    Width="100"/>
+                    Width="100"
+                    Command="{Binding CancelCommand}"/>
         </StackPanel>
 
     </Grid>
