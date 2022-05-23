@@ -1,5 +1,7 @@
 ﻿using LookScoreAdmin.Model.Entity;
+using LookScoreAdmin.Service.FileServices;
 using System;
+using System.Collections.Generic;
 
 namespace LookScoreAdmin.Service.EntityServices
 {
@@ -12,7 +14,7 @@ namespace LookScoreAdmin.Service.EntityServices
 
         public Game[] FindAll()
         {
-            throw new NotImplementedException();
+            return DataService.Instance.Storage.Games ?? new Game[0];
         }
 
         public Game FindOne(int id)
@@ -20,14 +22,31 @@ namespace LookScoreAdmin.Service.EntityServices
             throw new NotImplementedException();
         }
 
-        public void Insert(Game entity)
+        public void Insert(Game game)
         {
-            throw new NotImplementedException();
+            if (game == null) return;
+
+            game.Id = GetNextId();
+            game.GameTitle = game.HomeClub.Name + "-" + game.GuestClub.Name;
+
+            List<Game> games = new List<Game>(DataService.Instance.Storage.Games);
+            games.Add(game);
+            DataService.Instance.Storage.Games = games.ToArray();
+            DataService.Instance.SetStorageModified();
         }
 
         public void Update(Game entity)
         {
             throw new NotImplementedException();
         }
+
+        #region Helper Functions
+
+        private int GetNextId()
+        {
+            return DataService.Instance.Storage.Games.Length + 1;
+        }
+
+        #endregion
     }
 }

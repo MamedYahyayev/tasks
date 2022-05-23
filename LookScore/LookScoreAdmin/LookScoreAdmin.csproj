@@ -102,6 +102,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\VoidReactiveCommand.cs" />
+    <Compile Include="Converter\ClubJoinConverter.cs" />
     <Compile Include="Converter\LongNameToShortConverter.cs" />
     <Compile Include="Exceptions\FileTypeNotConfiguredException.cs" />
     <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubEditorViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubViewModel.cs" />
+    <Compile Include="ViewModel\SubViewModel\GameEditorViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\GameViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\RefereeViewModel.cs" />

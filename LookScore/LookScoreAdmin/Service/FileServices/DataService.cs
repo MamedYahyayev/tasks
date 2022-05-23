@@ -26,6 +26,7 @@ namespace LookScoreAdmin.Service.FileServices
             _fileService = fileService;
 
             _storage = _fileService.Load();
+            Storage = _storage;
             if (_storage == null) _storage = new Storage();
 
             StartPersistence();
