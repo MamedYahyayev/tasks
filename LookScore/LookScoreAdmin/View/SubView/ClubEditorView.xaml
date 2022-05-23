@@ -51,8 +51,9 @@
                    FontSize="15"/>
             <DatePicker Width="200"
                         FontSize="17"
+                        SelectedDateFormat="Short"
                         SelectedDate="{Binding Club.FormedYear, 
-                                UpdateSourceTrigger=PropertyChanged}"
+                                UpdateSourceTrigger=PropertyChanged, StringFormat=dd-MM-yyyy}"
                        />
         </StackPanel>
 
