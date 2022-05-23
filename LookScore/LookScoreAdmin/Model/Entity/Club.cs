@@ -11,6 +11,6 @@ namespace LookScoreAdmin.Model.Entity
         public int PlayersCount { get; set; }
         public string LogoUrl { get; set; }
         public string Country { get; set; }
-        public DateTime FormedYear { get; set; }
+        public DateTime FormedYear { get; set; } = new DateTime(1800, 1, 1);
     }
 }

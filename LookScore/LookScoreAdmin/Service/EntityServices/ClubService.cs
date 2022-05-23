@@ -28,6 +28,7 @@ namespace LookScoreAdmin.Service.EntityServices
 
             List<Club> clubs = new List<Club>(DataService.Instance.Storage.Clubs);
             club.Id = FindNextId();
+            club.ShortName = club.Name.Substring(0, 3).ToUpper();
             clubs.Add(club);
             DataService.Instance.Storage.Clubs = clubs.ToArray();
             DataService.Instance.SetStorageModified();

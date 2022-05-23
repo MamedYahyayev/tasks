@@ -74,7 +74,7 @@
                             DisplayMemberBinding="{Binding Id}"
                                         />
                         <GridViewColumn 
-                            Header="Name" Width="100"
+                            Header="Name" Width="200"
                             DisplayMemberBinding="{Binding Name}"
                                         />
                         <GridViewColumn 
@@ -85,7 +85,7 @@
                         
                         <GridViewColumn 
                             Header="Formed Year" Width="200"
-                            DisplayMemberBinding="{Binding FormedYear}"
+                            DisplayMemberBinding="{Binding FormedYear, StringFormat=dd-MMMM-yyyy}"
                                         />
 
                         <GridViewColumn 

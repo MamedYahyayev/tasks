@@ -28,6 +28,8 @@ namespace LookScoreAdmin.Service.EntityServices
 
             game.Id = GetNextId();
             game.GameTitle = game.HomeClub.Name + "-" + game.GuestClub.Name;
+            game.HomeClubId = game.HomeClub.Id;
+            game.GuestClubId = game.GuestClub.Id;
 
             List<Game> games = new List<Game>(DataService.Instance.Storage.Games);
             games.Add(game);
