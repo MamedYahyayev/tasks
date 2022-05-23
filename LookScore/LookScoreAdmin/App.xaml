@@ -38,7 +38,11 @@
             <DataTemplate DataType="{x:Type subViewModel:ClubEditorViewModel}">
                 <subview:ClubEditorView />
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type subViewModel:GameEditorViewModel}">
+                <subview:GameEditorView />
+            </DataTemplate>
+
 
             <!--Converters-->
             <converter:LongNameToShortConverter x:Key="LongNameToShortConverter" />
