@@ -46,6 +46,7 @@
 
             <!--Converters-->
             <converter:LongNameToShortConverter x:Key="LongNameToShortConverter" />
+            <converter:ClubJoinConverter x:Key="ClubJoinConverter" />
             
         </ResourceDictionary>
     </Application.Resources>
