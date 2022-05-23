@@ -35,6 +35,10 @@
                 <subview:ClubView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type subViewModel:ClubEditorViewModel}">
+                <subview:ClubEditorView />
+            </DataTemplate>
+            
 
             <!--Converters-->
             <converter:LongNameToShortConverter x:Key="LongNameToShortConverter" />

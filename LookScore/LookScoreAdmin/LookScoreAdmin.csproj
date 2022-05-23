@@ -111,6 +111,7 @@
     <Compile Include="Service\FileServices\FileServiceFactory.cs" />
     <Compile Include="Util\FileValidator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\SubViewModel\ClubEditorViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\GameViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\PlayerViewModel.cs" />
