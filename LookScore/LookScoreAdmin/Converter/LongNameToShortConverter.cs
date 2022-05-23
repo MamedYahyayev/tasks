@@ -15,7 +15,7 @@ namespace LookScoreAdmin.Converter
             if(value == null) return value;
 
             string longName = (string)value;
-            return longName.Substring(0, 2).ToUpper();
+            return longName.Substring(0, 3).ToUpper();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
