@@ -1,4 +1,5 @@
 ﻿using LookScoreAdmin.Model.Entity;
+using LookScoreAdmin.Service.FileServices;
 using System;
 
 namespace LookScoreAdmin.Service.EntityServices
@@ -12,10 +13,10 @@ namespace LookScoreAdmin.Service.EntityServices
 
         public Club[] FindAll()
         {
-            throw new NotImplementedException();
+            return DataService.Instance.Storage.Clubs ?? new Club[0]; 
         }
 
-        public Club FindOne()
+        public Club FindOne(int id)
         {
             throw new NotImplementedException();
         }
