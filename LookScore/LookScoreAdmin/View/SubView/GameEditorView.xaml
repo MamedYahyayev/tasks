@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LookScoreAdmin.View.SubView"
+             xmlns:subViewModel="clr-namespace:LookScoreAdmin.ViewModel.SubViewModel"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance subViewModel:GameEditorViewModel,
+                        IsDesignTimeCreatable=False}"
              xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
@@ -29,11 +32,10 @@
             <Label Content="Home Team" 
                    Width="100"
                    FontSize="15"/>
-            <ComboBox Width="200" FontSize="17">
-                <ComboBoxItem Content="Select" IsSelected="True"/>
-                <ComboBoxItem Content="Arsenal" />
-                <ComboBoxItem Content="NewCastle United" />
-            </ComboBox>
+            <ComboBox Width="200" FontSize="17" 
+                      ItemsSource="{Binding Clubs}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding Game.HomeClub}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1"
@@ -46,11 +48,10 @@
             <Label Content="Guest Team" 
                    Width="100"
                    FontSize="15"/>
-            <ComboBox Width="200" FontSize="17">
-                <ComboBoxItem Content="Select" IsSelected="True"/>
-                <ComboBoxItem Content="Arsenal" />
-                <ComboBoxItem Content="NewCastle United" />
-            </ComboBox>
+            <ComboBox Width="200" FontSize="17" 
+                      ItemsSource="{Binding Clubs}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding Game.GuestClub}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1"
@@ -66,12 +67,13 @@
             <toolkit:DateTimePicker 
                     Width="200"
                     Format="Custom"
-                    FormatString="dd/mm/yyyy HH:mm"
+                    FormatString="dd/MM/yyyy HH:mm"
                     FontSize="17"
+                    Value="{Binding Game.GameStartDate}"
                 />
         </StackPanel>
 
-        <StackPanel Grid.Row="1"
+        <!--<StackPanel Grid.Row="1"
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Left"
                     Orientation="Horizontal" 
@@ -86,16 +88,19 @@
                 <ComboBoxItem Content="Samir Ilyasov" />
                 <ComboBoxItem Content="Qasim Eliyev" />
             </ComboBox>
-        </StackPanel>
+        </StackPanel>-->
 
 
         <StackPanel Grid.Row="2" 
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Content="Save" Margin="5"
-                    Width="100"/>
+                    Width="100"
+                    Command="{Binding SaveCommand}"/>
+
             <Button Content="Cancel" Margin="5"
-                    Width="100"/>
+                    Width="100"
+                    Command="{Binding CancelCommand}"/>
         </StackPanel>
 
     </Grid>
