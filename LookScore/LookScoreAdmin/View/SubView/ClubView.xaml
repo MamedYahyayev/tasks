@@ -65,6 +65,7 @@
             <ListView Margin="10" Name="studentsList" SelectionMode="Single"
                       ItemsSource="{Binding Clubs}"
                       Style="{StaticResource TableTheme}"
+                      HorizontalContentAlignment="Center"
                       >
                 <ListView.View>
                     <GridView>
@@ -93,7 +94,7 @@
                                         />
 
                         <GridViewColumn 
-                            Header="Players Count" Width="30"
+                            Header="Players Count" Width="120"
                             DisplayMemberBinding="{Binding PlayersCount}"
                                         />
 
