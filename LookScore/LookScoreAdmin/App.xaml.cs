@@ -1,8 +1,10 @@
 ﻿using LookScoreAdmin.Exceptions;
 using LookScoreAdmin.Model.Enums;
+using LookScoreAdmin.Service;
 using LookScoreAdmin.Service.FileServices;
 using LookScoreAdmin.Util;
 using System.Configuration;
+using System.ServiceModel;
 using System.Windows;
 
 namespace LookScoreAdmin
@@ -23,6 +25,11 @@ namespace LookScoreAdmin
             FileType fileService = FileHelper.GetFileType(fileType);
 
             DataService.InitInstance(FileServiceFactory.CreateFileService(fileService));
+
+            using (ServiceHost host = new ServiceHost(typeof(GameService)))
+            {
+                host.Open();
+            }
 
             base.OnStartup(e);
         }
