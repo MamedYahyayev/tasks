@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:subview="clr-namespace:LookScoreAdmin.View.SubView"
-        xmlns:enum="clr-namespace:LookScoreAdmin.Model.Enums;assembly=LookScoreAdmin"  
+        xmlns:enum="clr-namespace:LookScoreInterfaces.Model.Enums;assembly=LookScoreInterfaces"  
         xmlns:viewModel="clr-namespace:LookScoreAdmin.ViewModel"
         xmlns:local="clr-namespace:LookScoreAdmin"
         mc:Ignorable="d"

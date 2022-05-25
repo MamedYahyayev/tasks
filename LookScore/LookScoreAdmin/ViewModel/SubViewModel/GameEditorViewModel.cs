@@ -1,5 +1,5 @@
-﻿using LookScoreAdmin.Model.Entity;
-using LookScoreAdmin.Service.EntityServices;
+﻿using LookScoreInterfaces.Model.Entity;
+using LookScoreInterfaces.Service.EntityServices;
 using ReactiveUI;
 using LookScoreAdmin.Command;
 

@@ -1,4 +1,4 @@
-﻿using LookScoreAdmin.Model.Entity;
+﻿using LookScoreInterfaces.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

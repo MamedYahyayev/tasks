@@ -1,6 +1,6 @@
 ﻿using LookScoreAdmin.Command;
-using LookScoreAdmin.Model.Entity;
-using LookScoreAdmin.Service.EntityServices;
+using LookScoreInterfaces.Model.Entity;
+using LookScoreInterfaces.Service.EntityServices;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;

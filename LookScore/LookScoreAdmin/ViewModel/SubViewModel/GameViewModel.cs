@@ -1,5 +1,5 @@
-﻿using LookScoreAdmin.Model.Entity;
-using LookScoreAdmin.Service.EntityServices;
+﻿using LookScoreInterfaces.Model.Entity;
+using LookScoreInterfaces.Service.EntityServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,8 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
             _gameService = new GameService();
             _clubService = new ClubService();
 
-            _games = _gameService.FindAll();
+            LookScoreWCF.GameServiceClient client = new LookScoreWCF.GameServiceClient();
+            Games = client.FindAllGames();
         }
 
         #region Public Properties

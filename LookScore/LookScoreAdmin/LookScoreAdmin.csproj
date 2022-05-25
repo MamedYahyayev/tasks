@@ -105,15 +105,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\VoidReactiveCommand.cs" />
+    <Compile Include="Connected Services\LookScoreWCF\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Converter\ClubJoinConverter.cs" />
     <Compile Include="Converter\LongNameToShortConverter.cs" />
-    <Compile Include="Exceptions\FileTypeNotConfiguredException.cs" />
-    <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
-    <Compile Include="Model\Entity\Person.cs" />
-    <Compile Include="Model\Enums\Nationality.cs" />
-    <Compile Include="Model\Enums\ViewType.cs" />
-    <Compile Include="Service\FileServices\FileServiceFactory.cs" />
-    <Compile Include="Util\FileValidator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubEditorViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubViewModel.cs" />
@@ -153,26 +151,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Entity\Game.cs" />
-    <Compile Include="Model\Entity\GameStatistics.cs" />
-    <Compile Include="Model\Entity\Statistics.cs" />
-    <Compile Include="Model\Entity\Player.cs" />
-    <Compile Include="Model\Entity\Club.cs" />
-    <Compile Include="Model\Entity\Referee.cs" />
-    <Compile Include="Model\Enums\FileType.cs" />
-    <Compile Include="Model\Enums\Position.cs" />
-    <Compile Include="Service\EntityServices\ClubService.cs" />
-    <Compile Include="Service\FileServices\DataService.cs" />
-    <Compile Include="Service\EntityServices\GameService.cs" />
-    <Compile Include="Service\EntityServices\ICrudOperation.cs" />
-    <Compile Include="Service\FileServices\IFileService.cs" />
-    <Compile Include="Service\FileServices\JsonFileService.cs" />
-    <Compile Include="Service\EntityServices\PlayerService.cs" />
-    <Compile Include="Service\EntityServices\RefereeService.cs" />
-    <Compile Include="Service\EntityServices\StatisticService.cs" />
-    <Compile Include="Model\Entity\Storage.cs" />
-    <Compile Include="Service\FileServices\XmlFileService.cs" />
-    <Compile Include="Util\FileHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -249,7 +227,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\LookScoreWCF\GameService.wsdl" />
+    <None Include="Connected Services\LookScoreWCF\GameService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LookScoreWCF\GameService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LookScoreWCF\GameService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LookScoreWCF\GameService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\LookScoreInterfaces.Model.Entity.Game.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -259,11 +251,31 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\" />
-    <Folder Include="Service\ExportServices\" />
+    <ProjectReference Include="..\LookScoreInterfaces\LookScoreInterfaces.csproj">
+      <Project>{d7809914-b0db-4ddc-8bcc-628b37142cb6}</Project>
+      <Name>LookScoreInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\LookScoreWCF\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LookScoreWCF\GameService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LookScoreWCF\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LookScoreWCF\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LookScoreWCF\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
