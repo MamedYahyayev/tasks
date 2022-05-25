@@ -1,11 +1,4 @@
-﻿using LookScoreAdmin.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using ReactiveUI;
+﻿using ReactiveUI;
 
 namespace LookScoreViewerClient.ViewModel
 {
@@ -19,9 +12,8 @@ namespace LookScoreViewerClient.ViewModel
 
         public MainViewModel()
         {
-            GameService.ServiceClient serviceClient = new GameService.ServiceClient("GameServiceEndpoint");
-            string[] result = serviceClient.FindAllGames();
-            Games = result;
+            LookScoreWCF.GameServiceClient client = new LookScoreWCF.GameServiceClient();
+            Games = client.GetAllGamesTitle();
         }
 
         #region Public Properties
