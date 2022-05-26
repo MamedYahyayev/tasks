@@ -2,11 +2,20 @@
 using LookScoreServer.Service.FileServices;
 using System;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace LookScoreServer.Service.EntityServices
 {
     public class GameService : ICrudOperation<Game>
     {
+        private readonly ClubService _clubService;
+
+        public GameService()
+        {
+            _clubService = new ClubService();
+        }
+
         public void Delete(int id)
         {
             throw new NotImplementedException();
@@ -19,7 +28,7 @@ namespace LookScoreServer.Service.EntityServices
 
         public Game FindOne(int id)
         {
-            throw new NotImplementedException();
+            return DataService.Instance.Storage.Games.First(g => g.Id == id);
         }
 
         public void Insert(Game game)
@@ -40,6 +49,18 @@ namespace LookScoreServer.Service.EntityServices
         public void Update(Game entity)
         {
             throw new NotImplementedException();
+        }
+
+        public Game[] FindAllDetails()
+        {
+            var games = DataService.Instance.Storage.Games;
+            foreach (var game in games)
+            {
+                game.HomeClub = _clubService.FindOne(game.HomeClubId);
+                game.GuestClub = _clubService.FindOne(game.GuestClubId);
+            }
+
+            return games ?? new Game[0];
         }
 
         #region Helper Functions

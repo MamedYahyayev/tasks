@@ -12,6 +12,11 @@ namespace LookScoreServer.Service.WCFServices
             _gameService = new EntityServices.GameService();
         }
 
+        public Game[] FindAllGameDetails()
+        {
+            return _gameService.FindAllDetails();
+        }
+
         public Game[] FindAllGames()
         {
             return _gameService.FindAll();

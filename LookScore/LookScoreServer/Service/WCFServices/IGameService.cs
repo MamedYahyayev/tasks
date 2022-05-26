@@ -13,6 +13,9 @@ namespace LookScoreServer.Service.WCFServices
         Game[] FindAllGames();
 
         [OperationContract]
+        Game[] FindAllGameDetails();
+
+        [OperationContract]
         void InsertGame(Game game); 
     }
 }
