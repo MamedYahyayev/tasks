@@ -121,10 +121,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LookScoreCommon\LookScoreCommon.csproj">
+      <Project>{766932ff-f58e-470f-8e15-9b266096ae4a}</Project>
+      <Name>LookScoreCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LookScoreServer\LookScoreServer.csproj">
       <Project>{8DD4EA0F-C438-4742-B468-FDA65040F077}</Project>
       <Name>LookScoreServer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
