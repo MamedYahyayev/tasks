@@ -14,7 +14,8 @@ namespace LookScoreViewerClient.ViewModel
 
         public MainViewModel()
         {
-            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("LookScoreGameService");
+
+            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("GameService");
             IGameService gameService = channelFactory.CreateChannel();
 
             Games = gameService.GetAllGamesTitle();

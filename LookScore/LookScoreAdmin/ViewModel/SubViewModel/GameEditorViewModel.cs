@@ -2,6 +2,8 @@
 using LookScoreAdmin.Command;
 using LookScoreServer.Service.EntityServices;
 using LookScoreServer.Model.Entity;
+using System.ServiceModel;
+using LookScoreServer.Service.WCFServices;
 
 namespace LookScoreAdmin.ViewModel.SubViewModel
 {
@@ -9,8 +11,8 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private readonly ClubService _clubService;
-        private GameService _gameService;
+        //private readonly ClubService _clubService;
+        //private GameService _gameService;
         private Game _game;
         private Club[] _clubs;
 
@@ -19,10 +21,10 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         public GameEditorViewModel()
         {
-            _clubService = new ClubService();
+            ChannelFactory<IClubService> channelFactory = new ChannelFactory<IClubService>("ClubService");
+            Clubs = channelFactory.CreateChannel().FindAllClubs();
 
             Game = new Game();
-            Clubs = _clubService.FindAll();
         }
 
         #region Public Properties
@@ -46,9 +48,9 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         private void SaveGame()
         {
-            _gameService = new GameService();
+            //_gameService = new GameService();
 
-            _gameService.Insert(Game);
+            //_gameService.Insert(Game);
 
             BackToPreviousView();
         }
