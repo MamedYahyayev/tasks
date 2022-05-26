@@ -1,4 +1,5 @@
-﻿using LookScoreInterfaces.Model.Entity;
+﻿//using LookScoreInterfaces.Model.Entity;
+using LookScoreServer.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace LookScoreWCF
     [ServiceContract]
     public interface IGameService
     {
-        [OperationContract]
-        string[] GetAllGamesTitle();
+        //[OperationContract]
+        //string[] GetAllGamesTitle();
 
-        [OperationContract]
-        Game[] FindAllGames();
+        //[OperationContract]
+        //Game[] FindAllGames();
     }
 
 

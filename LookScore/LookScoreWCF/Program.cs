@@ -1,6 +1,6 @@
 ﻿using LookScoreInterfaces.Exceptions;
-using LookScoreInterfaces.Model.Enums;
-using LookScoreWCF.Service.FileServices;
+//using LookScoreInterfaces.Model.Enums;
+//using LookScoreWCF.Service.FileServices;
 using LookScoreInterfaces.Util;
 using System;
 using System.Collections.Generic;
@@ -8,13 +8,17 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace LookScoreWCF
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
+            //ServiceHost serviceHost = new ServiceHost(typeof(GameService));
+            //serviceHost.Open();
+
             //var fileType = ConfigurationManager.AppSettings.Get("fileType");
             //if (string.IsNullOrEmpty(fileType)) throw new FileTypeNotConfiguredException("File Type doesn't exist in config file!");
 
@@ -26,6 +30,8 @@ namespace LookScoreWCF
             //DataService.InitInstance(FileServiceFactory.CreateFileService(fileService));
 
             //Console.ReadLine();
+
+            //serviceHost.Close();
         }
     }
 }

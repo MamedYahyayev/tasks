@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using LookScoreServer.Service.WCFServices;
+using ReactiveUI;
+using System.ServiceModel;
 
 namespace LookScoreViewerClient.ViewModel
 {
@@ -12,8 +14,10 @@ namespace LookScoreViewerClient.ViewModel
 
         public MainViewModel()
         {
-            LookScoreWCF.GameServiceClient client = new LookScoreWCF.GameServiceClient();
-            Games = client.GetAllGamesTitle();
+            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("LookScoreGameService");
+            IGameService gameService = channelFactory.CreateChannel();
+
+            Games = gameService.GetAllGamesTitle();
         }
 
         #region Public Properties

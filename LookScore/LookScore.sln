@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreWCF", "LookScoreWC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreInterfaces", "LookScoreInterfaces\LookScoreInterfaces.csproj", "{D7809914-B0DB-4DDC-8BCC-628B37142CB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreServer", "LookScoreServer\LookScoreServer.csproj", "{8DD4EA0F-C438-4742-B468-FDA65040F077}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -88,11 +88,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Connected Services\LookScoreWCF\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -117,22 +112,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\LookScoreWCF\GameService.wsdl" />
-    <None Include="Connected Services\LookScoreWCF\GameService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LookScoreWCF\GameService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LookScoreWCF\GameService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LookScoreWCF\GameService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LookScoreWCF\LookScoreViewerClient.LookScoreWCF.Game.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -143,25 +122,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\LookScoreWCF\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LookScoreWCF\GameService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LookScoreWCF\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LookScoreWCF\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LookScoreWCF\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <ProjectReference Include="..\LookScoreServer\LookScoreServer.csproj">
+      <Project>{8DD4EA0F-C438-4742-B468-FDA65040F077}</Project>
+      <Name>LookScoreServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
