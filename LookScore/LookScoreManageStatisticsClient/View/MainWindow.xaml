@@ -124,6 +124,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
 
@@ -158,7 +159,7 @@
                 </Border>
 
 
-                <!-- shoot statistics-->
+                <!-- goal statistics-->
                 <Border Grid.Row="1" Background="#E8E1D9" 
                         Grid.Column="0"
                         BorderBrush="Black" BorderThickness="2">
@@ -178,7 +179,7 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="8"
+                                   Text="3"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -198,7 +199,7 @@
                 <Border Grid.Row="1" Background="#E8E1D9" 
                         Grid.Column="1"
                         BorderBrush="Black" BorderThickness="0, 2, 0, 2">
-                    <TextBlock Text="Shoots"
+                    <TextBlock Text="Goals"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
@@ -223,7 +224,7 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="4"
+                                   Text="1"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -489,7 +490,92 @@
                 </Border>
 
 
+                <!-- shoot statistics-->
+                <Border Grid.Row="6" Background="#E8E1D9" 
+                        Grid.Column="0"
+                        BorderBrush="Black" BorderThickness="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" 
+                                Background="Transparent" BorderBrush="Transparent">
+                            <fa:FontAwesome Icon="Minus"
+                                        FontSize="20"
+                                        VerticalAlignment="Center"
+                                        Margin="5"/>
+                        </Button>
+
+                        <TextBlock Grid.Column="1"
+                                   Text="14"
+                                   FontSize="25"
+                                   HorizontalAlignment="Center"
+                                   />
+
+                        <Button Background="Transparent" BorderBrush="Transparent"
+                            Grid.Column="2"
+                            >
+                            <fa:FontAwesome Icon="Plus"
+                                        FontSize="20"
+                                        VerticalAlignment="Center"
+                                        Margin="5"/>
+                        </Button>
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="6" Background="#E8E1D9" 
+                        Grid.Column="1"
+                        BorderBrush="Black" BorderThickness="0, 2, 0, 2">
+                    <TextBlock Text="Shoots"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="6" Background="#E8E1D9" 
+                        Grid.Column="2"
+                        BorderBrush="Black" BorderThickness="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" 
+                                Background="Transparent" BorderBrush="Transparent">
+                            <fa:FontAwesome Icon="Minus"
+                                        FontSize="20"
+                                        VerticalAlignment="Center"
+                                        Margin="5"/>
+                        </Button>
+
+                        <TextBlock Grid.Column="1"
+                                   Text="9"
+                                   FontSize="25"
+                                   HorizontalAlignment="Center"
+                                   />
+
+                        <Button Background="Transparent" BorderBrush="Transparent"
+                            Grid.Column="2"
+                            >
+                            <fa:FontAwesome Icon="Plus"
+                                        FontSize="20"
+                                        VerticalAlignment="Center"
+                                        Margin="5"/>
+                        </Button>
+
+                    </Grid>
+                </Border>
+
+
             </Grid>
+            
+            
 
         </StackPanel>
 
