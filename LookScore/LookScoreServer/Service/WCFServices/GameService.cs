@@ -21,5 +21,10 @@ namespace LookScoreServer.Service.WCFServices
         {
             return _gameService.FindAll().Select(g => g.GameTitle).ToArray();
         }
+
+        public void InsertGame(Game game)
+        {
+            _gameService.Insert(game);
+        }
     }
 }
