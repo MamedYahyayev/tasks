@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LookScoreInterfaces.Model.Enums
+namespace LookScoreInterfaces.Enums
 {
-    public enum ViewType
+    public enum FileType
     {
-        GAME, REFEREE, CLUB, PLAYER
+        JSON, XML
     }
 }

@@ -1,7 +1,8 @@
 ﻿using LookScoreInterfaces.Exceptions;
-using LookScoreInterfaces.Model.Enums;
+using LookScoreInterfaces.Enums;
 using System;
 using System.IO;
+
 
 namespace LookScoreInterfaces.Util
 {

@@ -48,33 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\FileType.cs" />
     <Compile Include="Exceptions\FileTypeNotConfiguredException.cs" />
     <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
-    <Compile Include="Model\Entity\Club.cs" />
-    <Compile Include="Model\Entity\Game.cs" />
-    <Compile Include="Model\Entity\GameStatistics.cs" />
-    <Compile Include="Model\Entity\Person.cs" />
-    <Compile Include="Model\Entity\Player.cs" />
-    <Compile Include="Model\Entity\Referee.cs" />
-    <Compile Include="Model\Entity\Statistics.cs" />
-    <Compile Include="Model\Entity\Storage.cs" />
-    <Compile Include="Model\Enums\FileType.cs" />
-    <Compile Include="Model\Enums\Nationality.cs" />
-    <Compile Include="Model\Enums\Position.cs" />
-    <Compile Include="Model\Enums\ViewType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\EntityServices\ClubService.cs" />
-    <Compile Include="Service\EntityServices\GameService.cs" />
-    <Compile Include="Service\EntityServices\ICrudOperation.cs" />
-    <Compile Include="Service\EntityServices\PlayerService.cs" />
-    <Compile Include="Service\EntityServices\RefereeService.cs" />
-    <Compile Include="Service\EntityServices\StatisticService.cs" />
-    <Compile Include="Service\FileServices\DataService.cs" />
-    <Compile Include="Service\FileServices\FileServiceFactory.cs" />
-    <Compile Include="Service\FileServices\IFileService.cs" />
-    <Compile Include="Service\FileServices\JsonFileService.cs" />
-    <Compile Include="Service\FileServices\XmlFileService.cs" />
     <Compile Include="Util\FileHelper.cs" />
     <Compile Include="Util\FileValidator.cs" />
   </ItemGroup>
