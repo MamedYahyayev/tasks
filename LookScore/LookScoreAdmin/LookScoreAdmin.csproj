@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -62,6 +63,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -104,13 +107,6 @@
     <Compile Include="Command\VoidReactiveCommand.cs" />
     <Compile Include="Converter\ClubJoinConverter.cs" />
     <Compile Include="Converter\LongNameToShortConverter.cs" />
-    <Compile Include="Exceptions\FileTypeNotConfiguredException.cs" />
-    <Compile Include="Exceptions\UnsupportedFileTypeException.cs" />
-    <Compile Include="Model\Entity\Person.cs" />
-    <Compile Include="Model\Enums\Nationality.cs" />
-    <Compile Include="Model\Enums\ViewType.cs" />
-    <Compile Include="Service\FileServices\FileServiceFactory.cs" />
-    <Compile Include="Util\FileValidator.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubEditorViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\ClubViewModel.cs" />
@@ -150,26 +146,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Entity\Game.cs" />
-    <Compile Include="Model\Entity\GameStatistics.cs" />
-    <Compile Include="Model\Entity\Statistics.cs" />
-    <Compile Include="Model\Entity\Player.cs" />
-    <Compile Include="Model\Entity\Club.cs" />
-    <Compile Include="Model\Entity\Referee.cs" />
-    <Compile Include="Model\Enums\FileType.cs" />
-    <Compile Include="Model\Enums\Position.cs" />
-    <Compile Include="Service\EntityServices\ClubService.cs" />
-    <Compile Include="Service\FileServices\DataService.cs" />
-    <Compile Include="Service\EntityServices\GameService.cs" />
-    <Compile Include="Service\EntityServices\ICrudOperation.cs" />
-    <Compile Include="Service\FileServices\IFileService.cs" />
-    <Compile Include="Service\FileServices\JsonFileService.cs" />
-    <Compile Include="Service\EntityServices\PlayerService.cs" />
-    <Compile Include="Service\EntityServices\RefereeService.cs" />
-    <Compile Include="Service\EntityServices\StatisticService.cs" />
-    <Compile Include="Model\Entity\Storage.cs" />
-    <Compile Include="Service\FileServices\XmlFileService.cs" />
-    <Compile Include="Util\FileHelper.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -247,6 +223,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\LookScoreInterfaces.Model.Entity.Game.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -256,7 +233,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Service\ExportServices\" />
+    <ProjectReference Include="..\LookScoreInterfaces\LookScoreInterfaces.csproj">
+      <Project>{d7809914-b0db-4ddc-8bcc-628b37142cb6}</Project>
+      <Name>LookScoreInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LookScoreServer\LookScoreServer.csproj">
+      <Project>{8DD4EA0F-C438-4742-B468-FDA65040F077}</Project>
+      <Name>LookScoreServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

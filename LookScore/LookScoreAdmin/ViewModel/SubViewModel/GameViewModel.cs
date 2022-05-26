@@ -1,12 +1,9 @@
-﻿using LookScoreAdmin.Model.Entity;
-using LookScoreAdmin.Service.EntityServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using ReactiveUI;
 using LookScoreAdmin.Command;
+using LookScoreServer.Model.Entity;
+using System.ServiceModel;
+using LookScoreServer.Service.WCFServices;
 
 namespace LookScoreAdmin.ViewModel.SubViewModel
 {
@@ -14,18 +11,19 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private readonly GameService _gameService;
-        private readonly ClubService _clubService;
+        //private readonly ClubService _clubService;
         private Game[] _games;
         
         #endregion
 
         public GameViewModel()
         {
-            _gameService = new GameService();
-            _clubService = new ClubService();
+            //_clubService = new ClubService();
 
-            _games = _gameService.FindAll();
+            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("LookScoreGameService");
+            IGameService gameService = channelFactory.CreateChannel();
+
+            Games = gameService.FindAllGames();
         }
 
         #region Public Properties

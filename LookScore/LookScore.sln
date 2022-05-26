@@ -4,12 +4,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreViewerClient", "LookScoreViewerClient\LookScoreViewerClient.csproj", "{8371F3D9-E303-4675-8A74-FAE4AB072A20}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42D231F0-89B7-4FF9-90DC-DA018EC3FF58} = {42D231F0-89B7-4FF9-90DC-DA018EC3FF58}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreTimeJudgeClient", "LookScoreTimeJudgeClient\LookScoreTimeJudgeClient.csproj", "{33EB5A40-6C66-4195-BC09-BDFF008AC9DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreManageStatisticsClient", "LookScoreManageStatisticsClient\LookScoreManageStatisticsClient.csproj", "{937B221A-4858-4AB3-A4CA-C90DB3FBDD0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreAdmin", "LookScoreAdmin\LookScoreAdmin.csproj", "{3A75D0B1-69E8-47F0-945F-46F29379D5D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreWCF", "LookScoreWCF\LookScoreWCF.csproj", "{42D231F0-89B7-4FF9-90DC-DA018EC3FF58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreInterfaces", "LookScoreInterfaces\LookScoreInterfaces.csproj", "{D7809914-B0DB-4DDC-8BCC-628B37142CB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreServer", "LookScoreServer\LookScoreServer.csproj", "{8DD4EA0F-C438-4742-B468-FDA65040F077}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +42,18 @@ Global
 		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42D231F0-89B7-4FF9-90DC-DA018EC3FF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42D231F0-89B7-4FF9-90DC-DA018EC3FF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42D231F0-89B7-4FF9-90DC-DA018EC3FF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42D231F0-89B7-4FF9-90DC-DA018EC3FF58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

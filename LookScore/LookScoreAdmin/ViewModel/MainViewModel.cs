@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LookScoreAdmin.Command;
-using LookScoreAdmin.Model.Enums;
 using LookScoreAdmin.ViewModel.SubViewModel;
 using ReactiveUI;
+using LookScoreServer.Model.Enums;
 
 namespace LookScoreAdmin.ViewModel
 {

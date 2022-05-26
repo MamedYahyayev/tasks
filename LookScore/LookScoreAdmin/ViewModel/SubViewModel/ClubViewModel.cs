@@ -1,6 +1,6 @@
 ﻿using LookScoreAdmin.Command;
-using LookScoreAdmin.Model.Entity;
-using LookScoreAdmin.Service.EntityServices;
+using LookScoreServer.Model.Entity;
+using LookScoreServer.Service.EntityServices;
 using ReactiveUI;
 
 namespace LookScoreAdmin.ViewModel.SubViewModel

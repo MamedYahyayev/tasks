@@ -1,0 +1,197 @@
+﻿<Window x:Class="LookScoreViewerClient.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LookScoreViewerClient"
+        xmlns:viewModel="clr-namespace:LookScoreViewerClient.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+
+            <ComboBox Margin="5" 
+                      FontSize="20" 
+                      Width="200"
+                      HorizontalAlignment="Left" 
+                      ItemsSource="{Binding Games}"
+                      />
+
+
+            <StackPanel Grid.Column="1" 
+                    Orientation="Horizontal" 
+                    VerticalAlignment="Center"
+                    Margin="20, 0, 0, 0">
+                <TextBlock FontSize="20">
+                23.05.2022 19:00
+                </TextBlock>
+                <TextBlock FontSize="20" Margin="20, 0, 0, 0">
+                Arsenal - Newcastle United
+                </TextBlock>
+            </StackPanel>
+
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="5, 20, 5, 0">
+                <!--first team stack panel-->
+                <StackPanel>
+                    <Image
+                        Width="150"
+                        Height="150"
+                        Source="C:\Users\User\Desktop\tasks\LookScore\LookScoreViewerClient\Resources\newcastle-united-logo.png" />
+                    <TextBlock Text="Newcastle United"
+                               HorizontalAlignment="Center"
+                               FontSize="30"/>
+                </StackPanel>
+
+
+                <!--score and time stack panel-->
+                <StackPanel Orientation="Vertical" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="20, 0, 20, 0">
+                    <TextBlock Text="35:23"
+                               FontSize="35"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="1 - 2"
+                               FontSize="35"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <!--second team stack panel-->
+                <StackPanel>
+                    <Image
+                        Width="150"
+                        Height="150"
+                        Source="C:\Users\User\Desktop\tasks\LookScore\LookScoreViewerClient\Resources\arsenal-logo.png" />
+                    <TextBlock Text="Arsenal"
+                               HorizontalAlignment="Center"
+                               FontSize="30"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel Margin="20, 0, 0, 0">
+                <TextBlock Text="Statistics"
+                           FontSize="25"/>
+
+                <StackPanel Orientation="Vertical" Margin="0, 10, 0, 0">
+                    <!--shoots statistics-->
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal"
+                                    Width="150"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="1"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                            FontSize="20"
+                                       />
+
+                            <TextBlock Text="Shoots"
+                                           HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="20, 0, 20, 0"
+                                       FontSize="20"
+                                       />
+
+                            <TextBlock Text="4"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                       FontSize="20"
+                                       />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--passes statistics-->
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal"
+                                    Width="150">
+                            <TextBlock Text="122"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                       FontSize="20"
+                                       />
+
+                            <TextBlock Text="Passes"
+                                           HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="20, 0, 20, 0"
+                                       FontSize="20"
+                                       />
+
+                            <TextBlock Text="256"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                       FontSize="20"
+                                       />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--tackles statistics-->
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal"
+                                    Width="150">
+                            <TextBlock Text="34"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                       FontSize="20"
+                                       />
+
+                            <TextBlock Text="Tackles"
+                                           HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="20, 0, 20, 0"
+                                       FontSize="20"
+                                       />
+
+                            <TextBlock Text="25"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                       FontSize="20"
+                                       />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--corners statistics-->
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal"
+                                    Width="150">
+                            <TextBlock Text="2"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                       FontSize="20"
+                                       />
+
+                            <TextBlock Text="Corners"
+                                           HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="20, 0, 20, 0"
+                                       FontSize="20"
+                                       />
+
+                            <TextBlock Text="7"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                       FontSize="20"
+                                       />
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
