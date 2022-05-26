@@ -11,7 +11,7 @@
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -21,74 +21,98 @@
         <StackPanel Orientation="Horizontal">
 
             <ComboBox Margin="5" 
-                      FontSize="20" 
+                      FontSize="16" 
                       Width="200"
-                      HorizontalAlignment="Left" 
+                      HorizontalAlignment="Left"
+                      DisplayMemberPath="GameTitle"
                       ItemsSource="{Binding Games}"
+                      SelectedItem="{Binding SelectedGame, 
+                        UpdateSourceTrigger=PropertyChanged}"
+                      ToolTip="{Binding SelectedGame.GameTitle, 
+                        UpdateSourceTrigger=PropertyChanged}"
                       />
-
 
             <StackPanel Grid.Column="1" 
                     Orientation="Horizontal" 
                     VerticalAlignment="Center"
                     Margin="20, 0, 0, 0">
-                <TextBlock FontSize="20">
-                23.05.2022 19:00
-                </TextBlock>
-                <TextBlock FontSize="20" Margin="20, 0, 0, 0">
-                Arsenal - Newcastle United
-                </TextBlock>
+                <TextBlock FontSize="20" 
+                           Text="{Binding SelectedGame.GameStartDate, StringFormat=dd.MM.yyyy HH:mm}" />
+                <TextBlock FontSize="20" Margin="20, 0, 0, 0"
+                           Text="{Binding SelectedGame.GameTitle}" />
             </StackPanel>
 
         </StackPanel>
 
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <StackPanel Orientation="Horizontal" Margin="5, 20, 5, 0">
-                <!--first team stack panel-->
-                <StackPanel>
-                    <Image
-                        Width="150"
-                        Height="150"
-                        Source="C:\Users\User\Desktop\tasks\LookScore\LookScoreViewerClient\Resources\newcastle-united-logo.png" />
-                    <TextBlock Text="Newcastle United"
+            <StackPanel 
+                Orientation="Horizontal"
+                VerticalAlignment="Top"
+                Margin="5, 20, 5, 0"
+                Height="40"
+                Background="#14C38E">
+                <!--Score Board-->
+                <Border Width="Auto">
+                    <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="10, 5, 10, 5"
+                               Foreground="White"/>
+                </Border>
+
+                <Border Width="60"
+                        BorderBrush="LightGray"
+                        BorderThickness="3, 0, 3, 0" >
+                    <TextBlock Text="3 : 1"
+                               FontSize="22"
+                               VerticalAlignment="Center"
                                HorizontalAlignment="Center"
-                               FontSize="30"/>
-                </StackPanel>
+                               Margin="5, 0, 5, 0"
+                               Foreground="White"/>
+                </Border>
 
+                <Border Width="Auto">
+                    <TextBlock Text="{Binding SelectedGame.GuestClub.Name, UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="10, 5, 10, 5"
+                               Foreground="White"/>
+                </Border>
 
-                <!--score and time stack panel-->
-                <StackPanel Orientation="Vertical" 
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Margin="20, 0, 20, 0">
-                    <TextBlock Text="35:23"
-                               FontSize="35"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock Text="1 - 2"
-                               FontSize="35"
-                               HorizontalAlignment="Center"/>
-                </StackPanel>
+                <Border Background="#F2F2F2"
+                        Width="Auto">
+                    <StackPanel VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock Text="45 : 00"
+                                    FontSize="18"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="5, 0, 10, 0"
+                               Foreground="Black"
+                                 />
 
-                <!--second team stack panel-->
-                <StackPanel>
-                    <Image
-                        Width="150"
-                        Height="150"
-                        Source="C:\Users\User\Desktop\tasks\LookScore\LookScoreViewerClient\Resources\arsenal-logo.png" />
-                    <TextBlock Text="Arsenal"
-                               HorizontalAlignment="Center"
-                               FontSize="30"/>
-                </StackPanel>
+                        <TextBlock Text="2:12"
+                                    FontSize="18"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="5, 0, 10, 0"
+                               Foreground="Black"
+                                   FontStyle="Italic" />
 
+                    </StackPanel>
+                </Border>
+    
             </StackPanel>
 
-            <StackPanel Margin="20, 0, 0, 0">
+            <!--<StackPanel Margin="20, 0, 0, 0">
                 <TextBlock Text="Statistics"
                            FontSize="25"/>
 
                 <StackPanel Orientation="Vertical" Margin="0, 10, 0, 0">
-                    <!--shoots statistics-->
+                    -->
+            <!--shoots statistics-->
+            <!--
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Horizontal"
                                     Width="150"
@@ -114,7 +138,9 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <!--passes statistics-->
+                    -->
+            <!--passes statistics-->
+            <!--
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Horizontal"
                                     Width="150">
@@ -139,7 +165,9 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <!--tackles statistics-->
+                    -->
+            <!--tackles statistics-->
+            <!--
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Horizontal"
                                     Width="150">
@@ -164,7 +192,9 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <!--corners statistics-->
+                    -->
+            <!--corners statistics-->
+            <!--
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Horizontal"
                                     Width="150">
@@ -190,7 +220,7 @@
                     </StackPanel>
 
                 </StackPanel>
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
 
     </Grid>
