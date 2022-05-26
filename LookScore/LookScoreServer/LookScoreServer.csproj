@@ -75,7 +75,9 @@
     <Compile Include="Service\FileServices\IFileService.cs" />
     <Compile Include="Service\FileServices\JsonFileService.cs" />
     <Compile Include="Service\FileServices\XmlFileService.cs" />
+    <Compile Include="Service\WCFServices\ClubService.cs" />
     <Compile Include="Service\WCFServices\GameService.cs" />
+    <Compile Include="Service\WCFServices\IClubService.cs" />
     <Compile Include="Service\WCFServices\IGameService.cs" />
   </ItemGroup>
   <ItemGroup>

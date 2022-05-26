@@ -24,12 +24,15 @@ namespace LookScoreServer
             DataService.InitInstance(FileServiceFactory.CreateFileService(fileService));
 
             ServiceHost serviceHost = new ServiceHost(typeof(GameService));
+            ServiceHost clubServiceHost = new ServiceHost(typeof(ClubService));
 
             serviceHost.Open();
+            clubServiceHost.Open();
 
-            Console.ReadLine();
+            Console.Read();
 
             serviceHost.Close();
+            clubServiceHost.Close();
         }
     }
 }
