@@ -12,6 +12,11 @@ namespace LookScoreServer.Service.WCFServices
             _gameService = new EntityServices.GameService();
         }
 
+        public Game[] FindAllGameDetails()
+        {
+            return _gameService.FindAllDetails();
+        }
+
         public Game[] FindAllGames()
         {
             return _gameService.FindAll();
@@ -20,6 +25,11 @@ namespace LookScoreServer.Service.WCFServices
         public string[] GetAllGamesTitle()
         {
             return _gameService.FindAll().Select(g => g.GameTitle).ToArray();
+        }
+
+        public void InsertGame(Game game)
+        {
+            _gameService.Insert(game);
         }
     }
 }

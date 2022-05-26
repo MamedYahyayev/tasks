@@ -11,18 +11,17 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        //private readonly ClubService _clubService;
-        //private GameService _gameService;
         private Game _game;
         private Club[] _clubs;
+        private readonly ChannelFactory<IClubService> _clubChannelFactory = new ChannelFactory<IClubService>("ClubService");
+        private readonly ChannelFactory<IGameService> _gameChannelFactory = new ChannelFactory<IGameService>("GameService");
 
         #endregion
 
 
         public GameEditorViewModel()
         {
-            ChannelFactory<IClubService> channelFactory = new ChannelFactory<IClubService>("ClubService");
-            Clubs = channelFactory.CreateChannel().FindAllClubs();
+            Clubs = _clubChannelFactory.CreateChannel().FindAllClubs();
 
             Game = new Game();
         }
@@ -48,9 +47,7 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         private void SaveGame()
         {
-            //_gameService = new GameService();
-
-            //_gameService.Insert(Game);
+            _gameChannelFactory.CreateChannel().InsertGame(Game);
 
             BackToPreviousView();
         }

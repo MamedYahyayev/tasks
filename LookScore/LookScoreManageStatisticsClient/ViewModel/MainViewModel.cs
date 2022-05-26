@@ -1,16 +1,21 @@
-﻿using LookScoreServer.Model.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
+using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
-using System.ServiceModel;
 
-namespace LookScoreViewerClient.ViewModel
+namespace LookScoreManageStatisticsClient.ViewModel
 {
     public class MainViewModel : ReactiveObject
     {
         #region Private Properties
 
         private Game[] _games;
-        private Game _selectedGame; 
+        private Game _selectedGame;
 
         #endregion
 
@@ -37,5 +42,8 @@ namespace LookScoreViewerClient.ViewModel
         }
 
         #endregion
+
+
+
     }
 }

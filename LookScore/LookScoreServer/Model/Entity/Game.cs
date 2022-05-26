@@ -15,7 +15,10 @@ namespace LookScoreServer.Model.Entity
         [DataMember]
         public string GameTitle { get; set; }
 
+        [DataMember]
         public int HomeClubId { get; set; }
+
+        [DataMember]
         public int GuestClubId { get; set; }
 
         [XmlIgnore]

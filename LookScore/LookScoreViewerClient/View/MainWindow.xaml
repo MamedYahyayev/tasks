@@ -11,7 +11,7 @@
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -21,176 +21,288 @@
         <StackPanel Orientation="Horizontal">
 
             <ComboBox Margin="5" 
-                      FontSize="20" 
+                      FontSize="16" 
                       Width="200"
-                      HorizontalAlignment="Left" 
+                      HorizontalAlignment="Left"
+                      DisplayMemberPath="GameTitle"
                       ItemsSource="{Binding Games}"
+                      SelectedItem="{Binding SelectedGame, 
+                        UpdateSourceTrigger=PropertyChanged}"
+                      ToolTip="{Binding SelectedGame.GameTitle, 
+                        UpdateSourceTrigger=PropertyChanged}"
                       />
-
 
             <StackPanel Grid.Column="1" 
                     Orientation="Horizontal" 
                     VerticalAlignment="Center"
                     Margin="20, 0, 0, 0">
-                <TextBlock FontSize="20">
-                23.05.2022 19:00
-                </TextBlock>
-                <TextBlock FontSize="20" Margin="20, 0, 0, 0">
-                Arsenal - Newcastle United
-                </TextBlock>
+                <TextBlock FontSize="20" 
+                           Text="{Binding SelectedGame.GameStartDate, StringFormat=dd.MM.yyyy HH:mm}" />
+                <TextBlock FontSize="20" Margin="20, 0, 0, 0"
+                           Text="{Binding SelectedGame.GameTitle}" />
             </StackPanel>
 
         </StackPanel>
 
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <StackPanel Orientation="Horizontal" Margin="5, 20, 5, 0">
-                <!--first team stack panel-->
-                <StackPanel>
-                    <Image
-                        Width="150"
-                        Height="150"
-                        Source="C:\Users\User\Desktop\tasks\LookScore\LookScoreViewerClient\Resources\newcastle-united-logo.png" />
-                    <TextBlock Text="Newcastle United"
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel 
+                Orientation="Horizontal"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Margin="5, 20, 5, 0"
+                Height="40"
+                Background="#14C38E">
+                <!--Score Board-->
+                <Border Width="Auto">
+                    <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="10, 5, 10, 5"
+                               Foreground="White"/>
+                </Border>
+
+                <Border Width="60"
+                        BorderBrush="LightGray"
+                        BorderThickness="3, 0, 3, 0" >
+                    <TextBlock Text="3 : 1"
+                               FontSize="22"
+                               VerticalAlignment="Center"
                                HorizontalAlignment="Center"
-                               FontSize="30"/>
-                </StackPanel>
+                               Margin="5, 0, 5, 0"
+                               Foreground="White"/>
+                </Border>
 
+                <Border Width="Auto">
+                    <TextBlock Text="{Binding SelectedGame.GuestClub.Name, UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="10, 5, 10, 5"
+                               Foreground="White"/>
+                </Border>
 
-                <!--score and time stack panel-->
-                <StackPanel Orientation="Vertical" 
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Margin="20, 0, 20, 0">
-                    <TextBlock Text="35:23"
-                               FontSize="35"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock Text="1 - 2"
-                               FontSize="35"
-                               HorizontalAlignment="Center"/>
-                </StackPanel>
+                <Border Background="#F2F2F2"
+                        Width="Auto">
+                    <StackPanel VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock Text="45 : 00"
+                                    FontSize="18"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="5, 0, 10, 0"
+                               Foreground="Black"
+                                 />
 
-                <!--second team stack panel-->
-                <StackPanel>
-                    <Image
-                        Width="150"
-                        Height="150"
-                        Source="C:\Users\User\Desktop\tasks\LookScore\LookScoreViewerClient\Resources\arsenal-logo.png" />
-                    <TextBlock Text="Arsenal"
-                               HorizontalAlignment="Center"
-                               FontSize="30"/>
-                </StackPanel>
+                        <TextBlock Text="2:12"
+                                    FontSize="18"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="5, 0, 10, 0"
+                               Foreground="Black"
+                                   FontStyle="Italic" />
+
+                    </StackPanel>
+                </Border>
 
             </StackPanel>
 
-            <StackPanel Margin="20, 0, 0, 0">
-                <TextBlock Text="Statistics"
-                           FontSize="25"/>
+            <Grid  
+                        Margin="10"
+                  HorizontalAlignment="Center">
 
-                <StackPanel Orientation="Vertical" Margin="0, 10, 0, 0">
-                    <!--shoots statistics-->
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Horizontal"
-                                    Width="150"
-                                    HorizontalAlignment="Center">
-                            <TextBlock Text="1"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                            FontSize="20"
-                                       />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="400"/>
+                </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Shoots"
-                                           HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Margin="20, 0, 20, 0"
-                                       FontSize="20"
-                                       />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-                            <TextBlock Text="4"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                       FontSize="20"
-                                       />
-                        </StackPanel>
-                    </StackPanel>
 
-                    <!--passes statistics-->
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Horizontal"
-                                    Width="150">
-                            <TextBlock Text="122"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                       FontSize="20"
-                                       />
+                <!--stats header-->
+                <Border Background="#14C38E">
+                    <TextBlock Text="{Binding SelectedGame.HomeClub.Name}"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               Margin="5"/>
+                </Border>
 
-                            <TextBlock Text="Passes"
-                                           HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Margin="20, 0, 20, 0"
-                                       FontSize="20"
-                                       />
+                <Border Grid.Column="1" Background="#14C38E">
+                    <TextBlock Text="Statistics"
+                               Grid.Column="1"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               Margin="5"/>
+                </Border>
 
-                            <TextBlock Text="256"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                       FontSize="20"
-                                       />
-                        </StackPanel>
-                    </StackPanel>
+                <Border Grid.Column="2" Background="#14C38E">
+                    <TextBlock Text="{Binding SelectedGame.GuestClub.Name}"
+                               Grid.Column="2"
+                               FontSize="30"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               HorizontalAlignment="Center" 
+                               Margin="5"/>
+                </Border>
 
-                    <!--tackles statistics-->
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Horizontal"
-                                    Width="150">
-                            <TextBlock Text="34"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                       FontSize="20"
-                                       />
 
-                            <TextBlock Text="Tackles"
-                                           HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Margin="20, 0, 20, 0"
-                                       FontSize="20"
-                                       />
+                <!-- ball possession statistics-->
+                <Border Grid.Row="1" Background="#E8E1D9" 
+                        Grid.Column="0"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="56%"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
 
-                            <TextBlock Text="25"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                       FontSize="20"
-                                       />
-                        </StackPanel>
-                    </StackPanel>
+                <Border Grid.Row="1" Background="#E8E1D9" 
+                        Grid.Column="1"
+                        BorderBrush="Black" BorderThickness="0, 2, 0, 2">
+                    <TextBlock Text="Ball Possession"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
 
-                    <!--corners statistics-->
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Horizontal"
-                                    Width="150">
-                            <TextBlock Text="2"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                       FontSize="20"
-                                       />
+                <Border Grid.Row="1" Background="#E8E1D9" 
+                        Grid.Column="2"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="44%"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
 
-                            <TextBlock Text="Corners"
-                                           HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Margin="20, 0, 20, 0"
-                                       FontSize="20"
-                                       />
 
-                            <TextBlock Text="7"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                       FontSize="20"
-                                       />
-                        </StackPanel>
-                    </StackPanel>
+                <!-- shoot statistics-->
+                <Border Grid.Row="2" Background="#E8E1D9" 
+                        Grid.Column="0"
+                        BorderBrush="Black" BorderThickness="2"> 
+                    <TextBlock Text="8"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
 
-                </StackPanel>
-            </StackPanel>
+                <Border Grid.Row="2" Background="#E8E1D9" 
+                        Grid.Column="1"
+                        BorderBrush="Black" BorderThickness="0, 2, 0, 2">
+                    <TextBlock Text="Shoots"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="2" Background="#E8E1D9" 
+                        Grid.Column="2"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="4"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+
+                <!-- corner statistics-->
+                <Border Grid.Row="3" Background="#E8E1D9" 
+                        Grid.Column="0"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="4"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="3" Background="#E8E1D9" 
+                        Grid.Column="1"
+                        BorderBrush="Black" BorderThickness="0, 2, 0, 2">
+                    <TextBlock Text="Corners"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="3" Background="#E8E1D9" 
+                        Grid.Column="2"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="2"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <!-- corner statistics-->
+                <Border Grid.Row="4" Background="#E8E1D9" 
+                        Grid.Column="0"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="256"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="4" Background="#E8E1D9" 
+                        Grid.Column="1"
+                        BorderBrush="Black" BorderThickness="0, 2, 0, 2">
+                    <TextBlock Text="Passes"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="4" Background="#E8E1D9" 
+                        Grid.Column="2"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="176"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+
+                <!-- tackle statistics-->
+                <Border Grid.Row="5" Background="#E8E1D9" 
+                        Grid.Column="0"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="19"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="5" Background="#E8E1D9" 
+                        Grid.Column="1"
+                        BorderBrush="Black" BorderThickness="0, 2, 0, 2">
+                    <TextBlock Text="Tackles"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+                <Border Grid.Row="5" Background="#E8E1D9" 
+                        Grid.Column="2"
+                        BorderBrush="Black" BorderThickness="2">
+                    <TextBlock Text="5"
+                                   FontSize="25"
+                               HorizontalAlignment="Center"
+                                   />
+                </Border>
+
+
+            </Grid>
+
         </StackPanel>
 
     </Grid>

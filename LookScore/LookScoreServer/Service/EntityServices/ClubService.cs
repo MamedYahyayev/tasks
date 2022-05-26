@@ -2,6 +2,7 @@
 using LookScoreServer.Service.FileServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LookScoreServer.Service.EntityServices
 {
@@ -19,7 +20,7 @@ namespace LookScoreServer.Service.EntityServices
 
         public Club FindOne(int id)
         {
-            throw new NotImplementedException();
+            return DataService.Instance.Storage.Clubs.First(x => x.Id == id);
         }
 
         public void Insert(Club club)
