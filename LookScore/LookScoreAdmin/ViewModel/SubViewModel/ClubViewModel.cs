@@ -1,7 +1,9 @@
 ﻿using LookScoreAdmin.Command;
 using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.EntityServices;
+using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
+using System.ServiceModel;
 
 namespace LookScoreAdmin.ViewModel.SubViewModel
 {
@@ -10,14 +12,15 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
         #region Private Properties
 
         private Club[] _clubs;
-        private readonly ClubService _clubService = new ClubService();
 
         #endregion
 
 
         public ClubViewModel()
         {
-            Clubs = _clubService.FindAll();
+            ChannelFactory<IClubService> channel = new ChannelFactory<IClubService>("ClubService");
+                
+            Clubs = channel.CreateChannel().FindAllClubs();
         }
 
         #region Public Properties
