@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+using LookScoreCommon.Command;
+using LookScoreCommon.Enums;
 using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
@@ -16,15 +14,15 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
         private Game[] _games;
         private Game _selectedGame;
+        //private readonly ChannelFactory<IGameService> _gameServiceChannel = new ChannelFactory<IGameService>("GameService");
+        private readonly IStatisticService _statisticService = new ChannelFactory<IStatisticService>("StatisticService").CreateChannel();
 
         #endregion
 
         public MainViewModel()
         {
-            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("GameService");
-            IGameService gameService = channelFactory.CreateChannel();
-
-            Games = gameService.FindAllGameDetails();
+            //Games = _gameServiceChannel.CreateChannel().FindAllGameDetails();
+            //_gameServiceChannel.Close();
         }
 
         #region Public Properties
@@ -43,7 +41,58 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
         #endregion
 
+        #region Functions
 
+        private void IncreaseHomeTeamStatistics(StatisticType statistic)
+        {
+            IncreaseStatistics(statistic, Team.HOME);
+        }
+
+        private void IncreaseGuestTeamStatistics(StatisticType statistic)
+        {
+            IncreaseStatistics(statistic, Team.GUEST);
+        }
+
+        private void IncreaseStatistics(StatisticType statistic, Team team)
+        {
+            switch (statistic)
+            {
+                case StatisticType.GOAL:
+                    _statisticService.ChangeGoalStatistic(1, (int)team, 1);
+                    break;
+
+                case StatisticType.SHOOT:
+                    break;
+
+                case StatisticType.CORNER:
+                    break;
+
+                case StatisticType.TACKLE:
+                    break;
+
+                case StatisticType.PASS:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        #endregion
+
+
+
+        #region Commands
+
+        private readonly VoidReactiveCommand<StatisticType> _increaseHomeTeamStatisticCommand;
+        public VoidReactiveCommand<StatisticType> IncreaseHomeTeamStatisticCommand =>
+            _increaseHomeTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseHomeTeamStatistics);
+
+        private readonly VoidReactiveCommand<StatisticType> _increaseGuestTeamStatisticCommand;
+        public VoidReactiveCommand<StatisticType> IncreaseGuestTeamStatisticCommand =>
+            _increaseGuestTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseGuestTeamStatistics);
+
+        #endregion
 
     }
 }

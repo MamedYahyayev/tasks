@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LookScoreManageStatisticsClient"
         xmlns:viewModel="clr-namespace:LookScoreManageStatisticsClient.ViewModel"
+        xmlns:enum="clr-namespace:LookScoreCommon.Enums;assembly=LookScoreCommon"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
@@ -186,6 +187,8 @@
 
                         <Button Background="Transparent" BorderBrush="Transparent"
                             Grid.Column="2"
+                            Command="{Binding IncreaseHomeTeamStatisticCommand}"
+                            CommandParameter="{x:Static enum:StatisticType.GOAL}"
                             >
                                 <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
