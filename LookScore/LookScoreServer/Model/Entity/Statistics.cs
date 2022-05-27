@@ -13,6 +13,7 @@ namespace LookScoreServer.Model.Entity
         public int Corner { get; set; }
         public int Tackle { get; set; }
         public int Pass { get; set; }
+        public int Shoot { get; set; }
         public int BallPossessionTime { get; set; }
     }
 }

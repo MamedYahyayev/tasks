@@ -1,4 +1,5 @@
 ﻿using LookScoreCommon.Enums;
+using LookScoreServer.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,14 @@ namespace LookScoreServer.Service.WCFServices
             _statisticService = new EntityServices.StatisticService();
         }
 
-        public void ChangeGoalStatistic(int gameId, Team team, int amount)
+        public void ChangeStatistic(GameStatistics statistics)
         {
-            _statisticService.ChangeGoalStatistic(gameId, team, amount);
+            _statisticService.ChangeStatistic(statistics);
+        }
+
+        public GameStatistics FindGameStatistics(int gameId)
+        {
+            return _statisticService.FindGameStatistics(gameId);
         }
     }
 }
