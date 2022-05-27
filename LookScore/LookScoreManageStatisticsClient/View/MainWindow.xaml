@@ -7,6 +7,7 @@
         xmlns:viewModel="clr-namespace:LookScoreManageStatisticsClient.ViewModel"
         xmlns:enum="clr-namespace:LookScoreCommon.Enums;assembly=LookScoreCommon"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1200">
 
@@ -32,7 +33,13 @@
                         UpdateSourceTrigger=PropertyChanged}"
                       ToolTip="{Binding SelectedGame.GameTitle, 
                         UpdateSourceTrigger=PropertyChanged}"
-                      />
+                      >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GameChangeComamnd}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
 
             <StackPanel Grid.Column="1" 
                     Orientation="Horizontal" 
@@ -67,7 +74,7 @@
                 <Border Width="60"
                         BorderBrush="LightGray"
                         BorderThickness="3, 0, 3, 0" >
-                    <TextBlock Text="3 : 1"
+                    <TextBlock Text="{Binding CurrentGameStatistics, Converter={StaticResource ScoreBoardConverter}}"
                                FontSize="22"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -172,7 +179,9 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.GOAL}">
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -180,7 +189,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="3"
+                                   Text="{Binding CurrentGameStatistics.HomeClub.Goal, 
+                                        UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -221,7 +231,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.GOAL}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -229,7 +242,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="1"
+                                   Text="{Binding CurrentGameStatistics.GuestClub.Goal, 
+                                                    UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -261,7 +275,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.CORNER}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -269,7 +286,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="4"
+                                   Text="{Binding CurrentGameStatistics.HomeClub.Corner,
+                                            UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -308,7 +326,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.CORNER}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -316,7 +337,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="2"
+                                   Text="{Binding CurrentGameStatistics.GuestClub.Corner,
+                                                    UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -335,7 +357,7 @@
                     </Grid>
                 </Border>
 
-                <!-- corner statistics-->
+                <!-- passes statistics-->
                 <Border Grid.Row="4" Background="#E8E1D9" 
                         Grid.Column="0"
                         BorderBrush="Black" BorderThickness="2">
@@ -430,7 +452,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.TACKLE}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -438,7 +463,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="14"
+                                   Text="{Binding CurrentGameStatistics.HomeClub.Tackle,
+                                            UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -477,7 +503,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.TACKLE}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -485,7 +514,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="9"
+                                   Text="{Binding CurrentGameStatistics.GuestClub.Tackle,
+                                                UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -517,7 +547,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.SHOOT}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -525,7 +558,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="14"
+                                   Text="{Binding CurrentGameStatistics.HomeClub.Shoot,
+                                                UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
@@ -564,7 +598,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.SHOOT}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -572,7 +609,8 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="9"
+                                   Text="{Binding CurrentGameStatistics.GuestClub.Shoot,
+                                            UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
