@@ -17,9 +17,9 @@ namespace LookScoreServer.Service.WCFServices
             _statisticService = new EntityServices.StatisticService();
         }
 
-        public void ChangeGoalStatistic(int gameId, int team, int amount)
+        public void ChangeGoalStatistic(int gameId, Team team, int amount)
         {
-            _statisticService.ChangeGoalStatistic(gameId, (Team) team, amount);
+            _statisticService.ChangeGoalStatistic(gameId, team, amount);
         }
     }
 }

@@ -11,19 +11,35 @@ namespace LookScoreServer.Service.EntityServices
     {
         public void ChangeGoalStatistic(int gameId, Team team, int amount)
         {
-            var statistic = DataService.Instance.Storage.GameStatistics.First(x => x.GameId == gameId);
+            var gameStatisticList = DataService.Instance.Storage.GameStatistics.ToList();
 
-            if (team == Team.HOME)
+            GameStatistics gameStatistic;
+            if (gameStatisticList.Count == 0)
             {
-                statistic.HomeClub.Goal += amount;
+                gameStatistic = new GameStatistics
+                {
+                    GameId = gameId,
+                    HomeClub = new Statistics(),
+                    GuestClub = new Statistics()
+                };
+                gameStatisticList.Add(gameStatistic);
             }
             else
             {
-                statistic.GuestClub.Goal += amount;
+                gameStatistic = gameStatisticList.FirstOrDefault(x => x.GameId == gameId);
             }
 
-            var gameStatisticList = new List<GameStatistics>(DataService.Instance.Storage.GameStatistics);
-            gameStatisticList.Add(statistic);
+
+            if (team == Team.HOME)
+            {
+                gameStatistic.HomeClub.Goal += amount;
+            }
+            else
+            {
+                gameStatistic.GuestClub.Goal += amount;
+            }
+
+
             DataService.Instance.Storage.GameStatistics = gameStatisticList.ToArray();
             DataService.Instance.SetStorageModified();
         }
