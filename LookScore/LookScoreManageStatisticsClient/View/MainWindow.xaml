@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LookScoreManageStatisticsClient"
         xmlns:viewModel="clr-namespace:LookScoreManageStatisticsClient.ViewModel"
+        xmlns:enum="clr-namespace:LookScoreCommon.Enums;assembly=LookScoreCommon"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
@@ -184,17 +185,23 @@
                                    HorizontalAlignment="Center"
                                    />
 
-                        <Button Background="Transparent" BorderBrush="Transparent"
-                            Grid.Column="2"
+                        <Button Background="Transparent" 
+                                BorderBrush="Transparent"
+                                Grid.Column="2"
+                                Command="{Binding IncreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.GOAL}"
                             >
-                                <fa:FontAwesome Icon="Plus"
+                            <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
                                         Margin="5"/>
                         </Button>
-                        
+
                     </Grid>
                 </Border>
+
+                <!--Command="{Binding IncreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.GOAL}"-->
 
                 <Border Grid.Row="1" Background="#E8E1D9" 
                         Grid.Column="1"
@@ -574,8 +581,8 @@
 
 
             </Grid>
-            
-            
+
+
 
         </StackPanel>
 

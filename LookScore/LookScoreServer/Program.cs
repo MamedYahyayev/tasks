@@ -25,14 +25,19 @@ namespace LookScoreServer
 
             ServiceHost serviceHost = new ServiceHost(typeof(GameService));
             ServiceHost clubServiceHost = new ServiceHost(typeof(ClubService));
+            ServiceHost statisticServiceHost = new ServiceHost(typeof(StatisticService));
 
             serviceHost.Open();
             clubServiceHost.Open();
+            statisticServiceHost.Open();
+
 
             Console.Read();
 
             serviceHost.Close();
             clubServiceHost.Close();
+            statisticServiceHost.Close();
+
         }
     }
 }

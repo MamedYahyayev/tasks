@@ -1,65 +1,47 @@
-﻿namespace LookScoreServer.Service.EntityServices
+﻿using LookScoreCommon.Enums;
+using LookScoreServer.Model.Entity;
+using LookScoreServer.Service.FileServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LookScoreServer.Service.EntityServices
 {
     public class StatisticService
     {
-        #region Goal Statistics
-
-        public int IncreaseGoal()
+        public void ChangeGoalStatistic(int gameId, Team team, int amount)
         {
-            return 0;
+            var gameStatisticList = DataService.Instance.Storage.GameStatistics.ToList();
+
+            GameStatistics gameStatistic;
+            if (gameStatisticList.Count == 0)
+            {
+                gameStatistic = new GameStatistics
+                {
+                    GameId = gameId,
+                    HomeClub = new Statistics(),
+                    GuestClub = new Statistics()
+                };
+                gameStatisticList.Add(gameStatistic);
+            }
+            else
+            {
+                gameStatistic = gameStatisticList.FirstOrDefault(x => x.GameId == gameId);
+            }
+
+
+            if (team == Team.HOME)
+            {
+                gameStatistic.HomeClub.Goal += amount;
+            }
+            else
+            {
+                gameStatistic.GuestClub.Goal += amount;
+            }
+
+
+            DataService.Instance.Storage.GameStatistics = gameStatisticList.ToArray();
+            DataService.Instance.SetStorageModified();
         }
-
-        public int DecreaseGoal()
-        {
-            return 0;
-        }
-
-        #endregion
-
-        #region Corner Statistics
-
-        public int IncreaseCornerKicks()
-        {
-            return 0;
-        }
-
-        public int DecreaseCornerKicks()
-        {
-            return 0;
-        }
-
-        #endregion
-
-        #region Tackles Statistics
-
-        public int IncreaseTackles()
-        {
-            return 0;
-        }
-
-        public int DecreaseTackles()
-        {
-            return 0;
-        }
-
-        #endregion
-
-        #region Pass Statistics
-
-        public int UpdatePassStatistics(int amount)
-        {
-            return 0;
-        }
-
-        #endregion
-
-        #region Ball Possession Statistics
-
-        public int UpdateBallPossessionStatistics(int amount)
-        {
-            return 0;
-        }
-
-        #endregion
     }
 }

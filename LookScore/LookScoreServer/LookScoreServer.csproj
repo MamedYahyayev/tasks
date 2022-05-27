@@ -79,12 +79,18 @@
     <Compile Include="Service\WCFServices\GameService.cs" />
     <Compile Include="Service\WCFServices\IClubService.cs" />
     <Compile Include="Service\WCFServices\IGameService.cs" />
+    <Compile Include="Service\WCFServices\IStatisticService.cs" />
+    <Compile Include="Service\WCFServices\StatisticService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LookScoreCommon\LookScoreCommon.csproj">
+      <Project>{766932FF-F58E-470F-8E15-9B266096AE4A}</Project>
+      <Name>LookScoreCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LookScoreInterfaces\LookScoreInterfaces.csproj">
       <Project>{d7809914-b0db-4ddc-8bcc-628b37142cb6}</Project>
       <Name>LookScoreInterfaces</Name>

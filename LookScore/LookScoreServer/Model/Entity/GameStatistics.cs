@@ -12,5 +12,7 @@ namespace LookScoreServer.Model.Entity
         public Statistics HomeClub { get; set; } 
         public Statistics GuestClub { get; set; }
         public Game Game { get; set; }
+
+        public int GameId { get; set; }
     }
 }
