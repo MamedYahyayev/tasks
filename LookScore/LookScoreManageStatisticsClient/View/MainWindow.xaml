@@ -8,7 +8,7 @@
         xmlns:enum="clr-namespace:LookScoreCommon.Enums;assembly=LookScoreCommon"
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900">
+        Title="MainWindow" Height="450" Width="1200">
 
     <Window.DataContext>
         <viewModel:MainViewModel />
@@ -200,8 +200,6 @@
                     </Grid>
                 </Border>
 
-                <!--Command="{Binding IncreaseHomeTeamStatisticCommand}"
-                                CommandParameter="{x:Static enum:StatisticType.GOAL}"-->
 
                 <Border Grid.Row="1" Background="#E8E1D9" 
                         Grid.Column="1"
@@ -237,7 +235,9 @@
                                    />
 
                         <Button Background="Transparent" BorderBrush="Transparent"
-                            Grid.Column="2"
+                                Grid.Column="2"
+                                Command="{Binding IncreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.GOAL}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
@@ -276,6 +276,8 @@
 
                         <Button Background="Transparent" BorderBrush="Transparent"
                             Grid.Column="2"
+                                Command="{Binding IncreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.CORNER}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
@@ -320,7 +322,9 @@
                                    />
 
                         <Button Background="Transparent" BorderBrush="Transparent"
-                            Grid.Column="2"
+                                Grid.Column="2"
+                                Command="{Binding IncreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.CORNER}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
@@ -441,6 +445,8 @@
 
                         <Button Background="Transparent" BorderBrush="Transparent"
                             Grid.Column="2"
+                                Command="{Binding IncreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.TACKLE}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
@@ -485,7 +491,9 @@
                                    />
 
                         <Button Background="Transparent" BorderBrush="Transparent"
-                            Grid.Column="2"
+                                Grid.Column="2"
+                                Command="{Binding IncreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.TACKLE}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
@@ -523,7 +531,9 @@
                                    />
 
                         <Button Background="Transparent" BorderBrush="Transparent"
-                            Grid.Column="2"
+                                Grid.Column="2"
+                                Command="{Binding IncreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.SHOOT}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
@@ -568,7 +578,9 @@
                                    />
 
                         <Button Background="Transparent" BorderBrush="Transparent"
-                            Grid.Column="2"
+                                Grid.Column="2"
+                                Command="{Binding IncreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.SHOOT}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"

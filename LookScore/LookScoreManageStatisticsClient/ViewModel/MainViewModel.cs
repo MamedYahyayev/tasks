@@ -57,28 +57,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
         private void IncreaseStatistics(StatisticType statistic, Team team)
         {
             IStatisticService statisticService = _statisticServiceChannel.CreateChannel();
-
-            switch (statistic)
-            {
-                case StatisticType.GOAL:
-                    statisticService.ChangeGoalStatistic(SelectedGame.Id, team, 1);
-                    break;
-
-                case StatisticType.SHOOT:
-                    break;
-
-                case StatisticType.CORNER:
-                    break;
-
-                case StatisticType.TACKLE:
-                    break;
-
-                case StatisticType.PASS:
-                    break;
-
-                default:
-                    break;
-            }
+            statisticService.ChangeStatistic(SelectedGame.Id, team, 1, statistic);
         }
 
 
@@ -101,14 +80,18 @@ namespace LookScoreManageStatisticsClient.ViewModel
             }
         }
 
-        //private readonly VoidReactiveCommand<StatisticType> _increaseHomeTeamStatisticCommand;
-        //public VoidReactiveCommand<StatisticType> IncreaseHomeTeamStatisticCommand =>
-        //    _increaseHomeTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseHomeTeamStatistics);
-
-
-        //private readonly VoidReactiveCommand<StatisticType> _increaseGuestTeamStatisticCommand;
-        //public VoidReactiveCommand<StatisticType> IncreaseGuestTeamStatisticCommand =>
-        //    _increaseGuestTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseGuestTeamStatistics);
+        private RelayCommand<StatisticType> _increaseGuestTeamStatisticCommand;
+        public RelayCommand<StatisticType> IncreaseGuestTeamStatisticCommand
+        {
+            get
+            {
+                return _increaseGuestTeamStatisticCommand ?? (_increaseGuestTeamStatisticCommand =
+                                 new RelayCommand<StatisticType>(statisticType =>
+                                 {
+                                     IncreaseGuestTeamStatistics(statisticType);
+                                 }));
+            }
+        }
 
         #endregion
 

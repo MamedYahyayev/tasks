@@ -12,6 +12,6 @@ namespace LookScoreServer.Service.WCFServices
     public interface IStatisticService
     {
         [OperationContract]
-        void ChangeGoalStatistic(int gameId, Team team, int amount);
+        void ChangeStatistic(int gameId, Team team, int amount, StatisticType statisticType);
     }
 }

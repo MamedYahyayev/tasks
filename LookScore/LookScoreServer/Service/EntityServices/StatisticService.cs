@@ -9,7 +9,7 @@ namespace LookScoreServer.Service.EntityServices
 {
     public class StatisticService
     {
-        public void ChangeGoalStatistic(int gameId, Team team, int amount)
+        public void ChangeStatistic(int gameId, Team team, int amount, StatisticType statisticType)
         {
             var gameStatisticList = DataService.Instance.Storage.GameStatistics.ToList();
 
@@ -30,6 +30,44 @@ namespace LookScoreServer.Service.EntityServices
             }
 
 
+            switch (statisticType)
+            {
+                case StatisticType.GOAL:
+                    ChangeGoalStatistic(gameStatistic, team, amount);
+                    break;
+                case StatisticType.CORNER:
+                    ChangeCornerStatistic(gameStatistic, team, amount);
+                    break;
+                case StatisticType.TACKLE:
+                    ChangeTackleStatistic(gameStatistic, team, amount);
+                    break;
+                case StatisticType.SHOOT:
+                    ChangeShootStatistic(gameStatistic, team, amount);
+                    break;
+            }
+
+
+            DataService.Instance.Storage.GameStatistics = gameStatisticList.ToArray();
+            DataService.Instance.SetStorageModified();
+        }
+
+
+        #region Statistics
+
+        private void ChangeCornerStatistic(GameStatistics gameStatistic, Team team, int amount)
+        {
+            if (team == Team.HOME)
+            {
+                gameStatistic.HomeClub.Corner += amount;
+            }
+            else
+            {
+                gameStatistic.GuestClub.Corner += amount;
+            }
+        }
+
+        private void ChangeGoalStatistic(GameStatistics gameStatistic, Team team, int amount)
+        {
             if (team == Team.HOME)
             {
                 gameStatistic.HomeClub.Goal += amount;
@@ -38,10 +76,33 @@ namespace LookScoreServer.Service.EntityServices
             {
                 gameStatistic.GuestClub.Goal += amount;
             }
-
-
-            DataService.Instance.Storage.GameStatistics = gameStatisticList.ToArray();
-            DataService.Instance.SetStorageModified();
         }
+
+        private void ChangeTackleStatistic(GameStatistics gameStatistic, Team team, int amount)
+        {
+            if (team == Team.HOME)
+            {
+                gameStatistic.HomeClub.Tackle += amount;
+            }
+            else
+            {
+                gameStatistic.GuestClub.Tackle += amount;
+            }
+        }
+
+        private void ChangeShootStatistic(GameStatistics gameStatistic, Team team, int amount)
+        {
+            if (team == Team.HOME)
+            {
+                gameStatistic.HomeClub.Shoot += amount;
+            }
+            else
+            {
+                gameStatistic.GuestClub.Shoot += amount;
+            }
+        }
+
+        #endregion
+
     }
 }
