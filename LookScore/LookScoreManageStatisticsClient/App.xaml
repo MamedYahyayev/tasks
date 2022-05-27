@@ -2,8 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LookScoreManageStatisticsClient"
+             xmlns:converter="clr-namespace:LookScoreManageStatisticsClient.Converter"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+
+
+        <!--Converters-->
+        <converter:ScoreBoardConverter x:Key="ScoreBoardConverter" />
+        
     </Application.Resources>
 </Application>
