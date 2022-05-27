@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ServiceModel;
-using LookScoreCommon.Command;
-using LookScoreCommon.Enums;
 using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
+using GalaSoft.MvvmLight.Command;
+using LookScoreCommon.Enums;
 
 namespace LookScoreManageStatisticsClient.ViewModel
 {
@@ -14,15 +14,15 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
         private Game[] _games;
         private Game _selectedGame;
-        //private readonly ChannelFactory<IGameService> _gameServiceChannel = new ChannelFactory<IGameService>("GameService");
-        private readonly IStatisticService _statisticService = new ChannelFactory<IStatisticService>("StatisticService").CreateChannel();
-
+        private readonly ChannelFactory<IGameService> _gameServiceChannel = new ChannelFactory<IGameService>("GameService");
+        private readonly ChannelFactory<IStatisticService> _statisticServiceChannel = new ChannelFactory<IStatisticService>("StatisticService");
         #endregion
 
         public MainViewModel()
         {
-            //Games = _gameServiceChannel.CreateChannel().FindAllGameDetails();
-            //_gameServiceChannel.Close();
+            Games = _gameServiceChannel.CreateChannel().FindAllGameDetails();
+            _gameServiceChannel.Close();
+
         }
 
         #region Public Properties
@@ -38,6 +38,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
             get => _selectedGame;
             set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
         }
+
 
         #endregion
 
@@ -55,10 +56,12 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
         private void IncreaseStatistics(StatisticType statistic, Team team)
         {
+            IStatisticService statisticService = _statisticServiceChannel.CreateChannel();
+
             switch (statistic)
             {
                 case StatisticType.GOAL:
-                    _statisticService.ChangeGoalStatistic(1, (int)team, 1);
+                    statisticService.ChangeGoalStatistic(SelectedGame.Id, team, 1);
                     break;
 
                 case StatisticType.SHOOT:
@@ -78,19 +81,34 @@ namespace LookScoreManageStatisticsClient.ViewModel
             }
         }
 
+
         #endregion
 
 
 
         #region Commands
 
-        private readonly VoidReactiveCommand<StatisticType> _increaseHomeTeamStatisticCommand;
-        public VoidReactiveCommand<StatisticType> IncreaseHomeTeamStatisticCommand =>
-            _increaseHomeTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseHomeTeamStatistics);
+        private RelayCommand<StatisticType> _increaseHomeTeamStatisticCommand;
+        public RelayCommand<StatisticType> IncreaseHomeTeamStatisticCommand
+        {
+            get
+            {
+                return _increaseHomeTeamStatisticCommand ?? (_increaseHomeTeamStatisticCommand =
+                                 new RelayCommand<StatisticType>(statisticType =>
+                                 {
+                                     IncreaseHomeTeamStatistics(statisticType);
+                                 }));
+            }
+        }
 
-        private readonly VoidReactiveCommand<StatisticType> _increaseGuestTeamStatisticCommand;
-        public VoidReactiveCommand<StatisticType> IncreaseGuestTeamStatisticCommand =>
-            _increaseGuestTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseGuestTeamStatistics);
+        //private readonly VoidReactiveCommand<StatisticType> _increaseHomeTeamStatisticCommand;
+        //public VoidReactiveCommand<StatisticType> IncreaseHomeTeamStatisticCommand =>
+        //    _increaseHomeTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseHomeTeamStatistics);
+
+
+        //private readonly VoidReactiveCommand<StatisticType> _increaseGuestTeamStatisticCommand;
+        //public VoidReactiveCommand<StatisticType> IncreaseGuestTeamStatisticCommand =>
+        //    _increaseGuestTeamStatisticCommand ?? VoidReactiveCommand<StatisticType>.Create(IncreaseGuestTeamStatistics);
 
         #endregion
 
