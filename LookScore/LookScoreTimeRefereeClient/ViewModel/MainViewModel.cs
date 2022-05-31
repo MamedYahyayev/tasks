@@ -9,6 +9,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LookScoreTimeRefereeClient.ViewModel
 {
@@ -26,7 +27,10 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         public MainViewModel()
         {
-            InstanceContext callbackLocation = new InstanceContext(new GameStatisticsCallback());
+            var callback = new GameStatisticsCallback();
+            callback.StatisticsChanged += OnStatisticsChanged;
+
+            InstanceContext callbackLocation = new InstanceContext(callback);
             _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
             _statisticServiceChannel.JoinToChannel();
 
@@ -67,6 +71,11 @@ namespace LookScoreTimeRefereeClient.ViewModel
             {
                 CurrentGameStatistics = _statisticServiceChannel.FindGameStatistics(SelectedGame.Id);
             }
+        }
+
+        protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
+        {
+            CurrentGameStatistics = args.GameStatistics;
         }
 
         #endregion
