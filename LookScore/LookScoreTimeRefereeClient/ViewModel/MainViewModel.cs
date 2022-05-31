@@ -1,5 +1,7 @@
-﻿using LookScoreServer.Model.Entity;
+﻿using GalaSoft.MvvmLight.Command;
+using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
+using LookScoreTimeRefereeClient.Contract;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -14,18 +16,24 @@ namespace LookScoreTimeRefereeClient.ViewModel
     {
         #region Private Properties
 
+        private readonly IStatisticService _statisticServiceChannel;
+
         private Game[] _games;
         private Game _selectedGame;
+        private GameStatistics _currentGameStatistics;
 
         #endregion
 
         public MainViewModel()
         {
+            InstanceContext callbackLocation = new InstanceContext(new GameStatisticsCallback());
+            _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
+            _statisticServiceChannel.JoinToChannel();
+
             ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("GameService");
             IGameService gameService = channelFactory.CreateChannel();
 
             Games = gameService.FindAllGameDetails();
-
         }
 
         #region Public Properties
@@ -42,18 +50,39 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
         }
 
+        public GameStatistics CurrentGameStatistics
+        {
+            get => _currentGameStatistics;
+            set => this.RaiseAndSetIfChanged(ref _currentGameStatistics, value);
+        }
 
         #endregion
 
 
         #region Functions
 
+        private void GameChange()
+        {
+            if (SelectedGame != null)
+            {
+                CurrentGameStatistics = _statisticServiceChannel.FindGameStatistics(SelectedGame.Id);
+            }
+        }
 
         #endregion
 
+
         #region Commands
 
-
+        private RelayCommand _gameChangeCommand;
+        public RelayCommand GameChangeComamnd
+        {
+            get
+            {
+                return _gameChangeCommand ?? (_gameChangeCommand =
+                                 new RelayCommand(() => GameChange()));
+            }
+        }
 
         #endregion
 
