@@ -5,8 +5,14 @@
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LookScoreTimeRefereeClient"
+        xmlns:viewModel="clr-namespace:LookScoreTimeRefereeClient.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -48,7 +54,7 @@
                 Margin="5, 20, 5, 0"
                 Height="40"
                 Background="#14C38E">
-                
+
                 <!--Score Board-->
                 <Border Width="Auto">
                     <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
