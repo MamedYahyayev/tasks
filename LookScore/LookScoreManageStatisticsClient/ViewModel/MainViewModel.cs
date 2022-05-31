@@ -5,6 +5,7 @@ using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
 using GalaSoft.MvvmLight.Command;
 using LookScoreCommon.Enums;
+using LookScoreManageStatisticsClient.Contract;
 
 namespace LookScoreManageStatisticsClient.ViewModel
 {
@@ -12,16 +13,20 @@ namespace LookScoreManageStatisticsClient.ViewModel
     {
         #region Private Properties
 
+        private readonly ChannelFactory<IGameService> _gameServiceChannel = new ChannelFactory<IGameService>("GameService");
+        private readonly DuplexChannelFactory<IStatisticService> _statisticServiceChannelFactory;
         private Game[] _games;
         private Game _selectedGame;
         private GameStatistics _currentGameStatistic;
-        private readonly ChannelFactory<IGameService> _gameServiceChannel = new ChannelFactory<IGameService>("GameService");
-        private readonly ChannelFactory<IStatisticService> _statisticServiceChannel = new ChannelFactory<IStatisticService>("StatisticService");
 
         #endregion
 
         public MainViewModel()
         {
+            InstanceContext callbackLocation = new InstanceContext(new GameStatisticsCallback());
+            _statisticServiceChannelFactory = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService");
+            _statisticServiceChannelFactory.CreateChannel().JoinToChannel();
+
             Games = _gameServiceChannel.CreateChannel().FindAllGameDetails();
             _gameServiceChannel.Close();
         }
@@ -80,7 +85,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
             this.RaisePropertyChanged(nameof(CurrentGameStatistics));
 
-            IStatisticService statisticService = _statisticServiceChannel.CreateChannel();
+            IStatisticService statisticService = _statisticServiceChannelFactory.CreateChannel();
             statisticService.ChangeStatistic(CurrentGameStatistics);
         }
 
@@ -114,7 +119,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
             this.RaisePropertyChanged(nameof(CurrentGameStatistics));
 
-            IStatisticService statisticService = _statisticServiceChannel.CreateChannel();
+            IStatisticService statisticService = _statisticServiceChannelFactory.CreateChannel();
             statisticService.ChangeStatistic(CurrentGameStatistics);
         }
 
@@ -122,7 +127,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
         {
             if (SelectedGame != null)
             {
-                CurrentGameStatistics = _statisticServiceChannel.CreateChannel().FindGameStatistics(SelectedGame.Id);
+                CurrentGameStatistics = _statisticServiceChannelFactory.CreateChannel().FindGameStatistics(SelectedGame.Id);
             }
         }
 
