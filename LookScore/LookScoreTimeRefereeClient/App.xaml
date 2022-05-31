@@ -1,9 +1,17 @@
-﻿<Application x:Class="LookScoreTimeJudgeClient.App"
+﻿<Application x:Class="LookScoreTimeRefereeClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:LookScoreTimeJudgeClient"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:LookScoreTimeRefereeClient"
+             StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+
+            <!--Themes-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Theme/RefereeOperationsTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
