@@ -9,9 +9,12 @@ using System.Text;
 
 namespace LookScoreServer.Service.WCFServices
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IStatisticCallbackService))]
     public interface IStatisticService
     {
+        [OperationContract] 
+        void JoinToChannel();
+
         [OperationContract]
         void ChangeStatistic(GameStatistics statistics);
 

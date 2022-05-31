@@ -1,0 +1,192 @@
+﻿<Window x:Class="LookScoreTimeRefereeClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LookScoreTimeRefereeClient"
+        xmlns:viewModel="clr-namespace:LookScoreTimeRefereeClient.ViewModel" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="900">
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+
+            <ComboBox Margin="5" 
+                      FontSize="16" 
+                      Width="200"
+                      HorizontalAlignment="Left"
+                      DisplayMemberPath="GameTitle"
+                      ItemsSource="{Binding Games}"
+                      SelectedItem="{Binding SelectedGame, 
+                        UpdateSourceTrigger=PropertyChanged}"
+                      ToolTip="{Binding SelectedGame.GameTitle, 
+                        UpdateSourceTrigger=PropertyChanged}"
+                      >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GameChangeComamnd}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+
+            <StackPanel Grid.Column="1" 
+                    Orientation="Horizontal" 
+                    VerticalAlignment="Center"
+                    Margin="20, 0, 0, 0">
+                <TextBlock FontSize="20" 
+                           Text="{Binding SelectedGame.GameStartDate, StringFormat=dd.MM.yyyy HH:mm}" />
+                <TextBlock FontSize="20" Margin="20, 0, 0, 0"
+                           Text="{Binding SelectedGame.GameTitle}" />
+            </StackPanel>
+
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel 
+                Orientation="Horizontal"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Margin="5, 20, 5, 0"
+                Height="40"
+                Background="#14C38E">
+
+                <!--Score Board-->
+                <Border Width="Auto">
+                    <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="10, 5, 10, 5"
+                               Foreground="White"/>
+                </Border>
+
+                <Border Width="60"
+                        BorderBrush="LightGray"
+                        BorderThickness="3, 0, 3, 0" >
+                    <TextBlock Text="{Binding CurrentGameStatistics, Converter={StaticResource ScoreBoardConverter}}"
+                               FontSize="22"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="5, 0, 5, 0"
+                               Foreground="White"/>
+                </Border>
+
+                <Border Width="Auto">
+                    <TextBlock Text="{Binding SelectedGame.GuestClub.Name, UpdateSourceTrigger=PropertyChanged}"
+                               FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="10, 5, 10, 5"
+                               Foreground="White"/>
+                </Border>
+
+                <Border Background="#F2F2F2"
+                        Width="Auto">
+                    <StackPanel VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock Text="45 : 00"
+                                    FontSize="18"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="5, 0, 10, 0"
+                               Foreground="Black"
+                                 />
+
+                        <TextBlock Text="2:12"
+                                    FontSize="18"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="5, 0, 10, 0"
+                               Foreground="Black"
+                                   FontStyle="Italic" />
+
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="10">
+                <Button Style="{StaticResource RefereeOperationTheme}"
+                        Background="#14C38E">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="PlayCircle" 
+                                        VerticalAlignment="Center"
+                                        Margin="5,0,3,0"
+                                        Foreground="White"/>
+                        <Label Content="Start Timer" VerticalAlignment="Center" 
+                               Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource RefereeOperationTheme}"
+                        Background="#FFEF82">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="StopCircle" 
+                                        VerticalAlignment="Center"
+                                        Margin="5,0,3,0"/>
+                        <Label Content="Stop Timer" VerticalAlignment="Center" 
+                               Foreground="Black"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource RefereeOperationTheme}"
+                        Background="#646FD4">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="PlusCircle" 
+                                        VerticalAlignment="Center"
+                                        Margin="5,0,3,0"
+                                        Foreground="White"/>
+                        <Label Content="Extra TIme" VerticalAlignment="Center" 
+                               Foreground="White"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <TextBlock Text="Which team is currently playing with Ball?"
+                           FontSize="18"
+                           />
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Liverpool"
+                            Style="{StaticResource RefereeOperationTheme}"
+                            Padding="30, 6"
+                            />
+
+                    <Button Content="Real Madrid"
+                            Style="{StaticResource RefereeOperationTheme}"
+                            Padding="30, 6"
+                     />
+                </StackPanel>
+
+                <StackPanel Margin="10">
+                    <TextBlock Text="Ball Possession Time" 
+                               FontSize="18"/>
+
+                    <StackPanel>
+                        <TextBlock Text="Liverpool: 36:23" 
+                                   Margin="5"
+                                   FontSize="15"/>
+
+                        <TextBlock Text="Real Madrid: 12:67" 
+                                   Margin="5"
+                                   FontSize="15"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+
+        </StackPanel>
+
+    </Grid>
+</Window>

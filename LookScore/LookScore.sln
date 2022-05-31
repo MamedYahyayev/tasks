@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreViewerClient", "LookScoreViewerClient\LookScoreViewerClient.csproj", "{8371F3D9-E303-4675-8A74-FAE4AB072A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreTimeRefereeClient", "LookScoreTimeJudgeClient\LookScoreTimeRefereeClient.csproj", "{33EB5A40-6C66-4195-BC09-BDFF008AC9DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreTimeRefereeClient", "LookScoreTimeRefereeClient\LookScoreTimeRefereeClient.csproj", "{33EB5A40-6C66-4195-BC09-BDFF008AC9DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreManageStatisticsClient", "LookScoreManageStatisticsClient\LookScoreManageStatisticsClient.csproj", "{937B221A-4858-4AB3-A4CA-C90DB3FBDD0D}"
 EndProject

@@ -79,6 +79,7 @@
     <Compile Include="Service\WCFServices\GameService.cs" />
     <Compile Include="Service\WCFServices\IClubService.cs" />
     <Compile Include="Service\WCFServices\IGameService.cs" />
+    <Compile Include="Service\WCFServices\IStatisticCallbackService.cs" />
     <Compile Include="Service\WCFServices\IStatisticService.cs" />
     <Compile Include="Service\WCFServices\StatisticService.cs" />
   </ItemGroup>

@@ -1,0 +1,22 @@
+﻿<Application x:Class="LookScoreTimeRefereeClient.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:LookScoreTimeRefereeClient"
+             xmlns:converter="clr-namespace:LookScoreTimeRefereeClient.Converter"
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!--Themes-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Theme/RefereeOperationsTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+
+            <!--Converters-->
+            <converter:ScoreBoardConverter x:Key="ScoreBoardConverter" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
