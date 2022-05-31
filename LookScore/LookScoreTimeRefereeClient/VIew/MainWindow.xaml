@@ -70,7 +70,8 @@
                                Foreground="White"/>
                 </Border>
 
-                <Border Width="60"
+                <Border Width="Auto"
+                        Padding="2"
                         BorderBrush="LightGray"
                         BorderThickness="3, 0, 3, 0" >
                     <TextBlock Text="{Binding CurrentGameStatistics, Converter={StaticResource ScoreBoardConverter}}"
