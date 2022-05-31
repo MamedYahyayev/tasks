@@ -10,7 +10,7 @@ namespace LookScoreManageStatisticsClient.Contract
     {
         public void NotifyGoalScored(GameStatistics gameStatistics)
         {
-            MessageBox.Show("Goal Scored");
+
         }
     }
 }

@@ -13,9 +13,16 @@ namespace LookScoreTimeRefereeClient.Contract
     [CallbackBehavior(UseSynchronizationContext = false)]
     public class GameStatisticsCallback : IStatisticCallbackService
     {
+        public event EventHandler<StatisticEventArgs> StatisticsChanged;
+
         public void NotifyGoalScored(GameStatistics gameStatistics)
         {
-            MessageBox.Show("Goal Scored");
+            OnStatisticsChanged(gameStatistics);
+        }
+
+        protected virtual void OnStatisticsChanged(GameStatistics statistics)
+        {
+            StatisticsChanged?.Invoke(this, new StatisticEventArgs() { GameStatistics = statistics });
         }
     }
 }
