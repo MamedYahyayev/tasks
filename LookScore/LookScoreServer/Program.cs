@@ -6,6 +6,7 @@ using LookScoreServer.Service.WCFServices;
 using System;
 using System.Configuration;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace LookScoreServer
 {
