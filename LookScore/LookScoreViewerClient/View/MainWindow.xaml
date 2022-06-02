@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LookScoreViewerClient"
-        xmlns:viewModel="clr-namespace:LookScoreViewerClient.ViewModel"
+        xmlns:viewModel="clr-namespace:LookScoreViewerClient.ViewModel" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -30,7 +30,13 @@
                         UpdateSourceTrigger=PropertyChanged}"
                       ToolTip="{Binding SelectedGame.GameTitle, 
                         UpdateSourceTrigger=PropertyChanged}"
-                      />
+                      >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GameChangeComamnd}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
 
             <StackPanel Grid.Column="1" 
                     Orientation="Horizontal" 
@@ -53,7 +59,7 @@
                 Margin="5, 20, 5, 0"
                 Height="40"
                 Background="#14C38E">
-                <!--Score Board-->
+
                 <Border Width="Auto">
                     <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
                                FontSize="18"
@@ -66,7 +72,7 @@
                         Padding="2"
                         BorderBrush="LightGray"
                         BorderThickness="3, 0, 3, 0" >
-                    <TextBlock Text="3 : 1"
+                    <TextBlock Text="{Binding CurrentGameStatistics, Converter={StaticResource ScoreBoardConverter}}"
                                FontSize="22"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -104,7 +110,6 @@
 
                     </StackPanel>
                 </Border>
-
             </StackPanel>
 
             <Grid  
@@ -190,7 +195,7 @@
                 <!-- shoot statistics-->
                 <Border Grid.Row="2" Background="#E8E1D9" 
                         Grid.Column="0"
-                        BorderBrush="Black" BorderThickness="2"> 
+                        BorderBrush="Black" BorderThickness="2">
                     <TextBlock Text="8"
                                    FontSize="25"
                                HorizontalAlignment="Center"
