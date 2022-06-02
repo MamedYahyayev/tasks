@@ -53,6 +53,7 @@
 
 
         <StackPanel Grid.Row="1" Orientation="Vertical">
+            <!--Score Board-->
             <StackPanel 
                 Orientation="Horizontal"
                 VerticalAlignment="Top"
@@ -61,7 +62,6 @@
                 Height="40"
                 Background="#14C38E">
 
-                <!--Score Board-->
                 <Border Width="Auto">
                     <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
                                FontSize="18"
