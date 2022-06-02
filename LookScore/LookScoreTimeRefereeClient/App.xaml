@@ -16,6 +16,7 @@
 
             <!--Converters-->
             <converter:ScoreBoardConverter x:Key="ScoreBoardConverter" />
+            <converter:TeamEnumToActiveColorConverter x:Key="TeamEnumToActiveColorConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

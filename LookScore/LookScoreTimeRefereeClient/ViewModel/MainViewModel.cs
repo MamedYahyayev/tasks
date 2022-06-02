@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using LookScoreCommon.Enums;
 using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
 using LookScoreTimeRefereeClient.Contract;
@@ -22,6 +23,10 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private Game[] _games;
         private Game _selectedGame;
         private GameStatistics _currentGameStatistics;
+        private bool _isHomeTeamPlayBall;
+        private bool _isGuestTeamPlayBall;
+        private string _backgroundColor;
+        private Team _ballOwnerTeam;
 
         #endregion
 
@@ -60,6 +65,30 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _currentGameStatistics, value);
         }
 
+        public bool IsHomeTeamPlayBall
+        {
+            get => _isHomeTeamPlayBall;
+            set => this.RaiseAndSetIfChanged(ref _isHomeTeamPlayBall, value);
+        }
+
+        public bool IsGuestTeamPlayBall
+        {
+            get => _isGuestTeamPlayBall;
+            set => this.RaiseAndSetIfChanged(ref _isGuestTeamPlayBall, value);
+        }
+
+        public string BackgroundColor
+        {
+            get => _backgroundColor;
+            set => this.RaiseAndSetIfChanged(ref _backgroundColor, value);
+        }
+
+        public Team BallOwnerTeam
+        {
+            get => _ballOwnerTeam;
+            set => this.RaiseAndSetIfChanged(ref _ballOwnerTeam, value);
+        }
+
         #endregion
 
 
@@ -73,10 +102,24 @@ namespace LookScoreTimeRefereeClient.ViewModel
             }
         }
 
-        protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
+        private void BallOwnerTeamChanged(Team team)
         {
-            CurrentGameStatistics = args.GameStatistics;
+            if (team == Team.HOME)
+            {
+                //IsHomeTeamPlayBall = true;
+                //IsGuestTeamPlayBall = false;
+                BallOwnerTeam = Team.HOME;
+            }
+            else
+            {
+                //IsGuestTeamPlayBall = true;
+                //IsHomeTeamPlayBall = false;
+                BallOwnerTeam = Team.GUEST;
+            }
+
         }
+
+
 
         #endregion
 
@@ -93,7 +136,28 @@ namespace LookScoreTimeRefereeClient.ViewModel
             }
         }
 
+        private RelayCommand<Team> _ballOwnerTeamChanged;
+        public RelayCommand<Team> BallOwnerTeamChangedCommand
+        {
+            get
+            {
+                return _ballOwnerTeamChanged ?? (_ballOwnerTeamChanged =
+                                 new RelayCommand<Team>((team) => BallOwnerTeamChanged(team)));
+            }
+        }
+
+
+
         #endregion
 
+
+        #region Events
+
+        protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
+        {
+            CurrentGameStatistics = args.GameStatistics;
+        }
+
+        #endregion
     }
 }
