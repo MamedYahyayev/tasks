@@ -148,7 +148,7 @@
                                         VerticalAlignment="Center"
                                         Margin="5,3,3,0"
                                         Foreground="White"/>
-                        <Label Content="Extra TIme" VerticalAlignment="Center" 
+                        <Label Content="Extra Time" VerticalAlignment="Center" 
                                Foreground="White"/>
                     </StackPanel>
                 </Button>
