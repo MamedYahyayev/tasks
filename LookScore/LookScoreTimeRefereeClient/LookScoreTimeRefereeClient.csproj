@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Contract\GameStatisticsCallback.cs" />
     <Compile Include="Contract\StatisticEventArgs.cs" />
+    <Compile Include="Converter\TeamEnumToActiveColorConverter.cs" />
     <Compile Include="Converter\ScoreBoardConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
@@ -143,6 +144,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LookScoreCommon\LookScoreCommon.csproj">
+      <Project>{766932FF-F58E-470F-8E15-9B266096AE4A}</Project>
+      <Name>LookScoreCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LookScoreServer\LookScoreServer.csproj">
       <Project>{8DD4EA0F-C438-4742-B468-FDA65040F077}</Project>
       <Name>LookScoreServer</Name>

@@ -5,6 +5,7 @@
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LookScoreTimeRefereeClient"
+        xmlns:enum="clr-namespace:LookScoreCommon.Enums;assembly=LookScoreCommon"  
         xmlns:viewModel="clr-namespace:LookScoreTimeRefereeClient.ViewModel" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="900">
@@ -53,6 +54,7 @@
 
 
         <StackPanel Grid.Row="1" Orientation="Vertical">
+            <!--Score Board-->
             <StackPanel 
                 Orientation="Horizontal"
                 VerticalAlignment="Top"
@@ -61,7 +63,6 @@
                 Height="40"
                 Background="#14C38E">
 
-                <!--Score Board-->
                 <Border Width="Auto">
                     <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
                                FontSize="18"
@@ -162,12 +163,26 @@
                     <Button Content="Liverpool"
                             Style="{StaticResource RefereeOperationTheme}"
                             Padding="30, 6"
-                            />
+                            Command="{Binding BallOwnerTeamChangedCommand}"
+                            CommandParameter="{x:Static enum:Team.HOME}"
+                            Background="{Binding BallOwnerTeam, 
+                                Converter={StaticResource TeamEnumToActiveColorConverter},
+                                ConverterParameter={x:Static enum:Team.HOME}}"
+                     
+                     />
 
                     <Button Content="Real Madrid"
                             Style="{StaticResource RefereeOperationTheme}"
                             Padding="30, 6"
-                     />
+                            Command="{Binding BallOwnerTeamChangedCommand}"
+                            CommandParameter="{x:Static enum:Team.GUEST}"
+                            Background="{Binding BallOwnerTeam, 
+                                Converter={StaticResource TeamEnumToActiveColorConverter}, 
+                                ConverterParameter={x:Static enum:Team.GUEST}}"
+                     >
+
+                    </Button>
+
                 </StackPanel>
 
                 <StackPanel Margin="10">

@@ -187,7 +187,6 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
         #endregion
 
-
         #region Commands
 
         private RelayCommand<StatisticType> _increaseHomeTeamStatisticCommand;
