@@ -44,9 +44,13 @@
                     Orientation="Horizontal" 
                     VerticalAlignment="Center"
                     Margin="20, 0, 0, 0">
-                <TextBlock FontSize="20" 
-                           Text="{Binding SelectedGame.GameStartDate, StringFormat=dd.MM.yyyy HH:mm}" />
+                <TextBlock FontSize="20"
+                           FontWeight="Bold"
+                           Text="{Binding SelectedGame.GameStartDate, 
+                                    StringFormat=dd.MM.yyyy HH:mm}" />
+                
                 <TextBlock FontSize="20" Margin="20, 0, 0, 0"
+                           FontWeight="Bold"
                            Text="{Binding SelectedGame.GameTitle}" />
             </StackPanel>
 
@@ -156,6 +160,7 @@
 
             <StackPanel Margin="10">
                 <TextBlock Text="Which team is currently playing with Ball?"
+                           FontWeight="Bold"
                            FontSize="18"
                            />
 
@@ -186,11 +191,12 @@
                 </StackPanel>
 
                 <StackPanel Margin="10">
-                    <TextBlock Text="Ball Possession Time" 
+                    <TextBlock Text="Ball Possession Time"
+                               FontWeight="Bold"
                                FontSize="18"/>
 
                     <StackPanel>
-                        <TextBlock Text="Liverpool: 36:23" 
+                        <TextBlock Text="Liverpool: 36:23"
                                    Margin="5"
                                    FontSize="15"/>
 
