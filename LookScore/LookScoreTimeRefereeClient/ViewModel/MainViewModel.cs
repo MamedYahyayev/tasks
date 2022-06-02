@@ -4,13 +4,7 @@ using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
 using LookScoreTimeRefereeClient.Contract;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace LookScoreTimeRefereeClient.ViewModel
 {
@@ -23,9 +17,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private Game[] _games;
         private Game _selectedGame;
         private GameStatistics _currentGameStatistics;
-        private bool _isHomeTeamPlayBall;
-        private bool _isGuestTeamPlayBall;
-        private string _backgroundColor;
         private Team _ballOwnerTeam;
 
         #endregion
@@ -65,24 +56,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _currentGameStatistics, value);
         }
 
-        public bool IsHomeTeamPlayBall
-        {
-            get => _isHomeTeamPlayBall;
-            set => this.RaiseAndSetIfChanged(ref _isHomeTeamPlayBall, value);
-        }
-
-        public bool IsGuestTeamPlayBall
-        {
-            get => _isGuestTeamPlayBall;
-            set => this.RaiseAndSetIfChanged(ref _isGuestTeamPlayBall, value);
-        }
-
-        public string BackgroundColor
-        {
-            get => _backgroundColor;
-            set => this.RaiseAndSetIfChanged(ref _backgroundColor, value);
-        }
-
         public Team BallOwnerTeam
         {
             get => _ballOwnerTeam;
@@ -106,20 +79,14 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             if (team == Team.HOME)
             {
-                //IsHomeTeamPlayBall = true;
-                //IsGuestTeamPlayBall = false;
                 BallOwnerTeam = Team.HOME;
             }
             else
             {
-                //IsGuestTeamPlayBall = true;
-                //IsHomeTeamPlayBall = false;
                 BallOwnerTeam = Team.GUEST;
             }
 
         }
-
-
 
         #endregion
 
@@ -149,7 +116,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
 
         #endregion
-
 
         #region Events
 
