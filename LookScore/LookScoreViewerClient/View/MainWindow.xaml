@@ -196,7 +196,8 @@
                 <Border Grid.Row="2" Background="#E8E1D9" 
                         Grid.Column="0"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="8"
+                    <TextBlock Text="{Binding CurrentGameStatistics.HomeClub.Shoot
+                        , UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
@@ -214,7 +215,8 @@
                 <Border Grid.Row="2" Background="#E8E1D9" 
                         Grid.Column="2"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="4"
+                    <TextBlock Text="{Binding CurrentGameStatistics.GuestClub.Shoot,
+                        UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
@@ -225,7 +227,8 @@
                 <Border Grid.Row="3" Background="#E8E1D9" 
                         Grid.Column="0"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="4"
+                    <TextBlock Text="{Binding CurrentGameStatistics.HomeClub.Corner,
+                        UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
@@ -243,7 +246,8 @@
                 <Border Grid.Row="3" Background="#E8E1D9" 
                         Grid.Column="2"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="2"
+                    <TextBlock Text="{Binding CurrentGameStatistics.GuestClub.Corner,
+                        UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
@@ -282,7 +286,8 @@
                 <Border Grid.Row="5" Background="#E8E1D9" 
                         Grid.Column="0"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="19"
+                    <TextBlock Text="{Binding CurrentGameStatistics.HomeClub.Tackle,
+                        UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
@@ -300,7 +305,8 @@
                 <Border Grid.Row="5" Background="#E8E1D9" 
                         Grid.Column="2"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="5"
+                    <TextBlock Text="{Binding CurrentGameStatistics.GuestClub.Tackle,
+                        UpdateSourceTrigger=PropertyChanged}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
