@@ -29,6 +29,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private int _extraMinute;
         private bool _isTimerStart;
         private bool _isExtraTimeStart;
+        private bool _toggleExtraTimeAddVisibility;
 
         #endregion
 
@@ -102,6 +103,12 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _extraMinute, value);
         }
 
+        public bool ToggleExtraTimeAddVisibility
+        {
+            get => _toggleExtraTimeAddVisibility;
+            set => this.RaiseAndSetIfChanged(ref _toggleExtraTimeAddVisibility, value);
+        }
+
         #endregion
 
 
@@ -173,6 +180,11 @@ namespace LookScoreTimeRefereeClient.ViewModel
             _isTimerStart = false;
         }
 
+        private void ToggleExtraTimeVisibility()
+        {
+            ToggleExtraTimeAddVisibility = !ToggleExtraTimeAddVisibility;
+        }
+
         #endregion
 
 
@@ -215,6 +227,17 @@ namespace LookScoreTimeRefereeClient.ViewModel
                 return _stopTimerCommand ?? (_stopTimerCommand = new RelayCommand(() => StopTimer()));
             }
         }
+
+
+        private RelayCommand _addExtraTimeCommand;
+        public RelayCommand AddExtraTimeCommand
+        {
+            get
+            {
+                return _addExtraTimeCommand ?? (_addExtraTimeCommand = new RelayCommand(() => ToggleExtraTimeVisibility()));
+            }
+        }
+
 
 
         #endregion

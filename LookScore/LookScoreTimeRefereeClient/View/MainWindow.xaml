@@ -158,7 +158,8 @@
                 </Button>
 
                 <Button Style="{StaticResource RefereeOperationTheme}"
-                        Background="#646FD4">
+                        Background="#646FD4"
+                        Command="{Binding AddExtraTimeCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="PlusCircle" 
                                         VerticalAlignment="Center"
@@ -171,7 +172,9 @@
 
                 <TextBox Text="{Binding ExtraMinute, UpdateSourceTrigger=PropertyChanged}" 
                              Height="30" Width="80" FontSize="20" 
-                             HorizontalContentAlignment="Right" />
+                             HorizontalContentAlignment="Right"
+                         Visibility="{Binding ToggleExtraTimeAddVisibility, 
+                    Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
             </StackPanel>
 
