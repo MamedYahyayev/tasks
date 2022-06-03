@@ -118,6 +118,15 @@
 
                     </StackPanel>
                 </Border>
+
+                <Border Width="Auto" Background="#5FD068" Padding="5"
+                        Visibility="{Binding IsExtraTimeStart, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="{Binding Path=ExtraMinute, 
+                 StringFormat='+{0}'}" FontSize="22" 
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               />
+                </Border>
             </StackPanel>
 
 
@@ -159,6 +168,11 @@
                                Foreground="White"/>
                     </StackPanel>
                 </Button>
+
+                <TextBox Text="{Binding ExtraMinute, UpdateSourceTrigger=PropertyChanged}" 
+                             Height="30" Width="80" FontSize="20" 
+                             HorizontalContentAlignment="Right" />
+
             </StackPanel>
 
             <StackPanel Margin="10">

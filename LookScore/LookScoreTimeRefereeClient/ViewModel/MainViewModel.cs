@@ -26,6 +26,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         private int _seconds = 44 * 60 + 55;
         private int _extraSeconds;
+        private int _extraMinute;
         private bool _isTimerStart;
         private bool _isExtraTimeStart;
 
@@ -93,6 +94,12 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             get => _isExtraTimeStart;
             set => this.RaiseAndSetIfChanged(ref _isExtraTimeStart, value);
+        }
+
+        public int ExtraMinute
+        {
+            get => _extraMinute;
+            set => this.RaiseAndSetIfChanged(ref _extraMinute, value);
         }
 
         #endregion
@@ -208,6 +215,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
                 return _stopTimerCommand ?? (_stopTimerCommand = new RelayCommand(() => StopTimer()));
             }
         }
+
 
         #endregion
 
