@@ -44,9 +44,13 @@
                     Orientation="Horizontal" 
                     VerticalAlignment="Center"
                     Margin="20, 0, 0, 0">
-                <TextBlock FontSize="20" 
-                           Text="{Binding SelectedGame.GameStartDate, StringFormat=dd.MM.yyyy HH:mm}" />
+                <TextBlock FontSize="20"
+                           FontWeight="Bold"
+                           Text="{Binding SelectedGame.GameStartDate, 
+                                    StringFormat=dd.MM.yyyy HH:mm}" />
+
                 <TextBlock FontSize="20" Margin="20, 0, 0, 0"
+                           FontWeight="Bold"
                            Text="{Binding SelectedGame.GameTitle}" />
             </StackPanel>
 
@@ -95,7 +99,7 @@
                         Width="Auto">
                     <StackPanel VerticalAlignment="Center"
                                 Orientation="Horizontal">
-                        <TextBlock Text="45 : 00"
+                        <TextBlock Text="{Binding Seconds, Converter={StaticResource SecondsToMinuteConverter}}"
                                     FontSize="18"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
@@ -103,15 +107,25 @@
                                Foreground="Black"
                                  />
 
-                        <TextBlock Text="2:12"
+                        <TextBlock Text="{Binding ExtraSeconds, Converter={StaticResource SecondsToMinuteConverter}}"
                                     FontSize="18"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"
                                Margin="5, 0, 10, 0"
-                               Foreground="Black"
-                                   FontStyle="Italic" />
+                               Foreground="Red"
+                                   FontWeight="DemiBold"
+                                   Visibility="{Binding IsExtraTimeStart, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                     </StackPanel>
+                </Border>
+
+                <Border Width="Auto" Background="#5FD068" Padding="5"
+                        Visibility="{Binding IsExtraTimeStart, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="{Binding Path=ExtraMinute, 
+                 StringFormat='+{0}'}" FontSize="22" 
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               />
                 </Border>
             </StackPanel>
 
@@ -119,11 +133,12 @@
             <StackPanel Orientation="Horizontal"
                         Margin="10">
                 <Button Style="{StaticResource RefereeOperationTheme}"
-                        Background="#14C38E">
+                        Background="#14C38E"
+                        Command="{Binding StartTimerCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="PlayCircle" 
                                         VerticalAlignment="Center"
-                                        Margin="5,0,3,0"
+                                        Margin="5,3,3,0"
                                         Foreground="White"/>
                         <Label Content="Start Timer" VerticalAlignment="Center" 
                                Foreground="White"/>
@@ -131,31 +146,41 @@
                 </Button>
 
                 <Button Style="{StaticResource RefereeOperationTheme}"
-                        Background="#FFEF82">
+                        Background="#FFEF82"
+                        Command="{Binding StopTimerCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="StopCircle" 
                                         VerticalAlignment="Center"
-                                        Margin="5,0,3,0"/>
+                                        Margin="5,3,3,0"/>
                         <Label Content="Stop Timer" VerticalAlignment="Center" 
                                Foreground="Black"/>
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource RefereeOperationTheme}"
-                        Background="#646FD4">
+                        Background="#646FD4"
+                        Command="{Binding AddExtraTimeCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="PlusCircle" 
                                         VerticalAlignment="Center"
-                                        Margin="5,0,3,0"
+                                        Margin="5,3,3,0"
                                         Foreground="White"/>
-                        <Label Content="Extra TIme" VerticalAlignment="Center" 
+                        <Label Content="Extra Time" VerticalAlignment="Center" 
                                Foreground="White"/>
                     </StackPanel>
                 </Button>
+
+                <TextBox Text="{Binding ExtraMinute, UpdateSourceTrigger=PropertyChanged}" 
+                             Height="30" Width="80" FontSize="20" 
+                             HorizontalContentAlignment="Right"
+                         Visibility="{Binding ToggleExtraTimeAddVisibility, 
+                    Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
             </StackPanel>
 
             <StackPanel Margin="10">
                 <TextBlock Text="Which team is currently playing with Ball?"
+                           FontWeight="Bold"
                            FontSize="18"
                            />
 
@@ -186,11 +211,12 @@
                 </StackPanel>
 
                 <StackPanel Margin="10">
-                    <TextBlock Text="Ball Possession Time" 
+                    <TextBlock Text="Ball Possession Time"
+                               FontWeight="Bold"
                                FontSize="18"/>
 
                     <StackPanel>
-                        <TextBlock Text="Liverpool: 36:23" 
+                        <TextBlock Text="Liverpool: 36:23"
                                    Margin="5"
                                    FontSize="15"/>
 
