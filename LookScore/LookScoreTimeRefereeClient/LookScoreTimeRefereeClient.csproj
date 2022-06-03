@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Contract\GameStatisticsCallback.cs" />
     <Compile Include="Contract\StatisticEventArgs.cs" />
+    <Compile Include="Converter\SecondsToMinuteConverter.cs" />
     <Compile Include="Converter\TeamEnumToActiveColorConverter.cs" />
     <Compile Include="Converter\ScoreBoardConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

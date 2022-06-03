@@ -5,6 +5,7 @@ using LookScoreServer.Service.WCFServices;
 using LookScoreTimeRefereeClient.Contract;
 using ReactiveUI;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace LookScoreTimeRefereeClient.ViewModel
 {
@@ -18,6 +19,8 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private Game _selectedGame;
         private GameStatistics _currentGameStatistics;
         private Team _ballOwnerTeam;
+        private int _seconds = 0;
+        private bool _isTimerStart;
 
         #endregion
 
@@ -62,6 +65,12 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _ballOwnerTeam, value);
         }
 
+        public int Seconds
+        {
+            get => _seconds;
+            set => this.RaiseAndSetIfChanged(ref _seconds, value);
+        }
+
         #endregion
 
 
@@ -86,6 +95,25 @@ namespace LookScoreTimeRefereeClient.ViewModel
                 BallOwnerTeam = Team.GUEST;
             }
 
+        }
+
+        private void StartTimer()
+        {
+            _isTimerStart = true;
+
+            Task.Run(async () =>
+            {
+                while (_isTimerStart)
+                {
+                    Seconds += 1;
+                    await Task.Delay(1000);
+                }
+            });
+        }
+
+        private void StopTimer()
+        {
+            _isTimerStart = false;
         }
 
         #endregion
@@ -113,7 +141,23 @@ namespace LookScoreTimeRefereeClient.ViewModel
             }
         }
 
+        private RelayCommand _startTimerCommand;
+        public RelayCommand StartTimerCommand
+        {
+            get
+            {
+                return _startTimerCommand ?? (_startTimerCommand = new RelayCommand(() => StartTimer()));
+            }
+        }
 
+        private RelayCommand _stopTimerCommand;
+        public RelayCommand StopTimerCommand
+        {
+            get
+            {
+                return _stopTimerCommand ?? (_stopTimerCommand = new RelayCommand(() => StopTimer()));
+            }
+        }
 
         #endregion
 
