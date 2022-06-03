@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using LookScoreCommon.Constants;
 using LookScoreCommon.Enums;
 using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
@@ -19,10 +20,19 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private Game _selectedGame;
         private GameStatistics _currentGameStatistics;
         private Team _ballOwnerTeam;
-        private int _seconds = 0;
+
+
+        #region TIme Related Private Properties
+
+        private int _seconds = 44 * 60 + 55;
+        private int _extraSeconds;
         private bool _isTimerStart;
+        private bool _isExtraTimeStart;
 
         #endregion
+
+        #endregion
+
 
         public MainViewModel()
         {
@@ -65,13 +75,32 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _ballOwnerTeam, value);
         }
 
+        #region Time Related Public Properties
+
         public int Seconds
         {
             get => _seconds;
             set => this.RaiseAndSetIfChanged(ref _seconds, value);
         }
 
+        public int ExtraSeconds
+        {
+            get => _extraSeconds;
+            set => this.RaiseAndSetIfChanged(ref _extraSeconds, value);
+        }
+
+        public bool IsExtraTimeStart
+        {
+            get => _isExtraTimeStart;
+            set => this.RaiseAndSetIfChanged(ref _isExtraTimeStart, value);
+        }
+
         #endregion
+
+
+        #endregion
+
+
 
 
         #region Functions
@@ -105,7 +134,28 @@ namespace LookScoreTimeRefereeClient.ViewModel
             {
                 while (_isTimerStart)
                 {
+                    if (GameConstants.FIRST_HALF_IN_SECONDS == Seconds || GameConstants.BOTH_HALF_IN_SECONDS == Seconds)
+                    {
+                        _isTimerStart = false;
+                        StartExtraTime();
+                        return;
+                    }
+
                     Seconds += 1;
+                    await Task.Delay(1000);
+                }
+            });
+        }
+
+        private void StartExtraTime()
+        {
+            IsExtraTimeStart = true;
+
+            Task.Run(async () =>
+            {
+                while (IsExtraTimeStart)
+                {
+                    ExtraSeconds += 1;
                     await Task.Delay(1000);
                 }
             });

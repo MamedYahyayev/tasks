@@ -107,13 +107,14 @@
                                Foreground="Black"
                                  />
 
-                        <!--<TextBlock Text="2:12"
+                        <TextBlock Text="{Binding ExtraSeconds, Converter={StaticResource SecondsToMinuteConverter}}"
                                     FontSize="18"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Right"
                                Margin="5, 0, 10, 0"
-                               Foreground="Black"
-                                   FontStyle="Italic" />-->
+                               Foreground="Red"
+                                   FontWeight="DemiBold"
+                                   Visibility="{Binding IsExtraTimeStart, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                     </StackPanel>
                 </Border>

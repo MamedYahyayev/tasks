@@ -15,6 +15,7 @@
 
 
             <!--Converters-->
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <converter:ScoreBoardConverter x:Key="ScoreBoardConverter" />
             <converter:TeamEnumToActiveColorConverter x:Key="TeamEnumToActiveColorConverter" />
             <converter:SecondsToMinuteConverter x:Key="SecondsToMinuteConverter" />
