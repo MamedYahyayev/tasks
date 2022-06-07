@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LookScoreCommon
+namespace LookScoreCommon.Enums
 {
-    public class Program
+    public enum ViewType
     {
-        public static void Main(string[] args)
-        {
-
-        }    
+        GAME, REFEREE, CLUB, PLAYER
     }
 }
