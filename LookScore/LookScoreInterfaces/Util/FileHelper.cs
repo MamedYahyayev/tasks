@@ -8,7 +8,7 @@ namespace LookScoreInterfaces.Util
 {
     public class FileHelper
     {
-        private static string STORAGE_FILE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Data\";
+        private static readonly string STORAGE_FILE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Data\";
 
         private FileHelper()
         {

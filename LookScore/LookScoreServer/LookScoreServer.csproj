@@ -50,18 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Entity\Club.cs" />
-    <Compile Include="Model\Entity\Game.cs" />
-    <Compile Include="Model\Entity\GameStatistics.cs" />
-    <Compile Include="Model\Entity\Person.cs" />
-    <Compile Include="Model\Entity\Player.cs" />
-    <Compile Include="Model\Entity\Referee.cs" />
-    <Compile Include="Model\Entity\Statistics.cs" />
-    <Compile Include="Model\Entity\Storage.cs" />
-    <Compile Include="Model\Enums\FileType.cs" />
-    <Compile Include="Model\Enums\Nationality.cs" />
-    <Compile Include="Model\Enums\Position.cs" />
-    <Compile Include="Model\Enums\ViewType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EntityServices\ClubService.cs" />

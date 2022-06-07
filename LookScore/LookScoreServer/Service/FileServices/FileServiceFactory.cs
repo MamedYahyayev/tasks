@@ -1,5 +1,5 @@
-﻿using LookScoreInterfaces.Exceptions;
-using LookScoreServer.Model.Enums;
+﻿using LookScoreCommon.Enums;
+using LookScoreInterfaces.Exceptions;
 
 namespace LookScoreServer.Service.FileServices
 {

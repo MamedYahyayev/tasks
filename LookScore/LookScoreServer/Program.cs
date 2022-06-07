@@ -1,6 +1,6 @@
-﻿using LookScoreInterfaces.Exceptions;
+﻿using LookScoreCommon.Enums;
+using LookScoreInterfaces.Exceptions;
 using LookScoreInterfaces.Util;
-using LookScoreServer.Model.Enums;
 using LookScoreServer.Service.FileServices;
 using LookScoreServer.Service.WCFServices;
 using System;

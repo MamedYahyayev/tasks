@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using LookScoreCommon.Enums;
-using LookScoreServer.Model.Entity;
+using LookScoreCommon.Model;
 using LookScoreServer.Service.WCFServices;
 using LookScoreViewerClient.Contract;
 using ReactiveUI;
@@ -36,7 +35,7 @@ namespace LookScoreViewerClient.ViewModel
         }
 
         #region Public Properties
-
+        
         public Game[] Games
         {
             get => _games;
