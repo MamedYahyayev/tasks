@@ -1,6 +1,6 @@
 ﻿using LookScoreCommon.Enums;
-using LookScoreInterfaces.Exceptions;
-using LookScoreInterfaces.Util;
+using LookScoreCommon.Exceptions;
+using LookScoreCommon.Util;
 using LookScoreServer.Service.FileServices;
 using LookScoreServer.Service.WCFServices;
 using System;
@@ -20,7 +20,7 @@ namespace LookScoreServer
             var isValid = FileValidator.IsValidFileType(fileType);
             if (!isValid) throw new UnsupportedFileTypeException("Invalid File Type, please use json or xml file type");
 
-            FileType fileService = (FileType)FileHelper.GetFileType(fileType);
+            FileType fileService = FileHelper.GetFileType(fileType);
 
             DataService.InitInstance(FileServiceFactory.CreateFileService(fileService));
 

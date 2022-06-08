@@ -42,7 +42,6 @@ namespace LookScoreServer.Service.WCFServices
             {
                 _statisticCallbackServiceList.Add(registeredClient);
             }
-
         }
 
     }
