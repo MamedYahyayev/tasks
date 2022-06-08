@@ -1,11 +1,14 @@
-﻿using LookScoreServer.Model.Entity;
+﻿using LookScoreCommon.Model;
 using System.ServiceModel;
 
 namespace LookScoreServer.Service.WCFServices
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IGameCallbackService))]
     public interface IGameService
     {
+        [OperationContract]
+        void JoinToChannel();
+
         [OperationContract]
         string[] GetAllGamesTitle();
 
@@ -18,5 +21,7 @@ namespace LookScoreServer.Service.WCFServices
         [OperationContract]
         void InsertGame(Game game);
 
+        [OperationContract]
+        void StartGame(Game game);
     }
 }

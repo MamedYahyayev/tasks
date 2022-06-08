@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreManageStatisticsCl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreAdmin", "LookScoreAdmin\LookScoreAdmin.csproj", "{3A75D0B1-69E8-47F0-945F-46F29379D5D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreInterfaces", "LookScoreInterfaces\LookScoreInterfaces.csproj", "{D7809914-B0DB-4DDC-8BCC-628B37142CB6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreServer", "LookScoreServer\LookScoreServer.csproj", "{8DD4EA0F-C438-4742-B468-FDA65040F077}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookScoreCommon", "LookScoreCommon\LookScoreCommon.csproj", "{766932FF-F58E-470F-8E15-9B266096AE4A}"
@@ -39,10 +37,6 @@ Global
 		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A75D0B1-69E8-47F0-945F-46F29379D5D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7809914-B0DB-4DDC-8BCC-628B37142CB6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DD4EA0F-C438-4742-B468-FDA65040F077}.Release|Any CPU.ActiveCfg = Release|Any CPU

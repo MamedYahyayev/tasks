@@ -233,10 +233,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LookScoreInterfaces\LookScoreInterfaces.csproj">
-      <Project>{d7809914-b0db-4ddc-8bcc-628b37142cb6}</Project>
-      <Name>LookScoreInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LookScoreServer\LookScoreServer.csproj">
       <Project>{8DD4EA0F-C438-4742-B468-FDA65040F077}</Project>
       <Name>LookScoreServer</Name>

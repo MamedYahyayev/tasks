@@ -1,4 +1,4 @@
-﻿using LookScoreServer.Model.Entity;
+﻿using LookScoreCommon.Model;
 using System;
 using System.Globalization;
 using System.Windows.Data;

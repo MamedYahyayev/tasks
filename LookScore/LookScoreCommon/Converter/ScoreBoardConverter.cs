@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace LookScoreTimeRefereeClient.Converter
+namespace LookScoreCommon.Converter
 {
     public class ScoreBoardConverter : IValueConverter
     {

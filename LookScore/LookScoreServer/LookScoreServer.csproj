@@ -50,18 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Entity\Club.cs" />
-    <Compile Include="Model\Entity\Game.cs" />
-    <Compile Include="Model\Entity\GameStatistics.cs" />
-    <Compile Include="Model\Entity\Person.cs" />
-    <Compile Include="Model\Entity\Player.cs" />
-    <Compile Include="Model\Entity\Referee.cs" />
-    <Compile Include="Model\Entity\Statistics.cs" />
-    <Compile Include="Model\Entity\Storage.cs" />
-    <Compile Include="Model\Enums\FileType.cs" />
-    <Compile Include="Model\Enums\Nationality.cs" />
-    <Compile Include="Model\Enums\Position.cs" />
-    <Compile Include="Model\Enums\ViewType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EntityServices\ClubService.cs" />
@@ -79,6 +67,7 @@
     <Compile Include="Service\WCFServices\GameService.cs" />
     <Compile Include="Service\WCFServices\IClubService.cs" />
     <Compile Include="Service\WCFServices\IGameService.cs" />
+    <Compile Include="Service\WCFServices\IGameCallbackService.cs" />
     <Compile Include="Service\WCFServices\IStatisticCallbackService.cs" />
     <Compile Include="Service\WCFServices\IStatisticService.cs" />
     <Compile Include="Service\WCFServices\StatisticService.cs" />
@@ -91,10 +80,6 @@
     <ProjectReference Include="..\LookScoreCommon\LookScoreCommon.csproj">
       <Project>{766932FF-F58E-470F-8E15-9B266096AE4A}</Project>
       <Name>LookScoreCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LookScoreInterfaces\LookScoreInterfaces.csproj">
-      <Project>{d7809914-b0db-4ddc-8bcc-628b37142cb6}</Project>
-      <Name>LookScoreInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

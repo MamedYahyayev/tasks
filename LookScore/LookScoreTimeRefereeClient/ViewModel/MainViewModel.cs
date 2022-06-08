@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using LookScoreCommon.Constants;
 using LookScoreCommon.Enums;
-using LookScoreServer.Model.Entity;
+using LookScoreCommon.Model;
 using LookScoreServer.Service.WCFServices;
 using LookScoreTimeRefereeClient.Contract;
 using ReactiveUI;
@@ -15,6 +15,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
         #region Private Properties
 
         private readonly IStatisticService _statisticServiceChannel;
+        private readonly IGameService _gameService;
 
         private Game[] _games;
         private Game _selectedGame;
@@ -22,9 +23,9 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private Team _ballOwnerTeam;
 
 
-        #region TIme Related Private Properties
+        #region Time Related Private Properties
 
-        private int _seconds = 44 * 60 + 55;
+        private int _seconds;
         private int _extraSeconds;
         private int _extraMinute;
         private bool _isTimerStart;
@@ -41,14 +42,19 @@ namespace LookScoreTimeRefereeClient.ViewModel
             var callback = new GameStatisticsCallback();
             callback.StatisticsChanged += OnStatisticsChanged;
 
+            var gameCallback = new GameCallback();
+            gameCallback.GameStarted += OnGameStarted;
+
             InstanceContext callbackLocation = new InstanceContext(callback);
             _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
             _statisticServiceChannel.JoinToChannel();
 
-            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("GameService");
-            IGameService gameService = channelFactory.CreateChannel();
+            InstanceContext gameCallbackInstance = new InstanceContext(gameCallback);
+            DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
+            _gameService = channelFactory.CreateChannel();
+            _gameService.JoinToChannel();
 
-            Games = gameService.FindAllGameDetails();
+            Games = _gameService.FindAllGameDetails();
         }
 
         #region Public Properties
@@ -142,21 +148,33 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         private void StartTimer()
         {
+            _gameService.StartGame(SelectedGame);
+
+            if (_isTimerStart)
+            {
+                return;
+            }
+
             _isTimerStart = true;
+
+            if (ExtraSeconds > 0)
+            {
+                ResetExtraTime();
+            }
 
             Task.Run(async () =>
             {
                 while (_isTimerStart)
                 {
+                    Seconds += 1;
+                    await Task.Delay(1000);
+
                     if (GameConstants.FIRST_HALF_IN_SECONDS == Seconds || GameConstants.BOTH_HALF_IN_SECONDS == Seconds)
                     {
                         _isTimerStart = false;
                         StartExtraTime();
                         return;
                     }
-
-                    Seconds += 1;
-                    await Task.Delay(1000);
                 }
             });
         }
@@ -175,9 +193,21 @@ namespace LookScoreTimeRefereeClient.ViewModel
             });
         }
 
+        private void ResetExtraTime()
+        {
+            IsExtraTimeStart = false;
+            ExtraSeconds = 0;
+            ToggleExtraTimeAddVisibility = false;
+        }
+
         private void StopTimer()
         {
             _isTimerStart = false;
+
+            if (IsExtraTimeStart)
+            {
+                IsExtraTimeStart = false;
+            }
         }
 
         private void ToggleExtraTimeVisibility()
@@ -248,6 +278,13 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             CurrentGameStatistics = args.GameStatistics;
         }
+
+        protected virtual void OnGameStarted(object source, GameEventArgs args)
+        {
+
+        }
+
+
 
         #endregion
     }

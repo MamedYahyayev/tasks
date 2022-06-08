@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LookScoreServer.Model.Entity
+namespace LookScoreCommon.Model
 {
     [Serializable]
     public class GameStatistics

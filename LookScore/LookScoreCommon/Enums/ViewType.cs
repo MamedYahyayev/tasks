@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LookScoreServer.Model.Enums
+namespace LookScoreCommon.Enums
 {
-    public enum Nationality
+    public enum ViewType
     {
-        FRENCH, GERMAN, ENGLISH, TURKISH
+        GAME, REFEREE, CLUB, PLAYER
     }
 }

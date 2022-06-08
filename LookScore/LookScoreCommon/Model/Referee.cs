@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LookScoreServer.Model.Entity
+namespace LookScoreCommon.Model
 {
     [Serializable]
     public class Referee : Person

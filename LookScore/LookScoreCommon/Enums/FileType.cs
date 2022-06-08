@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LookScoreServer.Model.Enums
+namespace LookScoreCommon.Enums
 {
-    public enum Position
+    public enum FileType
     {
-        DEFENCE,
-        ATTACK,
-        GOALKEEPER,
-        MIDFIELDER
+        JSON, XML
     }
 }

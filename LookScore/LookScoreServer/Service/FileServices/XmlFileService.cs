@@ -1,6 +1,6 @@
-﻿using LookScoreServer.Model.Entity;
-using LookScoreServer.Model.Enums;
-using LookScoreInterfaces.Util;
+﻿using LookScoreCommon.Enums;
+using LookScoreCommon.Model;
+using LookScoreCommon.Util;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
@@ -11,7 +11,7 @@ namespace LookScoreServer.Service.FileServices
     {
         public Storage Load()
         {
-            var filePath = FileHelper.GetOrCreateFile((LookScoreInterfaces.Enums.FileType)FileType.XML);
+            var filePath = FileHelper.GetOrCreateFile(FileType.XML);
             Storage storage;
             object data = null;
 
@@ -43,7 +43,7 @@ namespace LookScoreServer.Service.FileServices
             if (storage == null)
                 return;
 
-            var filePath = FileHelper.GetOrCreateFile((LookScoreInterfaces.Enums.FileType)FileType.XML);
+            var filePath = FileHelper.GetOrCreateFile(FileType.XML);
             XmlSerializer serializer = new XmlSerializer(typeof(Storage));
 
             using (var writer = new StreamWriter(filePath))

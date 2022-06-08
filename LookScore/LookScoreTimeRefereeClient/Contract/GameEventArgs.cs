@@ -3,8 +3,8 @@ using System;
 
 namespace LookScoreTimeRefereeClient.Contract
 {
-    public class StatisticEventArgs : EventArgs
+    public class GameEventArgs : EventArgs
     {
-        public GameStatistics GameStatistics { get; set; }
+        public Game Game { get; set; }
     }
 }

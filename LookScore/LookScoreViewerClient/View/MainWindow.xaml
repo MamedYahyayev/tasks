@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LookScoreViewerClient"
-        xmlns:viewModel="clr-namespace:LookScoreViewerClient.ViewModel" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:viewModel="clr-namespace:LookScoreViewerClient.ViewModel" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:commonView="clr-namespace:LookScoreCommon.View;assembly=LookScoreCommon"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -52,68 +54,14 @@
 
 
         <StackPanel Grid.Row="1" Orientation="Vertical">
-            <StackPanel 
-                Orientation="Horizontal"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Center"
-                Margin="5, 20, 5, 0"
-                Height="40"
-                Background="#14C38E">
+            <commonView:ScoreBoardView
+                Game="{Binding SelectedGame, UpdateSourceTrigger=PropertyChanged}"
+                GameStatistics="{Binding CurrentGameStatistics, 
+                            UpdateSourceTrigger=PropertyChanged}"
+                IsGameStart="{Binding IsGameStart, UpdateSourceTrigger=PropertyChanged}"
+            />
 
-                <Border Width="Auto">
-                    <TextBlock Text="{Binding SelectedGame.HomeClub.Name, UpdateSourceTrigger=PropertyChanged}"
-                               FontSize="18"
-                               VerticalAlignment="Center"
-                               Margin="10, 5, 10, 5"
-                               Foreground="White"/>
-                </Border>
-
-                <Border Width="Auto"
-                        Padding="2"
-                        BorderBrush="LightGray"
-                        BorderThickness="3, 0, 3, 0" >
-                    <TextBlock Text="{Binding CurrentGameStatistics, Converter={StaticResource ScoreBoardConverter}}"
-                               FontSize="22"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Margin="5, 0, 5, 0"
-                               Foreground="White"/>
-                </Border>
-
-                <Border Width="Auto">
-                    <TextBlock Text="{Binding SelectedGame.GuestClub.Name, UpdateSourceTrigger=PropertyChanged}"
-                               FontSize="18"
-                               VerticalAlignment="Center"
-                               Margin="10, 5, 10, 5"
-                               Foreground="White"/>
-                </Border>
-
-                <Border Background="#F2F2F2"
-                        Width="Auto">
-                    <StackPanel VerticalAlignment="Center"
-                                Orientation="Horizontal">
-                        <TextBlock Text="45 : 00"
-                                    FontSize="18"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               Margin="5, 0, 10, 0"
-                               Foreground="Black"
-                                 />
-
-                        <TextBlock Text="2:12"
-                                    FontSize="18"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Right"
-                               Margin="5, 0, 10, 0"
-                               Foreground="Black"
-                                   FontStyle="Italic" />
-
-                    </StackPanel>
-                </Border>
-            </StackPanel>
-
-            <Grid  
-                        Margin="10"
+            <Grid Margin="40"
                   HorizontalAlignment="Center">
 
                 <Grid.ColumnDefinitions>

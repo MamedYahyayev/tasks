@@ -1,14 +1,14 @@
-﻿using LookScoreInterfaces.Exceptions;
-using LookScoreInterfaces.Enums;
+﻿using LookScoreCommon.Enums;
+using LookScoreCommon.Exceptions;
 using System;
 using System.IO;
 
 
-namespace LookScoreInterfaces.Util
+namespace LookScoreCommon.Util
 {
     public class FileHelper
     {
-        private static readonly string STORAGE_FILE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Data\";
+        private static string STORAGE_FILE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Data\";
 
         private FileHelper()
         {

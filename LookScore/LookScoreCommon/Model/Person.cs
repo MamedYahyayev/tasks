@@ -1,7 +1,7 @@
-﻿using LookScoreServer.Model.Enums;
+﻿using LookScoreCommon.Enums;
 using System;
 
-namespace LookScoreServer.Model.Entity
+namespace LookScoreCommon.Model
 {
     public class Person
     {

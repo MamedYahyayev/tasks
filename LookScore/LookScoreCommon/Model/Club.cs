@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace LookScoreServer.Model.Entity
+namespace LookScoreCommon.Model
 {
     [Serializable]
     [DataContract]

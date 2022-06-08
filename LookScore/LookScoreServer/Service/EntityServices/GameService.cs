@@ -1,8 +1,7 @@
-﻿using LookScoreServer.Model.Entity;
+﻿using LookScoreCommon.Model;
 using LookScoreServer.Service.FileServices;
 using System;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 
 namespace LookScoreServer.Service.EntityServices

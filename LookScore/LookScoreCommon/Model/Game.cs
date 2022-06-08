@@ -3,7 +3,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace LookScoreServer.Model.Entity
+namespace LookScoreCommon.Model
 {
     [Serializable]
     [DataContract]
@@ -30,8 +30,6 @@ namespace LookScoreServer.Model.Entity
         [JsonIgnore]
         [DataMember]
         public Club GuestClub { get; set; }
-
-        public Referee[] Referees { get; set; }
 
         [DataMember]
         public DateTime GameStartDate { get; set; } = DateTime.Now;

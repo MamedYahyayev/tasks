@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using LookScoreCommon.Enums;
-using LookScoreServer.Model.Entity;
+using LookScoreCommon.Model;
 using LookScoreServer.Service.WCFServices;
 using LookScoreViewerClient.Contract;
 using ReactiveUI;
@@ -13,7 +12,7 @@ namespace LookScoreViewerClient.ViewModel
         #region Private Properties
 
         private readonly IStatisticService _statisticServiceChannel;
-        
+
         private Game[] _games;
         private Game _selectedGame;
         private GameStatistics _currentGameStatistic;
@@ -25,12 +24,17 @@ namespace LookScoreViewerClient.ViewModel
             var callback = new GameStatisticsCallback();
             callback.StatisticsChanged += OnStatisticsChanged;
 
+            var gameCallback = new GameCallback();
+            gameCallback.GameStarted += OnGameStarted;
+
             InstanceContext callbackLocation = new InstanceContext(callback);
             _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
             _statisticServiceChannel.JoinToChannel();
 
-            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("GameService");
+            InstanceContext gameCallbackInstance = new InstanceContext(gameCallback);
+            DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
             IGameService gameService = channelFactory.CreateChannel();
+            gameService.JoinToChannel();
 
             Games = gameService.FindAllGameDetails();
         }
@@ -55,6 +59,12 @@ namespace LookScoreViewerClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _currentGameStatistic, value);
         }
 
+        private bool _isGameStart;
+        public bool IsGameStart
+        {
+            get => _isGameStart;
+            set => this.RaiseAndSetIfChanged(ref _isGameStart, value);
+        }
 
         #endregion
 
@@ -72,6 +82,12 @@ namespace LookScoreViewerClient.ViewModel
         protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
         {
             CurrentGameStatistics = args.GameStatistics;
+        }
+
+        protected virtual void OnGameStarted(object source, GameEventArgs args)
+        {
+            IsGameStart = true;
+            this.RaisePropertyChanged(nameof(IsGameStart));
         }
 
         #endregion

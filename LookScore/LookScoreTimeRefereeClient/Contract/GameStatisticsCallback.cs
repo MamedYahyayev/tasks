@@ -1,4 +1,4 @@
-﻿using LookScoreServer.Model.Entity;
+﻿using LookScoreCommon.Model;
 using LookScoreServer.Service.WCFServices;
 using System;
 using System.Collections.Generic;

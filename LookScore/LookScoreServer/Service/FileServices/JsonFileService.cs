@@ -1,6 +1,6 @@
-﻿using LookScoreServer.Model.Entity;
-using LookScoreServer.Model.Enums;
-using LookScoreInterfaces.Util;
+﻿using LookScoreCommon.Enums;
+using LookScoreCommon.Model;
+using LookScoreCommon.Util;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -11,7 +11,7 @@ namespace LookScoreServer.Service.FileServices
     {
         public Storage Load()
         {
-            var filePath = FileHelper.GetOrCreateFile((LookScoreInterfaces.Enums.FileType)FileType.JSON);
+            var filePath = FileHelper.GetOrCreateFile(FileType.JSON);
             Storage storage;
 
             if (!File.Exists(filePath))
@@ -39,7 +39,7 @@ namespace LookScoreServer.Service.FileServices
         {
             if(storage == null) return;
 
-            var filePath = FileHelper.GetOrCreateFile((LookScoreInterfaces.Enums.FileType)FileType.JSON);
+            var filePath = FileHelper.GetOrCreateFile(FileType.JSON);
             var text = JsonConvert.SerializeObject(storage);
             File.WriteAllText(filePath, text);
         }
