@@ -58,6 +58,7 @@
                 Game="{Binding SelectedGame, UpdateSourceTrigger=PropertyChanged}"
                 GameStatistics="{Binding CurrentGameStatistics, 
                             UpdateSourceTrigger=PropertyChanged}"
+                IsGameStart="{Binding IsGameStart, UpdateSourceTrigger=PropertyChanged}"
             />
 
             <Grid Margin="40"
