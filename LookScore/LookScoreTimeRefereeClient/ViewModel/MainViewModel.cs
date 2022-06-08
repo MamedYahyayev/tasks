@@ -286,8 +286,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         }
 
-
-
         #endregion
     }
 }

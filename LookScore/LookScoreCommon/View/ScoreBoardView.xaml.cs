@@ -52,6 +52,7 @@ namespace LookScoreCommon.View
                 new FrameworkPropertyMetadata()
                 {
                     DefaultValue = false,
+                    BindsTwoWayByDefault = false,
                     PropertyChangedCallback = (s, e) => { (s as ScoreBoardView).GameStart(); }
                 });
 
@@ -67,6 +68,7 @@ namespace LookScoreCommon.View
                 new FrameworkPropertyMetadata()
                 {
                     DefaultValue = false,
+                    BindsTwoWayByDefault = false,
                     PropertyChangedCallback = (s, e) => { (s as ScoreBoardView).GameStop(); }
                 });
 
@@ -214,6 +216,7 @@ namespace LookScoreCommon.View
             if (IsGameStart)
             {
                 StartTimer();
+                IsGameStop = false;
             }
         }
 
@@ -222,6 +225,7 @@ namespace LookScoreCommon.View
             if (IsGameStop)
             {
                 StopTimer();
+                IsGameStart = false;
             }
         }
 
