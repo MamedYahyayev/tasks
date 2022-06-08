@@ -1,6 +1,8 @@
-﻿using LookScoreCommon.Model;
+﻿using LookScoreCommon.Constants;
+using LookScoreCommon.Model;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,6 +13,12 @@ namespace LookScoreCommon.View
     /// </summary>
     public partial class ScoreBoardView : UserControl, INotifyPropertyChanged
     {
+        #region Private Properties
+
+        private bool _isTimerStart;
+
+        #endregion
+
         #region Dependency Properties
 
         public Game Game
@@ -31,6 +39,32 @@ namespace LookScoreCommon.View
 
         public static readonly DependencyProperty GameStatisticsProperty =
             DependencyProperty.Register("GameStatistics", typeof(GameStatistics), typeof(ScoreBoardView));
+
+
+        public bool IsGameStart
+        {
+            get { return (bool)GetValue(IsGameStartProperty); }
+            set { SetValue(IsGameStartProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsGameStartProperty =
+            DependencyProperty.Register("IsGameStart", typeof(bool), typeof(ScoreBoardView),
+                new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = false,
+                    PropertyChangedCallback = (d, e) => { (d as ScoreBoardView).GameStart(); }
+                });
+
+
+        public bool IsGameStop
+        {
+            get { return (bool)GetValue(IsGameStopProperty); }
+            set { SetValue(IsGameStopProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsGameStopProperty =
+            DependencyProperty.Register("IsGameStop", typeof(bool), typeof(ScoreBoardView), new PropertyMetadata(false));
+
 
         #endregion
 
@@ -87,26 +121,97 @@ namespace LookScoreCommon.View
                 _extraMinute = value;
                 OnPropertyChanged(nameof(ExtraMinute));
             }
-
-        }
-
-        private bool _toggleExtraTimeAddVisibility;
-        public bool ToggleExtraTimeAddVisibility
-        {
-            get => _toggleExtraTimeAddVisibility;
-            set
-            {
-                _toggleExtraTimeAddVisibility = value;
-                OnPropertyChanged(nameof(ToggleExtraTimeAddVisibility));
-            }
-
         }
 
         #endregion
 
+        #region Constructors
+
         public ScoreBoardView()
         {
             InitializeComponent();
+
+
+
+            if (IsGameStop)
+            {
+                StopTimer();
+            }
         }
+
+        #endregion
+
+        #region Functions
+
+        private void StartTimer()
+        {
+            if (_isTimerStart)
+            {
+                return;
+            }
+
+            _isTimerStart = true;
+
+            if (ExtraSeconds > 0)
+            {
+                ResetExtraTime();
+            }
+
+            Task.Run(async () =>
+            {
+                while (_isTimerStart)
+                {
+                    Seconds += 1;
+                    await Task.Delay(1000);
+
+                    if (GameConstants.FIRST_HALF_IN_SECONDS == Seconds || GameConstants.BOTH_HALF_IN_SECONDS == Seconds)
+                    {
+                        _isTimerStart = false;
+                        StartExtraTime();
+                        return;
+                    }
+                }
+            });
+        }
+
+        private void StartExtraTime()
+        {
+            IsExtraTimeStart = true;
+
+            Task.Run(async () =>
+            {
+                while (IsExtraTimeStart)
+                {
+                    ExtraSeconds += 1;
+                    await Task.Delay(1000);
+                }
+            });
+        }
+
+        private void ResetExtraTime()
+        {
+            IsExtraTimeStart = false;
+            ExtraSeconds = 0;
+        }
+
+        private void StopTimer()
+        {
+            _isTimerStart = false;
+
+            if (IsExtraTimeStart)
+            {
+                IsExtraTimeStart = false;
+            }
+        }
+
+        private void GameStart()
+        {
+            if (IsGameStart)
+            {
+                StartTimer();
+            }
+        }
+
+        #endregion
     }
 }
