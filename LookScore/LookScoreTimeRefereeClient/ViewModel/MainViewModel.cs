@@ -204,6 +204,8 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             _isTimerStart = false;
 
+            _gameService.StopGame(SelectedGame);
+
             if (IsExtraTimeStart)
             {
                 IsExtraTimeStart = false;
@@ -283,8 +285,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
 
         }
-
-
 
         #endregion
     }

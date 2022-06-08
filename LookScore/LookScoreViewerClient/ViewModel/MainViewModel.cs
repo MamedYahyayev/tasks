@@ -11,11 +11,7 @@ namespace LookScoreViewerClient.ViewModel
     {
         #region Private Properties
 
-        private readonly IStatisticService _statisticServiceChannel;
-
-        private Game[] _games;
-        private Game _selectedGame;
-        private GameStatistics _currentGameStatistic;
+        private readonly IStatisticService _statisticService;
 
         #endregion
 
@@ -26,10 +22,11 @@ namespace LookScoreViewerClient.ViewModel
 
             var gameCallback = new GameCallback();
             gameCallback.GameStarted += OnGameStarted;
+            gameCallback.GameStopped += OnGameStopped;
 
             InstanceContext callbackLocation = new InstanceContext(callback);
-            _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
-            _statisticServiceChannel.JoinToChannel();
+            _statisticService = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
+            _statisticService.JoinToChannel();
 
             InstanceContext gameCallbackInstance = new InstanceContext(gameCallback);
             DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
@@ -41,18 +38,21 @@ namespace LookScoreViewerClient.ViewModel
 
         #region Public Properties
 
+        private Game[] _games;
         public Game[] Games
         {
             get => _games;
             set => this.RaiseAndSetIfChanged(ref _games, value);
         }
 
+        private Game _selectedGame;
         public Game SelectedGame
         {
             get => _selectedGame;
             set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
         }
 
+        private GameStatistics _currentGameStatistic;
         public GameStatistics CurrentGameStatistics
         {
             get => _currentGameStatistic;
@@ -66,6 +66,13 @@ namespace LookScoreViewerClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _isGameStart, value);
         }
 
+        private bool _isGameStop;
+        public bool IsGameStop
+        {
+            get => _isGameStop;
+            set => this.RaiseAndSetIfChanged(ref _isGameStop, value);
+        }
+
         #endregion
 
 
@@ -75,9 +82,13 @@ namespace LookScoreViewerClient.ViewModel
         {
             if (SelectedGame != null)
             {
-                CurrentGameStatistics = _statisticServiceChannel.FindGameStatistics(SelectedGame.Id);
+                CurrentGameStatistics = _statisticService.FindGameStatistics(SelectedGame.Id);
             }
         }
+
+        #endregion
+
+        #region Events
 
         protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
         {
@@ -87,10 +98,15 @@ namespace LookScoreViewerClient.ViewModel
         protected virtual void OnGameStarted(object source, GameEventArgs args)
         {
             IsGameStart = true;
-            this.RaisePropertyChanged(nameof(IsGameStart));
+        }
+
+        protected virtual void OnGameStopped(object source, GameEventArgs args)
+        {
+            IsGameStop = true;
         }
 
         #endregion
+
 
         #region Commands
 

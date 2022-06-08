@@ -23,5 +23,8 @@ namespace LookScoreServer.Service.WCFServices
 
         [OperationContract]
         void StartGame(Game game);
+
+        [OperationContract]
+        void StopGame(Game game);
     }
 }
