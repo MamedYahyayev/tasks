@@ -15,6 +15,11 @@ namespace LookScoreTimeRefereeClient.Contract
             OnGameStarted(game);
         }
 
+        public void NotifyGameStop(Game game)
+        {
+
+        }
+
         protected virtual void OnGameStarted(Game game)
         {
             GameStarted?.Invoke(this, new GameEventArgs() { Game = game });
