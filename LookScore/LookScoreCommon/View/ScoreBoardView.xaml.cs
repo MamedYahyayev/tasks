@@ -52,7 +52,7 @@ namespace LookScoreCommon.View
                 new FrameworkPropertyMetadata()
                 {
                     DefaultValue = false,
-                    PropertyChangedCallback = (d, e) => { (d as ScoreBoardView).GameStart(); }
+                    PropertyChangedCallback = (s, e) => { (s as ScoreBoardView).GameStart(); }
                 });
 
 
@@ -63,7 +63,12 @@ namespace LookScoreCommon.View
         }
 
         public static readonly DependencyProperty IsGameStopProperty =
-            DependencyProperty.Register("IsGameStop", typeof(bool), typeof(ScoreBoardView), new PropertyMetadata(false));
+            DependencyProperty.Register("IsGameStop", typeof(bool), typeof(ScoreBoardView),
+                new FrameworkPropertyMetadata()
+                {
+                    DefaultValue = false,
+                    PropertyChangedCallback = (s, e) => { (s as ScoreBoardView).GameStop(); }
+                });
 
 
         #endregion
@@ -209,6 +214,14 @@ namespace LookScoreCommon.View
             if (IsGameStart)
             {
                 StartTimer();
+            }
+        }
+
+        private void GameStop()
+        {
+            if (IsGameStop)
+            {
+                StopTimer();
             }
         }
 
