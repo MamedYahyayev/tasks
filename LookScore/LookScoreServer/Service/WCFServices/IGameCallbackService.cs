@@ -7,5 +7,8 @@ namespace LookScoreServer.Service.WCFServices
     {
         [OperationContract(IsOneWay = true)]
         void NotifyGameStarted(Game game);
+
+        [OperationContract(IsOneWay = true)]
+        void NotifyGameStop(Game game);
     }
 }

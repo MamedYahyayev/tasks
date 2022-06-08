@@ -54,5 +54,12 @@ namespace LookScoreServer.Service.WCFServices
             _callbackList.ForEach(invoke);
         
         }
+
+        public void StopGame(Game game)
+        {
+            // notify all client that game stop
+            Action<IGameCallbackService> invoke = callback =>  callback.NotifyGameStop(game);
+            _callbackList.ForEach(invoke);
+        }
     }
 }
