@@ -106,6 +106,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Contract\GameCallback.cs" />
+    <Compile Include="Contract\GameEventArgs.cs" />
     <Compile Include="Contract\GameStatisticsCallback.cs" />
     <Compile Include="Contract\StatisticEventArgs.cs" />
     <Compile Include="Converter\SecondsToMinuteConverter.cs" />

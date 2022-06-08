@@ -15,6 +15,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
         #region Private Properties
 
         private readonly IStatisticService _statisticServiceChannel;
+        private readonly IGameService _gameService;
 
         private Game[] _games;
         private Game _selectedGame;
@@ -41,14 +42,19 @@ namespace LookScoreTimeRefereeClient.ViewModel
             var callback = new GameStatisticsCallback();
             callback.StatisticsChanged += OnStatisticsChanged;
 
+            var gameCallback = new GameCallback();
+            gameCallback.GameStarted += OnGameStarted;
+
             InstanceContext callbackLocation = new InstanceContext(callback);
             _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
             _statisticServiceChannel.JoinToChannel();
 
-            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("GameService");
-            IGameService gameService = channelFactory.CreateChannel();
+            InstanceContext gameCallbackInstance = new InstanceContext(gameCallback);
+            DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
+            _gameService = channelFactory.CreateChannel();
+            _gameService.JoinToChannel();
 
-            Games = gameService.FindAllGameDetails();
+            Games = _gameService.FindAllGameDetails();
         }
 
         #region Public Properties
@@ -142,7 +148,9 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         private void StartTimer()
         {
-            if(_isTimerStart)
+            _gameService.StartGame(SelectedGame);
+
+            if (_isTimerStart)
             {
                 return;
             }
@@ -270,6 +278,13 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             CurrentGameStatistics = args.GameStatistics;
         }
+
+        protected virtual void OnGameStarted(object source, GameEventArgs args)
+        {
+
+        }
+
+
 
         #endregion
     }
