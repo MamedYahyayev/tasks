@@ -118,13 +118,22 @@
             </StackPanel>
 
             <StackPanel Margin="10">
-                <TextBlock Text="Which team is currently playing with Ball?"
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Which team is currently playing with Ball?"
                            FontWeight="Bold"
                            FontSize="18"
+                               VerticalAlignment="Center"
                            />
 
+                    <Button Content="Deactivate"
+                            Style="{StaticResource RefereeOperationTheme}"
+                            Padding="20, 2"
+                            Command="{Binding DeactivateBallOwnerTeamCommand}"
+                    />
+                </StackPanel>
+
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Liverpool"
+                    <Button Content="{Binding SelectedGame.HomeClub.Name}"
                             Style="{StaticResource RefereeOperationTheme}"
                             Padding="30, 6"
                             Command="{Binding BallOwnerTeamChangedCommand}"
@@ -135,7 +144,7 @@
                      
                      />
 
-                    <Button Content="Real Madrid"
+                    <Button Content="{Binding SelectedGame.GuestClub.Name}"
                             Style="{StaticResource RefereeOperationTheme}"
                             Padding="30, 6"
                             Command="{Binding BallOwnerTeamChangedCommand}"
@@ -143,9 +152,9 @@
                             Background="{Binding BallOwnerTeam, 
                                 Converter={StaticResource TeamEnumToActiveColorConverter}, 
                                 ConverterParameter={x:Static enum:Team.GUEST}}"
-                     >
+                    />
 
-                    </Button>
+
 
                 </StackPanel>
 
@@ -155,13 +164,20 @@
                                FontSize="18"/>
 
                     <StackPanel>
-                        <TextBlock Text="Liverpool: 36:23"
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding SelectedGame.HomeClub.Name}" FontSize="15" FontWeight="ExtraLight"/>
+                            <TextBlock Text="{Binding HomeTeamBallPossessionTime, Converter={StaticResource SecondsToMinuteConverter}}"
                                    Margin="5"
                                    FontSize="15"/>
+                        </StackPanel>
 
-                        <TextBlock Text="Real Madrid: 12:67" 
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding SelectedGame.GuestClub.Name}" FontSize="15" FontWeight="ExtraLight" />
+                            <TextBlock Text="{Binding GuestTeamBallPossessionTime, Converter={StaticResource SecondsToMinuteConverter}}" 
                                    Margin="5"
                                    FontSize="15"/>
+                        </StackPanel>
+
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
