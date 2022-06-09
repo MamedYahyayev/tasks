@@ -1,12 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using LookScoreCommon.Constants;
 using LookScoreCommon.Enums;
 using LookScoreCommon.Model;
 using LookScoreServer.Service.WCFServices;
 using LookScoreTimeRefereeClient.Contract;
 using ReactiveUI;
 using System.ServiceModel;
-using System.Threading.Tasks;
 
 namespace LookScoreTimeRefereeClient.ViewModel
 {
@@ -16,23 +14,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         private readonly IStatisticService _statisticServiceChannel;
         private readonly IGameService _gameService;
-
-        private Game[] _games;
-        private Game _selectedGame;
-        private GameStatistics _currentGameStatistics;
-        private Team _ballOwnerTeam;
-
-
-        #region Time Related Private Properties
-
-        private int _seconds;
-        private int _extraSeconds;
-        private int _extraMinute;
-        private bool _isTimerStart;
-        private bool _isExtraTimeStart;
-        private bool _toggleExtraTimeAddVisibility;
-
-        #endregion
 
         #endregion
 
@@ -44,6 +25,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
             var gameCallback = new GameCallback();
             gameCallback.GameStarted += OnGameStarted;
+            gameCallback.GameStopped += OnGameStopped;
 
             InstanceContext callbackLocation = new InstanceContext(callback);
             _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
@@ -59,69 +41,63 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         #region Public Properties
 
+        private Game[] _games;
         public Game[] Games
         {
             get => _games;
             set => this.RaiseAndSetIfChanged(ref _games, value);
         }
 
+        private Game _selectedGame;
         public Game SelectedGame
         {
             get => _selectedGame;
             set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
         }
 
+        private GameStatistics _currentGameStatistics;
         public GameStatistics CurrentGameStatistics
         {
             get => _currentGameStatistics;
             set => this.RaiseAndSetIfChanged(ref _currentGameStatistics, value);
         }
 
+        private Team _ballOwnerTeam;
         public Team BallOwnerTeam
         {
             get => _ballOwnerTeam;
             set => this.RaiseAndSetIfChanged(ref _ballOwnerTeam, value);
         }
 
-        #region Time Related Public Properties
-
-        public int Seconds
-        {
-            get => _seconds;
-            set => this.RaiseAndSetIfChanged(ref _seconds, value);
-        }
-
-        public int ExtraSeconds
-        {
-            get => _extraSeconds;
-            set => this.RaiseAndSetIfChanged(ref _extraSeconds, value);
-        }
-
-        public bool IsExtraTimeStart
-        {
-            get => _isExtraTimeStart;
-            set => this.RaiseAndSetIfChanged(ref _isExtraTimeStart, value);
-        }
-
+        private int _extraMinute;
         public int ExtraMinute
         {
             get => _extraMinute;
             set => this.RaiseAndSetIfChanged(ref _extraMinute, value);
         }
 
+        private bool _toggleExtraTimeAddVisibility;
         public bool ToggleExtraTimeAddVisibility
         {
             get => _toggleExtraTimeAddVisibility;
             set => this.RaiseAndSetIfChanged(ref _toggleExtraTimeAddVisibility, value);
         }
 
+        private bool _isGameStart;
+        public bool IsGameStart
+        {
+            get => _isGameStart;
+            set => this.RaiseAndSetIfChanged(ref _isGameStart, value);
+        }
+
+        private bool _isGameStop;
+        public bool IsGameStop
+        {
+            get => _isGameStop;
+            set => this.RaiseAndSetIfChanged(ref _isGameStop, value);
+        }
+
         #endregion
-
-
-        #endregion
-
-
-
 
         #region Functions
 
@@ -149,67 +125,11 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private void StartTimer()
         {
             _gameService.StartGame(SelectedGame);
-
-            if (_isTimerStart)
-            {
-                return;
-            }
-
-            _isTimerStart = true;
-
-            if (ExtraSeconds > 0)
-            {
-                ResetExtraTime();
-            }
-
-            Task.Run(async () =>
-            {
-                while (_isTimerStart)
-                {
-                    Seconds += 1;
-                    await Task.Delay(1000);
-
-                    if (GameConstants.FIRST_HALF_IN_SECONDS == Seconds || GameConstants.BOTH_HALF_IN_SECONDS == Seconds)
-                    {
-                        _isTimerStart = false;
-                        StartExtraTime();
-                        return;
-                    }
-                }
-            });
-        }
-
-        private void StartExtraTime()
-        {
-            IsExtraTimeStart = true;
-
-            Task.Run(async () =>
-            {
-                while (IsExtraTimeStart)
-                {
-                    ExtraSeconds += 1;
-                    await Task.Delay(1000);
-                }
-            });
-        }
-
-        private void ResetExtraTime()
-        {
-            IsExtraTimeStart = false;
-            ExtraSeconds = 0;
-            ToggleExtraTimeAddVisibility = false;
         }
 
         private void StopTimer()
         {
-            _isTimerStart = false;
-
             _gameService.StopGame(SelectedGame);
-
-            if (IsExtraTimeStart)
-            {
-                IsExtraTimeStart = false;
-            }
         }
 
         private void ToggleExtraTimeVisibility()
@@ -283,7 +203,12 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         protected virtual void OnGameStarted(object source, GameEventArgs args)
         {
+            IsGameStart = true;
+        }
 
+        protected virtual void OnGameStopped(object source, GameEventArgs args)
+        {
+            IsGameStop = true;
         }
 
         #endregion
