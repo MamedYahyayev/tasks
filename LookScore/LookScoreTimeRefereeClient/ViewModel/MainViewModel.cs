@@ -4,7 +4,9 @@ using LookScoreCommon.Model;
 using LookScoreServer.Service.WCFServices;
 using LookScoreTimeRefereeClient.Contract;
 using ReactiveUI;
+using System;
 using System.ServiceModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LookScoreTimeRefereeClient.ViewModel
@@ -70,13 +72,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _ballOwnerTeam, value);
         }
 
-        private bool _isBallOwnerTeamChanged;
-        public bool IsBallOwnerTeamChanged
-        {
-            get => _isBallOwnerTeamChanged;
-            set => this.RaiseAndSetIfChanged(ref _isBallOwnerTeamChanged, value);
-        }
-
         private int _extraMinute;
         public int ExtraMinute
         {
@@ -105,20 +100,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _isGameStop, value);
         }
 
-        private int _homeTeamBallPossessionTime;
-        public int HomeTeamBallPossessionTime
-        {
-            get => _homeTeamBallPossessionTime;
-            set => this.RaiseAndSetIfChanged(ref _homeTeamBallPossessionTime, value);
-        }
-
-        private int _guestTeamBallPossessionTime;
-        public int GuestTeamBallPossessionTime
-        {
-            get => _guestTeamBallPossessionTime;
-            set => this.RaiseAndSetIfChanged(ref _guestTeamBallPossessionTime, value);
-        }
-
         #endregion
 
         #region Functions
@@ -135,56 +116,42 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             if (team == Team.HOME)
             {
-                if (BallOwnerTeam == Team.HOME)
-                {
-                    return;
-                }
-
                 BallOwnerTeam = Team.HOME;
-                IncreaseHomeTeamBallPossessionTime();
             }
             else
             {
-                if (BallOwnerTeam == Team.GUEST)
-                {
-                    return;
-                }
-
                 BallOwnerTeam = Team.GUEST;
-                IncreaseGuestTeamBallPossessionTime();
             }
 
+            Thread thread = new Thread(new ThreadStart(IncreaseBallPossessionTime));
+            thread.Start();
+        }
+
+        private void IncreaseBallPossessionTime()
+        {
+            lock (CurrentGameStatistics)
+            {
+                while (BallOwnerTeam != Team.UNSET)
+                {
+                    if (BallOwnerTeam == Team.HOME)
+                    {
+                        CurrentGameStatistics.HomeClub.BallPossessionTime += 1;
+                    }
+                    else
+                    {
+                        CurrentGameStatistics.GuestClub.BallPossessionTime += 1;
+                    }
+
+                    this.RaisePropertyChanged(nameof(CurrentGameStatistics));
+                    Thread.Sleep(1000);
+                }
+            }
         }
 
         private void DeactivateBallOwnerTeam()
         {
             BallOwnerTeam = Team.UNSET;
         }
-
-        private void IncreaseHomeTeamBallPossessionTime()
-        {
-            Task.Run(async () =>
-            {
-                while (BallOwnerTeam == Team.HOME)
-                {
-                    HomeTeamBallPossessionTime += 1;
-                    await Task.Delay(1000);
-                }
-            });
-        }
-
-        private void IncreaseGuestTeamBallPossessionTime()
-        {
-            Task.Run(async () =>
-            {
-                while (BallOwnerTeam == Team.GUEST)
-                {
-                    GuestTeamBallPossessionTime += 1;
-                    await Task.Delay(1000);
-                }
-            });
-        }
-
 
         private void StartTimer()
         {
@@ -231,7 +198,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             get
             {
-                return _deactivateBallOwnerTeamCommand ?? (_deactivateBallOwnerTeamCommand = 
+                return _deactivateBallOwnerTeamCommand ?? (_deactivateBallOwnerTeamCommand =
                                 new RelayCommand(() => DeactivateBallOwnerTeam()));
             }
         }

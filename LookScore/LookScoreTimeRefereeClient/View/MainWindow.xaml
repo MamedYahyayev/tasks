@@ -166,14 +166,14 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding SelectedGame.HomeClub.Name}" FontSize="15" FontWeight="ExtraLight"/>
-                            <TextBlock Text="{Binding HomeTeamBallPossessionTime, Converter={StaticResource SecondsToMinuteConverter}}"
+                            <TextBlock Text="{Binding CurrentGameStatistics.HomeClub.BallPossessionTime, Converter={StaticResource SecondsToMinuteConverter}}"
                                    Margin="5"
                                    FontSize="15"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{Binding SelectedGame.GuestClub.Name}" FontSize="15" FontWeight="ExtraLight" />
-                            <TextBlock Text="{Binding GuestTeamBallPossessionTime, Converter={StaticResource SecondsToMinuteConverter}}" 
+                            <TextBlock Text="{Binding CurrentGameStatistics.GuestClub.BallPossessionTime, Converter={StaticResource SecondsToMinuteConverter}}" 
                                    Margin="5"
                                    FontSize="15"/>
                         </StackPanel>
