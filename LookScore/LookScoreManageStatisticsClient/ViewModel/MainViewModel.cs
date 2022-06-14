@@ -1,8 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
-using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
 using GalaSoft.MvvmLight.Command;
+
+using LookScoreServer.Service.WCFServices;
 using LookScoreCommon.Enums;
 using LookScoreManageStatisticsClient.Contract;
 using LookScoreCommon.Model;
@@ -13,42 +14,66 @@ namespace LookScoreManageStatisticsClient.ViewModel
     {
         #region Private Properties
 
-        private readonly ChannelFactory<IGameService> _gameServiceChannel = new ChannelFactory<IGameService>("GameService");
-        private readonly DuplexChannelFactory<IStatisticService> _statisticServiceChannelFactory;
-        private Game[] _games;
-        private Game _selectedGame;
-        private GameStatistics _currentGameStatistic;
+        private readonly IGameService _gameService;
+        private readonly IStatisticService _statisticService;
 
         #endregion
 
         public MainViewModel()
         {
-            InstanceContext callbackLocation = new InstanceContext(new GameStatisticsCallback());
-            _statisticServiceChannelFactory = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService");
-            _statisticServiceChannelFactory.CreateChannel().JoinToChannel();
+            var gameStatisticsCallback = new GameStatisticsCallback();
+            gameStatisticsCallback.StatisticsChanged += OnStatisticsChanged;
 
-            Games = _gameServiceChannel.CreateChannel().FindAllGameDetails();
-            _gameServiceChannel.Close();
+            var _statisticServiceChannelFactory = new DuplexChannelFactory<IStatisticService>(new InstanceContext(gameStatisticsCallback), "StatisticService");
+            _statisticService = _statisticServiceChannelFactory.CreateChannel();
+            _statisticService.JoinToChannel();
+
+            var gameCallback = new GameCallback();
+            gameCallback.GameStarted += OnGameStarted;
+            gameCallback.GameStopped += OnGameStopped;
+
+            var gameServiceChannelFactory = new DuplexChannelFactory<IGameService>(new InstanceContext(gameCallback), "GameService");
+            _gameService = gameServiceChannelFactory.CreateChannel();
+            _gameService.JoinToChannel();
+
+            Games = _gameService.FindAllGameDetails();
         }
 
         #region Public Properties
 
+        private Game[] _games;
         public Game[] Games
         {
             get => _games;
             set => this.RaiseAndSetIfChanged(ref _games, value);
         }
 
+        private Game _selectedGame;
         public Game SelectedGame
         {
             get => _selectedGame;
             set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
         }
 
+        private GameStatistics _currentGameStatistic;
         public GameStatistics CurrentGameStatistics
         {
             get => _currentGameStatistic;
             set => this.RaiseAndSetIfChanged(ref _currentGameStatistic, value);
+        }
+
+        private bool _isGameStart;
+        public bool IsGameStart
+        {
+            get => _isGameStart;
+            set => this.RaiseAndSetIfChanged(ref _isGameStart, value);
+        }
+
+        private bool _isGameStop;
+        public bool IsGameStop
+        {
+            get => _isGameStop;
+            set => this.RaiseAndSetIfChanged(ref _isGameStop, value);
         }
 
         #endregion
@@ -85,8 +110,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
             this.RaisePropertyChanged(nameof(CurrentGameStatistics));
 
-            IStatisticService statisticService = _statisticServiceChannelFactory.CreateChannel();
-            statisticService.ChangeStatistic(CurrentGameStatistics);
+            _statisticService.ChangeStatistic(CurrentGameStatistics);
         }
 
         private void DecreaseHomeTeamStatistics(StatisticType statistic)
@@ -119,15 +143,14 @@ namespace LookScoreManageStatisticsClient.ViewModel
 
             this.RaisePropertyChanged(nameof(CurrentGameStatistics));
 
-            IStatisticService statisticService = _statisticServiceChannelFactory.CreateChannel();
-            statisticService.ChangeStatistic(CurrentGameStatistics);
+            _statisticService.ChangeStatistic(CurrentGameStatistics);
         }
 
         private void GameChange()
         {
             if (SelectedGame != null)
             {
-                CurrentGameStatistics = _statisticServiceChannelFactory.CreateChannel().FindGameStatistics(SelectedGame.Id);
+                CurrentGameStatistics = _statisticService.FindGameStatistics(SelectedGame.Id);
             }
         }
 
@@ -249,6 +272,25 @@ namespace LookScoreManageStatisticsClient.ViewModel
                 return _gameChangeCommand ?? (_gameChangeCommand =
                                  new RelayCommand(() => GameChange()));
             }
+        }
+
+        #endregion
+
+        #region Events
+
+        protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
+        {
+            CurrentGameStatistics = args.GameStatistics;
+        }
+
+        protected virtual void OnGameStarted(object source, GameEventArgs args)
+        {
+            IsGameStart = true;
+        }
+
+        protected virtual void OnGameStopped(object source, GameEventArgs args)
+        {
+            IsGameStop = true;
         }
 
         #endregion
