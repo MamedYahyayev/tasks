@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LookScoreServer.Service.EntityServices
+namespace LookScoreServer.Repository
 {
-    public class ClubService : ICrudOperation<Club>
+    public class ClubRepository : ICrudRepository<Club>
     {
         public void Delete(int id)
         {

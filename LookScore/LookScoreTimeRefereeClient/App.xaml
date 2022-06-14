@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LookScoreTimeRefereeClient"
              xmlns:converter="clr-namespace:LookScoreTimeRefereeClient.Converter"
+             xmlns:commonConverters="clr-namespace:LookScoreCommon.Converter;assembly=LookScoreCommon"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,13 +13,10 @@
                 <ResourceDictionary Source="/Theme/RefereeOperationsTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-
-
             <!--Converters-->
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <converter:ScoreBoardConverter x:Key="ScoreBoardConverter" />
             <converter:TeamEnumToActiveColorConverter x:Key="TeamEnumToActiveColorConverter" />
-            <converter:SecondsToMinuteConverter x:Key="SecondsToMinuteConverter" />
+            <commonConverters:SecondsToMinuteConverter x:Key="SecondsToMinuteConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

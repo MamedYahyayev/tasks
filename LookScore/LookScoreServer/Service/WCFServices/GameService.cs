@@ -1,8 +1,10 @@
-﻿using LookScoreCommon.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+
+using LookScoreCommon.Model;
+using LookScoreServer.Repository;
 
 namespace LookScoreServer.Service.WCFServices
 {
@@ -10,31 +12,31 @@ namespace LookScoreServer.Service.WCFServices
     public class GameService : IGameService
     {
         private static readonly List<IGameCallbackService> _callbackList = new List<IGameCallbackService>();
-        private readonly EntityServices.GameService _gameService;
+        private readonly GameRepository _gameRepository;
 
         public GameService()
         {
-            _gameService = new EntityServices.GameService();
+            _gameRepository = new GameRepository();
         }
 
         public Game[] FindAllGameDetails()
         {
-            return _gameService.FindAllDetails();
+            return _gameRepository.FindAllDetails();
         }
 
         public Game[] FindAllGames()
         {
-            return _gameService.FindAll();
+            return _gameRepository.FindAll();
         }
 
         public string[] GetAllGamesTitle()
         {
-            return _gameService.FindAll().Select(g => g.GameTitle).ToArray();
+            return _gameRepository.FindAll().Select(g => g.GameTitle).ToArray();
         }
 
         public void InsertGame(Game game)
         {
-            _gameService.Insert(game);
+            _gameRepository.Insert(game);
         }
 
         public void JoinToChannel()

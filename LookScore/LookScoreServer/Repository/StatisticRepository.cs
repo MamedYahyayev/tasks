@@ -1,13 +1,10 @@
-﻿using LookScoreCommon.Enums;
-using LookScoreCommon.Model;
+﻿using LookScoreCommon.Model;
 using LookScoreServer.Service.FileServices;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace LookScoreServer.Service.EntityServices
+namespace LookScoreServer.Repository
 {
-    public class StatisticService
+    public class StatisticRepository
     {
         public void ChangeStatistic(GameStatistics statistics)
         {

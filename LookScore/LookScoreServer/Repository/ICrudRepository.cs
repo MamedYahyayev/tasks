@@ -1,6 +1,6 @@
-﻿namespace LookScoreServer.Service.EntityServices
+﻿namespace LookScoreServer.Repository
 {
-    public interface ICrudOperation<T>
+    public interface ICrudRepository<T>
     {
         T[] FindAll();
 

@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LookScoreServer.Service.EntityServices
+namespace LookScoreServer.Repository
 {
-    public class GameService : ICrudOperation<Game>
+    public class GameRepository : ICrudRepository<Game>
     {
-        private readonly ClubService _clubService;
+        private readonly ClubRepository _clubRepository;
 
-        public GameService()
+        public GameRepository()
         {
-            _clubService = new ClubService();
+            _clubRepository = new ClubRepository();
         }
 
         public void Delete(int id)
@@ -55,8 +55,8 @@ namespace LookScoreServer.Service.EntityServices
             var games = DataService.Instance.Storage.Games;
             foreach (var game in games)
             {
-                game.HomeClub = _clubService.FindOne(game.HomeClubId);
-                game.GuestClub = _clubService.FindOne(game.GuestClubId);
+                game.HomeClub = _clubRepository.FindOne(game.HomeClubId);
+                game.GuestClub = _clubRepository.FindOne(game.GuestClubId);
             }
 
             return games ?? new Game[0];

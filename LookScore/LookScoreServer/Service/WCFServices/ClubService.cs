@@ -1,25 +1,20 @@
 ﻿using LookScoreCommon.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+using LookScoreServer.Repository;
 
 namespace LookScoreServer.Service.WCFServices
 {
     public class ClubService : IClubService
     {
-        private readonly EntityServices.ClubService _clubService;
+        private readonly ClubRepository _clubRepository;
 
         public ClubService()
         {
-            _clubService = new EntityServices.ClubService();
+            _clubRepository = new ClubRepository();
         }
 
         public Club[] FindAllClubs()
         {
-            return _clubService.FindAll();
+            return _clubRepository.FindAll();
         }
     }
 }

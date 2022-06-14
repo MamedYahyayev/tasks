@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ServiceModel;
-using LookScoreServer.Model.Entity;
 using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
 using GalaSoft.MvvmLight.Command;
 using LookScoreCommon.Enums;
 using LookScoreManageStatisticsClient.Contract;
+using LookScoreCommon.Model;
 
 namespace LookScoreManageStatisticsClient.ViewModel
 {
