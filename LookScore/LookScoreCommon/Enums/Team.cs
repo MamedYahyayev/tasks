@@ -11,6 +11,9 @@ namespace LookScoreCommon.Enums
     public enum Team
     {
         [EnumMember]
+        UNSET,
+
+        [EnumMember]
         HOME,
 
         [EnumMember]
