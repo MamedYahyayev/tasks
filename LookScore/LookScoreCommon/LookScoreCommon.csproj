@@ -76,6 +76,7 @@
     <Compile Include="Constants\GameConstants.cs" />
     <Compile Include="Converter\ScoreBoardConverter.cs" />
     <Compile Include="Converter\SecondsToMinuteConverter.cs" />
+    <Compile Include="Converter\SecondsToPercentageConverter.cs" />
     <Compile Include="Enums\FileType.cs" />
     <Compile Include="Enums\Nationality.cs" />
     <Compile Include="Enums\Position.cs" />

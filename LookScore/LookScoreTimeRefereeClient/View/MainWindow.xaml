@@ -10,7 +10,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:commonView="clr-namespace:LookScoreCommon.View;assembly=LookScoreCommon"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900">
+        Title="MainWindow" Height="550" Width="900">
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -177,9 +177,19 @@
                                    Margin="5"
                                    FontSize="15"/>
                         </StackPanel>
-
                     </StackPanel>
                 </StackPanel>
+
+                <Button Content="Send Results"
+                        Command="{Binding SendPossessionResultCommand}"
+                        Background="#4CACBC"
+                        Foreground="White"
+                        Style="{StaticResource RefereeOperationTheme}"
+                        Padding="30, 6"
+                        Width="Auto"
+                        HorizontalAlignment="Left"        
+                    />
+
             </StackPanel>
 
 

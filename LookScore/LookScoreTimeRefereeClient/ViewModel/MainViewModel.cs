@@ -15,7 +15,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
     {
         #region Private Properties
 
-        private readonly IStatisticService _statisticServiceChannel;
+        private readonly IStatisticService _statisticService;
         private readonly IGameService _gameService;
 
         #endregion
@@ -31,8 +31,8 @@ namespace LookScoreTimeRefereeClient.ViewModel
             gameCallback.GameStopped += OnGameStopped;
 
             InstanceContext callbackLocation = new InstanceContext(callback);
-            _statisticServiceChannel = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
-            _statisticServiceChannel.JoinToChannel();
+            _statisticService = new DuplexChannelFactory<IStatisticService>(callbackLocation, "StatisticService").CreateChannel();
+            _statisticService.JoinToChannel();
 
             InstanceContext gameCallbackInstance = new InstanceContext(gameCallback);
             DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
@@ -108,7 +108,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
         {
             if (SelectedGame != null)
             {
-                CurrentGameStatistics = _statisticServiceChannel.FindGameStatistics(SelectedGame.Id);
+                CurrentGameStatistics = _statisticService.FindGameStatistics(SelectedGame.Id);
             }
         }
 
@@ -166,6 +166,11 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private void ToggleExtraTimeVisibility()
         {
             ToggleExtraTimeAddVisibility = !ToggleExtraTimeAddVisibility;
+        }
+
+        private void SendPossessionResult()
+        {
+            _statisticService.ChangeStatistic(CurrentGameStatistics);
         }
 
         #endregion
@@ -231,6 +236,14 @@ namespace LookScoreTimeRefereeClient.ViewModel
             }
         }
 
+        private RelayCommand _sendPossessionResultCommand;
+        public RelayCommand SendPossessionResultCommand
+        {
+            get
+            {
+                return _sendPossessionResultCommand ?? (_sendPossessionResultCommand = new RelayCommand(() => SendPossessionResult()));
+            }
+        }
 
 
         #endregion
