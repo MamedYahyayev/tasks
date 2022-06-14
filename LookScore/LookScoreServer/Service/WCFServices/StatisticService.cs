@@ -1,5 +1,6 @@
 ﻿using LookScoreCommon.Enums;
 using LookScoreCommon.Model;
+using LookScoreServer.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +13,17 @@ namespace LookScoreServer.Service.WCFServices
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class StatisticService : IStatisticService
     {
-        private readonly EntityServices.StatisticService _statisticService;
+        private readonly StatisticRepository _statisticRepository;
         private static readonly List<IStatisticCallbackService> _statisticCallbackServiceList = new List<IStatisticCallbackService>();
 
         public StatisticService()
         {
-            _statisticService = new EntityServices.StatisticService();
+            _statisticRepository = new StatisticRepository();
         }
 
         public void ChangeStatistic(GameStatistics statistics)
         {
-            _statisticService.ChangeStatistic(statistics);
+            _statisticRepository.ChangeStatistic(statistics);
 
             Action<IStatisticCallbackService> invoke = callback => callback.NotifyGoalScored(statistics);
             _statisticCallbackServiceList.ForEach(invoke);
@@ -31,7 +32,7 @@ namespace LookScoreServer.Service.WCFServices
 
         public GameStatistics FindGameStatistics(int gameId)
         {
-            return _statisticService.FindGameStatistics(gameId);
+            return _statisticRepository.FindGameStatistics(gameId);
         }
 
         public void JoinToChannel()

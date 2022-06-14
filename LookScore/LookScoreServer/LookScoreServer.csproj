@@ -52,11 +52,13 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ClubRepository.cs" />
+    <Compile Include="Repository\GameRepository.cs" />
+    <Compile Include="Repository\ICrudRepository.cs" />
+    <Compile Include="Repository\StatisticRepository.cs" />
     <Compile Include="Service\EntityServices\ClubService.cs" />
     <Compile Include="Service\EntityServices\GameService.cs" />
     <Compile Include="Service\EntityServices\ICrudOperation.cs" />
-    <Compile Include="Service\EntityServices\PlayerService.cs" />
-    <Compile Include="Service\EntityServices\RefereeService.cs" />
     <Compile Include="Service\EntityServices\StatisticService.cs" />
     <Compile Include="Service\FileServices\DataService.cs" />
     <Compile Include="Service\FileServices\FileServiceFactory.cs" />
