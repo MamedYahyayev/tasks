@@ -113,9 +113,7 @@
     <Compile Include="Contract\GameEventArgs.cs" />
     <Compile Include="Contract\GameStatisticsCallback.cs" />
     <Compile Include="Contract\StatisticEventArgs.cs" />
-    <Compile Include="Converter\SecondsToMinuteConverter.cs" />
     <Compile Include="Converter\TeamEnumToActiveColorConverter.cs" />
-    <Compile Include="Converter\ScoreBoardConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
