@@ -65,15 +65,10 @@
 
         <StackPanel Grid.Row="1"
                         Margin="10"
-                        Visibility="{Binding IsPopupOpen, Mode=TwoWay, 
-                            UpdateSourceTrigger=PropertyChanged, 
-                            Converter={StaticResource BooleanToVisibilityConverter}}"
                         >
-            <control:NotificationPopup DataContext="{Binding}"
-                                Title="{Binding NotificationTitle, UpdateSourceTrigger=PropertyChanged}"
-                                Icon="{Binding Icon, UpdateSourceTrigger=PropertyChanged}"
-                                IconColor="{Binding IconColor, UpdateSourceTrigger=PropertyChanged}"
-                                HorizontalAlignment="Right"
+            <control:NotificationPopup
+                            DataContext="{Binding NotificationPopupViewModel}"
+                            HorizontalAlignment="Right"
                          />
         </StackPanel>
 

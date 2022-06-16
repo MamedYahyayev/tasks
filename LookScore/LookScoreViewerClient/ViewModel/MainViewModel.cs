@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using LookScoreCommon.Model;
+using LookScoreCommon.ViewModel;
 using LookScoreServer.Service.WCFServices;
 using LookScoreViewerClient.Contract;
 using ReactiveUI;
@@ -38,6 +39,8 @@ namespace LookScoreViewerClient.ViewModel
             gameService.JoinToChannel();
 
             Games = gameService.FindAllGameDetails();
+
+            NotificationPopupViewModel = new NotificationPopupViewModel();
         }
 
         #region Public Properties
@@ -77,33 +80,12 @@ namespace LookScoreViewerClient.ViewModel
             set => this.RaiseAndSetIfChanged(ref _isGameStop, value);
         }
 
-        private string _notificationTitle;
-        public string NotificationTitle
+        private NotificationPopupViewModel _notificationPopupViewModel;
+        public NotificationPopupViewModel NotificationPopupViewModel
         {
-            get => _notificationTitle;
-            set => this.RaiseAndSetIfChanged(ref _notificationTitle, value);
+            get => _notificationPopupViewModel;
+            set => this.RaiseAndSetIfChanged(ref _notificationPopupViewModel, value);
         }
-
-        private bool _isPopupOpen;
-        public bool IsPopupOpen
-        {
-            get => _isPopupOpen;
-            set => this.RaiseAndSetIfChanged(ref _isPopupOpen, value);
-        }
-
-        private string _icon;
-        public string Icon
-        {
-            get => _icon;
-            set => this.RaiseAndSetIfChanged(ref _icon, value);
-        }
-
-        private string _iconColor;
-        public string IconColor
-        {
-            get => _iconColor;
-            set => this.RaiseAndSetIfChanged(ref _iconColor, value);
-        } 
 
         #endregion
 
@@ -129,32 +111,13 @@ namespace LookScoreViewerClient.ViewModel
 
         protected virtual void OnGoalScored(object source, StatisticEventArgs args)
         {
-            NotificationTitle = "Goal!!!";
-            IsPopupOpen = true;
-            Icon = "Check";
-            IconColor = "Green";
-
-            Task.Run(async () =>
-            {
-                await Task.Delay(5000);
-                IsPopupOpen = false;
-            });
+            _notificationPopupViewModel.GetSuccessDesign("Goal!!!", 5);
         }
 
         protected virtual void OnGoalCancelled(object source, StatisticEventArgs args)
         {
-            NotificationTitle = "Goal Cancelled...";
-            IsPopupOpen = true;
-            Icon = "Close";
-            IconColor = "Red";
-
-            Task.Run(async () =>
-            {
-                await Task.Delay(5000);
-                IsPopupOpen = false;
-            });
+            _notificationPopupViewModel.GetFailedDesign("Goal cancelled...", 5);
         }
-
 
         protected virtual void OnGameStarted(object source, GameEventArgs args)
         {

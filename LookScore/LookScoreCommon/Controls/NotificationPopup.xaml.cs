@@ -26,41 +26,5 @@ namespace LookScoreCommon.Controls
             InitializeComponent();
         }
 
-
-        #region Dependency Properties
-
-        public string Title
-        {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
-        }
-
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(NotificationPopup), new PropertyMetadata(""));
-
-
-        public string IconColor
-        {
-            get { return (string)GetValue(IconColorProperty); }
-            set { SetValue(IconColorProperty, value); }
-        }
-
-        public static readonly DependencyProperty IconColorProperty =
-            DependencyProperty.Register("IconColor", typeof(string), typeof(NotificationPopup), new PropertyMetadata(""));
-
-
-        public string Icon
-        {
-            get { return (string)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
-        }
-
-        public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(string), typeof(NotificationPopup), new PropertyMetadata(""));
-
-
-
-        #endregion
-
     }
 }

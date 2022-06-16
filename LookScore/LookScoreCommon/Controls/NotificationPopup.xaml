@@ -5,26 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
              xmlns:local="clr-namespace:LookScoreCommon.Controls" 
-             xmlns:view="clr-namespace:LookScoreCommon.View" 
+             xmlns:viewModel="clr-namespace:LookScoreCommon.ViewModel;assembly=LookScoreCommon" 
              mc:Ignorable="d"
-             x:Name="Self"
              Width="250"
-       >
+             x:Name="Self"
+             d:DataContext="{d:DesignInstance viewModel:NotificationPopupViewModel, IsDesignTimeCreatable=False}"
+        >
     <Border CornerRadius="4" Width="250"
             Height="40"
             Background="White"
             BorderBrush="Black"
-            BorderThickness="1">
+            BorderThickness="1"
+            Visibility="{Binding IsPopupOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
         <Border.Effect>
             <DropShadowEffect />
         </Border.Effect>
         <StackPanel Orientation="Horizontal">
-            <fa:FontAwesome Icon="{Binding Icon, ElementName=Self}" 
+            <fa:FontAwesome Icon="{Binding Icon, UpdateSourceTrigger=PropertyChanged}" 
                         VerticalAlignment="Center"
                         Margin="5,3,3,0"
                         FontSize="18"
-                        Foreground="{Binding IconColor, ElementName=Self}"/>
-            <Label Content="{Binding Title, ElementName=Self}" Foreground="#06283D" VerticalAlignment="Center" FontSize="18"/>
+                        Foreground="{Binding IconColor, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="{Binding Title, UpdateSourceTrigger=PropertyChanged}" 
+                               Foreground="#06283D" 
+                               VerticalAlignment="Center" 
+                               FontSize="18"
+                   />
         </StackPanel>
     </Border>
 </UserControl>
