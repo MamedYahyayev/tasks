@@ -76,6 +76,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Command\VoidReactiveCommand.cs" />
     <Compile Include="Constants\GameConstants.cs" />
     <Compile Include="Controls\NotificationPopup.xaml.cs">
@@ -98,9 +101,9 @@
     <Compile Include="Model\Referee.cs" />
     <Compile Include="Model\Statistics.cs" />
     <Compile Include="Model\Storage.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Util\FileHelper.cs" />
     <Compile Include="Util\FileValidator.cs" />
+    <Compile Include="ViewModel\NotificationPopupViewModel.cs" />
     <Compile Include="View\ScoreBoardView.xaml.cs">
       <DependentUpon>ScoreBoardView.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
     <Page Include="Controls\NotificationPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
