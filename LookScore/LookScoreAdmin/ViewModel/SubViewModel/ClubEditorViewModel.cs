@@ -1,12 +1,9 @@
-﻿using LookScoreAdmin.Command;
-using LookScoreServer.Model.Entity;
-using LookScoreServer.Service.EntityServices;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using LookScoreAdmin.Command;
+using LookScoreCommon.Model;
+using LookScoreServer.Repository;
 
 namespace LookScoreAdmin.ViewModel.SubViewModel
 {
@@ -15,7 +12,7 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
         #region Private Properties
 
         private Club _club;
-        private ClubService _clubService;
+        private ClubRepository _clubRepository;
         private string[] _countries;
 
         #endregion
@@ -47,9 +44,9 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         private void SaveClub()
         {
-            _clubService = new ClubService();
+            _clubRepository = new ClubRepository();
 
-            _clubService.Insert(Club);
+            _clubRepository.Insert(Club);
 
             BackToPreviousView();
         }
@@ -64,7 +61,7 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         #region Commands
 
-        private readonly VoidReactiveCommand  _saveClubCommand;
+        private readonly VoidReactiveCommand _saveClubCommand;
         public VoidReactiveCommand SaveClubCommand =>
             _saveClubCommand ?? VoidReactiveCommand.Create(SaveClub);
 

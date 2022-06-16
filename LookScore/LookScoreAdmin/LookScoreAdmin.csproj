@@ -112,8 +112,6 @@
     <Compile Include="ViewModel\SubViewModel\ClubViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\GameEditorViewModel.cs" />
     <Compile Include="ViewModel\SubViewModel\GameViewModel.cs" />
-    <Compile Include="ViewModel\SubViewModel\PlayerViewModel.cs" />
-    <Compile Include="ViewModel\SubViewModel\RefereeViewModel.cs" />
     <Compile Include="View\SubView\ClubEditorView.xaml.cs">
       <DependentUpon>ClubEditorView.xaml</DependentUpon>
     </Compile>
@@ -123,20 +121,8 @@
     <Compile Include="View\SubView\ClubView.xaml.cs">
       <DependentUpon>ClubView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SubView\PlayerView.xaml.cs">
-      <DependentUpon>PlayerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SubView\RefereeView.xaml.cs">
-      <DependentUpon>RefereeView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\SubView\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SubView\PlayerEditorView.xaml.cs">
-      <DependentUpon>PlayerEditorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SubView\RefereeEditorView.xaml.cs">
-      <DependentUpon>RefereeEditorView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -183,23 +169,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\SubView\PlayerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\SubView\RefereeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\SubView\GameView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SubView\PlayerEditorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SubView\RefereeEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +203,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LookScoreCommon\LookScoreCommon.csproj">
+      <Project>{766932FF-F58E-470F-8E15-9B266096AE4A}</Project>
+      <Name>LookScoreCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LookScoreServer\LookScoreServer.csproj">
       <Project>{8DD4EA0F-C438-4742-B468-FDA65040F077}</Project>
       <Name>LookScoreServer</Name>

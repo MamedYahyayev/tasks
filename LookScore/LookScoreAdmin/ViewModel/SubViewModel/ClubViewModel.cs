@@ -1,6 +1,5 @@
 ﻿using LookScoreAdmin.Command;
-using LookScoreServer.Model.Entity;
-using LookScoreServer.Service.EntityServices;
+using LookScoreCommon.Model;
 using LookScoreServer.Service.WCFServices;
 using ReactiveUI;
 using System.ServiceModel;
