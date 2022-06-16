@@ -107,6 +107,7 @@
     <Compile Include="Contract\GameEventArgs.cs" />
     <Compile Include="Contract\GameStatisticsCallback.cs" />
     <Compile Include="Contract\StatisticEventArgs.cs" />
+    <Compile Include="Converter\ButtonActiveConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

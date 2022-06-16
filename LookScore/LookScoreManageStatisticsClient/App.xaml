@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LookScoreManageStatisticsClient" 
              xmlns:commonConverter="clr-namespace:LookScoreCommon.Converter;assembly=LookScoreCommon"
+             xmlns:converter="clr-namespace:LookScoreManageStatisticsClient.Converter"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
 
 
         <!--Converters-->
         <commonConverter:ScoreBoardConverter x:Key="ScoreBoardConverter" />
+        <converter:ButtonActiveConverter x:Key="ButtonActiveConverter" />
         
     </Application.Resources>
 </Application>

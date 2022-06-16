@@ -128,7 +128,9 @@
                         <Button Grid.Column="0" 
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseHomeTeamStatisticCommand}"
-                                CommandParameter="{x:Static enum:StatisticType.GOAL}">
+                                CommandParameter="{x:Static enum:StatisticType.GOAL}"
+                                IsEnabled="{Binding CurrentGameStatistics.HomeClub.Goal,
+                                            Converter={StaticResource ButtonActiveConverter}}">
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -181,6 +183,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseGuestTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.GOAL}"
+                                IsEnabled="{Binding CurrentGameStatistics.GuestClub.Goal,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -225,6 +229,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseHomeTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.CORNER}"
+                                IsEnabled="{Binding CurrentGameStatistics.HomeClub.Corner,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -276,6 +282,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseGuestTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.CORNER}"
+                                IsEnabled="{Binding CurrentGameStatistics.GuestClub.Corner,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -319,6 +327,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseHomeTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.PASS}"
+                                IsEnabled="{Binding CurrentGameStatistics.HomeClub.Pass,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -369,6 +379,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseGuestTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.PASS}"
+                                IsEnabled="{Binding CurrentGameStatistics.GuestClub.Pass,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -412,6 +424,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseHomeTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.TACKLE}"
+                                IsEnabled="{Binding CurrentGameStatistics.HomeClub.Tackle,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -463,6 +477,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseGuestTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.TACKLE}"
+                                IsEnabled="{Binding CurrentGameStatistics.GuestClub.Tackle,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -507,6 +523,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseHomeTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.SHOOT}"
+                                IsEnabled="{Binding CurrentGameStatistics.HomeClub.Shoot,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
@@ -558,6 +576,8 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Command="{Binding DecreaseGuestTeamStatisticCommand}"
                                 CommandParameter="{x:Static enum:StatisticType.SHOOT}"
+                                IsEnabled="{Binding CurrentGameStatistics.GuestClub.Shoot,
+                                            Converter={StaticResource ButtonActiveConverter}}"
                                 >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
