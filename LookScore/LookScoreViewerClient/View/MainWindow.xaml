@@ -218,7 +218,7 @@
                 <Border Grid.Row="4" Background="#E8E1D9" 
                         Grid.Column="0"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="256"
+                    <TextBlock Text="{Binding CurrentGameStatistics.HomeClub.Pass}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
@@ -236,7 +236,7 @@
                 <Border Grid.Row="4" Background="#E8E1D9" 
                         Grid.Column="2"
                         BorderBrush="Black" BorderThickness="2">
-                    <TextBlock Text="176"
+                    <TextBlock Text="{Binding CurrentGameStatistics.GuestClub.Pass}"
                                    FontSize="25"
                                HorizontalAlignment="Center"
                                    />
