@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:LookScoreViewerClient"
         xmlns:viewModel="clr-namespace:LookScoreViewerClient.ViewModel" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
         xmlns:commonView="clr-namespace:LookScoreCommon.View;assembly=LookScoreCommon"
         xmlns:commonConverter="clr-namespace:LookScoreCommon.Converter;assembly=LookScoreCommon"
         xmlns:enum="clr-namespace:LookScoreCommon.Enums;assembly=LookScoreCommon" 
+        xmlns:control="clr-namespace:LookScoreCommon.Controls;assembly=LookScoreCommon"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -54,19 +56,37 @@
                            Text="{Binding SelectedGame.GameStartDate, StringFormat=dd.MM.yyyy HH:mm}" />
                 <TextBlock FontSize="20" Margin="20, 0, 0, 0"
                            Text="{Binding SelectedGame.GameTitle}" />
+
+
             </StackPanel>
 
         </StackPanel>
 
 
+        <StackPanel Grid.Row="1"
+                        Margin="10"
+                        Visibility="{Binding IsPopupOpen, Mode=TwoWay, 
+                            UpdateSourceTrigger=PropertyChanged, 
+                            Converter={StaticResource BooleanToVisibilityConverter}}"
+                        >
+            <control:NotificationPopup DataContext="{Binding}"
+                                Title="{Binding NotificationTitle, UpdateSourceTrigger=PropertyChanged}"
+                                Icon="{Binding Icon, UpdateSourceTrigger=PropertyChanged}"
+                                IconColor="{Binding IconColor, UpdateSourceTrigger=PropertyChanged}"
+                                HorizontalAlignment="Right"
+                         />
+        </StackPanel>
+
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <commonView:ScoreBoardView
+                Margin="0, 30, 0, 0"
                 Game="{Binding SelectedGame, UpdateSourceTrigger=PropertyChanged}"
                 GameStatistics="{Binding CurrentGameStatistics, 
                             UpdateSourceTrigger=PropertyChanged}"
                 IsGameStart="{Binding IsGameStart, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 IsGameStop="{Binding IsGameStop, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
             />
+
 
             <Grid Margin="40"
                   HorizontalAlignment="Center">
