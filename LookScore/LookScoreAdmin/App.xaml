@@ -23,14 +23,6 @@
                 <subview:GameView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type subViewModel:RefereeViewModel}">
-                <subview:RefereeView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type subViewModel:PlayerViewModel}">
-                <subview:PlayerView />
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type subViewModel:ClubViewModel}">
                 <subview:ClubView />
             </DataTemplate>

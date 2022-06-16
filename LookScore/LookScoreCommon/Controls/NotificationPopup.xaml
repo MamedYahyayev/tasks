@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="LookScoreCommon.Controls.NotificationPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+             xmlns:local="clr-namespace:LookScoreCommon.Controls" 
+             xmlns:view="clr-namespace:LookScoreCommon.View" 
+             mc:Ignorable="d"
+             x:Name="Self"
+             Width="250"
+       >
+    <Border CornerRadius="4" Width="250"
+            Height="40"
+            Background="White"
+            BorderBrush="Black"
+            BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect />
+        </Border.Effect>
+        <StackPanel Orientation="Horizontal">
+            <fa:FontAwesome Icon="{Binding Icon, ElementName=Self}" 
+                        VerticalAlignment="Center"
+                        Margin="5,3,3,0"
+                        FontSize="18"
+                        Foreground="{Binding IconColor, ElementName=Self}"/>
+            <Label Content="{Binding Title, ElementName=Self}" Foreground="#06283D" VerticalAlignment="Center" FontSize="18"/>
+        </StackPanel>
+    </Border>
+</UserControl>

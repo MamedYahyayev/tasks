@@ -96,6 +96,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
             {
                 case StatisticType.GOAL:
                     ChangeGoalStatistic(team, 1);
+                    _statisticService.IncreaseGoal(CurrentGameStatistics);
                     break;
                 case StatisticType.CORNER:
                     ChangeCornerStatistic(team, 1);
@@ -132,6 +133,7 @@ namespace LookScoreManageStatisticsClient.ViewModel
             {
                 case StatisticType.GOAL:
                     ChangeGoalStatistic(team, -1);
+                    _statisticService.DecreaseGoal(CurrentGameStatistics);
                     break;
                 case StatisticType.CORNER:
                     ChangeCornerStatistic(team, -1);

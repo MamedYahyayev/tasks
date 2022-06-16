@@ -9,6 +9,7 @@
 
             <!--Converters-->
             <commonConverter:ScoreBoardConverter x:Key="ScoreBoardConverter" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

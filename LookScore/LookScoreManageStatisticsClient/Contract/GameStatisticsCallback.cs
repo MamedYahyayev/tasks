@@ -11,9 +11,17 @@ namespace LookScoreManageStatisticsClient.Contract
     {
         public event EventHandler<StatisticEventArgs> StatisticsChanged;
 
+        public void NotifyGoalCancelled(GameStatistics gameStatistics)
+        {
+        }
+
         public void NotifyGoalScored(GameStatistics gameStatistics)
         {
             OnStatisticsChanged(gameStatistics);
+        }
+
+        public void NotifyStatisticsChanged(GameStatistics gameStatistics)
+        {
         }
 
         protected virtual void OnStatisticsChanged(GameStatistics statistics)

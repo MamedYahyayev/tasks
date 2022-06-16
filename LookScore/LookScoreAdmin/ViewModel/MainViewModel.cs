@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ReactiveUI;
+
 using LookScoreAdmin.Command;
 using LookScoreAdmin.ViewModel.SubViewModel;
-using ReactiveUI;
-using LookScoreServer.Model.Enums;
+using LookScoreCommon.Enums;
 
 namespace LookScoreAdmin.ViewModel
 {
@@ -46,12 +43,6 @@ namespace LookScoreAdmin.ViewModel
             {
                 case ViewType.GAME:
                     CurrentView = new GameViewModel();
-                    break;
-                case ViewType.PLAYER:
-                    CurrentView = new PlayerViewModel();
-                    break;
-                case ViewType.REFEREE:
-                    CurrentView = new RefereeViewModel();
                     break;
                 case ViewType.CLUB:
                     CurrentView = new ClubViewModel();
