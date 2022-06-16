@@ -316,7 +316,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.PASS}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -324,13 +327,15 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="256"
+                                   Text="{Binding CurrentGameStatistics.HomeClub.Pass}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
 
                         <Button Background="Transparent" BorderBrush="Transparent"
-                            Grid.Column="2"
+                                Grid.Column="2"
+                                Command="{Binding IncreaseHomeTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.PASS}"
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"
@@ -361,7 +366,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
-                                Background="Transparent" BorderBrush="Transparent">
+                                Background="Transparent" BorderBrush="Transparent"
+                                Command="{Binding DecreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.PASS}"
+                                >
                             <fa:FontAwesome Icon="Minus"
                                         FontSize="20"
                                         VerticalAlignment="Center"
@@ -369,13 +377,15 @@
                         </Button>
 
                         <TextBlock Grid.Column="1"
-                                   Text="174"
+                                   Text="{Binding CurrentGameStatistics.GuestClub.Pass}"
                                    FontSize="25"
                                    HorizontalAlignment="Center"
                                    />
 
                         <Button Background="Transparent" BorderBrush="Transparent"
                             Grid.Column="2"
+                              Command="{Binding IncreaseGuestTeamStatisticCommand}"
+                                CommandParameter="{x:Static enum:StatisticType.PASS}"   
                             >
                             <fa:FontAwesome Icon="Plus"
                                         FontSize="20"

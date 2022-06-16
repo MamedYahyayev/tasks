@@ -106,6 +106,9 @@ namespace LookScoreManageStatisticsClient.ViewModel
                 case StatisticType.SHOOT:
                     ChangeShootStatistic(team, 1);
                     break;
+                case StatisticType.PASS:
+                    ChangePassStatistic(team, 1);
+                    break;
             }
 
             this.RaisePropertyChanged(nameof(CurrentGameStatistics));
@@ -138,6 +141,9 @@ namespace LookScoreManageStatisticsClient.ViewModel
                     break;
                 case StatisticType.SHOOT:
                     ChangeShootStatistic(team, -1);
+                    break;
+                case StatisticType.PASS:
+                    ChangePassStatistic(team, -1);
                     break;
             }
 
@@ -205,6 +211,18 @@ namespace LookScoreManageStatisticsClient.ViewModel
             else
             {
                 CurrentGameStatistics.GuestClub.Tackle += amount;
+            }
+        }
+
+        private void ChangePassStatistic(Team team, int amount)
+        {
+            if (team == Team.HOME)
+            {
+                CurrentGameStatistics.HomeClub.Pass += amount;
+            }
+            else
+            {
+                CurrentGameStatistics.GuestClub.Pass += amount;
             }
         }
 
