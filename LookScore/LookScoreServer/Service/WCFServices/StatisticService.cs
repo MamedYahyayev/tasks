@@ -25,7 +25,7 @@ namespace LookScoreServer.Service.WCFServices
         {
             _statisticRepository.ChangeStatistic(statistics);
 
-            Action<IStatisticCallbackService> invoke = callback => callback.NotifyGoalScored(statistics);
+            Action<IStatisticCallbackService> invoke = callback => callback.NotifyStatisticsChanged(statistics);
             _statisticCallbackServiceList.ForEach(invoke);
 
         }
@@ -45,5 +45,16 @@ namespace LookScoreServer.Service.WCFServices
             }
         }
 
+        public void IncreaseGoal(GameStatistics statistics)
+        {
+            Action<IStatisticCallbackService> invoke = callback => callback.NotifyGoalScored(statistics);
+            _statisticCallbackServiceList.ForEach(invoke);
+        }
+
+        public void DecreaseGoal(GameStatistics statistics)
+        {
+            Action<IStatisticCallbackService> invoke = callback => callback.NotifyGoalCancelled(statistics);
+            _statisticCallbackServiceList.ForEach(invoke);
+        }
     }
 }

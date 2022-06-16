@@ -20,5 +20,11 @@ namespace LookScoreServer.Service.WCFServices
 
         [OperationContract]
         GameStatistics FindGameStatistics(int gameId);
+
+        [OperationContract]
+        void IncreaseGoal(GameStatistics statistics);
+
+        [OperationContract]
+        void DecreaseGoal(GameStatistics statistics);
     }
 }
