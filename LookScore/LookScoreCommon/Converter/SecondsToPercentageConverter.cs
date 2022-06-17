@@ -13,6 +13,8 @@ namespace LookScoreCommon.Converter
 {
     public class SecondsToPercentageConverter : IValueConverter
     {
+        private const int TIE = 50;
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             GameStatistics gameStatistics = (GameStatistics)value;
@@ -24,10 +26,10 @@ namespace LookScoreCommon.Converter
             Team team = (Team)parameter;
             if (team == Team.GUEST)
             {
-                return (100 - result) + "%";
+                return 100 - result;
             }
 
-            return result + "%";
+            return result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -39,6 +41,11 @@ namespace LookScoreCommon.Converter
         {
             double homeTeamPossessionTime = gameStatistics.HomeClub.BallPossessionTime;
             double guestTeamPossessionTime = gameStatistics.GuestClub.BallPossessionTime;
+
+            if (homeTeamPossessionTime == guestTeamPossessionTime)
+            {
+                return TIE;
+            }
 
             return Math.Round((homeTeamPossessionTime / (homeTeamPossessionTime + guestTeamPossessionTime)) * 100);
         }

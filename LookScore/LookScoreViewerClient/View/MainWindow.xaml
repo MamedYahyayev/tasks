@@ -140,7 +140,8 @@
                     <TextBlock 
                         Text="{Binding CurrentGameStatistics,
                         Converter={StaticResource SecondsToPercentageConverter},
-                        ConverterParameter={x:Static enum:Team.HOME}}"
+                        ConverterParameter={x:Static enum:Team.HOME},
+                        StringFormat={}{0}%}"
                         FontSize="25"
                         HorizontalAlignment="Center"
                                    />
@@ -161,7 +162,8 @@
                     <TextBlock 
                         Text="{Binding CurrentGameStatistics,
                         Converter={StaticResource SecondsToPercentageConverter},
-                        ConverterParameter={x:Static enum:Team.GUEST}}"
+                        ConverterParameter={x:Static enum:Team.GUEST},
+                        StringFormat={}{0}%}"
                         FontSize="25"
                         HorizontalAlignment="Center"
                                    />
