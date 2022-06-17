@@ -104,6 +104,7 @@
     <Compile Include="Model\Referee.cs" />
     <Compile Include="Model\Statistics.cs" />
     <Compile Include="Model\Storage.cs" />
+    <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Util\FileHelper.cs" />
     <Compile Include="Util\FileValidator.cs" />
     <Compile Include="ViewModel\NotificationPopupViewModel.cs" />

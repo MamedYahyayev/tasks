@@ -8,6 +8,7 @@ using System.Windows.Data;
 
 using LookScoreCommon.Model;
 using LookScoreCommon.Enums;
+using LookScoreCommon.Utils;
 
 namespace LookScoreCommon.Converter
 {
@@ -47,7 +48,7 @@ namespace LookScoreCommon.Converter
                 return TIE;
             }
 
-            return Math.Round((homeTeamPossessionTime / (homeTeamPossessionTime + guestTeamPossessionTime)) * 100);
+            return MathUtil.Percentage(homeTeamPossessionTime, guestTeamPossessionTime + homeTeamPossessionTime);
         }
     }
 }
