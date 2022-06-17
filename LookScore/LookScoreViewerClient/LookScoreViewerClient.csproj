@@ -101,7 +101,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\GamesView.xaml">
+    <Page Include="View\GameListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,9 +117,10 @@
     <Compile Include="Contract\GameEventArgs.cs" />
     <Compile Include="Contract\GameStatisticsCallback.cs" />
     <Compile Include="Contract\StatisticEventArgs.cs" />
+    <Compile Include="ViewModel\GameListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\GamesView.xaml.cs">
-      <DependentUpon>GamesView.xaml</DependentUpon>
+    <Compile Include="View\GameListView.xaml.cs">
+      <DependentUpon>GameListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
