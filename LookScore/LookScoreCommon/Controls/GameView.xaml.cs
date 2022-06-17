@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LookScoreViewerClient.View
+namespace LookScoreCommon.Controls
 {
     /// <summary>
     /// Interaction logic for GamesView.xaml
     /// </summary>
-    public partial class GamesView : UserControl
+    public partial class GameView : UserControl
     {
-        public GamesView()
+        public GameView()
         {
             InitializeComponent();
         }
