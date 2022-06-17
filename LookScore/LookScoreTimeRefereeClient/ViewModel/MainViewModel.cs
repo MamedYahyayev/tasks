@@ -171,7 +171,6 @@ namespace LookScoreTimeRefereeClient.ViewModel
         private void SendPossessionResult()
         {
             _statisticService.ChangeStatistic(CurrentGameStatistics);
-            Monitor.Enter(CurrentGameStatistics);
         }
 
         #endregion
