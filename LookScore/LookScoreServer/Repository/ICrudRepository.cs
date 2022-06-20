@@ -8,6 +8,8 @@
 
         void Insert(T entity);
 
+        T InsertAndReturn(T entity);    
+
         void Update(T entity);
 
         void Delete(int id);

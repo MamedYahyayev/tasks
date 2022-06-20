@@ -4,9 +4,7 @@ using LookScoreServer.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 
 namespace LookScoreServer.Service.WCFServices
 {
@@ -55,6 +53,16 @@ namespace LookScoreServer.Service.WCFServices
         {
             Action<IStatisticCallbackService> invoke = callback => callback.NotifyGoalCancelled(statistics);
             _statisticCallbackServiceList.ForEach(invoke);
+        }
+
+        public GameStatistics[] FindAllGameStatistics()
+        {
+            return _statisticRepository.FindAll();
+        }
+
+        public void InitializeStatistics(Game game)
+        {
+            _statisticRepository.InitializeGameStatistics(game);
         }
     }
 }

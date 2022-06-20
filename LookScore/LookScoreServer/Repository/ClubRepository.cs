@@ -35,6 +35,11 @@ namespace LookScoreServer.Repository
             DataService.Instance.SetStorageModified();
         }
 
+        public Club InsertAndReturn(Club entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Club entity)
         {
             throw new NotImplementedException();

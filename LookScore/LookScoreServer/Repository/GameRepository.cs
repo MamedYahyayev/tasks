@@ -32,17 +32,12 @@ namespace LookScoreServer.Repository
 
         public void Insert(Game game)
         {
-            if (game == null) return;
+            InsertGameIntoDataService(game);
+        }
 
-            game.Id = GetNextId();
-            game.GameTitle = game.HomeClub.Name + "-" + game.GuestClub.Name;
-            game.HomeClubId = game.HomeClub.Id;
-            game.GuestClubId = game.GuestClub.Id;
-
-            List<Game> games = new List<Game>(DataService.Instance.Storage.Games);
-            games.Add(game);
-            DataService.Instance.Storage.Games = games.ToArray();
-            DataService.Instance.SetStorageModified();
+        public Game InsertAndReturn(Game game)
+        {
+            return InsertGameIntoDataService(game);
         }
 
         public void Update(Game entity)
@@ -67,6 +62,23 @@ namespace LookScoreServer.Repository
         private int GetNextId()
         {
             return DataService.Instance.Storage.Games.Length + 1;
+        }
+
+        private Game InsertGameIntoDataService(Game game)
+        {
+            if (game == null) return null;
+
+            game.Id = GetNextId();
+            game.GameTitle = game.HomeClub.Name + "-" + game.GuestClub.Name;
+            game.HomeClubId = game.HomeClub.Id;
+            game.GuestClubId = game.GuestClub.Id;
+
+            List<Game> games = new List<Game>(DataService.Instance.Storage.Games);
+            games.Add(game);
+            DataService.Instance.Storage.Games = games.ToArray();
+            DataService.Instance.SetStorageModified();
+
+            return game;
         }
 
         #endregion

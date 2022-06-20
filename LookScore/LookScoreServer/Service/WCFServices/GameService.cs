@@ -34,9 +34,9 @@ namespace LookScoreServer.Service.WCFServices
             return _gameRepository.FindAll().Select(g => g.GameTitle).ToArray();
         }
 
-        public void InsertGame(Game game)
+        public Game InsertGame(Game game)
         {
-            _gameRepository.Insert(game);
+            return _gameRepository.InsertAndReturn(game);
         }
 
         public void JoinToChannel()
