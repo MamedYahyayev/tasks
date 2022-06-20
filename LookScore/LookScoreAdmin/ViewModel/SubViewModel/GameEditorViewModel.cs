@@ -3,6 +3,7 @@ using LookScoreAdmin.Command;
 using System.ServiceModel;
 using LookScoreServer.Service.WCFServices;
 using LookScoreCommon.Model;
+using LookScoreViewerClient.Contract;
 
 namespace LookScoreAdmin.ViewModel.SubViewModel
 {
@@ -10,10 +11,8 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private Game _game;
-        private Club[] _clubs;
         private readonly ChannelFactory<IClubService> _clubChannelFactory = new ChannelFactory<IClubService>("ClubService");
-        private readonly ChannelFactory<IGameService> _gameChannelFactory = new ChannelFactory<IGameService>("GameService");
+        private readonly IGameService _gameService;
 
         #endregion
 
@@ -22,17 +21,23 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
         {
             Clubs = _clubChannelFactory.CreateChannel().FindAllClubs();
 
+            InstanceContext gameCallbackInstance = new InstanceContext(new GameCallback());
+            DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
+            _gameService = channelFactory.CreateChannel();
+
             Game = new Game();
         }
 
         #region Public Properties
 
+        private Game _game;
         public Game Game
         {
             get => _game;
             set => this.RaiseAndSetIfChanged(ref _game, value);
         }
 
+        private Club[] _clubs;
         public Club[] Clubs
         {
             get => _clubs;
@@ -46,7 +51,7 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         private void SaveGame()
         {
-            _gameChannelFactory.CreateChannel().InsertGame(Game);
+            _gameService.InsertGame(Game);
 
             BackToPreviousView();
         }
