@@ -13,6 +13,7 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         private readonly ChannelFactory<IClubService> _clubChannelFactory = new ChannelFactory<IClubService>("ClubService");
         private readonly IGameService _gameService;
+        private readonly IStatisticService _statisticService;
 
         #endregion
 
@@ -22,8 +23,12 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
             Clubs = _clubChannelFactory.CreateChannel().FindAllClubs();
 
             InstanceContext gameCallbackInstance = new InstanceContext(new GameCallback());
-            DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
-            _gameService = channelFactory.CreateChannel();
+            var gameServiceChannelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
+            _gameService = gameServiceChannelFactory.CreateChannel();
+
+            InstanceContext statisticCallbackInstance = new InstanceContext(new GameStatisticsCallback());
+            var statisticServiceChannelFactory = new DuplexChannelFactory<IStatisticService>(statisticCallbackInstance, "StatisticService");
+            _statisticService = statisticServiceChannelFactory.CreateChannel();
 
             Game = new Game();
         }
@@ -51,7 +56,8 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
 
         private void SaveGame()
         {
-            _gameService.InsertGame(Game);
+            Game game = _gameService.InsertGame(Game);
+            _statisticService.InitializeStatistics(game);
 
             BackToPreviousView();
         }
