@@ -31,7 +31,7 @@
                 <StackPanel Orientation="Horizontal"
                             Margin="0, 0, 0, 10" Height="40">
 
-                    <Image Width="30" Source="{Binding Game.HomeClub.LogoUrl, 
+                    <Image Width="30" Source="{Binding Game.HomeClub.LogoUrl, Mode=OneTime,
                          ElementName=Self, Converter={StaticResource PathToImageConverter}}" VerticalAlignment="Center"/>
 
                     <TextBlock Text="{Binding Game.HomeClub.Name, ElementName=Self}" FontSize="18" 
@@ -47,7 +47,7 @@
                 <!--guest team-->
                 <StackPanel Orientation="Horizontal"
                             Margin="0" Height="40">
-                    <Image Width="30" Source="{Binding Game.GuestClub.LogoUrl, 
+                    <Image Width="30" Source="{Binding Game.GuestClub.LogoUrl, Mode=OneTime, 
                          ElementName=Self, Converter={StaticResource PathToImageConverter}}" />
 
                     <TextBlock Text="{Binding Game.GuestClub.Name, ElementName=Self}" FontSize="18"

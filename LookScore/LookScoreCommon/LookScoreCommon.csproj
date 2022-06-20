@@ -143,9 +143,6 @@
     <Resource Include="Images\bayern.svg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\liverpool.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\liverpool2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
