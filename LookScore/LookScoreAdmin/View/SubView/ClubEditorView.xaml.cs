@@ -24,5 +24,6 @@ namespace LookScoreAdmin.View.SubView
         {
             InitializeComponent();
         }
+
     }
 }

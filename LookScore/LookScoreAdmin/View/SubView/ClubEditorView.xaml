@@ -27,11 +27,11 @@
             VerticalAlignment="Top" 
                     HorizontalAlignment="Left"
                     Orientation="Horizontal" 
-                    Width="300"
+                    Width="400"
                     Height="30"
                     Margin="10">
             <Label Content="Club Name" 
-                   Width="100"
+                   Width="120"
                    FontSize="15"/>
 
             <TextBox Width="200" FontSize="16" 
@@ -43,11 +43,11 @@
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Left"
                     Orientation="Horizontal" 
-                    Width="300"
+                    Width="400"
                     Height="30"
                     Margin="10, 60, 0, 0">
             <Label Content="Formed Date" 
-                   Width="100"
+                   Width="120"
                    FontSize="15"/>
             <DatePicker Width="200"
                         FontSize="17"
@@ -61,11 +61,11 @@
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Left"
                     Orientation="Horizontal" 
-                    Width="300"
+                    Width="400"
                     Height="30"
                     Margin="10, 110, 0, 0">
             <Label Content="Players Count" 
-                   Width="100"
+                   Width="120"
                    FontSize="15"/>
             <TextBox Width="200"
                      FontSize="17"
@@ -79,17 +79,32 @@
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Left"
                     Orientation="Horizontal" 
-                    Width="300"
+                    Width="400"
                     Height="30"
                     Margin="10, 160, 0, 0">
             <Label Content="Country" 
-                   Width="100"
+                   Width="120"
                    FontSize="15"/>
             <ComboBox Width="200" FontSize="17"
                       ItemsSource="{Binding Countries}"
                       SelectedItem="{Binding Club.Country, 
                                 UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
+
+        <StackPanel Grid.Row="1"
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal" 
+                    Width="400"
+                    Height="30"
+                    Margin="10, 210, 0, 0">
+            <Label Content="Club Logo" 
+                   Width="120"
+                   FontSize="15"/>
+            <Button Content="Upload" Width="200" FontSize="17" 
+                    Command="{Binding UploadFileCommand}"/>
+        </StackPanel>
+
 
 
         <StackPanel Grid.Row="2" 
