@@ -4,12 +4,13 @@
              xmlns:local="clr-namespace:LookScoreCommon"
              xmlns:control="clr-namespace:LookScoreCommon.Controls"
              xmlns:viewModel="clr-namespace:LookScoreCommon.ViewModel"
-             xmlns:commonConverter="clr-namespace:LookScoreCommon.Converter;assembly=LookScoreCommon">
+             xmlns:commonConverter="clr-namespace:LookScoreCommon.Converter;assembly=">
     <Application.Resources>
         <ResourceDictionary>
 
             <!--Converters-->
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <commonConverter:PathToImageConverter x:Key="PathToImageConverter" />
 
             <!--Views-->
             <DataTemplate DataType="{x:Type viewModel:NotificationPopupViewModel}">

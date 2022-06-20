@@ -87,6 +87,7 @@
     <Compile Include="Controls\NotificationPopup.xaml.cs">
       <DependentUpon>NotificationPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\PathToImageConverter.cs" />
     <Compile Include="Converter\ScoreBoardConverter.cs" />
     <Compile Include="Converter\SecondsToMinuteConverter.cs" />
     <Compile Include="Converter\SecondsToPercentageConverter.cs" />

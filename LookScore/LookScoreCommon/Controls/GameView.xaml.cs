@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LookScoreCommon.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,31 @@ namespace LookScoreCommon.Controls
         {
             InitializeComponent();
         }
+
+
+        #region Dependency Properties
+
+        public Game Game
+        {
+            get { return (Game)GetValue(GameProperty); }
+            set { SetValue(GameProperty, value); }
+        }
+
+        public static readonly DependencyProperty GameProperty =
+            DependencyProperty.Register("Game", typeof(Game), typeof(GameView), new PropertyMetadata(new Game()));
+
+
+        public GameStatistics GameStatistics
+        {
+            get { return (GameStatistics)GetValue(GameStatisticsProperty); }
+            set { SetValue(GameStatisticsProperty, value); }
+        }
+
+        public static readonly DependencyProperty GameStatisticsProperty =
+            DependencyProperty.Register("GameStatistics", typeof(GameStatistics), typeof(GameView), new PropertyMetadata(new GameStatistics()));
+
+        #endregion
+
+
     }
 }

@@ -2,67 +2,65 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:converter="clr-namespace:LookScoreCommon.Converter"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="350">
-        <Border BorderBrush="#112B3C"
+             d:DesignHeight="100" d:DesignWidth="350"
+             x:Name="Self">
+
+    <UserControl.Resources>
+        <converter:PathToImageConverter x:Key="PathToImageConverter"/>
+    </UserControl.Resources>
+
+    <Border BorderBrush="#112B3C"
                 BorderThickness="2"
                 Width="350"
-                Height="100"
+                Height="130"
                 CornerRadius="5"
                 Cursor="Hand">
-            <!--game time-->
-            <StackPanel Orientation="Horizontal">
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="22:00" FontSize="16"
+        <!--game time-->
+        <StackPanel Orientation="Horizontal">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="22:00" FontSize="16"
                                Margin="5"
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="22.06.2022" Margin="5"/>
-                </StackPanel>
-
-                <StackPanel Margin="10, 0, 0, 0">
-                    <!--home team-->
-                    <StackPanel Orientation="Horizontal"
-                            Margin="5">
-                        <Image Width="30">
-                            <Image.Source>
-                                <BitmapImage  
-                                UriSource="../Images/liverpool2.jpg" />
-                            </Image.Source>
-                        </Image>
-                        <TextBlock Text="Liverpool" FontSize="18" 
-                               VerticalAlignment="Center"
-                               Margin="10, 0"/>
-                    </StackPanel>
-
-                    <!--guest team-->
-                    <StackPanel Orientation="Horizontal"
-                            Margin="5">
-                        <Image Width="30">
-                            <Image.Source>
-                                <BitmapImage  
-                                UriSource="../Images/bayern.svg.png" />
-                            </Image.Source>
-                        </Image>
-                        <TextBlock Text="Bayern Munchen" FontSize="18"
-                               VerticalAlignment="Center"
-                               Margin="10, 0"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <!--score-->
-                <StackPanel Margin="10, 0, 0, 0" Width="50" VerticalAlignment="Center">
-                    <TextBlock Text="1" FontSize="20" 
-                               Margin="10"
-                               HorizontalAlignment="Center"
-                               />
-
-                    <TextBlock Text="0" FontSize="20" 
-                               Margin="10"
-                               HorizontalAlignment="Center"
-                               />
-                </StackPanel>
-
+                <TextBlock Text="22.06.2022" Margin="5"/>
             </StackPanel>
-        </Border>
+
+            <StackPanel Margin="10, 0, 0, 0" VerticalAlignment="Center">
+                <!--home team-->
+                <StackPanel Orientation="Horizontal"
+                            Margin="0, 0, 0, 10" Height="40">
+
+                    <Image Width="30" Source="{Binding Game.HomeClub.LogoUrl, 
+                         ElementName=Self, Converter={StaticResource PathToImageConverter}}" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding Game.HomeClub.Name, ElementName=Self}" FontSize="18" 
+                               VerticalAlignment="Center"
+                               Margin="10, 0" Width="150"/>
+
+                    <TextBlock Text="{Binding GameStatistics.HomeClub.Goal, ElementName=Self}" FontSize="20" 
+                                   Margin="10, 0"
+                                   VerticalAlignment="Center"
+                               />
+                </StackPanel>
+
+                <!--guest team-->
+                <StackPanel Orientation="Horizontal"
+                            Margin="0" Height="40">
+                    <Image Width="30" Source="{Binding Game.GuestClub.LogoUrl, 
+                         ElementName=Self, Converter={StaticResource PathToImageConverter}}" />
+
+                    <TextBlock Text="{Binding Game.GuestClub.Name, ElementName=Self}" FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="10, 0" Width="150"/>
+
+                    <TextBlock Text="{Binding GameStatistics.GuestClub.Goal, ElementName=Self}" FontSize="20" 
+                                    Margin="10, 0"  
+                                    VerticalAlignment="Center"
+                                   />
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
 </UserControl>
