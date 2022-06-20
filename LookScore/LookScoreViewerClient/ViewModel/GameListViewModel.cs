@@ -9,7 +9,7 @@ using ReactiveUI;
 
 namespace LookScoreViewerClient.ViewModel
 {
-    public class GameListViewModel : ReactiveObject
+    public class GameListViewModel : BaseViewModel
     {
         public GameListViewModel()
         {

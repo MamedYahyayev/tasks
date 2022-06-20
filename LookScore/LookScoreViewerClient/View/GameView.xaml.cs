@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace LookScoreViewerClient.View
 {
     /// <summary>
-    /// Interaction logic for GameListView.xaml
+    /// Interaction logic for GameView.xaml
     /// </summary>
-    public partial class GameListView : UserControl
+    public partial class GameView : UserControl
     {
-        public GameListView()
+        public GameView()
         {
             InitializeComponent();
         }
