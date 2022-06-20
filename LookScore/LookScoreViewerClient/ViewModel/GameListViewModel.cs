@@ -17,28 +17,27 @@ namespace LookScoreViewerClient.ViewModel
         #region Private Properties
 
         private readonly IGameService _gameService;
+        private readonly IStatisticService _statisticService;
 
         #endregion
 
         public GameListViewModel()
         {
-            var gameCallback = new GameCallback();
+            InstanceContext gameCallbackInstance = new InstanceContext(new GameStatisticsCallback());
+            var statisticChannelFactory = new DuplexChannelFactory<IStatisticService>(gameCallbackInstance, "StatisticService");
+            _statisticService = statisticChannelFactory.CreateChannel();
+            _statisticService.JoinToChannel();
 
-            InstanceContext gameCallbackInstance = new InstanceContext(gameCallback);
-            DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
-            _gameService = channelFactory.CreateChannel();
-            _gameService.JoinToChannel();
-
-            Games = _gameService.FindAllGameDetails();
+            GameStatistics = _statisticService.FindAllGameStatistics();
         }
 
         #region Public Properties
 
-        private Game[] _games;
-        public Game[] Games
+        private GameStatistics[] _gameStatistics;
+        public GameStatistics[] GameStatistics
         {
-            get => _games;
-            set => this.RaiseAndSetIfChanged(ref _games, value);
+            get => _gameStatistics;
+            set => this.RaiseAndSetIfChanged(ref _gameStatistics, value);
         }
 
         #endregion

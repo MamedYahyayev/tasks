@@ -11,7 +11,7 @@
                  >
     <Grid Background="AliceBlue">
         <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding Games}" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+            <ItemsControl ItemsSource="{Binding GameStatistics}" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal" 
@@ -20,7 +20,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:GameView Margin="5" />
+                        <controls:GameView Margin="5"
+                                           GameStatistics="{Binding}"
+                                           Game="{Binding Game}"
+                                           />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
