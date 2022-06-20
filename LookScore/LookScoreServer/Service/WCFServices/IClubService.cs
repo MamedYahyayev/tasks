@@ -8,5 +8,8 @@ namespace LookScoreServer.Service.WCFServices
     {
         [OperationContract]
         Club[] FindAllClubs();
+
+        [OperationContract]
+        void InsertClub(Club club);
     }
 }
