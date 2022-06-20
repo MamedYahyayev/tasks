@@ -16,6 +16,12 @@ namespace LookScoreServer.Service.WCFServices
         void JoinToChannel();
 
         [OperationContract]
+        GameStatistics[] FindAllGameStatistics();
+
+        [OperationContract]
+        void InitializeStatistics(Game game);
+
+        [OperationContract]
         void ChangeStatistic(GameStatistics statistics);
 
         [OperationContract]

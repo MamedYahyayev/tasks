@@ -19,6 +19,7 @@ namespace LookScoreCommon.Model
         [DataMember]
         public int PlayersCount { get; set; }
 
+        [DataMember]
         public string LogoUrl { get; set; }
 
         [DataMember]

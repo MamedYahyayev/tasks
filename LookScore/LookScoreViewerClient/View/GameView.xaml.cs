@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LookScoreAdmin.View.SubView
+namespace LookScoreViewerClient.View
 {
     /// <summary>
-    /// Interaction logic for ClubEditorView.xaml
+    /// Interaction logic for GameView.xaml
     /// </summary>
-    public partial class ClubEditorView : UserControl
+    public partial class GameView : UserControl
     {
-        public ClubEditorView()
+        public GameView()
         {
             InitializeComponent();
         }
-
     }
 }

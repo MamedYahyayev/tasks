@@ -4,6 +4,7 @@ using LookScoreAdmin.Command;
 using System.ServiceModel;
 using LookScoreServer.Service.WCFServices;
 using LookScoreCommon.Model;
+using LookScoreViewerClient.Contract;
 
 namespace LookScoreAdmin.ViewModel.SubViewModel
 {
@@ -11,20 +12,25 @@ namespace LookScoreAdmin.ViewModel.SubViewModel
     {
         #region Private Properties
 
-        private Game[] _games;
-        
+        private readonly IGameService _gameService;
+
         #endregion
 
         public GameViewModel()
         {
-            ChannelFactory<IGameService> channelFactory = new ChannelFactory<IGameService>("GameService");
-            IGameService gameService = channelFactory.CreateChannel();
+            var gameCallback = new GameCallback();
 
-            Games = gameService.FindAllGames();
+            InstanceContext gameCallbackInstance = new InstanceContext(gameCallback);
+            DuplexChannelFactory<IGameService> channelFactory = new DuplexChannelFactory<IGameService>(gameCallbackInstance, "GameService");
+            _gameService = channelFactory.CreateChannel();
+            _gameService.JoinToChannel();
+
+            Games = _gameService.FindAllGameDetails();
         }
 
         #region Public Properties
 
+        private Game[] _games;
         public Game[] Games
         {
             get => _games;

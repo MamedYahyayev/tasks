@@ -16,5 +16,10 @@ namespace LookScoreServer.Service.WCFServices
         {
             return _clubRepository.FindAll();
         }
+
+        public void InsertClub(Club club)
+        {
+            _clubRepository.Insert(club);
+        }
     }
 }

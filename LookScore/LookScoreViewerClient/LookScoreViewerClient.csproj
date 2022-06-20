@@ -101,6 +101,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\GameListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,7 +121,16 @@
     <Compile Include="Contract\GameEventArgs.cs" />
     <Compile Include="Contract\GameStatisticsCallback.cs" />
     <Compile Include="Contract\StatisticEventArgs.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\GameListViewModel.cs" />
+    <Compile Include="ViewModel\GameViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\GameListView.xaml.cs">
+      <DependentUpon>GameListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -155,6 +172,15 @@
       <Project>{8DD4EA0F-C438-4742-B468-FDA65040F077}</Project>
       <Name>LookScoreServer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bayern.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\liverpool.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\liverpool2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

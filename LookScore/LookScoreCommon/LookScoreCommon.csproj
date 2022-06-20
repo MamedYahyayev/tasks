@@ -81,9 +81,13 @@
     </Compile>
     <Compile Include="Command\VoidReactiveCommand.cs" />
     <Compile Include="Constants\GameConstants.cs" />
+    <Compile Include="Controls\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NotificationPopup.xaml.cs">
       <DependentUpon>NotificationPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\PathToImageConverter.cs" />
     <Compile Include="Converter\ScoreBoardConverter.cs" />
     <Compile Include="Converter\SecondsToMinuteConverter.cs" />
     <Compile Include="Converter\SecondsToPercentageConverter.cs" />
@@ -101,6 +105,7 @@
     <Compile Include="Model\Referee.cs" />
     <Compile Include="Model\Statistics.cs" />
     <Compile Include="Model\Storage.cs" />
+    <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Util\FileHelper.cs" />
     <Compile Include="Util\FileValidator.cs" />
     <Compile Include="ViewModel\NotificationPopupViewModel.cs" />
@@ -121,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\GameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\NotificationPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +139,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\bayern.svg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\liverpool.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\liverpool2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

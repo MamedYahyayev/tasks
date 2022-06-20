@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="LookScoreViewerClient.View.GameListView"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:controls="clr-namespace:LookScoreCommon.Controls;assembly=LookScoreCommon"
+                 xmlns:viewModel="clr-namespace:LookScoreViewerClient.ViewModel" 
+                 mc:Ignorable="d" 
+                 d:DesignHeight="450" d:DesignWidth="800"
+                 d:DataContext="{d:DesignInstance viewModel:GameListViewModel, IsDesignTimeCreatable=False}"
+                 >
+    <Grid Background="AliceBlue">
+        <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding GameStatistics}" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" 
+                                       VerticalAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:GameView Margin="5"
+                                           GameStatistics="{Binding}"
+                                           Game="{Binding Game}"
+                                           />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
