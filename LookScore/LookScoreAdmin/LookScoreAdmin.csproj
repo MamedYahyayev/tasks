@@ -105,6 +105,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\VoidReactiveCommand.cs" />
+    <Compile Include="Contract\GameCallback.cs" />
+    <Compile Include="Contract\GameEventArgs.cs" />
+    <Compile Include="Contract\GameStatisticsCallback.cs" />
+    <Compile Include="Contract\StatisticEventArgs.cs" />
     <Compile Include="Converter\ClubJoinConverter.cs" />
     <Compile Include="Converter\LongNameToShortConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
