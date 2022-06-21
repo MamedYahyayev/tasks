@@ -26,7 +26,6 @@ namespace LookScoreViewerClient.ViewModel
             _statisticService = statisticChannelFactory.CreateChannel();
             _statisticService.JoinToChannel();
 
-            //GameStatistics = new ObservableCollection<GameStatistics>(_statisticService.FindAllGameStatistics());
             GameStatistics = _statisticService.FindAllGameStatistics();
         }
 

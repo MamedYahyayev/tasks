@@ -27,7 +27,12 @@ namespace LookScoreServer.Repository
 
         public Game FindOne(int id)
         {
-            return DataService.Instance.Storage.Games.First(g => g.Id == id);
+            var game = DataService.Instance.Storage.Games.First(g => g.Id == id);
+
+            game.HomeClub = _clubRepository.FindOne(game.HomeClubId);
+            game.GuestClub = _clubRepository.FindOne(game.GuestClubId);
+
+            return game;
         }
 
         public void Insert(Game game)
