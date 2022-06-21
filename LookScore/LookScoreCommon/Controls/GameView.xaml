@@ -11,67 +11,73 @@
         <converter:PathToImageConverter x:Key="PathToImageConverter"/>
     </UserControl.Resources>
 
-    <Border BorderBrush="#D0C9C0"
+    <Grid>
+        <Grid.InputBindings>
+            <MouseBinding MouseAction="LeftClick" Command="{Binding SelectGameCommand, ElementName=Self}" 
+                          CommandParameter="{Binding Game.Id, ElementName=Self}"/>
+        </Grid.InputBindings>
+        <Border BorderBrush="#D0C9C0"
                 BorderThickness="2"
                 Width="350"
                 Height="110"
                 CornerRadius="5"
                 Cursor="Hand"
             Background="#F9F2ED">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="5" 
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5" 
                               ShadowDepth="7" 
                               Color="#F7ECDE" 
                               Opacity="0.7"
                        />
-        </Border.Effect>
-        <!--game time-->
-        <StackPanel Orientation="Horizontal">
-            <StackPanel VerticalAlignment="Center" Margin="5, 0">
-                <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=HH:mm}" 
+            </Border.Effect>
+            <!--game time-->
+            <StackPanel Orientation="Horizontal">
+                <StackPanel VerticalAlignment="Center" Margin="5, 0">
+                    <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=HH:mm}" 
                            Foreground="Red" HorizontalAlignment="Center" FontSize="20" />
 
-                <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=dd.MM.yyyy}" 
+                    <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=dd.MM.yyyy}" 
                            Foreground="Red" HorizontalAlignment="Center" FontSize="15" />
-            </StackPanel>
+                </StackPanel>
 
-            <StackPanel Margin="10, 0, 0, 0" VerticalAlignment="Center">
-                <!--home team-->
-                <StackPanel Orientation="Horizontal"
+                <StackPanel Margin="10, 0, 0, 0" VerticalAlignment="Center">
+                    <!--home team-->
+                    <StackPanel Orientation="Horizontal"
                             Margin="0, 0, 0, 10" Height="40">
 
-                    <Image Width="30" Source="{Binding Game.HomeClub.LogoUrl, Mode=OneTime,
+                        <Image Width="30" Source="{Binding Game.HomeClub.LogoUrl, Mode=OneTime,
                          ElementName=Self, Converter={StaticResource PathToImageConverter}}" VerticalAlignment="Center"/>
 
-                    <TextBlock Text="{Binding Game.HomeClub.Name, ElementName=Self}" FontSize="18" 
+                        <TextBlock Text="{Binding Game.HomeClub.Name, ElementName=Self}" FontSize="18" 
                                VerticalAlignment="Center"
                                Margin="10, 0" Width="150"/>
 
-                    <TextBlock Text="{Binding GameStatistics.HomeClub.Goal, ElementName=Self}" FontSize="20" 
+                        <TextBlock Text="{Binding GameStatistics.HomeClub.Goal, ElementName=Self}" FontSize="20" 
                                    Margin="10, 0"
                                    VerticalAlignment="Center"
                                    Foreground="Red"
                                />
-                </StackPanel>
+                    </StackPanel>
 
-                <!--guest team-->
-                <StackPanel Orientation="Horizontal"
+                    <!--guest team-->
+                    <StackPanel Orientation="Horizontal"
                             Margin="0" Height="40">
-                    <Image Width="30" Source="{Binding Game.GuestClub.LogoUrl, Mode=OneTime, 
+                        <Image Width="30" Source="{Binding Game.GuestClub.LogoUrl, Mode=OneTime, 
                          ElementName=Self, Converter={StaticResource PathToImageConverter}}" />
 
-                    <TextBlock Text="{Binding Game.GuestClub.Name, ElementName=Self}" FontSize="18"
+                        <TextBlock Text="{Binding Game.GuestClub.Name, ElementName=Self}" FontSize="18"
                                VerticalAlignment="Center"
                                Margin="10, 0" Width="150"/>
 
-                    <TextBlock Text="{Binding GameStatistics.GuestClub.Goal, ElementName=Self}" FontSize="20" 
+                        <TextBlock Text="{Binding GameStatistics.GuestClub.Goal, ElementName=Self}" FontSize="20" 
                                     Margin="10, 0"  
                                     VerticalAlignment="Center"
                                     Foreground="Red"
                                    />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Border>
-    
+        </Border>
+    </Grid>
+
 </UserControl>

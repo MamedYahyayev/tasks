@@ -5,6 +5,8 @@ using ReactiveUI;
 using LookScoreServer.Service.WCFServices;
 using LookScoreViewerClient.Contract;
 using System.ServiceModel;
+using GalaSoft.MvvmLight.Command;
+using System.Windows;
 
 namespace LookScoreViewerClient.ViewModel
 {
@@ -41,6 +43,15 @@ namespace LookScoreViewerClient.ViewModel
         #endregion
 
 
+        #region Functions
+
+        private void SelectGame(int gameId)
+        {
+            MainViewModel.Instance.SetCurrentView(new GameViewModel(gameId));
+        }
+
+        #endregion
+
         #region Events
 
         protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
@@ -58,5 +69,19 @@ namespace LookScoreViewerClient.ViewModel
 
         #endregion
 
+
+        #region Commands
+
+        private RelayCommand<int> _selectGameCommand;
+        public RelayCommand<int> SelectGameCommand
+        {
+            get
+            {
+                return _selectGameCommand ?? (_selectGameCommand =
+                                    new RelayCommand<int>((gameId) => SelectGame(gameId)));
+            }
+        }
+
+        #endregion
     }
 }

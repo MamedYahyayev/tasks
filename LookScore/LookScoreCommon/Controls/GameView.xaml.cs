@@ -1,4 +1,5 @@
-﻿using LookScoreCommon.Model;
+﻿using GalaSoft.MvvmLight.Command;
+using LookScoreCommon.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,18 @@ namespace LookScoreCommon.Controls
 
         public static readonly DependencyProperty GameStatisticsProperty =
             DependencyProperty.Register("GameStatistics", typeof(GameStatistics), typeof(GameView), new PropertyMetadata(new GameStatistics()));
+
+        
+        
+        public RelayCommand<int> SelectGameCommand
+        {
+            get { return (RelayCommand<int>)GetValue(SelectGameCommandProperty); }
+            set { SetValue(SelectGameCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectGameCommandProperty =
+            DependencyProperty.Register("SelectGameCommand", typeof(RelayCommand<int>), typeof(GameView));
+
 
         #endregion
 
