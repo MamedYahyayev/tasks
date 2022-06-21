@@ -92,6 +92,7 @@
     <Compile Include="Converter\SecondsToMinuteConverter.cs" />
     <Compile Include="Converter\SecondsToPercentageConverter.cs" />
     <Compile Include="Enums\FileType.cs" />
+    <Compile Include="Enums\GameStatus.cs" />
     <Compile Include="Enums\Nationality.cs" />
     <Compile Include="Enums\Position.cs" />
     <Compile Include="Enums\ViewType.cs" />

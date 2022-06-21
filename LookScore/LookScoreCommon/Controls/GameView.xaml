@@ -11,19 +11,28 @@
         <converter:PathToImageConverter x:Key="PathToImageConverter"/>
     </UserControl.Resources>
 
-    <Border BorderBrush="#112B3C"
+    <Border BorderBrush="#D0C9C0"
                 BorderThickness="2"
                 Width="350"
-                Height="130"
+                Height="110"
                 CornerRadius="5"
-                Cursor="Hand">
+                Cursor="Hand"
+            Background="#F9F2ED">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="5" 
+                              ShadowDepth="7" 
+                              Color="#F7ECDE" 
+                              Opacity="0.7"
+                       />
+        </Border.Effect>
         <!--game time-->
         <StackPanel Orientation="Horizontal">
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="22:00" FontSize="16"
-                               Margin="5"
-                               HorizontalAlignment="Center"/>
-                <TextBlock Text="22.06.2022" Margin="5"/>
+            <StackPanel VerticalAlignment="Center" Margin="5, 0">
+                <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=HH:mm}" 
+                           Foreground="Red" HorizontalAlignment="Center" FontSize="20" />
+
+                <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=dd.MM.yyyy}" 
+                           Foreground="Red" HorizontalAlignment="Center" FontSize="15" />
             </StackPanel>
 
             <StackPanel Margin="10, 0, 0, 0" VerticalAlignment="Center">
@@ -41,6 +50,7 @@
                     <TextBlock Text="{Binding GameStatistics.HomeClub.Goal, ElementName=Self}" FontSize="20" 
                                    Margin="10, 0"
                                    VerticalAlignment="Center"
+                                   Foreground="Red"
                                />
                 </StackPanel>
 
@@ -57,10 +67,11 @@
                     <TextBlock Text="{Binding GameStatistics.GuestClub.Goal, ElementName=Self}" FontSize="20" 
                                     Margin="10, 0"  
                                     VerticalAlignment="Center"
+                                    Foreground="Red"
                                    />
                 </StackPanel>
             </StackPanel>
-
         </StackPanel>
     </Border>
+    
 </UserControl>
