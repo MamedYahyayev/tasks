@@ -17,11 +17,12 @@ namespace LookScoreManageStatisticsClient.Contract
 
         public void NotifyGoalScored(GameStatistics gameStatistics)
         {
-            OnStatisticsChanged(gameStatistics);
+
         }
 
         public void NotifyStatisticsChanged(GameStatistics gameStatistics)
         {
+            OnStatisticsChanged(gameStatistics);
         }
 
         protected virtual void OnStatisticsChanged(GameStatistics statistics)

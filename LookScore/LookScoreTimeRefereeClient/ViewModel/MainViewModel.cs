@@ -155,6 +155,7 @@ namespace LookScoreTimeRefereeClient.ViewModel
 
         private void StartTimer()
         {
+            SelectedGame.GameStartDate = DateTime.Now;
             _gameService.StartGame(SelectedGame);
         }
 

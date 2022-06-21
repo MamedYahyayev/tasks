@@ -1,14 +1,12 @@
 ﻿using LookScoreCommon.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using ReactiveUI;
 using LookScoreServer.Service.WCFServices;
 using LookScoreViewerClient.Contract;
 using System.ServiceModel;
+using GalaSoft.MvvmLight.Command;
+using System.Windows;
 
 namespace LookScoreViewerClient.ViewModel
 {
@@ -16,14 +14,16 @@ namespace LookScoreViewerClient.ViewModel
     {
         #region Private Properties
 
-        private readonly IGameService _gameService;
         private readonly IStatisticService _statisticService;
 
         #endregion
 
         public GameListViewModel()
         {
-            InstanceContext gameCallbackInstance = new InstanceContext(new GameStatisticsCallback());
+            var gameStatisticsCallback = new GameStatisticsCallback();
+            gameStatisticsCallback.StatisticsChanged += OnStatisticsChanged;
+
+            var gameCallbackInstance = new InstanceContext(gameStatisticsCallback);
             var statisticChannelFactory = new DuplexChannelFactory<IStatisticService>(gameCallbackInstance, "StatisticService");
             _statisticService = statisticChannelFactory.CreateChannel();
             _statisticService.JoinToChannel();
@@ -42,5 +42,46 @@ namespace LookScoreViewerClient.ViewModel
 
         #endregion
 
+
+        #region Functions
+
+        private void SelectGame(int gameId)
+        {
+            MainViewModel.Instance.SetCurrentView(new GameViewModel(gameId));
+        }
+
+        #endregion
+
+        #region Events
+
+        protected virtual void OnStatisticsChanged(object source, StatisticEventArgs args)
+        {
+            var gameStatistic = args.GameStatistics;
+
+            var copiedGameStatistics = new GameStatistics[GameStatistics.Length];
+
+            Array.Copy(GameStatistics, copiedGameStatistics, _gameStatistics.Length);
+            int index = Array.FindIndex(copiedGameStatistics, row => row.GameId == gameStatistic.GameId);
+            copiedGameStatistics[index] = gameStatistic;
+
+            GameStatistics = copiedGameStatistics;
+        }
+
+        #endregion
+
+
+        #region Commands
+
+        private RelayCommand<int> _selectGameCommand;
+        public RelayCommand<int> SelectGameCommand
+        {
+            get
+            {
+                return _selectGameCommand ?? (_selectGameCommand =
+                                    new RelayCommand<int>((gameId) => SelectGame(gameId)));
+            }
+        }
+
+        #endregion
     }
 }

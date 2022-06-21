@@ -12,8 +12,12 @@ namespace LookScoreViewerClient.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        public static MainViewModel Instance { get; private set; }
+
         public MainViewModel()
         {
+            Instance = this;
+
             CurrentView = new GameListViewModel();
         }
 
@@ -28,5 +32,13 @@ namespace LookScoreViewerClient.ViewModel
 
         #endregion
 
+        #region Functions
+
+        public void SetCurrentView(BaseViewModel viewModel)
+        {
+            CurrentView = viewModel;
+        }
+
+        #endregion
     }
 }

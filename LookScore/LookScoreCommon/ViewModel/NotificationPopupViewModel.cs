@@ -45,7 +45,7 @@ namespace LookScoreCommon.ViewModel
 
         #region Functions
 
-        public void GetSuccessDesign(string title, int visibleTimeInSeconds)
+        public void GetSuccessPopup(string title, int visibleTimeInSeconds)
         {
             IsPopupOpen = true;
             Title = title;
@@ -55,7 +55,7 @@ namespace LookScoreCommon.ViewModel
             ClosePopupAfterDelay(visibleTimeInSeconds);
         }
 
-        public void GetFailedDesign(string title, int visibleTimeInSeconds)
+        public void GetFailedPopup(string title, int visibleTimeInSeconds)
         {
             IsPopupOpen = true;
             Title = title;

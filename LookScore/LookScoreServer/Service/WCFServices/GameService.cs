@@ -51,7 +51,9 @@ namespace LookScoreServer.Service.WCFServices
 
         public void StartGame(Game game)
         {
-            // notify all client that game start
+            _gameRepository.StartGame(game);
+
+            // notify all clients that game start
             Action<IGameCallbackService> invoke = callback => callback.NotifyGameStarted(game);
             _callbackList.ForEach(invoke);
         

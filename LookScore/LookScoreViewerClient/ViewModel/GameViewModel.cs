@@ -21,7 +21,7 @@ namespace LookScoreViewerClient.ViewModel
 
         #endregion
 
-        public GameViewModel()
+        public GameViewModel(int gameId)
         {
             var callback = new GameStatisticsCallback();
             callback.StatisticsChanged += OnStatisticsChanged;
@@ -42,6 +42,8 @@ namespace LookScoreViewerClient.ViewModel
             gameService.JoinToChannel();
 
             Games = gameService.FindAllGameDetails();
+            SelectedGame = Games.FirstOrDefault(x => x.Id == gameId);
+            GameChange();
 
             NotificationPopupViewModel = new NotificationPopupViewModel();
         }
@@ -102,6 +104,11 @@ namespace LookScoreViewerClient.ViewModel
             }
         }
 
+        private void BackToPrevious()
+        {
+            MainViewModel.Instance.SetCurrentView(new GameListViewModel());
+        }
+
         #endregion
 
         #region Events
@@ -113,12 +120,12 @@ namespace LookScoreViewerClient.ViewModel
 
         protected virtual void OnGoalScored(object source, StatisticEventArgs args)
         {
-            _notificationPopupViewModel.GetSuccessDesign("Goal!!!", 5);
+            _notificationPopupViewModel.GetSuccessPopup("Goal!!!", 5);
         }
 
         protected virtual void OnGoalCancelled(object source, StatisticEventArgs args)
         {
-            _notificationPopupViewModel.GetFailedDesign("Goal cancelled...", 5);
+            _notificationPopupViewModel.GetFailedPopup("Goal cancelled...", 5);
         }
 
         protected virtual void OnGameStarted(object source, GameEventArgs args)
@@ -143,6 +150,16 @@ namespace LookScoreViewerClient.ViewModel
             {
                 return _gameChangeCommand ?? (_gameChangeCommand =
                                  new RelayCommand(() => GameChange()));
+            }
+        }
+
+        private RelayCommand _backToPreviousCommand;
+        public RelayCommand BackToPreviousCommand
+        {
+            get
+            {
+                return _backToPreviousCommand  ?? (_backToPreviousCommand  =
+                                 new RelayCommand(() => BackToPrevious()));
             }
         }
 
