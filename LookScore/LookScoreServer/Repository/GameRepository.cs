@@ -62,6 +62,19 @@ namespace LookScoreServer.Repository
             return games ?? new Game[0];
         }
 
+        public void StartGame(Game game)
+        {
+            var games = DataService.Instance.Storage.Games;
+
+            int index = Array.FindIndex(games, x => x.Id == game.Id);
+            var findedGame = games[index];
+
+            findedGame.GameStartDate = game.GameStartDate;
+
+            DataService.Instance.Storage.Games[index] = findedGame;
+            DataService.Instance.SetStorageModified();
+        }
+
         #region Helper Functions
 
         private int GetNextId()
