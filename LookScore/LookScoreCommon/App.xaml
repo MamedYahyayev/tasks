@@ -11,6 +11,7 @@
             <!--Converters-->
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commonConverter:PathToImageConverter x:Key="PathToImageConverter" />
+            <commonConverter:GameStatusEnumToTextConverter x:Key="GameStatusEnumToTextConverter" />
 
             <!--Views-->
             <DataTemplate DataType="{x:Type viewModel:NotificationPopupViewModel}">

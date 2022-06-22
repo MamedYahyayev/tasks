@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LookScoreCommon.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -33,5 +34,8 @@ namespace LookScoreCommon.Model
 
         [DataMember]
         public DateTime GameStartDate { get; set; } = DateTime.Now;
+
+        [DataMember]
+        public GameStatus GameStatus { get; set; } = GameStatus.UNSTARTED;
     }
 }

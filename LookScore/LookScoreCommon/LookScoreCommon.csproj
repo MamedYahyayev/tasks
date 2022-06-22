@@ -102,6 +102,7 @@
     <Compile Include="Controls\NotificationPopup.xaml.cs">
       <DependentUpon>NotificationPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\GameStatusEnumToTextConverter.cs" />
     <Compile Include="Converter\PathToImageConverter.cs" />
     <Compile Include="Converter\ScoreBoardConverter.cs" />
     <Compile Include="Converter\SecondsToMinuteConverter.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Model\Referee.cs" />
     <Compile Include="Model\Statistics.cs" />
     <Compile Include="Model\Storage.cs" />
+    <Compile Include="Utils\DateUtil.cs" />
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Util\FileHelper.cs" />
     <Compile Include="Util\FileValidator.cs" />

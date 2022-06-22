@@ -1,4 +1,5 @@
-﻿using LookScoreCommon.Model;
+﻿using LookScoreCommon.Enums;
+using LookScoreCommon.Model;
 using LookScoreServer.Service.FileServices;
 using System;
 using System.Collections.Generic;
@@ -70,6 +71,7 @@ namespace LookScoreServer.Repository
             var findedGame = games[index];
 
             findedGame.GameStartDate = game.GameStartDate;
+            findedGame.GameStatus = GameStatus.STARTED;
 
             DataService.Instance.Storage.Games[index] = findedGame;
             DataService.Instance.SetStorageModified();
