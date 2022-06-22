@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,9 @@ namespace Learning
             IsOperator(3);
 
             IsOperatorWithDeclaredVariable(new Person() { Name = "Samir", Surname = "Samirov" });
+
+            Console.WriteLine("********Hash********");
+            Console.WriteLine(ComputeHash("salam"));
 
             Console.ReadLine();
         }
@@ -82,6 +86,22 @@ namespace Learning
             }
 
             // Console.WriteLine(person.ToString()); // compile error, person isn't declared outside of if block
+        }
+
+        public static string ComputeHash(string input)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            if (string.IsNullOrEmpty(input))
+            {
+                return string.Empty;
+            }
+
+            byte[] bytes = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+            string result = BitConverter.ToString(bytes).Replace("-", string.Empty);
+            // result will be DE-68-38-25-2F-95-D3-B9-E8-03-B2-8D-F3-3B-4B-AA, it is not good we can replace - sign with empty string
+            // we can hash password with this method
+            return result;
         }
     }
 
