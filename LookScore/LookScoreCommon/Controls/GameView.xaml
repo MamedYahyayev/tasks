@@ -9,6 +9,7 @@
 
     <UserControl.Resources>
         <converter:PathToImageConverter x:Key="PathToImageConverter"/>
+        <converter:GameStatusEnumToTextConverter x:Key="GameStatusEnumToTextConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -33,11 +34,10 @@
             <!--game time-->
             <StackPanel Orientation="Horizontal">
                 <StackPanel VerticalAlignment="Center" Margin="5, 0">
-                    <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=HH:mm}" 
+                    <TextBlock Text="{Binding Game, ElementName=Self,
+                           Converter={StaticResource GameStatusEnumToTextConverter}}"
                            Foreground="Red" HorizontalAlignment="Center" FontSize="20" />
-
-                    <TextBlock Text="{Binding Game.GameStartDate, ElementName=Self, StringFormat=dd.MM.yyyy}" 
-                           Foreground="Red" HorizontalAlignment="Center" FontSize="15" />
+                
                 </StackPanel>
 
                 <StackPanel Margin="10, 0, 0, 0" VerticalAlignment="Center">
