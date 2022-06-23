@@ -1,0 +1,4 @@
+﻿Samir	Samirov	22	samirsamirov@gmail.com
+Cabbar	Cabbarov	34	cabbar@gmail.com
+Zeki	Zekiyev	44	zeki@gmail.com
+Leyla	Hesenova	20	leyla@gmail.com

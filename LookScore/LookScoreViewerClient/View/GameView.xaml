@@ -42,6 +42,7 @@
                         UpdateSourceTrigger=PropertyChanged}"
                       ToolTip="{Binding SelectedGame.GameTitle, 
                         UpdateSourceTrigger=PropertyChanged}"
+                      ToolTipService.HasDropShadow="True"
                       >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -57,7 +58,12 @@
                 <TextBlock FontSize="20" 
                            Text="{Binding SelectedGame.GameStartDate, StringFormat=dd.MM.yyyy HH:mm}" />
                 <TextBlock FontSize="20" Margin="20, 0, 0, 0"
-                           Text="{Binding SelectedGame.GameTitle}" />
+                           Text="{Binding SelectedGame.GameTitle}"
+                           ToolTip="{Binding SelectedGame.GameTitle}"
+                           ToolTipService.ShowDuration="3000"
+                           ToolTipService.ShowOnDisabled="True"
+                           ToolTipService.HasDropShadow="True"
+                           />
 
 
             </StackPanel>
