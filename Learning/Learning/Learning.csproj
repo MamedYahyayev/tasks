@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColumnParser.cs" />
     <Compile Include="DataColumn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Program2.cs" />
+    <Compile Include="Program3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="persons.txt" />
+    <Content Include="StartList.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

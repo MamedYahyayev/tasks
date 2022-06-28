@@ -23,41 +23,41 @@ namespace Learning
             EMAIL
         }
 
-        public static void Main(string[] args)
-        {
-            dynamic column = new DataColumn();
+        //public static void Main(string[] args)
+        //{
+        //    dynamic column = new DataColumn();
             
-            var persons = new List<Person>();
-            using (var stream = new FileStream(@"C:\Users\User\Desktop\tasks\Learning\Learning\persons.txt", FileMode.Open))
-            {
-                var reader = new StreamReader(stream);
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    string[] values = line.Split('\t');
+        //    var persons = new List<Person>();
+        //    using (var stream = new FileStream(@"C:\Users\User\Desktop\tasks\Learning\Learning\persons.txt", FileMode.Open))
+        //    {
+        //        var reader = new StreamReader(stream);
+        //        while (!reader.EndOfStream)
+        //        {
+        //            var line = reader.ReadLine();
+        //            string[] values = line.Split('\t');
 
-                    for (var i = 0; i < 1; i++)
-                    {
-                        var person = new Person
-                        {
-                            Name = values[column[Student.NAME]],
-                            Surname = values[column[Student.SURNAME]],
-                            Age = Convert.ToInt32(values[column[Student.AGE]]),
-                            Email = values[column[Student.EMAIL]]
-                        };
+        //            for (var i = 0; i < 1; i++)
+        //            {
+        //                var person = new Person
+        //                {
+        //                    Name = values[column[Student.NAME]],
+        //                    Surname = values[column[Student.SURNAME]],
+        //                    Age = Convert.ToInt32(values[column[Student.AGE]]),
+        //                    Email = values[column[Student.EMAIL]]
+        //                };
 
-                        persons.Add(person);
-                    }
-                }
-            }
+        //                persons.Add(person);
+        //            }
+        //        }
+        //    }
 
-            foreach (var person in persons)
-            {
-                Console.WriteLine(person);
-            }
+        //    foreach (var person in persons)
+        //    {
+        //        Console.WriteLine(person);
+        //    }
 
-            Console.ReadLine();
-        }
+        //    Console.ReadLine();
+        //}
 
 
         class Person
