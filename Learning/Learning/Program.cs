@@ -11,40 +11,43 @@ namespace Learning
 {
     internal class Program
     {
-        //static void Main(string[] args)
-        //{
-        //    AddWithParamsKeyword(1, 2, 3, 4, 5, 6, 7, 8);
+        static void Main(string[] args)
+        {
+            AddWithParamsKeyword(1, 2, 3, 4, 5, 6, 7, 8);
 
-        //    AsOperator("saa");
+            AsOperator("saa");
 
-        //    IsOperator(3);
+            IsOperator(3);
 
-        //    IsOperatorWithDeclaredVariable(new Person() { Name = "Samir", Surname = "Samirov" });
+            IsOperatorWithDeclaredVariable(new Person() { Name = "Samir", Surname = "Samirov" });
 
-        //    Console.WriteLine("********Hash********");
-        //    Console.WriteLine(ComputeHash("salam"));
+            Console.WriteLine("********Hash********");
+            Console.WriteLine(ComputeHash("salam"));
 
-        //    Console.WriteLine("*****Comparison*****");
+            Console.WriteLine("*****Comparison*****");
 
-        //    CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
+            CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
 
-        //    Console.WriteLine(CompareStrings("SıL", "SIL"));
+            Console.WriteLine(CompareStrings("SıL", "SIL"));
 
-        //    Console.WriteLine("\ndynamic and var keyword");
+            Console.WriteLine("\ndynamic and var keyword");
 
-        //    DynamicAndVarKeywords();
+            DynamicAndVarKeywords();
 
-        //    Console.WriteLine("\ndynamic object");
+            Console.WriteLine("\ndynamic object");
 
-        //    dynamic obj = new Dynamic();
-        //    obj.LastName = "Samirov";
-        //    Console.WriteLine(obj.LastName);
+            dynamic obj = new Dynamic();
+            obj.LastName = "Samirov";
+            Console.WriteLine(obj.LastName);
 
-        //    obj["FirstName"] = "Samir";
-        //    Console.WriteLine(obj["FirstName"]);
+            obj["FirstName"] = "Samir";
+            Console.WriteLine(obj["FirstName"]);
 
-        //    Console.ReadLine();
-        //}
+
+            DynamicString();
+
+            Console.ReadLine();
+        }
 
         /// <summary>
         /// params keyword allow us to enter a large amount of
@@ -151,6 +154,13 @@ namespace Learning
             var num = 1;
 
             num = (int)1.5;
+        }
+
+        public static void DynamicString()
+        {
+            double count = 1.4;
+            string countText = $"{count:0.0}";
+            Console.WriteLine(countText);
         }
     }
 
